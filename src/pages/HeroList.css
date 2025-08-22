@@ -1,0 +1,22 @@
+body{
+    background-color: #343345;
+}
+
+.filterButton{
+    border: solid 2px #FDDE2B;
+    margin: 10px;
+}
+
+.card{
+    margin: 10px;
+    width: 200px;
+    height: 400px;
+}
+
+.card:hover{
+    opacity: 0.7;
+}
+
+.container{
+    border: solid 2px #FDDE2B;
+}
