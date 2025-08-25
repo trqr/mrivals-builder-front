@@ -11,7 +11,7 @@ import {
     Typography
 } from "@mui/material";
 import type {heroType} from"../@types/heroType";
-import {getAllHeroes} from "../api/HeroesService.ts";
+import {getAllHeroes} from "../api/Hero.service.ts";
 import "./HeroList.css";
 
 
