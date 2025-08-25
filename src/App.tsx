@@ -1,11 +1,13 @@
 import './App.css'
-import HeroList from "./pages/HeroList.tsx";
+import {RouterProvider} from "react-router-dom";
+import Router from "./router/Router.tsx";
 
 function App() {
 
   return (
     <>
-        <HeroList></HeroList>
+        <RouterProvider router={Router}>
+        </RouterProvider>
     </>
   )
 }

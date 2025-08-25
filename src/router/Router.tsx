@@ -1,25 +1,45 @@
-import {Route, Routes} from "react-router";
-import HeroList from "../pages/HeroList.tsx";
+// router.tsx
+import { createBrowserRouter } from "react-router-dom";
 import Admin from "../pages/Admin.tsx";
 import Builder from "../pages/Builder.tsx";
 import CompoDetails from "../pages/CompoDetails.tsx";
 import HeroDetails from "../pages/HeroDetails.tsx";
 import Home from "../pages/Home.tsx";
 import MapDetails from "../pages/MapDetails.tsx";
-import MapList from "../pages/MapList.tsx";
+import DataList from "../pages/DataList.tsx";
 
-const Router = () => {
-    return (
-        <Routes>
-            <Route path="/Admin" element={<Admin />} />
-            <Route path="/Builder" element={<Builder/>}/>
-            <Route path="/CompoDetails" element={<CompoDetails/>}/>
-            <Route path="/HeroDetails/:heroId" element={<HeroDetails/>}/>
-            <Route path="/HeroList" element={<HeroList/>}/>
-            <Route path="/Home" element={<Home/>}/>
-            <Route path="/MapDetails/:mapId" element={<MapDetails/>}/>
-            <Route path="/MapList" element={<MapList/>}/>
-        </Routes>
-    )
-}
+// 👉 tu peux rajouter un Layout si tu veux une structure commune
+// comme dans ton premier exemple
+// Ici je garde simple
+export const Router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Home />,   // page par défaut
+    },
+    {
+        path: "/Admin",
+        element: <Admin />,
+    },
+    {
+        path: "/Builder",
+        element: <Builder />,
+    },
+    {
+        path: "/CompoDetails",
+        element: <CompoDetails />,
+    },
+    {
+        path: "/HeroDetails/:heroId",
+        element: <HeroDetails />,
+    },
+    {
+        path: "/List",
+        element: <DataList />,
+    },
+    {
+        path: "/MapDetails/:mapId",
+        element: <MapDetails />,
+    },
+]);
+
 export default Router;

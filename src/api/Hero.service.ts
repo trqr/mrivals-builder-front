@@ -1,7 +1,7 @@
-import {tristanBackApi} from "./axios.config.ts";
+import {Api} from "./axios.config.ts";
 
 export const getAllHeroes = async () => {
-    return await tristanBackApi.get("/heroes")
+    return await Api.get("/heroes")
         .then((res) => {
         console.log(res.data);
         return res.data;
