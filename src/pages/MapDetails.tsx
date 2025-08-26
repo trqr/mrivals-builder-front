@@ -5,6 +5,7 @@ import type {MapType} from "../@types/MapType.d";
 import {emptyMapType} from "../@types/MapType.d";
 import NavBar from "../componnents/header/NavBar.tsx";
 import {imageBaseUrl} from "../api/axios.config.ts";
+import "./MapDetails.css"
 
 const MapDetails = () => {
     const [map, setMap] = useState<MapType>(emptyMapType)
@@ -24,20 +25,37 @@ const MapDetails = () => {
             <NavBar></NavBar>
             <div className="mapDetails" style={{marginTop: "67px"}}>
                 <div className="leftColumn">
-                    <h1>{map.name}</h1>
-                    <h2>{map.fullName}</h2>
+                    <div className="mapName">
+                        <h1>{map.name}</h1>
+                        <h2>{map.fullName ?? "Nom complet indisponible"}</h2>
+                    </div>
                 </div>
+
+                <div className="centerColumn">
+                    <div className="mapLore">
+                        <h2>Description :</h2>
+                        <p>{map.description}</p>
+                        <h2>Location :</h2>
+                        <p>{map.location}</p>
+                    </div>
+                </div>
+
                 <div className="rightColumn">
                     {map?.mapImages?.length > 0 && (
                         <img
+                            className="mapImage"
                             src={imageBaseUrl + map.mapImages[1].imageLink}
                             alt={map.name}
                         />
+
                     )}
+                    <div className="mapMode">
+                        <p>Mode de jeu : {map.gameMode ?? "Non défini"}</p>
+                        <p>Compétitif : {map.competitive ? "Oui" : "Non"}</p>
+                    </div>
                 </div>
-
-
             </div>
+
         </>
     )
 }
