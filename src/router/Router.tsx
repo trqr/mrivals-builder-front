@@ -37,7 +37,7 @@ export const Router = createBrowserRouter([
         element: <DataList />,
     },
     {
-        path: "/MapDetails/:mapId",
+        path: "/maps/:id",
         element: <MapDetails />,
     },
 ]);

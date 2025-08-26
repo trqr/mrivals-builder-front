@@ -10,3 +10,15 @@ export type MapType = {
     videoLink: string;
     mapImages: {id: number, imageLink: string}[];
 }
+export const emptyMapType: MapType = {
+    id: 0,
+    externalId: 0,
+    name: "",
+    fullName: "",
+    location: "",
+    description: "",
+    gameMode: "",
+    competitive: false,
+    videoLink: "",
+    mapImages: []
+}

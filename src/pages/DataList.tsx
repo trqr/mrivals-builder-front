@@ -76,8 +76,8 @@ const DataList = () => {
                         <CardContent key={map.id}>
                             <CardMedia>
                                 <Typography>{map.name}</Typography>
-                                <img src={`${imageBaseUrl}${map.mapImages[1].imageLink}`} alt={map.name}
-                                     onClick={() => navigate(`/MapDetails/${map.id}`)}/>
+                                <img src={`${imageBaseUrl}${map.mapImages[1].imageLink}`} alt={map.name} className="cardMap"
+                                     onClick={() => navigate(`/maps/${map.id}`)}/>
                             </CardMedia>
                         </CardContent>
                     ))}

@@ -10,7 +10,7 @@ const menuPages = [
     {name: 'Admin', path: '/Admin'},
     {name: 'Builder', path: '/Builder'},
     {name: 'héros/map', path: '/List'},
-    {name: 'Acceuil', path: '/Home'},
+    {name: 'Acceuil', path: '/'},
 ];
 
 export default function NavBar() {
