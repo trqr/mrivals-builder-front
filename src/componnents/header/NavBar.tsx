@@ -2,6 +2,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import {useNavigate} from 'react-router';
 import {AppBar, Avatar, Button} from "@mui/material";
+import AuthContainer from "../common/AuthContainer.tsx";
 
 
 
@@ -25,12 +26,13 @@ export default function NavBar() {
                 {menuPages.map((page) => (
                 <Button
                     sx={{border: '1px solid #FDDE2B', margin: '5px'}}
+                    variant={"contained"}
                     key={page.name}
                     onClick={() => navigate(page.path)}>
                     {page.name}
                 </Button>
                 ))}
-                <Avatar></Avatar>
+                <AuthContainer></AuthContainer>
             </Toolbar>
         </AppBar>
     );
