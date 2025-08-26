@@ -2,10 +2,6 @@ body{
     background-color: #343345;
 }
 
-.filterButton{
-    border: solid 2px #FDDE2B;
-    margin: 10px;
-}
 
 .card{
     margin: 10px;
@@ -25,10 +21,41 @@ body{
 .containerHeroes {
     border: solid 2px #FDDE2B;
     margin: 20px;
+    align-items: center;
+    justify-content: center;
 }
 
 .containerMaps {
     border: solid 2px #FDDE2B;
     margin: 20px;
+}
+
+.filterButton {
+    margin: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn.active {
+    background-color: #FDDE2B;
+    color: #343345;
+}
+
+.btn.inactive {
+    background-color: #343345;
+    color: #FDDE2B;
+}
+
+
+.card {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
 }
 

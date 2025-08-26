@@ -29,7 +29,7 @@ export const Router = createBrowserRouter([
         element: <CompoDetails />,
     },
     {
-        path: "/HeroDetails/:heroId",
+        path: "/HeroDetails/:id",
         element: <HeroDetails />,
     },
     {

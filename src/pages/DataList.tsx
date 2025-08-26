@@ -46,9 +46,11 @@ const DataList = () => {
             <NavBar />
 
             {/* Boutons de choix */}
-            <div style={{ marginTop: "80px", textAlign: "center" }}>
-                <button onClick={() => setShow("heroes")}>Heroes</button>
-                <button onClick={() => setShow("maps")}>Maps</button>
+            <div className={'filterButton'} style={{ marginTop: "80px", textAlign: "center" }}>
+                <button className={show === "heroes" ? "btn active" : "btn inactive"}
+                        onClick={() => setShow("heroes")}>Heroes</button>
+                <button className={show === "maps" ? "btn active" : "btn inactive"}
+                        onClick={() => setShow("maps")}>Maps</button>
             </div>
 
             {/* Affichage conditionnel */}
@@ -56,13 +58,13 @@ const DataList = () => {
                 <Grid container className={"containerHeroes"}>
                     {(role ? heroes.filter((hero: HeroType) => hero.role === role) : heroes).map((hero: HeroType) => (
                         <Grid sx={{xs: 2, xl: 1}} key={hero.id}>
-                            <Card className={"card"}>
-                                <CardContent onClick={() => navigate(`/HeroDetails/${hero.id}`)}>
-                                    <CardMedia>
-                                        <img src={imageBaseUrl + hero.imageLink} alt={hero.name}/>
-                                    </CardMedia>
-                                </CardContent>
-                            </Card>
+                            <img
+                                src={imageBaseUrl + hero.imageLink}
+                                alt={hero.name}
+                                className="card"
+                                onClick={() => navigate(`/HeroDetails/${hero.id}`)}
+                            />
+
                         </Grid>
                     ))}
                 </Grid>
@@ -74,7 +76,8 @@ const DataList = () => {
                         <CardContent key={map.id}>
                             <CardMedia>
                                 <Typography>{map.name}</Typography>
-                                <img src={`${imageBaseUrl}${map.mapImages[1].imageLink}`} alt={"image de la map"}/>
+                                <img src={`${imageBaseUrl}${map.mapImages[1].imageLink}`} alt={map.name}
+                                     onClick={() => navigate(`/MapDetails/${map.id}`)}/>
                             </CardMedia>
                         </CardContent>
                     ))}
