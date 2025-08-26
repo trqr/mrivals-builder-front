@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import {Avatar, Button, Paper} from "@mui/material";
 import {useState} from "react";
 import ProfileMenu from "./ProfileMenu.tsx";
 
@@ -15,6 +16,8 @@ const AuthContainer = () => {
         <>
             {!logged ?
                 <Box>
+                    <Button variant={"contained"} onClick={() => setLogged(true)}>Login</Button>
+                    <Button variant={"outlined"}>Register</Button>
                 </Box>
                 :
                 <>
@@ -36,8 +39,10 @@ const AuthContainer = () => {
                             </Box>
                         }
                     </Box>
+
                 </>
             }
+
         </>
     )
 }
