@@ -1,4 +1,4 @@
-import {useParams} from "react-router-dom";
+import {useLoaderData, useParams} from "react-router-dom";
 import {getHeroes} from "../api/Hero.service.ts";
 import {useEffect, useState, useTransition} from "react";
 import type {HeroType} from "../@types/HeroType.d";
@@ -8,17 +8,8 @@ import NavBar from "../componnents/header/NavBar.tsx";
 import {imageBaseUrl} from "../api/axios.config.ts";
 
 const HeroDetails = () => {
-    const [hero, setHero] = useState<HeroType>(emptyHeroType)
     const [isPending, startTransition] = useTransition()
-    const { id } = useParams<{id: string}>();
-
-    useEffect(() => {
-        startTransition(async () => {
-            const fetchedHero = await getHeroes(id!);
-            setHero(fetchedHero);
-        })
-    }, []);
-
+    const hero = useLoaderData();
 
     return (
         <>
