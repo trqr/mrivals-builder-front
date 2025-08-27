@@ -1,9 +1,23 @@
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
-import './InfiniteScroll.css';
+import "./InfiniteScroll.css";
 
 gsap.registerPlugin(Observer);
+
+interface InfiniteScrollProps {
+    width?: string;
+    maxHeight?: string;
+    negativeMargin?: string;
+    items: React.ReactNode[];   // 👈 Directement des ReactNode (images, div, texte…)
+    itemMinHeight?: number;
+    isTilted?: boolean;
+    tiltDirection?: "left" | "right";
+    autoplay?: boolean;
+    autoplaySpeed?: number;
+    autoplayDirection?: "down" | "up";
+    pauseOnHover?: boolean;
+}
 
 export default function InfiniteScroll({
                                            width = "30rem",
@@ -17,9 +31,9 @@ export default function InfiniteScroll({
                                            autoplaySpeed = 0.5,
                                            autoplayDirection = "down",
                                            pauseOnHover = false,
-                                       }) {
-    const wrapperRef = useRef(null);
-    const containerRef = useRef(null);
+                                       }: InfiniteScrollProps) {
+    const wrapperRef = useRef<HTMLDivElement | null>(null);
+    const containerRef = useRef<HTMLDivElement | null>(null);
 
     const getTiltTransform = () => {
         if (!isTilted) return "none";
@@ -33,7 +47,7 @@ export default function InfiniteScroll({
         if (!container) return;
         if (items.length === 0) return;
 
-        const divItems = gsap.utils.toArray(container.children);
+        const divItems = gsap.utils.toArray<HTMLElement>(container.children);
         if (!divItems.length) return;
 
         const firstItem = divItems[0];
@@ -41,7 +55,8 @@ export default function InfiniteScroll({
         const itemHeight = firstItem.offsetHeight;
         const itemMarginTop = parseFloat(itemStyle.marginTop) || 0;
         const totalItemHeight = itemHeight + itemMarginTop;
-        const totalHeight = (itemHeight * items.length) + (itemMarginTop * (items.length - 1));
+        const totalHeight =
+            itemHeight * items.length + itemMarginTop * (items.length - 1);
 
         const wrapFn = gsap.utils.wrap(-totalHeight, totalHeight);
 
@@ -55,10 +70,10 @@ export default function InfiniteScroll({
             type: "wheel,touch,pointer",
             preventDefault: true,
             onPress: ({ target }) => {
-                target.style.cursor = "grabbing";
+                (target as HTMLElement).style.cursor = "grabbing";
             },
             onRelease: ({ target }) => {
-                target.style.cursor = "grab";
+                (target as HTMLElement).style.cursor = "grab";
             },
             onChange: ({ deltaY, isDragging, event }) => {
                 const d = event.type === "wheel" ? -deltaY : deltaY;
@@ -69,14 +84,14 @@ export default function InfiniteScroll({
                         ease: "expo.out",
                         y: `+=${distance}`,
                         modifiers: {
-                            y: gsap.utils.unitize(wrapFn)
-                        }
+                            y: gsap.utils.unitize(wrapFn),
+                        },
                     });
                 });
-            }
+            },
         });
 
-        let rafId;
+        let rafId: number;
         if (autoplay) {
             const directionFactor = autoplayDirection === "down" ? 1 : -1;
             const speedPerFrame = autoplaySpeed * directionFactor;
@@ -86,8 +101,8 @@ export default function InfiniteScroll({
                     gsap.set(child, {
                         y: `+=${speedPerFrame}`,
                         modifiers: {
-                            y: gsap.utils.unitize(wrapFn)
-                        }
+                            y: gsap.utils.unitize(wrapFn),
+                        },
                     });
                 });
                 rafId = requestAnimationFrame(tick);
@@ -128,7 +143,7 @@ export default function InfiniteScroll({
         pauseOnHover,
         isTilted,
         tiltDirection,
-        negativeMargin
+        negativeMargin,
     ]);
 
     return (
@@ -159,11 +174,8 @@ export default function InfiniteScroll({
                     }}
                 >
                     {items.map((item, i) => (
-                        <div
-                            className='infinite-scroll-item'
-                            key={i}
-                        >
-                            {item.content}
+                        <div className="infinite-scroll-item" key={i}>
+                            {item}
                         </div>
                     ))}
                 </div>
@@ -171,3 +183,4 @@ export default function InfiniteScroll({
         </>
     );
 }
+

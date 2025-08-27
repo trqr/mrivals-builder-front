@@ -14,7 +14,6 @@ import "./DataList.css";
 import NavBar from "../componnents/header/NavBar.tsx";
 import Typography from "@mui/material/Typography";
 import {useNavigate} from "react-router";
-import Filter from "../componnents/Filter.tsx";
 
 
 const DataList = () => {
