@@ -30,6 +30,7 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
     const [showPassword, setShowPassword] = useState(false);
     const [loginValues, setLoginValues] = useState<LoginDTO>({email: "", password: ""})
     const [serverError, setServerError] = useState<string | null>(null);
+    const [validationErrors, setValidationErrors] = useState({email: "", password: ""})
 
 
     const handleChange = (field: keyof LoginDTO) =>
@@ -38,6 +39,8 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
     }
 
     const handleLogin = () => {
+        if (!validate())
+            return;
         startTransition( async () => {
             await new Promise(resolve => setTimeout(resolve, 1000));
             const authData = await login(loginValues);
@@ -48,9 +51,29 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
             } else {
                 setServerError(authData)
             }
-
         })
     }
+
+    const validate = () => {
+        const newErrors: { email: string; password: string } = {email: "", password: ""};
+        if (!loginValues.email){
+            newErrors.email = "Email is required";
+        }  else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(loginValues.email)) {
+            newErrors.email = "Email format is required";
+        }
+        if (!loginValues.password){
+            newErrors.password = "Password is required";
+        } else if (loginValues.password.length < 8) {
+            newErrors.password = "Password must be at least 8 characters";
+        }
+        else if (!/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&._-])[A-Za-z\d@$!%*?&._-]{8,}$/.test(loginValues.password)) {
+            newErrors.password = "Password must have one uppercase letter, one number, and one special character.";
+        }
+        setValidationErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    }
+
+
 
     return (
         <>
@@ -58,7 +81,7 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
                 {isPending &&
                     <LinearProgress></LinearProgress>
                 }
-                <DialogTitle>
+                <DialogTitle sx={{display: "flex", alignItems: "center"}}>
                     <LockOutlined/>Sign in</DialogTitle>
                 <DialogContent sx={{display: 'flex', gap: '10px', flexDirection: 'column', margin: '5px auto', width: '100%', alignItems: 'center'}}>
                     {serverError && (
@@ -74,6 +97,8 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
                         disabled={isPending}
                         value={loginValues.email}
                         onChange={handleChange("email")}
+                        error={!!validationErrors.email}
+                        helperText={validationErrors.email}
                     ></TextField>
                     <TextField
                         label="Mot de passe"
@@ -82,6 +107,8 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
                         fullWidth
                         value={loginValues.password}
                         onChange={handleChange("password")}
+                        error={!!validationErrors.password}
+                        helperText={validationErrors.password}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="end">
