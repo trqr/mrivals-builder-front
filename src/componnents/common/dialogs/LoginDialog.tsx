@@ -10,10 +10,11 @@ import {
     Link,
     TextField
 } from "@mui/material";
-import {useState, useTransition} from "react";
+import {useContext, useState, useTransition} from "react";
 import Box from "@mui/material/Box";
 import {Visibility, VisibilityOff, LockOutlined} from "@mui/icons-material";
 import {login} from "../../../api/Auth.service.ts";
+import {useAuth} from "../../../hooks/useAuth.tsx";
 
 export type LoginDTO = {
     email: string;
@@ -31,6 +32,7 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
     const [loginValues, setLoginValues] = useState<LoginDTO>({email: "", password: ""})
     const [serverError, setServerError] = useState<string | null>(null);
     const [validationErrors, setValidationErrors] = useState<{ email?: string; password?: string }>({})
+    const { setUser } = useAuth();
 
 
     const handleChange = (field: keyof LoginDTO) =>
@@ -45,9 +47,10 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
             await new Promise(resolve => setTimeout(resolve, 1000));
             const authData = await login(loginValues);
             if (authData.user) {
-                //set authcontext islooged true*
+                setUser(authData.user);
                 setOpen(false)
                 setLoginValues({email: "", password: ""})
+                localStorage.setItem("MBtoken", authData.token)
             } else {
                 setServerError(authData)
             }

@@ -4,12 +4,15 @@ import './index.css'
 import App from './App.tsx'
 import theme from "./theme/theme.ts";
 import {CssBaseline, ThemeProvider} from "@mui/material";
+import {AuthProvider} from "./contexts/AuthProvider.tsx";
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-      <ThemeProvider theme={theme}>
-          <CssBaseline/>
-            <App />
-      </ThemeProvider>
+      <AuthProvider>
+          <ThemeProvider theme={theme}>
+              <CssBaseline/>
+                <App />
+          </ThemeProvider>
+      </AuthProvider>
   </StrictMode>,
 )

@@ -4,26 +4,25 @@ import {useState} from "react";
 import ProfileMenu from "./ProfileMenu.tsx";
 import LoginDialog from "./dialogs/LoginDialog.tsx";
 import RegisterDialog from "./dialogs/RegisterDialog.tsx";
+import {useAuth} from "../../hooks/useAuth.tsx";
 
 const AuthContainer = () => {
-    const [logged, setLogged] = useState<boolean>(false)
+    // @ts-expect-error bien ds le context
+    const { isAuthenticated, setUser } = useAuth();
     const [openMenu, setOpenMenu] = useState(false);
     const [openLoginDialog, setOpenLoginDialog] = useState<boolean>(false);
     const [openRegisterDialog, setOpenRegisterDialog] = useState<boolean>(false);
 
     const handleLogout = () => {
         setOpenMenu(false);
-        setLogged(false);
+        setUser(null);
+        localStorage.removeItem("MBtoken");
     }
 
-    const handleLogin = () => {
-        setOpenLoginDialog(false);
-        setLogged(true);
-    }
 
     return (
         <>
-            {!logged ?
+            {!isAuthenticated ?
                 <Box>
                     <Button variant={"contained"} onClick={() => setOpenLoginDialog(true)}>Login</Button>
                     <Button variant={"outlined"} onClick={() => setOpenRegisterDialog(true)}>Register</Button>
