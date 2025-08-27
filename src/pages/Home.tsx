@@ -1,11 +1,20 @@
 import NavBar from "../componnents/header/NavBar.tsx";
 import {Button} from "@mui/material";
-import './Home.css';
 import affiche from "../image/affiche.jpeg"
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import FilterButton from "../componnents/button/TeambuildButton.tsx";
+import TeambuildButton from "../componnents/button/TeambuildButton.tsx";
+import {useNavigate} from "react-router";
+import TeambuildButton2 from "../componnents/button/TeambuildButton2.tsx";
 
 const Home = () => {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate("/Builder");
+    }
+
     return (
         <>
             <NavBar></NavBar>
@@ -39,13 +48,8 @@ const Home = () => {
             </Box>
             <div className="caroussel"></div>
             <div style={{ display: "flex", justifyContent: "center", marginTop: "40px" }}>
-            <Button className={"teambuildButton"}
-            sx={{padding: '30px',
-                color: 'black',
-                fontWeight: 'bold',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',}}>Teambuild</Button>
+                <TeambuildButton2 onClick={handleClick}>
+                    Build</TeambuildButton2>
             </div>
 
         </>
