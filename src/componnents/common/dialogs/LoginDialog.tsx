@@ -32,6 +32,7 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
     const [loginValues, setLoginValues] = useState<LoginDTO>({email: "", password: ""})
     const [serverError, setServerError] = useState<string | null>(null);
     const [validationErrors, setValidationErrors] = useState<{ email?: string; password?: string }>({})
+    // @ts-expect-error bien ds le context
     const { setUser } = useAuth();
 
 

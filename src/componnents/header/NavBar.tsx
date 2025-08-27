@@ -15,7 +15,7 @@ export default function NavBar() {
     const navigate = useNavigate();
 
     return (
-        <AppBar position="fixed" sx={{borderBottom: '3px solid #FDDE2B'}}>
+        <AppBar sx={{borderBottom: '3px solid #FDDE2B'}}>
             <Toolbar>
                 <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
                     Rivals Builder
