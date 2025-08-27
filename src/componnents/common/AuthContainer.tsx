@@ -50,7 +50,7 @@ const AuthContainer = () => {
                     </Box>
                 </>
             }
-            <LoginDialog open={openLoginDialog} setOpen={setOpenLoginDialog} handleLogin={handleLogin}></LoginDialog>
+            <LoginDialog open={openLoginDialog} setOpen={setOpenLoginDialog}></LoginDialog>
             <RegisterDialog open={openRegisterDialog} setOpen={setOpenRegisterDialog}></RegisterDialog>
         </>
     )

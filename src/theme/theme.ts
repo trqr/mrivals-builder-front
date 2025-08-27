@@ -8,7 +8,7 @@ const theme = createTheme({
             paper: "#1e1e2f",
         },
         primary: {
-            main: "#8B8B8B",
+            main: "#f4e543",
         },
         secondary: {
             main: "#58b697",

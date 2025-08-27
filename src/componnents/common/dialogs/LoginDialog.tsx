@@ -30,7 +30,7 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
     const [showPassword, setShowPassword] = useState(false);
     const [loginValues, setLoginValues] = useState<LoginDTO>({email: "", password: ""})
     const [serverError, setServerError] = useState<string | null>(null);
-    const [validationErrors, setValidationErrors] = useState({email: "", password: ""})
+    const [validationErrors, setValidationErrors] = useState<{ email?: string; password?: string }>({})
 
 
     const handleChange = (field: keyof LoginDTO) =>
@@ -55,7 +55,7 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
     }
 
     const validate = () => {
-        const newErrors: { email: string; password: string } = {email: "", password: ""};
+        const newErrors: { email?: string; password?: string } = {};
         if (!loginValues.email){
             newErrors.email = "Email is required";
         }  else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(loginValues.email)) {
@@ -70,6 +70,7 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
             newErrors.password = "Password must have one uppercase letter, one number, and one special character.";
         }
         setValidationErrors(newErrors);
+        console.log("test")
         return Object.keys(newErrors).length === 0;
     }
 
@@ -82,7 +83,7 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
                     <LinearProgress></LinearProgress>
                 }
                 <DialogTitle sx={{display: "flex", alignItems: "center"}}>
-                    <LockOutlined/>Sign in</DialogTitle>
+                    <LockOutlined fontSize={"small"}/>Sign in</DialogTitle>
                 <DialogContent sx={{display: 'flex', gap: '10px', flexDirection: 'column', margin: '5px auto', width: '100%', alignItems: 'center'}}>
                     {serverError && (
                         <Alert severity="error" onClose={() => setServerError(null)}>
@@ -99,6 +100,7 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
                         onChange={handleChange("email")}
                         error={!!validationErrors.email}
                         helperText={validationErrors.email}
+                        required={true}
                     ></TextField>
                     <TextField
                         label="Mot de passe"
@@ -109,6 +111,7 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
                         onChange={handleChange("password")}
                         error={!!validationErrors.password}
                         helperText={validationErrors.password}
+                        required={true}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="end">
