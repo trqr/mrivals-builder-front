@@ -2,7 +2,6 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import {useNavigate} from 'react-router';
 import {AppBar, Avatar, Button} from "@mui/material";
-import MainButton from "../button/MainButton.tsx";
 
 
 
@@ -24,11 +23,12 @@ export default function NavBar() {
                     Rivals Builder
                 </Typography>
                 {menuPages.map((page) => (
-                <MainButton
+                <Button
+                    sx={{border: '1px solid #FDDE2B', margin: '5px'}}
                     key={page.name}
                     onClick={() => navigate(page.path)}>
-                    <span>{page.name}</span>
-                </MainButton>
+                    {page.name}
+                </Button>
                 ))}
                 <Avatar></Avatar>
             </Toolbar>
