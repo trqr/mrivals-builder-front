@@ -1,11 +1,8 @@
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import {useNavigate} from 'react-router';
-import {AppBar, Avatar, Button} from "@mui/material";
+import {AppBar, Button} from "@mui/material";
 import AuthContainer from "../common/AuthContainer.tsx";
-
-
-
 
 const menuPages = [
     {name: 'Admin', path: '/Admin'},
