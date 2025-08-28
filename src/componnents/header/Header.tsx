@@ -4,6 +4,11 @@ import {useNavigate} from 'react-router';
 import {AppBar, Button} from "@mui/material";
 import AuthContainer from "../common/AuthContainer.tsx";
 import Box from "@mui/material/Box";
+import {AppBar, Avatar, Button} from "@mui/material";
+import MainButton from "../button/MainButton.tsx";
+
+
+
 
 const menuPages = [
     {name: 'Admin', path: '/Admin'},
@@ -21,13 +26,11 @@ export default function Header() {
                     Rivals Builder
                 </Typography>
                 {menuPages.map((page) => (
-                <Button
-                    sx={{border: '1px solid #FDDE2B', margin: '5px'}}
-                    variant={"contained"}
+                <MainButton
                     key={page.name}
                     onClick={() => navigate(page.path)}>
-                    {page.name}
-                </Button>
+                    <span>{page.name}</span>
+                </MainButton>
                 ))}
                 <AuthContainer></AuthContainer>
         </Box>

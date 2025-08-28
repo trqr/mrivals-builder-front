@@ -19,6 +19,21 @@ const theme = createTheme({
             secondary: "#b3b3b3",
         },
     },
+    components: {
+        // Name of the component
+        MuiButton: {
+            styleOverrides: {
+                // Name of the slot
+                root: {
+                    // Some CSS
+                    fontSize: '1rem',
+                    color: 'darkgrey',
+                    transform: 'skewX(+30deg)',
+                    borderRadius: '0px',
+                },
+            },
+        },
+    },
 });
 
 
