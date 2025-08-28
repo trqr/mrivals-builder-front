@@ -3,7 +3,7 @@ import {useParams} from "react-router-dom";
 import {getMapById} from "../api/Map.service.ts";
 import type {MapType} from "../@types/MapType.d";
 import {emptyMapType} from "../@types/MapType.d";
-import NavBar from "../componnents/header/NavBar.tsx";
+import Header from "../componnents/header/Header.tsx";
 import {imageBaseUrl} from "../api/axios.config.ts";
 import "./MapDetails.css"
 
@@ -22,7 +22,7 @@ const MapDetails = () => {
     console.log(map.mapImages)
     return (
         <>
-            <NavBar></NavBar>
+            <Header></Header>
             <div className="mapDetails" style={{marginTop: "67px"}}>
                 <div className="leftColumn">
                     <div className="mapName">

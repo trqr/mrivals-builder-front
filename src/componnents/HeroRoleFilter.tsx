@@ -1,8 +1,12 @@
 import {ToggleButton, ToggleButtonGroup} from "@mui/material";
 import {useState} from "react";
 
-const Filter = () => {
-    const [role, setRole] = useState("")
+type FilterProps = {
+    role: string;
+    setRole: (newRole: string) => void;
+}
+
+const HeroRoleFilter = ({role, setRole}: FilterProps) => {
 
     const handleChange = (
         event: React.MouseEvent<HTMLElement>,
@@ -17,11 +21,10 @@ const Filter = () => {
         exclusive
         onChange={handleChange}
         aria-label="Platform"
-        sx={{marginTop: "80px"}}
     >
         <ToggleButton className={"filterButton"} value="Vanguard">Vanguard</ToggleButton>
         <ToggleButton className={"filterButton"} value="Duelist">Duelist</ToggleButton>
         <ToggleButton className={"filterButton"} value="Strategist">Strategist</ToggleButton>
     </ToggleButtonGroup>)
 }
-export default Filter
+export default HeroRoleFilter

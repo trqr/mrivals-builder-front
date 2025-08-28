@@ -1,4 +1,4 @@
-import NavBar from "../componnents/header/NavBar.tsx";
+import Header from "../componnents/header/Header.tsx";
 import {Button} from "@mui/material";
 import './Home.css';
 import affiche from "../image/affiche.jpeg"
@@ -8,7 +8,7 @@ import Box from "@mui/material/Box";
 const Home = () => {
     return (
         <>
-            <NavBar></NavBar>
+            <Header></Header>
             <div style={{ marginTop: "80px" }}></div>
             <Box
                 className="actuality"

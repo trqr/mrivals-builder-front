@@ -11,10 +11,10 @@ import type {MapType} from "../@types/MapType";
 import {getAllHeroes} from "../api/Hero.service.ts";
 import {getAllMap} from "../api/Map.service.ts";
 import "./DataList.css";
-import NavBar from "../componnents/header/NavBar.tsx";
+import Header from "../componnents/header/Header.tsx";
 import Typography from "@mui/material/Typography";
 import {useNavigate} from "react-router";
-import Filter from "../componnents/Filter.tsx";
+import HeroRoleFilter from "../componnents/HeroRoleFilter.tsx";
 
 
 const DataList = () => {
@@ -44,7 +44,7 @@ const DataList = () => {
 
     return (
         <>
-            <NavBar />
+            <Header />
 
             {/* Boutons de choix */}
             <div className={'filterButton'} style={{ marginTop: "80px", textAlign: "center" }}>

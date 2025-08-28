@@ -4,7 +4,7 @@ import {useEffect, useState, useTransition} from "react";
 import type {HeroType} from "../@types/HeroType.d";
 import {emptyHeroType} from "../@types/HeroType.d";
 import "./HeroDetails.css";
-import NavBar from "../componnents/header/NavBar.tsx";
+import Header from "../componnents/header/Header.tsx";
 import {imageBaseUrl} from "../api/axios.config.ts";
 
 const HeroDetails = () => {
@@ -13,7 +13,7 @@ const HeroDetails = () => {
 
     return (
         <>
-            <NavBar></NavBar>
+            <Header></Header>
             <div className="heroDetails" style={{ marginTop: "66px" }}>
                 <div className="leftColumn">
                     <div className="heroName">
