@@ -33,7 +33,6 @@ export default function Header() {
                     ))}
                     <AuthContainer></AuthContainer>
             </Box>
-            <LinearProgress variant={"indeterminate"}></LinearProgress>
         </>
     );
 }

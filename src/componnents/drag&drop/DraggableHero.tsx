@@ -2,7 +2,12 @@ import type {HeroType} from "../../@types/HeroType";
 import {useDraggable} from "@dnd-kit/core";
 import {imageBaseUrl} from "../../api/axios.config.ts";
 
-export const DraggableHero = ({ hero }: { hero: HeroType }) =>  {
+type DraggableHeroProps = {
+    hero: HeroType;
+    bestHeroes: any;
+}
+
+export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
     const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
         id: hero.id.toString(),
     });
@@ -24,6 +29,17 @@ export const DraggableHero = ({ hero }: { hero: HeroType }) =>  {
             <img
                 src={imageBaseUrl + hero.imageLink}
                 style={{
+                    border: bestHeroes.some(r =>
+                        r.heroes.some(h => h.id === hero.id)
+                    )
+                        ? "3px solid limegreen"
+                        : "none",
+                    borderRadius: "50%",
+                    animation: bestHeroes.some(r =>
+                        r.heroes.some(h => h.id === hero.id)
+                    )
+                        ? "pulse 1.5s infinite"
+                        : "none",
                     objectFit: "cover",
                     objectPosition: "center",
                     maxHeight: "100%",

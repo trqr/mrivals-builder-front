@@ -1,18 +1,20 @@
 import Box from "@mui/material/Box";
-import {Button, Grid} from "@mui/material";
+import {Button, Grid, LinearProgress} from "@mui/material";
 import {useLoaderData} from "react-router-dom";
 import type {HeroType} from "../@types/HeroType";
-import {useState, useTransition} from "react";
+import {useEffect, useState, useTransition} from "react";
 import HeroRoleFilter from "../componnents/HeroRoleFilter.tsx";
 import Header from "../componnents/header/Header.tsx";
 import {DndContext, DragOverlay} from "@dnd-kit/core";
 import {DroppableSlot} from "../componnents/drag&drop/DroppableSlot.tsx";
 import {DraggableHero} from "../componnents/drag&drop/DraggableHero.tsx";
 import {imageBaseUrl} from "../api/axios.config.ts";
+import {getBestWinRateByRole} from "../api/Compo.service.ts";
 
 const Builder = () => {
     const fetchedHeroes = useLoaderData<HeroType[]>()
     const [heroes, setHeroes] = useState(fetchedHeroes)
+    const [bestHeroes, setBestHeroes] = useState([])
     const [role, setRole] = useState("")
     const [slots, setSlots] = useState<(HeroType | null)[]>(Array(6).fill(null));
     const [activeHero, setActiveHero] = useState<HeroType | null>(null);
@@ -25,6 +27,16 @@ const Builder = () => {
         }
     };
 
+    useEffect(() => {
+        startTransition(async () => {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            const heroesIds = slots.map(hero => hero?.id)
+            const fetchedBestHeroes = await getBestWinRateByRole(heroesIds);
+            setBestHeroes(fetchedBestHeroes);
+        })
+        localStorage.setItem("currentCompo", JSON.stringify(slots.map(hero => hero?.id)));
+        console.log(slots)
+    }, [slots]);
 
     const handleDragEnd = (event: any) => {
         const { over, active } = event;
@@ -37,10 +49,6 @@ const Builder = () => {
                 setSlots(newSlots);
                 const newHeroes = heroes.filter((h) => h.id !== hero.id);
                 setHeroes(newHeroes);
-                startTransition( async () => {
-                    // mettre mon post pour create et add a la compo
-                })
-                console.log(slots)
             }
         }
         setActiveHero(null);
@@ -53,6 +61,9 @@ const Builder = () => {
     return (
         <>
             <Header></Header>
+            {isPending &&
+                <LinearProgress variant={"indeterminate"}></LinearProgress>
+            }
             <DndContext
                 onDragStart={handleDragStart}
                 onDragEnd={handleDragEnd}
@@ -74,10 +85,10 @@ const Builder = () => {
                         <Box sx={{display: "flex", justifyContent: "center", margin: "30px 10px"}}>
                             <HeroRoleFilter role={role} setRole={setRole}></HeroRoleFilter>
                         </Box>
-                        <Grid container>
+                        <Grid container gap={1}>
                             {(role ? heroes.filter((hero: HeroType) => hero.role === role) : heroes).map((hero: HeroType, index: number) => (
-                                <Grid key={index} size={{md: 1}} sx={{height: "175px", overflow: "hidden"}}>
-                                    <DraggableHero hero={hero} />
+                                <Grid key={index} size={{md: 0.9}} sx={{height: "175px", overflow: "hidden"}}>
+                                    <DraggableHero hero={hero} bestHeroes={bestHeroes} />
                                 </Grid>
                             ))}
                         </Grid>
