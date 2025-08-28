@@ -1,7 +1,6 @@
 import {useEffect, useState, useTransition} from "react";
 import {imageBaseUrl} from "../api/axios.config.ts";
 import {
-    Card,
     CardContent,
     CardMedia,
     Grid,
@@ -14,8 +13,6 @@ import "./DataList.css";
 import Header from "../componnents/header/Header.tsx";
 import Typography from "@mui/material/Typography";
 import {useNavigate} from "react-router";
-import HeroRoleFilter from "../componnents/HeroRoleFilter.tsx";
-
 
 const DataList = () => {
     const [heroes, setHeroes] = useState([])

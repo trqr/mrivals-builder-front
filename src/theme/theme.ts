@@ -28,7 +28,7 @@ const theme = createTheme({
                     // Some CSS
                     fontSize: '1rem',
                     color: 'darkgrey',
-                    transform: 'skewX(+30deg)',
+                    transform: 'skewX(-30deg)',
                     borderRadius: '0px',
                 },
             },

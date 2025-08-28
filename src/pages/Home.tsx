@@ -1,6 +1,4 @@
 import Header from "../componnents/header/Header.tsx";
-import {Button} from "@mui/material";
-import './Home.css';
 import affiche from "../image/affiche.jpeg"
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";

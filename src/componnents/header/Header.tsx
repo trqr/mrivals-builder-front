@@ -1,10 +1,7 @@
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import {useNavigate} from 'react-router';
-import {AppBar, Button} from "@mui/material";
 import AuthContainer from "../common/AuthContainer.tsx";
 import Box from "@mui/material/Box";
-import {AppBar, Avatar, Button} from "@mui/material";
 import MainButton from "../button/MainButton.tsx";
 
 
