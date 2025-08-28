@@ -1,11 +1,10 @@
-import {useLoaderData, useParams} from "react-router-dom";
-import {getHeroes} from "../api/Hero.service.ts";
-import {useEffect, useState, useTransition} from "react";
-import type {HeroType} from "../@types/HeroType.d";
-import {emptyHeroType} from "../@types/HeroType.d";
+import {useLoaderData} from "react-router-dom";
+import {useTransition} from "react";
 import "./HeroDetails.css";
 import Header from "../componnents/header/Header.tsx";
-import {imageBaseUrl} from "../api/axios.config.ts";
+import {iconBaseUrl, imageBaseUrl} from "../api/axios.config.ts";
+import type {AbilitiesType} from "../@types/AbilitiesType";
+import {parseCustomTags} from "../utils/strParser.ts";
 
 const HeroDetails = () => {
     const [isPending, startTransition] = useTransition()
@@ -34,9 +33,11 @@ const HeroDetails = () => {
                 <div className="rightColumn">
                     <div className="abilities">
                         <h2>Abilities :</h2>
-                        {hero.abilities?.map((ability, index) => (
+                        {hero.abilities?.map((ability: AbilitiesType, index: number) => (
                             <div key={index} className="ability">
+                                <img src={iconBaseUrl+ability.icon}></img>
                                 <h3>{ability.name}</h3>
+                                <p dangerouslySetInnerHTML={{__html: parseCustomTags(ability.description)}}/>
                                 <p>{ability.description}</p>
                             </div>
                         ))}

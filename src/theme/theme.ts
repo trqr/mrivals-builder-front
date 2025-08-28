@@ -28,7 +28,7 @@ const theme = createTheme({
                     // Some CSS
                     fontSize: '1rem',
                     color: 'darkgrey',
-                    transform: 'skewX(-30deg)',
+                    clipPath: 'polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%)',
                     borderRadius: '0px',
                 },
             },
