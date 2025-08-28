@@ -35,6 +35,7 @@
     padding-inline: 1rem;
     cursor: grab;
     transform-origin: center center;
+    align-items: center;
 }
 
 .infinite-scroll-item {
@@ -52,14 +53,18 @@
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
-    width: 500px;
-    height: 900px;
+    width: 250px;
+    height: 800px;
+    transform: rotate(90deg); /* tourne chaque item de 90° */
+    transform-origin: center center;
 }
 
 .infinite-scroll-item img {
     object-fit: cover;
+    object-position: center;
     border-radius: 13px;
-    transform: rotate(90deg) scale(1.7);
+    height: 100%;
+    transform: rotate(-90deg);
 }
 
 .infinite-scroll-item:hover {

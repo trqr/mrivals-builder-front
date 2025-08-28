@@ -73,7 +73,7 @@ const Home = () => {
                 justifyContent: 'center',
                 alignItems: 'center'}}>
                 <div style={{ height: '450px',
-                    width: '800px',
+                    width: '500px',
                     position: 'relative',
                     border: 'solid 2px #FDDE2B',
                     transform: 'skew(-21deg)',
@@ -89,10 +89,9 @@ const Home = () => {
                         ))}
                         autoplay
                         autoplaySpeed={0.3}
-                        autoplayDirection="down"
+                        autoplayDirection="up"
                         isTilted
                         tiltDirection="left"
-                        pauseOnHover
                     />
                 </div>
 

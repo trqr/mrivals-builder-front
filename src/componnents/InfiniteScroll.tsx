@@ -37,9 +37,7 @@ export default function InfiniteScroll({
 
     const getTiltTransform = () => {
         if (!isTilted) return "none";
-        return tiltDirection === "left"
-            ? "rotateX(20deg) rotateZ(-20deg) skewX(20deg)"
-            : "rotateX(20deg) rotateZ(20deg) skewX(-20deg)";
+        return "rotateX(0deg) rotateZ(0deg)"; // pas de diagonale
     };
 
     useEffect(() => {
