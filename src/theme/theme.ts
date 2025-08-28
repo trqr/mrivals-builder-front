@@ -1,5 +1,7 @@
 import {createTheme} from "@mui/material";
 
+
+
 const theme = createTheme({
     palette: {
         mode: "dark",
@@ -8,12 +10,13 @@ const theme = createTheme({
             paper: "#1e1e2f",
         },
         primary: {
-            main: "#f4e543",
+            main: "#FDDE2B",
+            contrastText: "#FFFFFF",
         },
         secondary: {
-            main: "#58b697",
+            main: "#535755",
         },
-        divider: "#28c7d6",
+        divider: "#000000",
         text: {
             primary: "#ffffff",
             secondary: "#b3b3b3",
@@ -28,12 +31,18 @@ const theme = createTheme({
                     // Some CSS
                     fontSize: '1rem',
                     color: 'darkgrey',
-                    clipPath: 'polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%)',
+                    clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)',
                     borderRadius: '0px',
                 },
             },
+            variants: [
+                {
+                    props: { variant: 'contained'} ,
+                    style: {
+                        boxShadow: '10px 5px 2px black'},
+                }],
+            },
         },
-    },
 });
 
 

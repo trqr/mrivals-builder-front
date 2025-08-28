@@ -1,5 +1,4 @@
 import {ToggleButton, ToggleButtonGroup} from "@mui/material";
-import {useState} from "react";
 
 type FilterProps = {
     role: string;
@@ -15,16 +14,17 @@ const HeroRoleFilter = ({role, setRole}: FilterProps) => {
         setRole(newAlignment);
     };
 
-    return (<ToggleButtonGroup
-        color="primary"
-        value={role}
-        exclusive
-        onChange={handleChange}
-        aria-label="Platform"
-    >
-        <ToggleButton className={"filterButton"} value="Vanguard">Vanguard</ToggleButton>
-        <ToggleButton className={"filterButton"} value="Duelist">Duelist</ToggleButton>
-        <ToggleButton className={"filterButton"} value="Strategist">Strategist</ToggleButton>
-    </ToggleButtonGroup>)
+    return (
+        <ToggleButtonGroup
+            color="primary"
+            value={role}
+            exclusive
+            onChange={handleChange}
+            aria-label="Platform"
+        >
+            <ToggleButton className={"filterButton"} color={"primary"} value="Vanguard">Vanguard</ToggleButton>
+            <ToggleButton className={"filterButton"} value="Duelist">Duelist</ToggleButton>
+            <ToggleButton className={"filterButton"} value="Strategist">Strategist</ToggleButton>
+        </ToggleButtonGroup>)
 }
 export default HeroRoleFilter
