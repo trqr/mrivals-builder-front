@@ -45,15 +45,27 @@ const Home = () => {
     return (
         <>
             <Header></Header>
-            <div style={{ marginTop: "80px" }}></div>
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "row", // ligne
+                    justifyContent: "space-between", // espace entre les colonnes
+                    alignItems: "flex-start", // alignement vertical en haut
+                    gap: 4,
+                    padding: "20px",
+                }}
+            >
             <Box
                 className="actuality"
                 sx={{
+                    flex: 1,
                     display: "flex",
-                    alignItems: "center",
+                    flexDirection: "column",
+                    alignItems: "start",
                     justifyContent: "space-between",
-                    gap: 4,
-                    padding: "20px"
+                    gap: 2,
+                    padding: "20px",
+                    maxWidth: "50%"
                 }}
             >
                 {/* Image à gauche */}
@@ -69,7 +81,7 @@ const Home = () => {
                 />
 
                 {/* Texte à droite */}
-                <Typography sx={{ flex: 1, textAlign: "justify", marginLeft: "60px" }}></Typography>
+                <Typography sx={{ flex: 1, textAlign: "justify"}}></Typography>
                     <SplitText
                         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                         className="text-2xl font-semibold text-center"
@@ -84,16 +96,19 @@ const Home = () => {
                         textAlign="center"
                         onLetterAnimationComplete={handleAnimationComplete}
                     />
+                <div style={{ display: "flex", justifyContent: "center", margin: "40px", transform: 'skew(-21deg)', }}>
+                    <TeambuildButton2 onClick={handleClick}>
+                        Build</TeambuildButton2>
+                </div>
             </Box>
-            <div className="caroussel" style={{display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'}}>
-                <div style={{ height: '450px',
-                    width: '500px',
-                    position: 'relative',
-                    border: 'solid 2px #FDDE2B',
-                    transform: 'skew(-21deg)',
-                    }}>
+            <Box className="caroussel" style={{display: 'flex',
+                justifyContent: 'end',
+                alignItems: 'end',
+                width: "600px",
+                height: "90vh",
+                border: "solid 2px #FDDE2B",
+                position: "relative",
+            }}>
                     <InfiniteScroll
                         items={heroes.map((hero) => (
                             <img
@@ -109,13 +124,8 @@ const Home = () => {
                         isTilted
                         tiltDirection="left"
                     />
-                </div>
-
-            </div>
-            <div style={{ display: "flex", justifyContent: "center", margin: "40px", transform: 'skew(-21deg)', }}>
-                <TeambuildButton2 onClick={handleClick}>
-                    Build</TeambuildButton2>
-            </div>
+            </Box>
+            </Box>
 
         </>
     )

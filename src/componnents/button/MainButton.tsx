@@ -12,7 +12,9 @@ const MainButton = styled.button`
     text-transform: uppercase;
     cursor: pointer;
     transform: skew(-21deg);
-    position: relative; /* important pour ::before */
+    position: relative;
+    margin-bottom: 10px;
+    margin-top: 10px;
 
     span {
         display: inline-block;

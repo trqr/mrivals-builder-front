@@ -4,10 +4,10 @@ const TeambuildButton2 = styled.button`
     /* From Uiverse.io by 212004ALJI */
     &,
     &::after {
-        padding: 10px 50px;
-        font-size: 20px;
+        padding: 30px 60px;
+        font-size: 40px;
+        font-weight: bold;
         border: 2px solid #FDDE2B;
-        border-radius: 5px;
         color: #FDDE2B;
         background-color: transparent;
         position: relative;

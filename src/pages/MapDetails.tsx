@@ -23,7 +23,7 @@ const MapDetails = () => {
     return (
         <>
             <Header></Header>
-            <div className="mapDetails" style={{marginTop: "67px"}}>
+            <div className="mapDetails">
                 <div className="leftColumn">
                     <div className="mapName">
                         <h1>{map.name}</h1>
