@@ -46,7 +46,7 @@ const Builder = () => {
                         <Grid container gap={1}>
                             {(role ? heroes.filter((hero: HeroType) => hero.role === role) : heroes).map((hero: HeroType, index: number) => (
                                 <Grid key={index} size={{md: 1.2}} sx={{width: "300px", height: "200px", overflow: "hidden"}}>
-                                    <img src={imageBaseUrl+hero.imageLink} style={{objectFit: "cover", objectPosition: "center"}} alt={hero.name}/>
+                                    <img src={imageBaseUrl+hero.imageLink} style={{objectFit: "cover", objectPosition: "center", maxHeight: "100%", maxWidth: "100%"}} alt={hero.name}/>
                                 </Grid>
                             ))}
                         </Grid>

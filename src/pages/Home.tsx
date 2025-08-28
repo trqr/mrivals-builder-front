@@ -16,9 +16,25 @@ const Home = () => {
     const [heroes, setHeroes] = useState<HeroType[]>([]);
 
     useEffect(() => {
-        getAllHeroes().then((data) =>
-            setHeroes(data));
+        getAllHeroes()
+            .then((data) => {
+                if (Array.isArray(data)) {
+                    // cas où l'API retourne directement un tableau
+                    setHeroes(data);
+                } else if (data && Array.isArray(data.heroes)) {
+                    // cas où l'API retourne { heroes: [...] }
+                    setHeroes(data.heroes);
+                } else {
+                    console.error("Format inattendu :", data);
+                    setHeroes([]); // évite de planter
+                }
+            })
+            .catch((err) => {
+                console.error("Erreur API:", err);
+                setHeroes([]); // évite undefined → map crash
+            });
     }, []);
+
     const handleClick = () => {
         navigate("/Builder");
     }
