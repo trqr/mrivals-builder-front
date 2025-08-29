@@ -9,13 +9,10 @@ import MapDetails from "../pages/MapDetails.tsx";
 import DataList from "../pages/DataList.tsx";
 import {getAllHeroes, getHeroes} from "../api/Hero.service.ts";
 
-// 👉 tu peux rajouter un Layout si tu veux une structure commune
-// comme dans ton premier exemple
-// Ici je garde simple
 export const Router = createBrowserRouter([
     {
         path: "/",
-        element: <Home />,   // page par défaut
+        element: <Home />,
     },
     {
         path: "/Admin",

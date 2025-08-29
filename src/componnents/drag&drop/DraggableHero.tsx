@@ -21,6 +21,7 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
                     : undefined,
                 cursor: "grab",
                 opacity: isDragging ? 0.3 : 1,
+                height: 200
 
             }}
             {...listeners}
@@ -32,9 +33,8 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
                     border: bestHeroes.some(r =>
                         r.heroes.some(h => h.id === hero.id)
                     )
-                        ? "3px solid limegreen"
+                        ? "2px solid limegreen"
                         : "none",
-       //             borderRadius: "50%",
                     animation: bestHeroes.some(r =>
                         r.heroes.some(h => h.id === hero.id)
                     )
