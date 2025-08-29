@@ -5,7 +5,13 @@ import {imageBaseUrl} from "../../api/axios.config.ts";
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
 
-export const DroppableSlot = ({ id, hero }: { id: string; hero?: HeroType }) =>  {
+type DroppableSlotProps = {
+    id: string;
+    hero?: HeroType;
+    handleClick: () => void;
+}
+
+export const DroppableSlot = ({ id, hero, handleClick }: DroppableSlotProps) =>  {
     const { isOver, setNodeRef } = useDroppable({id});
 
     return (
@@ -16,6 +22,7 @@ export const DroppableSlot = ({ id, hero }: { id: string; hero?: HeroType }) => 
                 border: isOver ? "2px solid green" : "1px solid lightgrey",
                 transition: "0.2s",
             }}
+            onClick={handleClick}
         >
             <CardHeader
                 title={hero ? hero.name : `Hero ${id}`}
@@ -27,7 +34,7 @@ export const DroppableSlot = ({ id, hero }: { id: string; hero?: HeroType }) => 
                     <img
                         src={imageBaseUrl + hero.imageLink}
                         alt={hero.name}
-                        style={{ maxWidth: "100%", maxHeight: "180px", objectFit: "contain" }}
+                        style={{ maxWidth: "100%", maxHeight: "190px", objectFit: "contain" }}
                     />
                     </CardMedia>
                 ) : (

@@ -9,7 +9,7 @@ import {DndContext, DragOverlay} from "@dnd-kit/core";
 import {DroppableSlot} from "../componnents/drag&drop/DroppableSlot.tsx";
 import {DraggableHero} from "../componnents/drag&drop/DraggableHero.tsx";
 import {imageBaseUrl} from "../api/axios.config.ts";
-import {getBestWinRateByRole} from "../api/Compo.service.ts";
+import {getBestWinRateByRole, saveCompo} from "../api/Compo.service.ts";
 
 const Builder = () => {
     const fetchedHeroes = useLoaderData<HeroType[]>()
@@ -58,6 +58,17 @@ const Builder = () => {
         setActiveHero(null);
     };
 
+    const handleRemoveHero = () => {
+        console.log("remove hero");
+    }
+
+    const handleSubmitCompo = async () => {
+        startTransition( async () => {
+            const heroesIds = slots.map(hero => hero?.id)
+            const savedCompo = await saveCompo(heroesIds);
+        })
+    }
+
     return (
         <>
             <Header></Header>
@@ -74,11 +85,14 @@ const Builder = () => {
                     <Grid container gap={1} sx={{display: "flex", justifyContent: "center"}}>
                         {slots.map((slotHero, i) => (
                             <Grid key={i} size={{ md: 5.5, lg: 5.5, xl: 5.5 }}>
-                                <DroppableSlot id={`slot-${i}`} hero={slotHero || undefined} />
+                                <DroppableSlot id={`slot-${i}`} hero={slotHero || undefined} handleClick={handleRemoveHero}/>
                             </Grid>
                         ))}
                     </Grid>
-                    <Button variant={"contained"} sx={{margin: "10px"}} disabled={(slots.filter(x => x !== null).length < 6)}>Validate</Button>
+                    <Button variant={"contained"} sx={{margin: "10px"}}
+                            disabled={(slots.filter(x => x !== null).length < 6)}
+                            onClick={handleSubmitCompo}
+                    >Validate</Button>
                 </Box>
                 <Box sx={{display: "flex", justifyContent: "space-between", flexDirection: "column", width:'75%'}}>
                     <Box >

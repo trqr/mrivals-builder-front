@@ -34,7 +34,7 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
                     )
                         ? "3px solid limegreen"
                         : "none",
-                    borderRadius: "50%",
+       //             borderRadius: "50%",
                     animation: bestHeroes.some(r =>
                         r.heroes.some(h => h.id === hero.id)
                     )
@@ -42,8 +42,8 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
                         : "none",
                     objectFit: "cover",
                     objectPosition: "center",
-                    maxHeight: "100%",
-                    maxWidth: "100%",
+                    maxHeight: "90%",
+                    maxWidth: "90%",
                 }}
                 alt={hero.name}
             />
