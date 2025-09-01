@@ -13,6 +13,7 @@ import "./DataList.css";
 import Header from "../componnents/header/Header.tsx";
 import Typography from "@mui/material/Typography";
 import {useNavigate} from "react-router";
+import Page from "./layout/Page.tsx";
 
 const DataList = () => {
     const [heroes, setHeroes] = useState([])
@@ -40,9 +41,7 @@ const DataList = () => {
 
 
     return (
-        <>
-            <Header />
-
+        <Page description={"Heroes and maps listing"} title={"Heroes and maps listing"}>
             {/* Boutons de choix */}
             <div className={'filterButton'} style={{ marginTop: "80px", textAlign: "center" }}>
                 <button className={show === "heroes" ? "btn active" : "btn inactive"}
@@ -81,7 +80,7 @@ const DataList = () => {
                     ))}
                 </Grid>
             )}
-        </>
+        </Page>
     )
 }
 

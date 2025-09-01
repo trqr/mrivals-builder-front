@@ -1,17 +1,17 @@
-import Header from "../componnents/header/Header.tsx";
 import affiche from "../image/affiche.jpeg";
 import affiche2 from "../image/acceuil2.jpeg";
 import affiche3 from "../image/acceuil3.jpeg";
 import affiche4 from "../image/acceuil4.jpg";
 import Box from "@mui/material/Box";
-import { useNavigate } from "react-router";
+import {useNavigate} from "react-router";
 import TeambuildButton2 from "../componnents/button/TeambuildButton2.tsx";
 import InfiniteScroll from "../componnents/InfiniteScroll.tsx";
-import type { HeroType } from "../@types/HeroType";
-import { useEffect, useState } from "react";
-import { getAllHeroes } from "../api/Hero.service.ts";
-import { imageBaseUrl } from "../api/axios.config.ts";
+import type {HeroType} from "../@types/HeroType";
+import {useEffect, useState} from "react";
+import {getAllHeroes} from "../api/Hero.service.ts";
+import {imageBaseUrl} from "../api/axios.config.ts";
 import SplitText from "../componnents/HomeText.tsx";
+import Page from "./layout/Page.tsx";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -44,9 +44,7 @@ const Home = () => {
     };
 
     return (
-        <>
-            <Header />
-
+        <Page title={"Homepage"} description={"Homepage"}>
             <Box
                 sx={{
                     display: "grid",
@@ -134,7 +132,7 @@ const Home = () => {
                     />
                 </Box>
             </Box>
-        </>
+        </Page>
     );
 };
 

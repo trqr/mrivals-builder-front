@@ -7,6 +7,7 @@ import type {AbilitiesType} from "../@types/AbilitiesType";
 import {parseCustomTags} from "../utils/strParser.ts";
 import Box from "@mui/material/Box";
 import {Grid, Popover, Stack, Tooltip} from "@mui/material";
+import Page from "./layout/Page.tsx";
 
 const HeroDetails = () => {
     const [isPending, startTransition] = useTransition();
@@ -14,8 +15,7 @@ const HeroDetails = () => {
     const [activeAbility, setActiveAbility] = useState<AbilitiesType | null>(null);
 
     return (
-        <>
-            <Header/>
+        <Page title={"Hero details"} description={"Hero details"}>
             <div className="heroDetails">
                 <div className="leftColumn">
                     <div className="heroName">
@@ -75,7 +75,7 @@ const HeroDetails = () => {
 
                 </div>
             </div>
-        </>
+        </Page>
     );
 };
 

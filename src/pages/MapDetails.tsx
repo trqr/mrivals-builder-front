@@ -3,9 +3,9 @@ import {useParams} from "react-router-dom";
 import {getMapById} from "../api/Map.service.ts";
 import type {MapType} from "../@types/MapType.d";
 import {emptyMapType} from "../@types/MapType.d";
-import Header from "../componnents/header/Header.tsx";
 import {imageBaseUrl} from "../api/axios.config.ts";
 import "./MapDetails.css"
+import Page from "./layout/Page.tsx";
 
 const MapDetails = () => {
     const [map, setMap] = useState<MapType>(emptyMapType)
@@ -21,8 +21,7 @@ const MapDetails = () => {
 
     console.log(map.mapImages)
     return (
-        <>
-            <Header></Header>
+        <Page title={"Map details"} description={"Map details"}>
             <div className="mapDetails">
                 <div className="leftColumn">
                     <div className="mapName">
@@ -56,7 +55,7 @@ const MapDetails = () => {
                 </div>
             </div>
 
-        </>
+        </Page>
     )
 }
 
