@@ -1,14 +1,16 @@
 import Header from "../componnents/header/Header.tsx";
-import affiche from "../image/affiche.jpeg"
-import Typography from "@mui/material/Typography";
+import affiche from "../image/affiche.jpeg";
+import affiche2 from "../image/acceuil2.jpeg";
+import affiche3 from "../image/acceuil3.jpeg"
+import affiche4 from "../image/acceuil4.jpg"
 import Box from "@mui/material/Box";
-import {useNavigate} from "react-router";
+import { useNavigate } from "react-router";
 import TeambuildButton2 from "../componnents/button/TeambuildButton2.tsx";
 import InfiniteScroll from "../componnents/InfiniteScroll.tsx";
-import type {HeroType} from "../@types/HeroType";
-import {useEffect, useState} from "react";
-import {getAllHeroes} from "../api/Hero.service.ts";
-import {imageBaseUrl} from "../api/axios.config.ts";
+import type { HeroType } from "../@types/HeroType";
+import { useEffect, useState } from "react";
+import { getAllHeroes } from "../api/Hero.service.ts";
+import { imageBaseUrl } from "../api/axios.config.ts";
 import SplitText from "../componnents/HomeText.tsx";
 
 const Home = () => {
@@ -19,73 +21,79 @@ const Home = () => {
         getAllHeroes()
             .then((data) => {
                 if (Array.isArray(data)) {
-                    // cas où l'API retourne directement un tableau
                     setHeroes(data);
                 } else if (data && Array.isArray(data.heroes)) {
-                    // cas où l'API retourne { heroes: [...] }
                     setHeroes(data.heroes);
                 } else {
                     console.error("Format inattendu :", data);
-                    setHeroes([]); // évite de planter
+                    setHeroes([]);
                 }
             })
             .catch((err) => {
                 console.error("Erreur API:", err);
-                setHeroes([]); // évite undefined → map crash
+                setHeroes([]);
             });
     }, []);
 
     const handleClick = () => {
         navigate("/Builder");
-    }
+    };
+
     const handleAnimationComplete = () => {
-        console.log('All letters have animated!');
+        console.log("All letters have animated!");
     };
 
     return (
         <>
-            <Header></Header>
+            <Header />
+
             <Box
                 sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "flex-start",
+                    display: "grid",
+                    gridTemplateColumns: "1fr 600px",
                     gap: 4,
                     padding: "20px",
-                }}
-            >
-            <Box
-                className="actuality"
-                sx={{
-                    flex: 1,
-                    display: "flex",
-                    flexDirection: "column",
                     alignItems: "start",
-                    justifyContent: "space-between",
-                    gap: 2,
-                    padding: "20px",
-                    maxWidth: "50%"
                 }}
             >
-                {/* Image à gauche */}
-                <img
-                    className="image"
-                    src={affiche}
-                    alt="affiche de la saison 3.5"
-                    style={{
-                        width: "500px",
-                        height: "auto",
-
+                {/* Colonne gauche : images + texte + bouton */}
+                <Box
+                    className="actuality"
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        gap: 3,
                     }}
-                />
+                >
+                    {/* Deux images côte à côte */}
+                    <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
+                        <img
+                            src={affiche}
+                            alt="affiche de la saison 3.5"
+                            style={{ width: "450px", height: "auto"}}
+                        />
+                        <img
+                            src={affiche2}
+                            alt="affiche de la saison 3.5"
+                            style={{ width: "450px", height: "auto"}}
+                        />
+                        <img
+                            src={affiche3}
+                            alt="affiche de la saison 3.5"
+                            style={{ width: "450px", height: "auto"}}
+                            />
+                        <img
+                        src={affiche4}
+                        alt="affiche de la saison 3.5"
+                        style={{ width: "450px", height: "auto"}}
+                        />
+                    </Box>
 
-                {/* Texte à droite */}
-                <Typography sx={{ flex: 1, textAlign: "justify"}}></Typography>
+                    {/* Texte animé */}
                     <SplitText
                         text="Le prochain personnage sort le 12/09"
-                        className="text-2xl font-semibold text-center"
-                        style={{}}
+                        className="text-3xl font-bold text-center"
                         delay={100}
                         duration={0.4}
                         ease="power3.out"
@@ -97,19 +105,27 @@ const Home = () => {
                         textAlign="center"
                         onLetterAnimationComplete={handleAnimationComplete}
                     />
-                <div style={{ display: "flex", justifyContent: "center", margin: "40px", transform: 'skew(-21deg)', }}>
-                    <TeambuildButton2 onClick={handleClick}>
-                        Build</TeambuildButton2>
-                </div>
-            </Box>
-            <Box className="caroussel" style={{display: 'flex',
-                justifyContent: 'end',
-                alignItems: 'end',
-                width: "600px",
-                height: "90vh",
-                border: "solid 2px #FDDE2B",
-                position: "relative",
-            }}>
+
+                    {/* Bouton centré */}
+                    <Box sx={{ transform: "skew(-21deg)", mt: 2 }}>
+                        <TeambuildButton2 onClick={handleClick}>Build</TeambuildButton2>
+                    </Box>
+                </Box>
+
+                {/* Colonne droite : carrousel */}
+                <Box
+                    className="caroussel"
+                    sx={{
+                        display: "flex",
+                        justifyContent: "end",
+                        alignItems: "end",
+                        width: "600px",
+                        height: "90vh",
+                        border: "solid 2px #FDDE2B",
+                        position: "relative",
+                        overflow: "hidden",
+                    }}
+                >
                     <InfiniteScroll
                         items={heroes.map((hero) => (
                             <img
@@ -125,11 +141,10 @@ const Home = () => {
                         isTilted
                         tiltDirection="left"
                     />
+                </Box>
             </Box>
-            </Box>
-
         </>
-    )
-}
+    );
+};
 
 export default Home;
