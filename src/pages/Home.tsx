@@ -48,9 +48,9 @@ const Home = () => {
             <Box
                 sx={{
                     display: "flex",
-                    flexDirection: "row", // ligne
-                    justifyContent: "space-between", // espace entre les colonnes
-                    alignItems: "flex-start", // alignement vertical en haut
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "flex-start",
                     gap: 4,
                     padding: "20px",
                 }}
@@ -83,10 +83,11 @@ const Home = () => {
                 {/* Texte à droite */}
                 <Typography sx={{ flex: 1, textAlign: "justify"}}></Typography>
                     <SplitText
-                        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                        text="Le prochain personnage sort le 12/09"
                         className="text-2xl font-semibold text-center"
+                        style={{}}
                         delay={100}
-                        duration={0.6}
+                        duration={0.4}
                         ease="power3.out"
                         splitType="chars"
                         from={{ opacity: 0, y: 40 }}
