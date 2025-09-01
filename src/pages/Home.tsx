@@ -1,8 +1,8 @@
 import Header from "../componnents/header/Header.tsx";
 import affiche from "../image/affiche.jpeg";
 import affiche2 from "../image/acceuil2.jpeg";
-import affiche3 from "../image/acceuil3.jpeg"
-import affiche4 from "../image/acceuil4.jpg"
+import affiche3 from "../image/acceuil3.jpeg";
+import affiche4 from "../image/acceuil4.jpg";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router";
 import TeambuildButton2 from "../componnents/button/TeambuildButton2.tsx";
@@ -66,28 +66,19 @@ const Home = () => {
                         gap: 3,
                     }}
                 >
-                    {/* Deux images côte à côte */}
-                    <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
-                        <img
-                            src={affiche}
-                            alt="affiche de la saison 3.5"
-                            style={{ width: "450px", height: "auto"}}
-                        />
-                        <img
-                            src={affiche2}
-                            alt="affiche de la saison 3.5"
-                            style={{ width: "450px", height: "auto"}}
-                        />
-                        <img
-                            src={affiche3}
-                            alt="affiche de la saison 3.5"
-                            style={{ width: "450px", height: "auto"}}
-                            />
-                        <img
-                        src={affiche4}
-                        alt="affiche de la saison 3.5"
-                        style={{ width: "450px", height: "auto"}}
-                        />
+                    {/* Grille des 4 images */}
+                    <Box
+                        sx={{
+                            display: "grid",
+                            gridTemplateColumns: "1fr 1fr",
+                            gap: 2,
+                            justifyItems: "center",
+                        }}
+                    >
+                        <img src={affiche} alt="affiche 1" style={{ width: "100%", maxWidth: "400px", borderRadius: "8px" }} />
+                        <img src={affiche2} alt="affiche 2" style={{ width: "100%", maxWidth: "400px", borderRadius: "8px" }} />
+                        <img src={affiche3} alt="affiche 3" style={{ width: "100%", maxWidth: "400px", borderRadius: "8px" }} />
+                        <img src={affiche4} alt="affiche 4" style={{ width: "100%", maxWidth: "400px", borderRadius: "8px" }} />
                     </Box>
 
                     {/* Texte animé */}
@@ -148,3 +139,4 @@ const Home = () => {
 };
 
 export default Home;
+

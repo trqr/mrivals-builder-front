@@ -139,6 +139,9 @@ const SplitText = ({
             whiteSpace: "normal",
             wordWrap: "break-word",
             willChange: "transform, opacity",
+            fontSize: "30px",
+            fontWeight: "bold",
+            fontFamily: "roboto"
         };
         const classes = `split-parent ${className}`;
         switch (tag) {
