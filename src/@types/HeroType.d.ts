@@ -1,4 +1,6 @@
 import type {AbilitiesType} from "./AbilitiesType";
+import type {SynergieType} from "./SynergieType.ts";
+import type {MatchUpType} from "./MatchUpType.ts";
 
 export type HeroType = {
     id: number;
@@ -12,7 +14,8 @@ export type HeroType = {
     lore: string;
     winRate: number;
     abilities: AbilitiesType[];
-
+    synergies: SynergieType[];
+    matchUps: MatchUpType[]
 }
 export const emptyHeroType: HeroType = {
     id: 0,
@@ -25,5 +28,4 @@ export const emptyHeroType: HeroType = {
     bio: "",
     lore: "",
     winRate: 0,
-
 }

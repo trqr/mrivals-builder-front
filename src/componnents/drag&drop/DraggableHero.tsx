@@ -2,14 +2,13 @@ import type {HeroType} from "../../@types/HeroType";
 import {useDraggable} from "@dnd-kit/core";
 import {imageBaseUrl} from "../../api/axios.config.ts";
 import Popover from "@mui/material/Popover";
-import Typography from "@mui/material/Typography";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import {Paper} from "@mui/material";
 
 type DraggableHeroProps = {
     hero: HeroType;
-    bestHeroes: any;
+    bestHeroes: never[];
 }
 
 export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
@@ -51,12 +50,12 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
                 src={imageBaseUrl + hero.imageLink}
                 style={{
                     border: bestHeroes.some(r =>
-                        r.heroes.some(h => h.id === hero.id)
+                        r.heroes.some((h: HeroType) => h.id === hero.id)
                     )
                         ? "2px solid limegreen"
                         : "none",
                     animation: bestHeroes.some(r =>
-                        r.heroes.some(h => h.id === hero.id)
+                        r.heroes.some((h: HeroType) => h.id === hero.id)
                     )
                         ? "pulse 1.5s infinite"
                         : "none",
@@ -78,14 +77,14 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
                     horizontal: 'right',
                 }}
             >
-                <Box sx={{display: "flex", flexDirection: "row", alignItems: "center", border: "1px solid red"}}>
+                <Box sx={{display: "flex", flexDirection: "row", alignItems: "center" ,padding: "5px", backgroundColor: "#b1b1af"}}>
                 {hero.matchUps.map(matchup => (
-                    <Paper elevation={6} key={matchup.id} sx={{ padding: "2px" , display: "flex" , alignItems: "center"}}>
+                    <Paper elevation={6} key={matchup.id} sx={{ display: "flex" , padding: "2px", alignItems: "center", border: "2px solid red"}}>
                     <img
                         src={imageBaseUrl + matchup.counterPick.imageLink}
                         style={{
-                            width: "60px",
-                            height: "60px",
+                            width: "70px",
+                            height: "70px",
                             objectFit: "cover",
                             objectPosition: "center 15%",
                         }}
@@ -109,14 +108,14 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
                     horizontal: "right",
                 }}
             >
-                <Box sx={{display: "flex", flexDirection: "row", alignItems: "center", border: "1px solid green"}}>
-                    {hero.matchUps.map(matchup => (
-                        <Paper elevation={6} key={matchup.id} sx={{ padding: "3px" , display: "flex" , alignItems: "center"}}>
+                <Box sx={{display: "flex", flexDirection: "row", alignItems: "center",padding: "5px", backgroundColor: "#b1b1af" }}>
+                    {hero.synergies.map(synergie => (
+                        <Paper elevation={6} key={synergie.id} sx={{ padding: "2px" , display: "flex" , alignItems: "center", border: synergie.isTeamUp ? "3px dashed gold" : "2px solid green"}}>
                             <img
-                                src={imageBaseUrl + matchup.counterPick.imageLink}
+                                src={imageBaseUrl + synergie.ally.imageLink}
                                 style={{
-                                    width: "60px",
-                                    height: "60px",
+                                    width: "70px",
+                                    height: "70px",
                                     objectFit: "cover",
                                     objectPosition: "center 15%",
                                 }}

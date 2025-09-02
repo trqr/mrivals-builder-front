@@ -125,7 +125,7 @@ const RegisterDialog = ({open, setOpen}: RegisterDialogProps) => {
                                 required={true}
                             ></TextField>
                             <TextField
-                                label="Mot de passe"
+                                label="Password"
                                 type={!showPassword ? "password" : "text"}
                                 autoComplete="current-password"
                                 fullWidth
