@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import {Button, Grid, LinearProgress} from "@mui/material";
+import {Button, Grid, LinearProgress, Popover} from "@mui/material";
 import {useLoaderData} from "react-router-dom";
 import type {HeroType} from "../@types/HeroType";
 import {useEffect, useState, useTransition} from "react";
@@ -11,6 +11,8 @@ import {DraggableHero} from "../componnents/drag&drop/DraggableHero.tsx";
 import {imageBaseUrl} from "../api/axios.config.ts";
 import {getBestWinRateByRole, saveCompo} from "../api/Compo.service.ts";
 import {useCompo} from "../hooks/useCompo.tsx";
+import {useNavigate} from "react-router";
+import Page from "./layout/Page.tsx";
 
 const Builder = () => {
     const fetchedHeroes = useLoaderData<HeroType[]>();
@@ -19,6 +21,7 @@ const Builder = () => {
     const [role, setRole] = useState("");
     const [activeHero, setActiveHero] = useState<HeroType | null>(null);
     const [isPending, startTransition] = useTransition();
+    const navigate = useNavigate();
 
     const {compo, addToCompo, removeFromCompo} = useCompo();
 
@@ -70,13 +73,12 @@ const Builder = () => {
     const handleSubmitCompo = async () => {
         startTransition(async () => {
             const heroesIds = compo.map((hero) => hero?.id);
-            const savedCompo = await saveCompo(heroesIds);
+            const savedCompo = await saveCompo(heroesIds).then(() => navigate("/team"))
         });
     };
 
     return (
-        <>
-            <Header/>
+        <Page title={"Builder"} description="Builder">
             {isPending && <LinearProgress variant={"indeterminate"}/>}
             <DndContext
                 onDragStart={handleDragStart}
@@ -179,7 +181,7 @@ const Builder = () => {
                     ) : null}
                 </DragOverlay>
             </DndContext>
-        </>
+        </Page>
     );
 };
 

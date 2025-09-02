@@ -6,13 +6,14 @@ import {
     DialogContent,
     DialogTitle,
     IconButton,
-    InputAdornment, LinearProgress,
+    InputAdornment,
+    LinearProgress,
     Link,
     TextField
 } from "@mui/material";
-import {useContext, useState, useTransition} from "react";
+import {useState, useTransition} from "react";
 import Box from "@mui/material/Box";
-import {Visibility, VisibilityOff, LockOutlined} from "@mui/icons-material";
+import {LockOutlined, Visibility, VisibilityOff} from "@mui/icons-material";
 import {login} from "../../../api/Auth.service.ts";
 import {useAuth} from "../../../hooks/useAuth.tsx";
 
@@ -107,7 +108,7 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
                         required={true}
                     ></TextField>
                     <TextField
-                        label="Mot de passe"
+                        label="Password"
                         type={!showPassword ? "password" : "text"}
                         autoComplete="current-password"
                         fullWidth

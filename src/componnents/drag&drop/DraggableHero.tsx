@@ -1,19 +1,38 @@
 import type {HeroType} from "../../@types/HeroType";
 import {useDraggable} from "@dnd-kit/core";
 import {imageBaseUrl} from "../../api/axios.config.ts";
+import Popover from "@mui/material/Popover";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import {Paper} from "@mui/material";
 
 type DraggableHeroProps = {
     hero: HeroType;
-    bestHeroes: any;
+    bestHeroes: never[];
 }
 
 export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
     const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
         id: hero.id.toString(),
     });
+    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+
+
+    const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handlePopoverClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
 
     return (
         <div
+            onMouseEnter={handlePopoverOpen}
+            onMouseLeave={handlePopoverClose}
             ref={setNodeRef}
             style={{
                 transform: transform
@@ -21,7 +40,7 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
                     : undefined,
                 cursor: "grab",
                 opacity: isDragging ? 0.3 : 1,
-                height: 200
+                height: 175
 
             }}
             {...listeners}
@@ -31,22 +50,80 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
                 src={imageBaseUrl + hero.imageLink}
                 style={{
                     border: bestHeroes.some(r =>
-                        r.heroes.some(h => h.id === hero.id)
+                        r.heroes.some((h: HeroType) => h.id === hero.id)
                     )
                         ? "2px solid limegreen"
                         : "none",
                     animation: bestHeroes.some(r =>
-                        r.heroes.some(h => h.id === hero.id)
+                        r.heroes.some((h: HeroType) => h.id === hero.id)
                     )
                         ? "pulse 1.5s infinite"
                         : "none",
                     objectFit: "cover",
                     objectPosition: "center",
-                    maxHeight: "90%",
-                    maxWidth: "90%",
+                    maxHeight: "100%",
+                    maxWidth: "100%",
                 }}
                 alt={hero.name}
             />
+            <Popover
+                id={id}
+                sx={{ pointerEvents: "none" }}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handlePopoverClose}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                }}
+            >
+                <Box sx={{display: "flex", flexDirection: "row", alignItems: "center" ,padding: "5px", backgroundColor: "#b1b1af"}}>
+                {hero.matchUps.map(matchup => (
+                    <Paper elevation={6} key={matchup.id} sx={{ display: "flex" , padding: "2px", alignItems: "center", border: "2px solid red"}}>
+                    <img
+                        src={imageBaseUrl + matchup.counterPick.imageLink}
+                        style={{
+                            width: "70px",
+                            height: "70px",
+                            objectFit: "cover",
+                            objectPosition: "center 15%",
+                        }}
+                    />
+                    </Paper>
+                ))}
+                </Box>
+            </Popover>
+            <Popover
+                id={id}
+                sx={{ pointerEvents: "none" }}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handlePopoverClose}
+                anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                }}
+                transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                }}
+            >
+                <Box sx={{display: "flex", flexDirection: "row", alignItems: "center",padding: "5px", backgroundColor: "#b1b1af" }}>
+                    {hero.synergies.map(synergie => (
+                        <Paper elevation={6} key={synergie.id} sx={{ padding: "2px" , display: "flex" , alignItems: "center", border: synergie.isTeamUp ? "3px dashed gold" : "2px solid green"}}>
+                            <img
+                                src={imageBaseUrl + synergie.ally.imageLink}
+                                style={{
+                                    width: "70px",
+                                    height: "70px",
+                                    objectFit: "cover",
+                                    objectPosition: "center 15%",
+                                }}
+                            />
+                        </Paper>
+                    ))}
+                </Box>
+            </Popover>
         </div>
     );
 }
