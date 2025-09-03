@@ -5,6 +5,7 @@ import Popover from "@mui/material/Popover";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import {Paper} from "@mui/material";
+import {useCompo} from "../../hooks/useCompo.tsx";
 
 type DraggableHeroProps = {
     hero: HeroType;
@@ -16,6 +17,7 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
         id: hero.id.toString(),
     });
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+    const { compo } = useCompo();
 
 
     const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -28,6 +30,10 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
 
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
+
+    const isTeamUp = () => {
+        return compo.some((h: HeroType) => h.synergies.some(allyHero => (hero.id === allyHero.ally.id) && allyHero.isTeamUp));
+    }
 
     return (
         <div
@@ -52,8 +58,8 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
                     border: bestHeroes.some(r =>
                         r.heroes.some((h: HeroType) => h.id === hero.id)
                     )
-                        ? "2px solid limegreen"
-                        : "none",
+                        ? (isTeamUp() ? "2px dashed gold" :  "2px solid limegreen")
+                        : (isTeamUp() ? "2px dashed gold" : "none"),
                     animation: bestHeroes.some(r =>
                         r.heroes.some((h: HeroType) => h.id === hero.id)
                     )

@@ -1,10 +1,9 @@
 import Box from "@mui/material/Box";
-import {Button, Grid, LinearProgress, Popover} from "@mui/material";
+import {Button, Grid, Icon, LinearProgress} from "@mui/material";
 import {useLoaderData} from "react-router-dom";
 import type {HeroType} from "../@types/HeroType";
 import {useEffect, useState, useTransition} from "react";
 import HeroRoleFilter from "../componnents/HeroRoleFilter.tsx";
-import Header from "../componnents/header/Header.tsx";
 import {DndContext, DragOverlay} from "@dnd-kit/core";
 import {DroppableSlot} from "../componnents/drag&drop/DroppableSlot.tsx";
 import {DraggableHero} from "../componnents/drag&drop/DraggableHero.tsx";
@@ -13,6 +12,9 @@ import {getBestWinRateByRole, saveCompo} from "../api/Compo.service.ts";
 import {useCompo} from "../hooks/useCompo.tsx";
 import {useNavigate} from "react-router";
 import Page from "./layout/Page.tsx";
+import {Paper} from "@mui/material";
+import Typography from "@mui/material/Typography";
+import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 
 const Builder = () => {
     const fetchedHeroes = useLoaderData<HeroType[]>();
@@ -21,6 +23,7 @@ const Builder = () => {
     const [role, setRole] = useState("");
     const [activeHero, setActiveHero] = useState<HeroType | null>(null);
     const [isPending, startTransition] = useTransition();
+    const [recommendationsMessages, setRecommendationsMessages] = useState({archetype: "", ban: ""})
     const navigate = useNavigate();
 
     const {compo, addToCompo, removeFromCompo} = useCompo();
@@ -39,10 +42,22 @@ const Builder = () => {
             const fetchedBestHeroes = await getBestWinRateByRole(heroesIds);
             setBestHeroes(fetchedBestHeroes);
         });
-
+        recommend();
         localStorage.setItem("currentCompo", JSON.stringify(compo.map((hero) => hero?.id)));
         console.log(compo);
     }, [compo]);
+
+    const recommend = () => {
+        if (compo.length === 0) {
+            setRecommendationsMessages({...recommendationsMessages, archetype: "Drag a hero to start composing your team !"});
+        } else if (compo.filter(hero => hero.role === "Duelist").length > 2) {
+            setRecommendationsMessages({...recommendationsMessages, archetype: "You have way too much Duelist ! Consider replacing one duelist by a Vanguard or a Strategist"});
+        } else if (compo.filter(hero => hero.role === "Vanguard").length > 3) {
+            setRecommendationsMessages({...recommendationsMessages, archetype: "You have way too much Vanguard ! Consider replacing one duelist by a Strategist or a Duelist"});
+        } else if (compo.filter(hero => hero.role === "Strategist").length > 3) {
+            setRecommendationsMessages({...recommendationsMessages, archetype: "You have way too much Strategist ! Consider replacing one duelist by a Vanguard or a Duelist"});
+        } else {setRecommendationsMessages({...recommendationsMessages, archetype: ""})}
+    }
 
     const handleDragEnd = (event: any) => {
         if (compo.length > 5) {
@@ -149,20 +164,31 @@ const Builder = () => {
                                     <Grid
                                         key={index}
                                         size={{md: 0.9}}
+/*
                                         sx={{height: "175px", overflow: "hidden"}}
+*/
                                     >
                                         <DraggableHero hero={hero} bestHeroes={bestHeroes}/>
                                     </Grid>
                                 ))}
                             </Grid>
                         </Box>
-                        <Box
-                            sx={{
-                                display: "flex",
-                                justifyContent: "center",
-                                flexDirection: "row",
-                            }}
-                        ></Box>
+                        <Box sx={{display: "flex", justifyContent: "space-around"}}>
+                            <Paper elevation={1} square sx={{margin: "30px", padding: "5px"}}>
+                                {recommendationsMessages.archetype &&
+                                    <Typography sx={{display: "flex", alignItems: "center" }} variant={"subtitle2"}>
+                                        <PriorityHighIcon color={"error"}/>
+                                        {recommendationsMessages.archetype}
+                                    </Typography>
+                                }
+                                {recommendationsMessages.ban &&
+                                    <Typography sx={{display: "flex", alignItems: "center" }} variant={"subtitle2"}>
+                                        <PriorityHighIcon color={"error"}/>
+                                        {recommendationsMessages.ban}
+                                    </Typography>
+                                }
+                            </Paper>
+                        </Box>
                     </Box>
                 </Box>
                 <DragOverlay>
