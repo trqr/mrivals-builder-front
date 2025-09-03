@@ -19,15 +19,12 @@ export const DroppableSlot = ({ id, hero, handleClick }: DroppableSlotProps) => 
             ref={setNodeRef}
             sx={{
                 height: "220px",
+                width: "80%",
                 border: isOver ? "2px solid green" : "1px solid lightgrey",
                 transition: "0.2s",
             }}
             onClick={handleClick}
         >
-            <CardHeader
-                title={hero ? hero.name : `Hero ${id}`}
-                subheader={hero ? hero.role : "role"}
-            />
             <CardContent sx={{ display: "flex", justifyContent: "center" }}>
                 {hero ? (
                     <CardMedia>

@@ -5,9 +5,9 @@ import Box from "@mui/material/Box";
 import MainButton from "../button/MainButton.tsx";
 
 const menuPages = [
-    {name: 'Accueil', path: '/'},
-    {name: 'Builder', path: '/Builder'},
-    {name: 'héros/map', path: '/List'},
+    {name: 'Home', path: '/'},
+    {name: 'Builder', path: '/builder'},
+    {name: 'Heroes', path: '/list'},
 ];
 
 export default function Header() {
@@ -16,7 +16,10 @@ export default function Header() {
     return (
         <>
             <Box sx={{borderBottom: '1px solid #FDDE2B' , display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0 10px"}}>
-                <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+                <Box
+                    sx={{display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer"}}
+                    onClick={() => navigate('/')}
+                >
                     <img height={40} style={{margin: "0 10px"}} src={"assets/logo.png"}/>Rivals Builder
                     <Typography variant="h6" noWrap component="div">
                     </Typography>

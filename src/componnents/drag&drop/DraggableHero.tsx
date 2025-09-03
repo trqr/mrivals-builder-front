@@ -28,6 +28,7 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
         setAnchorEl(null);
     };
 
+
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
 

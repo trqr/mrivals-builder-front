@@ -15,6 +15,7 @@ import Page from "./layout/Page.tsx";
 import {Paper} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
+import {useTheme} from "@mui/material/styles";
 
 const Builder = () => {
     const fetchedHeroes = useLoaderData<HeroType[]>();
@@ -25,6 +26,8 @@ const Builder = () => {
     const [isPending, startTransition] = useTransition();
     const [recommendationsMessages, setRecommendationsMessages] = useState({archetype: "", ban: ""})
     const navigate = useNavigate();
+    const theme = useTheme();
+
 
     const {compo, addToCompo, removeFromCompo} = useCompo();
 
@@ -101,26 +104,27 @@ const Builder = () => {
                 onDragCancel={handleDragCancel}
             >
                 <Box
-                    sx={{display: "flex", justifyContent: "space-between", width: "100%"}}
+                    sx={{display: "flex", justifyContent: "space-between", width: "100%", }}
                 >
                     <Box
                         sx={{
                             display: "flex",
                             flexDirection: "column",
-                            width: "25%",
-                            margin: "10px",
+                            width: "22%",
+                            margin: "25px",
                             alignItems: "center",
-                            justifyContent: "flex-end",
-                            height: "90vh",
+                            alignContent: "center",
+                            justifyContent: "center",
+                            height: "85vh",
                         }}
                     >
                         <Grid
                             container
-                            gap={1}
-                            sx={{display: "flex", justifyContent: "center"}}
+                            gap={2}
+                            sx={{display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "10px"}}
                         >
                             {Array.from({length: 6}).map((_, i) => (
-                                <Grid key={i} size={{md: 5.5, lg: 5.5, xl: 5.5}}>
+                                <Grid key={i} size={{md: 5.5, lg: 5.5, xl: 5.5}} sx={{textAlign: "center", display: "flex", justifyContent: "center"}}>
                                     <DroppableSlot
                                         id={`slot-${i}`}
                                         hero={compo[i] || undefined}
@@ -148,46 +152,41 @@ const Builder = () => {
                     >
                         <Box>
                             <Box
-                                sx={{
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    margin: "30px 10px",
-                                }}
-                            >
+                                sx={{display: "flex", justifyContent: "center", margin: "30px 10px"}}>
                                 <HeroRoleFilter role={role} setRole={setRole}/>
                             </Box>
-                            <Grid container gap={1}>
-                                {(role
-                                        ? heroes.filter((hero: HeroType) => hero.role === role)
-                                        : heroes
-                                ).map((hero: HeroType, index: number) => (
+                            <Grid container gap={1} sx={{
+                                height: "550px",
+                                overflowY: "auto",
+                                scrollbarWidth: "thin",
+                                scrollbarColor: `${theme.palette.primary.main} transparent`,
+                            }}>
+                                {(role ? heroes.filter((hero: HeroType) => hero.role === role) : heroes)
+                                    .map((hero: HeroType, index: number) => (
                                     <Grid
                                         key={index}
                                         size={{md: 0.9}}
-/*
-                                        sx={{height: "175px", overflow: "hidden"}}
-*/
                                     >
                                         <DraggableHero hero={hero} bestHeroes={bestHeroes}/>
                                     </Grid>
                                 ))}
                             </Grid>
-                        </Box>
-                        <Box sx={{display: "flex", justifyContent: "space-around"}}>
-                            <Paper elevation={1} square sx={{margin: "30px", padding: "5px"}}>
-                                {recommendationsMessages.archetype &&
-                                    <Typography sx={{display: "flex", alignItems: "center" }} variant={"subtitle2"}>
-                                        <PriorityHighIcon color={"error"}/>
-                                        {recommendationsMessages.archetype}
-                                    </Typography>
-                                }
-                                {recommendationsMessages.ban &&
-                                    <Typography sx={{display: "flex", alignItems: "center" }} variant={"subtitle2"}>
-                                        <PriorityHighIcon color={"error"}/>
-                                        {recommendationsMessages.ban}
-                                    </Typography>
-                                }
-                            </Paper>
+                            <Box sx={{display: "flex", justifyContent: "space-around"}}>
+                                <Paper elevation={1} square sx={{margin: "30px", padding: "5px"}}>
+                                    {recommendationsMessages.archetype &&
+                                        <Typography sx={{display: "flex", alignItems: "center"}} variant={"subtitle2"}>
+                                            <PriorityHighIcon color={"error"}/>
+                                            {recommendationsMessages.archetype}
+                                        </Typography>
+                                    }
+                                    {recommendationsMessages.ban &&
+                                        <Typography sx={{display: "flex", alignItems: "center"}} variant={"subtitle2"}>
+                                            <PriorityHighIcon color={"error"}/>
+                                            {recommendationsMessages.ban}
+                                        </Typography>
+                                    }
+                                </Paper>
+                            </Box>
                         </Box>
                     </Box>
                 </Box>
