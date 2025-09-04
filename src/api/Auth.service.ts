@@ -28,3 +28,16 @@ export const register = async (registerDTO: RegisterDTO) => {
             return err.response.data
         })
 }
+
+export const isTokenValid = async () => {
+    const token = localStorage.getItem("MBtoken");
+    if (!token) return;
+
+    return await Api.get("/auth", {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+        .then((res) => res.data)
+        .catch((err) => err)
+}

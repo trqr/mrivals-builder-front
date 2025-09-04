@@ -1,8 +1,6 @@
 // router.tsx
-import { createBrowserRouter } from "react-router-dom";
-import Admin from "../pages/Admin.tsx";
+import {createBrowserRouter} from "react-router-dom";
 import Builder from "../pages/Builder.tsx";
-import CompoDetails from "../pages/CompoDetails.tsx";
 import HeroDetails from "../pages/HeroDetails.tsx";
 import Home from "../pages/Home.tsx";
 import MapDetails from "../pages/MapDetails.tsx";
@@ -10,6 +8,9 @@ import DataList from "../pages/DataList.tsx";
 import {getAllHeroes, getHeroes} from "../api/Hero.service.ts";
 import TeamCompositionCheckout from "../pages/TeamCompositionCheckout.tsx";
 import Layout from "../pages/layout/Layout.tsx";
+import AdministrationPage from "../pages/AdministrationPage.tsx";
+import {getAllUsers} from "../api/User.api.ts";
+import ProtectedRoute from "../componnents/common/ProtectedRoute.tsx";
 
 export const Router = createBrowserRouter([
     {
@@ -21,17 +22,9 @@ export const Router = createBrowserRouter([
                 element: <Home />,
             },
             {
-                path: "/admin",
-                element: <Admin />,
-            },
-            {
                 path: "/builder",
                 element: <Builder />,
                 loader: () => getAllHeroes()
-            },
-            {
-                path: "/compoDetails",
-                element: <CompoDetails />,
             },
             {
                 path: "/heroDetails/:id",
@@ -50,6 +43,14 @@ export const Router = createBrowserRouter([
                 path: "/team",
                 element: <TeamCompositionCheckout />,
             },
+            {
+                path: "/admin",
+                element:
+                    <ProtectedRoute>
+                        <AdministrationPage/>
+                    </ProtectedRoute>,
+                loader: ()  => getAllUsers()
+            }
         ]
     }
 ]);
