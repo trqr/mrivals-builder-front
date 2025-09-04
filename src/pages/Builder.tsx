@@ -24,7 +24,7 @@ const Builder = () => {
     const [role, setRole] = useState("");
     const [activeHero, setActiveHero] = useState<HeroType | null>(null);
     const [isPending, startTransition] = useTransition();
-    const [recommendationsMessages, setRecommendationsMessages] = useState({archetype: "", ban: ""})
+    const [recommendationsMessages, setRecommendationsMessages] = useState({archetype: "", mainTank: "", mainHeal: "", ban: ""})
     const navigate = useNavigate();
     const theme = useTheme();
 
@@ -51,15 +51,25 @@ const Builder = () => {
     }, [compo]);
 
     const recommend = () => {
+        let newMessages = {...recommendationsMessages};
+
         if (compo.length === 0) {
-            setRecommendationsMessages({...recommendationsMessages, archetype: "Drag a hero to start composing your team !"});
+            setRecommendationsMessages({...recommendationsMessages, archetype: ""});
         } else if (compo.filter(hero => hero.role === "Duelist").length > 2) {
-            setRecommendationsMessages({...recommendationsMessages, archetype: "You have way too much Duelist ! Consider replacing one duelist by a Vanguard or a Strategist"});
+            newMessages.archetype = "You have way too much Duelist ! Consider replacing one duelist by a Vanguard or a Strategist"
         } else if (compo.filter(hero => hero.role === "Vanguard").length > 3) {
-            setRecommendationsMessages({...recommendationsMessages, archetype: "You have way too much Vanguard ! Consider replacing one duelist by a Strategist or a Duelist"});
+            newMessages.archetype = "You have way too much Vanguard ! Consider replacing one Vanguard by a Strategist or a Duelist"
         } else if (compo.filter(hero => hero.role === "Strategist").length > 3) {
-            setRecommendationsMessages({...recommendationsMessages, archetype: "You have way too much Strategist ! Consider replacing one duelist by a Vanguard or a Duelist"});
-        } else {setRecommendationsMessages({...recommendationsMessages, archetype: ""})}
+            newMessages.archetype = "You have way too much Strategist ! Consider replacing one Strategist by a Vanguard or a Duelist"
+        } else newMessages.archetype = ""
+        if (compo.length > 0 && compo.filter(hero => hero.isMainTank).length === 0) {
+            newMessages.mainTank = "You're team lack tanking. Consider picking one main Tank."
+        } else newMessages.mainTank = ""
+        if (compo.length > 0 && compo.filter(hero => hero.isMainHeal).length === 0) {
+            newMessages.mainHeal = "You're team lack healing. Consider picking one main Heal."
+        } else newMessages.mainHeal = ""
+
+        setRecommendationsMessages(newMessages);
     }
 
     const handleDragEnd = (event: any) => {
@@ -177,6 +187,18 @@ const Builder = () => {
                                         <Typography sx={{display: "flex", alignItems: "center"}} variant={"subtitle2"}>
                                             <PriorityHighIcon color={"error"}/>
                                             {recommendationsMessages.archetype}
+                                        </Typography>
+                                    }
+                                    {recommendationsMessages.mainTank &&
+                                        <Typography sx={{display: "flex", alignItems: "center"}} variant={"subtitle2"}>
+                                            <PriorityHighIcon color={"error"}/>
+                                            {recommendationsMessages.mainTank}
+                                        </Typography>
+                                    }
+                                    {recommendationsMessages.mainHeal &&
+                                        <Typography sx={{display: "flex", alignItems: "center"}} variant={"subtitle2"}>
+                                            <PriorityHighIcon color={"error"}/>
+                                            {recommendationsMessages.mainHeal}
                                         </Typography>
                                     }
                                     {recommendationsMessages.ban &&

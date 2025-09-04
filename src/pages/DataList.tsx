@@ -42,7 +42,6 @@ const DataList = () => {
 
     return (
         <Page description={"Heroes and maps listing"} title={"Heroes and maps listing"}>
-            {/* Boutons de choix */}
             <div className={'filterButton'} style={{ marginTop: "80px", textAlign: "center" }}>
                 <button className={show === "heroes" ? "btn active" : "btn inactive"}
                         onClick={() => setShow("heroes")}>Heroes</button>
@@ -50,7 +49,6 @@ const DataList = () => {
                         onClick={() => setShow("maps")}>Maps</button>
             </div>
 
-            {/* Affichage conditionnel */}
             {show === "heroes" && (
                 <Grid container className={"containerHeroes"}>
                     {(role ? heroes.filter((hero: HeroType) => hero.role === role) : heroes).map((hero: HeroType) => (
