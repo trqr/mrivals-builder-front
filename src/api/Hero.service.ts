@@ -23,3 +23,15 @@ export const getHeroes = async (id: string) => {
             return err;
         })
 }
+
+export const updateHeroesMainRole = async (ids: number[], mainRole: string) => {
+    return await Api.put(`/heroes/main-role`, {ids: ids, role: mainRole})
+        .then((res) => {
+            console.log(res.data);
+            return res.data;
+        })
+        .catch((err) => {
+            console.log(err);
+            return err;
+        })
+}

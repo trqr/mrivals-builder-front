@@ -50,6 +50,14 @@ export const Router = createBrowserRouter([
                         <AdministrationPage/>
                     </ProtectedRoute>,
                 loader: ()  => getAllUsers()
+            },
+            {
+                path: "/admin/heroes",
+                element:
+                    <ProtectedRoute>
+                        <AdministrationPage/>
+                    </ProtectedRoute>,
+                loader: () => getAllHeroes()
             }
         ]
     }
