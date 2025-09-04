@@ -8,7 +8,7 @@ import {DndContext, DragOverlay} from "@dnd-kit/core";
 import {DroppableSlot} from "../componnents/drag&drop/DroppableSlot.tsx";
 import {DraggableHero} from "../componnents/drag&drop/DraggableHero.tsx";
 import {imageBaseUrl} from "../api/axios.config.ts";
-import {getBestWinRateByRole, saveCompo} from "../api/Compo.service.ts";
+import {getBestWinRateByRole, getTeamSynergie, saveCompo} from "../api/Compo.service.ts";
 import {useCompo} from "../hooks/useCompo.tsx";
 import {useNavigate} from "react-router";
 import Page from "./layout/Page.tsx";
@@ -40,6 +40,7 @@ const Builder = () => {
     };
 
     const [teamCounters, setTeamCounters] = useState<any[]>([]);
+    const [teamSynergies, setTeamSynergies] = useState<any[]>([]);
 
     useEffect(() => {
         startTransition(async () => {
@@ -47,9 +48,11 @@ const Builder = () => {
                 const heroesIds = compo.map((hero) => hero?.id);
                 const fetchedBestHeroes = await getBestWinRateByRole(heroesIds);
                 const fetchedTeamCounters = await getTeamCounter(heroesIds);
+                const fetchedTeamSynergies = await getTeamSynergie(heroesIds);
 
                 setBestHeroes(fetchedBestHeroes);
                 setTeamCounters(fetchedTeamCounters);
+                setTeamSynergies(fetchedTeamSynergies);
             }
         });
 
@@ -221,11 +224,22 @@ const Builder = () => {
                                     <ul>
                                         {teamCounters.map(counter => (
                                             <li key={counter.enemyHeroId}>
-                                                Enemy hero {counter.enemyHeroId} → score {counter.totalScore}
+                                                Enemy hero {counter.name} <img src={imageBaseUrl + counter.imageLink} alt={counter.name}/> → score {counter.totalScore}
                                             </li>
                                         ))}
                                     </ul>
                                 </Box>
+                                <Box sx={{marginTop: "20px"}}>
+                                    <Typography variant="h6">Best Synergies</Typography>
+                                    <ul>
+                                        {Array.isArray(teamSynergies) && teamSynergies.map(synergy => (
+                                            <li key={synergy.teamHeroId}>
+                                                Ally hero {synergy.name} <img src={imageBaseUrl + synergy.imageLink} alt={synergy.name}/> → score {synergy.totalScore}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </Box>
+
                             </Box>
                         </Box>
                     </Box>
