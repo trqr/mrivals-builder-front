@@ -16,6 +16,7 @@ import {Paper} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import {useTheme} from "@mui/material/styles";
+import { getTeamCounter } from "../api/Compo.service.ts";
 
 const Builder = () => {
     const fetchedHeroes = useLoaderData<HeroType[]>();
@@ -38,16 +39,23 @@ const Builder = () => {
         }
     };
 
+    const [teamCounters, setTeamCounters] = useState<any[]>([]);
+
     useEffect(() => {
         startTransition(async () => {
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-            const heroesIds = compo.map((hero) => hero?.id);
-            const fetchedBestHeroes = await getBestWinRateByRole(heroesIds);
-            setBestHeroes(fetchedBestHeroes);
+            if (compo.length > 0) {
+                const heroesIds = compo.map((hero) => hero?.id);
+                const fetchedBestHeroes = await getBestWinRateByRole(heroesIds);
+                const fetchedTeamCounters = await getTeamCounter(heroesIds);
+
+                setBestHeroes(fetchedBestHeroes);
+                setTeamCounters(fetchedTeamCounters);
+            }
         });
+
         recommend();
         localStorage.setItem("currentCompo", JSON.stringify(compo.map((hero) => hero?.id)));
-        console.log(compo);
+        console.log("Compo actuelle:", compo);
     }, [compo]);
 
     const recommend = () => {
@@ -208,6 +216,16 @@ const Builder = () => {
                                         </Typography>
                                     }
                                 </Paper>
+                                <Box sx={{marginTop: "20px"}}>
+                                    <Typography variant="h6">Worst Counters</Typography>
+                                    <ul>
+                                        {teamCounters.map(counter => (
+                                            <li key={counter.enemyHeroId}>
+                                                Enemy hero {counter.enemyHeroId} → score {counter.totalScore}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </Box>
                             </Box>
                         </Box>
                     </Box>
