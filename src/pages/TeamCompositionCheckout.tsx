@@ -56,15 +56,15 @@ const TeamCompositionCheckout = () => {
                             </Box>
                             <Box>
                                 {hero.matchUps.map((matchUp) => (
-                                    <Paper elevation={6} key={matchUp.id} sx={{ padding: "2px", display: "flex", alignItems: "center", border: "2px solid red"}}
+                                    <Paper elevation={6} key={matchUp.id} sx={{ padding: "2px", display: "flex", alignItems: "center", border: "2px solid red"}}>
                                         <img
-                                            src={imageBaseUrl + matchup.imageLink}
+                                            src={imageBaseUrl + matchUp.counterPick.imageLink}
                                             style={{
                                             width: "50px",
                                             height: "50px",
                                             objectFit: "cover",
                                             objectPosition: "center 15%",
-                                }}
+                                            }}
                                     />
                                     </Paper>
                                 ))}
