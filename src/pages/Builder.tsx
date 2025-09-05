@@ -193,6 +193,37 @@ const Builder = () => {
                                 ))}
                             </Grid>
                             <Box sx={{display: "flex", justifyContent: "space-around"}}>
+                                <Box sx={{ marginTop: "20px", backgroundColor: "rgba(0, 0, 0, 0.2)", padding: "10px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)" }}>
+                                    <Typography variant="h6" gutterBottom>
+                                        Worst Counters
+                                    </Typography>
+                                    <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "row" }}>
+                                        {teamCounters.slice(0, 2).map((counter) => (
+                                            <li
+                                                key={counter.enemyHeroId}
+                                                style={{
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    marginBottom: "10px",
+                                                }}
+                                            >
+                                                <img
+                                                    src={imageBaseUrl + counter.imageLink}
+                                                    alt={counter.name}
+                                                    style={{
+                                                        objectFit: "cover",
+                                                        objectPosition: "top",
+                                                        height: "80px",
+                                                        width: "80px",
+                                                        borderRadius: "5px",
+                                                        border: "3px solid violet",
+                                                        marginRight: "10px",
+                                                    }}
+                                                />
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </Box>
                                 <Paper elevation={1} square sx={{margin: "30px", padding: "5px"}}>
                                     {recommendationsMessages.archetype &&
                                         <Typography sx={{display: "flex", alignItems: "center"}} variant={"subtitle2"}>
@@ -219,24 +250,36 @@ const Builder = () => {
                                         </Typography>
                                     }
                                 </Paper>
-                                <Box sx={{marginTop: "20px"}}>
-                                    <Typography variant="h6">Worst Counters</Typography>
-                                    <ul>
-                                        {teamCounters.map(counter => (
-                                            <li key={counter.enemyHeroId}>
-                                                Enemy hero {counter.name} <img src={imageBaseUrl + counter.imageLink} alt={counter.name}/> → score {counter.totalScore}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </Box>
-                                <Box sx={{marginTop: "20px"}}>
-                                    <Typography variant="h6">Best Synergies</Typography>
-                                    <ul>
-                                        {Array.isArray(teamSynergies) && teamSynergies.map(synergy => (
-                                            <li key={synergy.teamHeroId}>
-                                                Ally hero {synergy.name} <img src={imageBaseUrl + synergy.imageLink} alt={synergy.name}/> → score {synergy.totalScore}
-                                            </li>
-                                        ))}
+                                <Box sx={{ marginTop: "20px", backgroundColor: "rgba(0, 0, 0, 0.2)", padding: "10px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)"}}>
+                                    <Typography variant="h6" gutterBottom>
+                                        Best Synergies
+                                    </Typography>
+                                    <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "row" }}>
+                                        {Array.isArray(teamSynergies) &&
+                                            teamSynergies.slice(0, 2).map((synergy) => (
+                                                <li
+                                                    key={synergy.teamHeroId}
+                                                    style={{
+                                                        display: "flex",
+                                                        alignItems: "center",
+                                                        marginBottom: "10px",
+                                                    }}
+                                                >
+                                                    <img
+                                                        src={imageBaseUrl + synergy.imageLink}
+                                                        alt={synergy.name}
+                                                        style={{
+                                                            objectFit: "cover",
+                                                            objectPosition: "top",
+                                                            height: "80px",
+                                                            width: "80px",
+                                                            borderRadius: "5px",
+                                                            border: "3px solid blue",
+                                                            marginRight: "10px",
+                                                        }}
+                                                    />
+                                                </li>
+                                            ))}
                                     </ul>
                                 </Box>
 
