@@ -28,8 +28,6 @@ const Builder = () => {
     const [recommendationsMessages, setRecommendationsMessages] = useState({archetype: "", mainTank: "", mainHeal: "", ban: ""})
     const navigate = useNavigate();
     const theme = useTheme();
-
-
     const {compo, addToCompo, removeFromCompo} = useCompo();
 
     const handleDragStart = (event: any) => {
