@@ -15,7 +15,9 @@ export type HeroType = {
     winRate: number;
     abilities: AbilitiesType[];
     synergies: SynergieType[];
-    matchUps: MatchUpType[]
+    matchUps: MatchUpType[];
+    isMainTank: boolean;
+    isMainHeal: boolean
 }
 export const emptyHeroType: HeroType = {
     id: 0,

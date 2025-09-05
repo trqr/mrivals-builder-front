@@ -6,6 +6,8 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import {Paper} from "@mui/material";
 import {useCompo} from "../../hooks/useCompo.tsx";
+import iconTank from "../../image/mainTank.png";
+import iconHeal from "../../image/mainHeal.png";
 
 type DraggableHeroProps = {
     hero: HeroType;
@@ -53,6 +55,7 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
             {...listeners}
             {...attributes}
         >
+            <div style={{ position: "relative" }}>
             <img
                 src={imageBaseUrl + hero.imageLink}
                 style={{
@@ -73,6 +76,33 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
                 }}
                 alt={hero.name}
             />
+            {hero.isMainTank && (
+                <img
+                    src={iconTank}
+                    alt="Main Tank"
+                    style={{
+                        position: "absolute",
+                        top: "5px",
+                        right: "5px",
+                        width: "30px",
+                        height: "40px",
+                    }}
+                />
+            )}
+            {hero.isMainHeal && (
+                <img
+                    src={iconHeal}
+                    alt="Main Healer"
+                    style={{
+                        position: "absolute",
+                        top: "5px",
+                        left: "5px",
+                        width: "30px",
+                        height: "40px",
+                    }}
+                />
+            )}
+            </div>
             <Popover
                 id={id}
                 sx={{ pointerEvents: "none" }}

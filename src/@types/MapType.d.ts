@@ -9,6 +9,7 @@ export type MapType = {
     competitive: boolean;
     videoLink: string;
     mapImages: {id: number, imageLink: string}[];
+
 }
 export const emptyMapType: MapType = {
     id: 0,
