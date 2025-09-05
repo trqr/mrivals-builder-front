@@ -42,13 +42,12 @@ const Builder = () => {
 
     useEffect(() => {
         startTransition(async () => {
+            const heroesIds = compo.map((hero) => hero?.id);
+            const fetchedBestHeroes = await getBestWinRateByRole(heroesIds);
+            setBestHeroes(fetchedBestHeroes);
             if (compo.length > 0) {
-                const heroesIds = compo.map((hero) => hero?.id);
-                const fetchedBestHeroes = await getBestWinRateByRole(heroesIds);
                 const fetchedTeamCounters = await getTeamCounter(heroesIds);
                 const fetchedTeamSynergies = await getTeamSynergie(heroesIds);
-
-                setBestHeroes(fetchedBestHeroes);
                 setTeamCounters(fetchedTeamCounters);
                 setTeamSynergies(fetchedTeamSynergies);
             }
@@ -184,79 +183,32 @@ const Builder = () => {
                                     .map((hero: HeroType, index: number) => (
                                     <Grid
                                         key={index}
-                                        size={{md: 0.9}}
+                                        size={{md: 1}}
                                     >
                                         <DraggableHero hero={hero} bestHeroes={bestHeroes}/>
                                     </Grid>
                                 ))}
                             </Grid>
                             <Box sx={{display: "flex", justifyContent: "space-around"}}>
-                                <Box sx={{ marginTop: "20px", backgroundColor: "rgba(0, 0, 0, 0.2)", padding: "10px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)" }}>
-                                    <Typography variant="h6" gutterBottom>
-                                        Worst Counters
-                                    </Typography>
-                                    <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "row" }}>
-                                        {teamCounters.slice(0, 2).map((counter) => (
-                                            <li
-                                                key={counter.enemyHeroId}
-                                                style={{
-                                                    display: "flex",
-                                                    alignItems: "center",
-                                                    marginBottom: "10px",
-                                                }}
-                                            >
-                                                <img
-                                                    src={imageBaseUrl + counter.imageLink}
-                                                    alt={counter.name}
-                                                    style={{
-                                                        objectFit: "cover",
-                                                        objectPosition: "top",
-                                                        height: "80px",
-                                                        width: "80px",
-                                                        borderRadius: "5px",
-                                                        border: "3px solid violet",
-                                                        marginRight: "10px",
-                                                    }}
-                                                />
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </Box>
-                                <Paper elevation={1} square sx={{margin: "30px", padding: "5px"}}>
-                                    {recommendationsMessages.archetype &&
-                                        <Typography sx={{display: "flex", alignItems: "center"}} variant={"subtitle2"}>
-                                            <PriorityHighIcon color={"error"}/>
-                                            {recommendationsMessages.archetype}
+                                {compo.length > 0 &&
+                                    <Box sx={{
+                                        marginTop: "20px",
+                                        backgroundColor: "rgba(0, 0, 0, 0.2)",
+                                        padding: "10px",
+                                        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)"
+                                    }}>
+                                        <Typography variant="h6" gutterBottom>
+                                            Worst Counters
                                         </Typography>
-                                    }
-                                    {recommendationsMessages.mainTank &&
-                                        <Typography sx={{display: "flex", alignItems: "center"}} variant={"subtitle2"}>
-                                            <PriorityHighIcon color={"error"}/>
-                                            {recommendationsMessages.mainTank}
-                                        </Typography>
-                                    }
-                                    {recommendationsMessages.mainHeal &&
-                                        <Typography sx={{display: "flex", alignItems: "center"}} variant={"subtitle2"}>
-                                            <PriorityHighIcon color={"error"}/>
-                                            {recommendationsMessages.mainHeal}
-                                        </Typography>
-                                    }
-                                    {recommendationsMessages.ban &&
-                                        <Typography sx={{display: "flex", alignItems: "center"}} variant={"subtitle2"}>
-                                            <PriorityHighIcon color={"error"}/>
-                                            {recommendationsMessages.ban}
-                                        </Typography>
-                                    }
-                                </Paper>
-                                <Box sx={{ marginTop: "20px", backgroundColor: "rgba(0, 0, 0, 0.2)", padding: "10px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)"}}>
-                                    <Typography variant="h6" gutterBottom>
-                                        Best Synergies
-                                    </Typography>
-                                    <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "row" }}>
-                                        {Array.isArray(teamSynergies) &&
-                                            teamSynergies.slice(0, 2).map((synergy) => (
+                                        <ul style={{
+                                            listStyle: "none",
+                                            padding: 0,
+                                            display: "flex",
+                                            flexDirection: "row"
+                                        }}>
+                                            {teamCounters.slice(0, 2).map((counter) => (
                                                 <li
-                                                    key={synergy.teamHeroId}
+                                                    key={counter.enemyHeroId}
                                                     style={{
                                                         display: "flex",
                                                         alignItems: "center",
@@ -264,22 +216,101 @@ const Builder = () => {
                                                     }}
                                                 >
                                                     <img
-                                                        src={imageBaseUrl + synergy.imageLink}
-                                                        alt={synergy.name}
+                                                        src={imageBaseUrl + counter.imageLink}
+                                                        alt={counter.name}
                                                         style={{
                                                             objectFit: "cover",
                                                             objectPosition: "top",
                                                             height: "80px",
                                                             width: "80px",
                                                             borderRadius: "5px",
-                                                            border: "3px solid blue",
+                                                            border: "3px solid violet",
                                                             marginRight: "10px",
                                                         }}
                                                     />
                                                 </li>
                                             ))}
-                                    </ul>
-                                </Box>
+                                        </ul>
+                                    </Box>
+                                }
+                                {compo.length > 0 &&
+                                    <Paper elevation={1} square sx={{margin: "30px", padding: "5px"}}>
+                                        {recommendationsMessages.archetype &&
+                                            <Typography sx={{display: "flex", alignItems: "center"}}
+                                                        variant={"subtitle2"}>
+                                                <PriorityHighIcon color={"error"}/>
+                                                {recommendationsMessages.archetype}
+                                            </Typography>
+                                        }
+                                        {recommendationsMessages.mainTank &&
+                                            <Typography sx={{display: "flex", alignItems: "center"}}
+                                                        variant={"subtitle2"}>
+                                                <PriorityHighIcon color={"error"}/>
+                                                {recommendationsMessages.mainTank}
+                                            </Typography>
+                                        }
+                                        {recommendationsMessages.mainHeal &&
+                                            <Typography sx={{display: "flex", alignItems: "center"}}
+                                                        variant={"subtitle2"}>
+                                                <PriorityHighIcon color={"error"}/>
+                                                {recommendationsMessages.mainHeal}
+                                            </Typography>
+                                        }
+                                        {recommendationsMessages.ban &&
+                                            <Typography sx={{display: "flex", alignItems: "center"}}
+                                                        variant={"subtitle2"}>
+                                                <PriorityHighIcon color={"error"}/>
+                                                {recommendationsMessages.ban}
+                                            </Typography>
+                                        }
+                                    </Paper>
+                                }
+
+                                {compo.length > 0 &&
+                                    <Box sx={{
+                                        marginTop: "20px",
+                                        backgroundColor: "rgba(0, 0, 0, 0.2)",
+                                        padding: "10px",
+                                        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)"
+                                    }}>
+                                        <Typography variant="h6" gutterBottom>
+                                            Best Synergies
+                                        </Typography>
+                                        <ul style={{
+                                            listStyle: "none",
+                                            padding: 0,
+                                            display: "flex",
+                                            flexDirection: "row"
+                                        }}>
+                                            {Array.isArray(teamSynergies) &&
+                                                teamSynergies.slice(0, 2).map((synergy) => (
+                                                    <li
+                                                        key={synergy.teamHeroId}
+                                                        style={{
+                                                            display: "flex",
+                                                            alignItems: "center",
+                                                            marginBottom: "10px",
+                                                        }}
+                                                    >
+                                                        <img
+                                                            src={imageBaseUrl + synergy.imageLink}
+                                                            alt={synergy.name}
+                                                            style={{
+                                                                objectFit: "cover",
+                                                                objectPosition: "top",
+                                                                height: "80px",
+                                                                width: "80px",
+                                                                borderRadius: "5px",
+                                                                border: "3px solid blue",
+                                                                marginRight: "10px",
+                                                            }}
+                                                        />
+                                                    </li>
+                                                ))}
+                                        </ul>
+                                    </Box>
+                                }
+
 
                             </Box>
                         </Box>

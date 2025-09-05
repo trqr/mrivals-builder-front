@@ -49,13 +49,13 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
                     : undefined,
                 cursor: "grab",
                 opacity: isDragging ? 0.3 : 1,
-                height: 175
+                height: 175,
+                position: "relative"
 
             }}
             {...listeners}
             {...attributes}
         >
-            <div style={{ position: "relative" }}>
             <img
                 src={imageBaseUrl + hero.imageLink}
                 style={{
@@ -83,9 +83,9 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
                     style={{
                         position: "absolute",
                         top: "5px",
-                        right: "5px",
-                        width: "30px",
-                        height: "40px",
+                        left: "5px",
+                        width: "25px",
+                        height: "35px",
                     }}
                 />
             )}
@@ -97,12 +97,11 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
                         position: "absolute",
                         top: "5px",
                         left: "5px",
-                        width: "30px",
-                        height: "40px",
+                        width: "25px",
+                        height: "35px",
                     }}
                 />
             )}
-            </div>
             <Popover
                 id={id}
                 sx={{ pointerEvents: "none" }}
