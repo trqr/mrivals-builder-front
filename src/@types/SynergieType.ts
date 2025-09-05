@@ -4,6 +4,6 @@ export type SynergieType = {
     id: number;
     heroId: number;
     ally: HeroSummaryType;
-    value: string;
+    value: number;
     isTeamUp: boolean;
 }
