@@ -13,33 +13,39 @@ import {
     InputLabel,
     FormControl,
 } from "@mui/material";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import type {SynergieType} from "../../../@types/SynergieType.ts";
 
 type SynergyUpdateDialogProps = {
     open: boolean;
     handleClose: () => void;
-    handleSave: (allyId: number, value: number, isTeamUp: boolean) => void;
+    handleSave: (allyId: number, value: number, isTeamUp: boolean, id?: number) => void;
     heroes: { id: number; name: string }[];
+    editingSynergy?: SynergieType | null;
 };
 
-const SynergyUpdateDialog = ({
-                              open,
-                              handleClose,
-                              handleSave,
-                              heroes,
-                          }: SynergyUpdateDialogProps) => {
+const SynergyUpdateDialog = ({open, handleClose, handleSave, heroes, editingSynergy}: SynergyUpdateDialogProps) => {
     const [allyId, setAllyId] = useState<number | "">("");
     const [value, setValue] = useState<number>(1);
     const [isTeamUp, setIsTeamUp] = useState<boolean>(false);
 
     const onSubmit = () => {
         if (allyId === "") return;
-        handleSave(Number(allyId), value, isTeamUp);
+        handleSave(Number(allyId), value, isTeamUp, editingSynergy?.id);
         handleClose();
-        setAllyId("");
-        setValue(1);
-        setIsTeamUp(false);
     };
+
+    useEffect(() => {
+        if (editingSynergy) {
+            setAllyId(editingSynergy.ally.id);
+            setValue(editingSynergy.value);
+            setIsTeamUp(editingSynergy.isTeamUp);
+        } else {
+            setAllyId("");
+            setValue(1);
+            setIsTeamUp(false);
+        }
+    }, [editingSynergy, open]);
 
     return (
         <Dialog open={open} onClose={handleClose} maxWidth="xs" fullWidth>

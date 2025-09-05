@@ -1,7 +1,6 @@
 import {useLoaderData, useRevalidator} from "react-router-dom";
 import {useState} from "react";
 import {DataGrid, type GridColDef} from "@mui/x-data-grid";
-import {changeUsersRoleToAdmin, changeUsersRoleToUser} from "../../api/User.api.ts";
 import {Box, Button, MenuItem, Paper, Typography, useTheme} from "@mui/material";
 import Select from "@mui/material/Select";
 import ConfirmationDialog from "../common/dialogs/ConfirmationDialog.tsx";
@@ -12,8 +11,8 @@ import type {MatchUpType} from "../../@types/MatchUpType.ts";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from "@mui/icons-material/Add";
-import SynergieUpdateDialog from "../common/dialogs/SynergyUpdateDialog.tsx";
 import SynergyUpdateDialog from "../common/dialogs/SynergyUpdateDialog.tsx";
+import { addSynergy, updateSynergy} from "../../api/Synergie.api.ts";
 
 
 const HeroesManagement = () => {
@@ -23,9 +22,19 @@ const HeroesManagement = () => {
     const [selectedRole, setSelectedRole] = useState<string>("");
     const [openConfirmationDialog, setOpenConfirmationDialog] = useState<boolean>(false);
     const [openSynergieDialog, setOpenSynergieDialog] = useState(false);
+    const [selectedHeroId, setSelectedHeroId] = useState<number | null>(null);
+    const [editingSynergy, setEditingSynergy] = useState<SynergieType | null>(null);
     const theme = useTheme();
 
-    const handleAddSynergy = async (allyId: number, value: number, isTeamUp: boolean) => {
+    const handleAddSynergy = async (allyId: number, value: number, isTeamUp: boolean, synergyId?: number) => {
+        if (!selectedHeroId) return;
+
+        if (synergyId) {
+            await updateSynergy(synergyId, selectedHeroId, allyId, value, isTeamUp);
+        } else {
+            await addSynergy(selectedHeroId, allyId, value, isTeamUp);
+        }
+
         await revalidate();
     };
 
@@ -82,13 +91,20 @@ const HeroesManagement = () => {
                                 />
                             <Box>
                                 <IconButton size="small">
-                                    <EditIcon fontSize="inherit" />
+                                    <EditIcon fontSize="inherit" onClick={() => {
+                                        setSelectedHeroId(params.row.id);
+                                        setEditingSynergy(synergie);
+                                        setOpenSynergieDialog(true);
+                                    }}/>
                                 </IconButton>
                             </Box>
                         </Box>
                     ))}
                     <IconButton>
-                        <AddIcon fontSize={"small"} color={"primary"} onClick={() => setOpenSynergieDialog(true)}></AddIcon>
+                        <AddIcon fontSize={"small"} color={"primary"} onClick={() => {
+                            setSelectedHeroId(params.row.id);
+                            setOpenSynergieDialog(true);
+                        }}></AddIcon>
                     </IconButton>
                 </Box>
             )
@@ -199,9 +215,13 @@ const HeroesManagement = () => {
             ></ConfirmationDialog>
             <SynergyUpdateDialog
                 open={openSynergieDialog}
-                handleClose={() => setOpenSynergieDialog(false)}
+                handleClose={() => {
+                    setOpenSynergieDialog(false);
+                    setEditingSynergy(null);
+                }}
                 handleSave={handleAddSynergy}
                 heroes={heroes}
+                editingSynergy={editingSynergy}
             />
         </>
     )
