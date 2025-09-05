@@ -40,6 +40,7 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
 
     return (
         <div
+            className="draggable-card"
             onMouseEnter={handlePopoverOpen}
             onMouseLeave={handlePopoverClose}
             ref={setNodeRef}
@@ -67,8 +68,8 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
                     animation: bestHeroes.some(r =>
                         r.heroes.some((h: HeroType) => h.id === hero.id)
                     )
-                        ? "pulse 1.5s infinite"
-                        : "none",
+                        ? (isTeamUp() ? "teamup-pulse 1.5s infinite" : "pulse 1.5s infinite")
+                        : (isTeamUp() ? "teamup-pulse 1.5s infinite" : "none"),
                     objectFit: "cover",
                     objectPosition: "center",
                     maxHeight: "100%",

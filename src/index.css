@@ -34,7 +34,7 @@ kbd {
     }
     70% {
         box-shadow: 0 0 25px 20px rgba(218, 165, 32, 0);
-        transform: scale(1.05);
+        transform: scale(1.03);
     }
     100% {
         box-shadow: 0 0 0 0 rgba(218, 165, 32, 0);
@@ -52,4 +52,14 @@ kbd {
     100% {
         filter: drop-shadow(0 0 4px #FFD700);
     }
+}
+
+.draggable-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+.draggable-card:hover {
+    transform: perspective(600px) rotateZ(2deg) scale(1.05);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
 }

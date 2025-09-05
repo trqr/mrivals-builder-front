@@ -176,6 +176,7 @@ const Builder = () => {
                             <Grid container gap={1} sx={{
                                 height: "550px",
                                 overflowY: "auto",
+                                padding: "10px",
                                 scrollbarWidth: "thin",
                                 scrollbarColor: `${theme.palette.primary.main} transparent`,
                             }}>
@@ -204,7 +205,9 @@ const Builder = () => {
                                             listStyle: "none",
                                             padding: 0,
                                             display: "flex",
-                                            flexDirection: "row"
+                                            flexDirection: "row",
+                                            justifyContent: "center",
+                                            alignItems: "center"
                                         }}>
                                             {teamCounters.slice(0, 2).map((counter) => (
                                                 <li
