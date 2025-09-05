@@ -3,15 +3,29 @@ import Typography from "@mui/material/Typography";
 import type {HeroType} from "../@types/HeroType";
 import {Card, CardMedia, Grid, Paper} from "@mui/material";
 import {imageBaseUrl} from "../api/axios.config.ts";
-import {useEffect} from "react";
+import {startTransition, useEffect, useState} from "react";
 import Page from "./layout/Page.tsx";
 import Box from "@mui/material/Box";
+import {getTeamCounter, getTeamSynergie} from "../api/Compo.service.ts";
+import TeambuildButton2 from "../componnents/button/TeambuildButton2.tsx";
 
 const TeamCompositionCheckout = () => {
     const { compo } = useCompo();
+    const [teamCounters, setTeamCounters] = useState<any[]>([]);
+    const [teamSynergies, setTeamSynergies] = useState<any[]>([]);
+
 
     useEffect(() => {
-        console.log(compo);
+        startTransition(async () => {
+            if (compo.length > 0) {
+                const heroesIds = compo.map((hero) => hero?.id);
+                const fetchedTeamCounters = await getTeamCounter(heroesIds);
+                const fetchedTeamSynergies = await getTeamSynergie(heroesIds);
+
+                setTeamCounters(fetchedTeamCounters);
+                setTeamSynergies(fetchedTeamSynergies);
+            }
+        })
     }, []);
 
 
@@ -21,7 +35,8 @@ const TeamCompositionCheckout = () => {
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-between",
-                alignItems: "center",
+                borderBottom: "2 px solid #FDDE2B"
+
             }}>
                 {compo.map((hero: HeroType) => (
                     <Grid size={{lg: 1.5}}>
@@ -36,10 +51,16 @@ const TeamCompositionCheckout = () => {
                             <CardMedia>
                                 <img src={imageBaseUrl+hero.imageLink} alt={hero.name}></img>
                             </CardMedia>
-                            <Typography variant={"h4"} style={{fontSize: "20px"}}>Pickrate :</Typography>
                             <Typography variant={"h4"} style={{fontSize: "20px"}}>Winrate : {(hero.winRate * 100).toFixed(1)}%</Typography>
-                            <Typography variant={"h4"} style={{fontSize: "20px"}}>Type : {hero.attackType}</Typography>
-                            <Box>
+                            <div style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "center",
+                                alignItems: "flex-start",
+                                padding: "16px",
+                                margin: "10px",
+                            }}>
+                            <Box style={{margin: "5px"}}>
                                 {hero.synergies.map((synergie) => (
                                     <Paper elevation={6} key={synergie.id} sx={{ padding: "2px" , display: "flex" , alignItems: "center", border: synergie.isTeamUp ? "3px dashed gold" : "2px solid green"}}>
                                         <img
@@ -54,7 +75,7 @@ const TeamCompositionCheckout = () => {
                                     </Paper>
                                 ))}
                             </Box>
-                            <Box>
+                            <Box style={{margin: "5px"}}>
                                 {hero.matchUps.map((matchUp) => (
                                     <Paper elevation={6} key={matchUp.id} sx={{ padding: "2px", display: "flex", alignItems: "center", border: "2px solid red"}}>
                                         <img
@@ -69,9 +90,83 @@ const TeamCompositionCheckout = () => {
                                     </Paper>
                                 ))}
                             </Box>
+                            </div>
                         </Card>
                     </Grid>
                 ))}
+            </Grid>
+            <Grid style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "flex-start",
+            }}>
+                <Box sx={{ margin: "20px", backgroundColor: "rgba(0, 0, 0, 0.2)", padding: "10px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)"}}>
+                    <Typography variant="h6" gutterBottom>
+                        Best Synergies
+                    </Typography>
+                    <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "row" }}>
+                        {Array.isArray(teamSynergies) &&
+                            teamSynergies.map((synergy) => (
+                                <li
+                                    key={synergy.teamHeroId}
+                                    style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        marginBottom: "10px",
+                                    }}
+                                >
+                                    <img
+                                        src={imageBaseUrl + synergy.imageLink}
+                                        alt={synergy.name}
+                                        style={{
+                                            objectFit: "cover",
+                                            objectPosition: "top",
+                                            height: "80px",
+                                            width: "80px",
+                                            borderRadius: "5px",
+                                            border: "3px solid blue",
+                                            marginRight: "10px",
+                                        }}
+                                    />
+                                </li>
+                            ))}
+                    </ul>
+                </Box>
+                <Box sx={{ margin: "20px", backgroundColor: "rgba(0, 0, 0, 0.2)", padding: "10px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)" }}>
+                    <Typography variant="h6" gutterBottom>
+                        Worst Counters
+                    </Typography>
+                    <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "row" }}>
+                        {teamCounters.map((counter) => (
+                            <li
+                                key={counter.enemyHeroId}
+                                style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    marginBottom: "10px",
+                                }}
+                            >
+                                <img
+                                    src={imageBaseUrl + counter.imageLink}
+                                    alt={counter.name}
+                                    style={{
+                                        objectFit: "cover",
+                                        objectPosition: "top",
+                                        height: "80px",
+                                        width: "80px",
+                                        borderRadius: "5px",
+                                        border: "3px solid violet",
+                                        marginRight: "10px",
+                                    }}
+                                />
+                            </li>
+                        ))}
+                    </ul>
+                </Box>
+                <Box sx={{ transform: "skew(-21deg)", mt: 2, margin: "20px", alignItems: "center"}}>
+                    <TeambuildButton2 style={{marginTop: "20px"}}>Save</TeambuildButton2>
+                </Box>
             </Grid>
         </Page>
     )
