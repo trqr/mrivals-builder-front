@@ -11,7 +11,8 @@ import IconButton from "@mui/material/IconButton";
 import SaveIcon from '@mui/icons-material/Save';
 import {useAuth} from "../hooks/useAuth.tsx";
 import type {UserType} from "../@types/UserType.ts";
-import {changeUserMRaccount, changeUsername} from "../api/User.api.ts";
+import {changeUserMRaccount, changeUsername, changeUserPassword} from "../api/User.api.ts";
+import {Visibility, VisibilityOff} from "@mui/icons-material";
 
 const UserSettings = () => {
     const { user } = useAuth();
@@ -19,6 +20,7 @@ const UserSettings = () => {
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleChange = (field: keyof UserType, value: string) => {
         setCurrentUser({...currentUser, [field]: value});
@@ -32,11 +34,11 @@ const UserSettings = () => {
         await changeUserMRaccount(currentUser.id, currentUser.mrivalsAccount)
     };
 
-    const handleChangePassword = () => {
+    const handleChangePassword = async () => {
         if (newPassword !== confirmPassword) {
             return;
         }
-        // TODO: API call pour changer le mot de passe
+        await changeUserPassword(oldPassword, newPassword);
     };
 
     return (
@@ -56,7 +58,7 @@ const UserSettings = () => {
                                 fullWidth
                                 InputProps={{
                                     endAdornment: (
-                                        <Button variant={"outlined"} size={"small"} onClick={handleUsernameChange}>
+                                        <Button variant={"contained"} size={"small"} onClick={handleUsernameChange}>
                                             save
                                         </Button>
                                     ),
@@ -73,7 +75,7 @@ const UserSettings = () => {
                                 fullWidth
                                 InputProps={{
                                     endAdornment: (
-                                        <Button variant={"outlined"} size={"small"} onClick={handleMRaccountChange}>
+                                        <Button variant={"contained"} size={"small"} onClick={handleMRaccountChange}>
                                             save
                                         </Button>
                                     ),
@@ -102,27 +104,60 @@ const UserSettings = () => {
 
                     <Stack spacing={3}>
                         <TextField
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             label="Current Password"
                             value={oldPassword}
                             onChange={(e) => setOldPassword(e.target.value)}
                             fullWidth
+                            InputProps={{
+                                endAdornment: (
+                                    <IconButton
+                                        aria-label={showPassword ? "Hide password" : "Show password"}
+                                        onClick={() => setShowPassword((s) => !s)}
+                                        edge="end"
+                                    >
+                                        {showPassword ? <VisibilityOff/> : <Visibility/>}
+                                    </IconButton>
+                                ),
+                            }}
                         />
 
                         <TextField
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             label="New Password"
                             value={newPassword}
                             onChange={(e) => setNewPassword(e.target.value)}
                             fullWidth
+                            InputProps={{
+                                endAdornment: (
+                                    <IconButton
+                                        aria-label={showPassword ? "Hide password" : "Show password"}
+                                        onClick={() => setShowPassword((s) => !s)}
+                                        edge="end"
+                                    >
+                                        {showPassword ? <VisibilityOff/> : <Visibility/>}
+                                    </IconButton>
+                                ),
+                            }}
                         />
 
                         <TextField
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             label="Confirm New Password"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             fullWidth
+                            InputProps={{
+                                endAdornment: (
+                                    <IconButton
+                                        aria-label={showPassword ? "Hide password" : "Show password"}
+                                        onClick={() => setShowPassword((s) => !s)}
+                                        edge="end"
+                                    >
+                                        {showPassword ? <VisibilityOff/> : <Visibility/>}
+                                    </IconButton>
+                                ),
+                            }}
                         />
 
                         <Box sx={{textAlign: "right"}}>
