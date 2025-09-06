@@ -1,13 +1,12 @@
 import { Api } from "./axios.config"
+import {toast} from "react-toastify";
 
 export const getAllUsers = async () => {
     return await Api.get("/users")
         .then((res) => {
-            console.log(res.data);
             return res.data;
         })
         .catch((err) => {
-            console.log(err);
             return err;
         })
 }
@@ -22,4 +21,39 @@ export const changeUsersRoleToUser = async (ids: number[]) => {
     return await Api.put(`/users/role/user`, ids)
         .then((res) => res.data)
         .catch(console.error);
+}
+
+export const changeUsername = async (userName: string) => {
+    return await Api.patch(`/users/username?userName=${userName}`)
+        .then((res) => {
+            toast.success(`Username changed to ${userName} successfully.`);
+            return res.data
+        })
+        .catch(error => {
+            toast.error(`An error occurred: ${error}`);
+            return error;
+        });
+}
+
+export const changeUserMRaccount = async (userId: number, accountName: string) => {
+    return await Api.patch(`/users/${userId}/mr-account?accountName=${accountName}`)
+        .then((res) => {
+            toast.success(`Marvel Rivals account changed to ${accountName} successfully.`);
+            return res.data
+        })
+        .catch(error => {
+            toast.error(`An error occurred: ${error}`);
+            return error;
+        });
+}
+
+export const changeUserPassword = async (oldPassword: string, newPassword: string) => {
+    return await Api.patch(`/users/password`, {oldPassword: oldPassword, newPassword: newPassword})
+        .then((res) => {
+            return res.data
+        })
+        .catch(error => {
+            console.log(error);
+            return error.response.data;
+        });
 }

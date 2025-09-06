@@ -81,7 +81,7 @@ const ProfileMenu = () => {
                             Account
                         </MenuItem>
                         <Divider/>
-                        <MenuItem onClick={() => navigate(`/teams/${user.id}`)}>
+                        <MenuItem onClick={() => navigate(`/user/teams`)}>
                             <ListItemIcon>
                                 <ViewList fontSize="small"/>
                             </ListItemIcon>
@@ -95,7 +95,7 @@ const ProfileMenu = () => {
                                 Administration
                             </MenuItem>
                         )}
-                        <MenuItem onClick={handleClose}>
+                        <MenuItem onClick={() => navigate("/user/settings")}>
                             <ListItemIcon>
                                 <Settings fontSize="small"/>
                             </ListItemIcon>

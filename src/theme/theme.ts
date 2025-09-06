@@ -19,27 +19,20 @@ const theme = createTheme({
         divider: "#000000",
         text: {
             primary: "#ffffff",
-            secondary: "#b3b3b3",
+            secondary: "#e1dfdf",
         },
     },
     components: {
         // Name of the component
         MuiButton: {
-            styleOverrides: {
-                // Name of the slot
-                root: {
-                    // Some CSS
-                    fontSize: '1rem',
-                    color: 'darkgrey',
-                    clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)',
-                    borderRadius: '0px',
-                },
-            },
             variants: [
                 {
                     props: { variant: 'contained'} ,
                     style: {
-                        boxShadow: '10px 5px 2px black'},
+                        fontSize: '1rem',
+                        color: 'darkgrey',
+                        clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)',
+                        borderRadius: '0px',},
                 }],
             },
         },

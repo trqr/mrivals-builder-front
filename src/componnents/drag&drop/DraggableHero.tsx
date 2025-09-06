@@ -104,6 +104,8 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
                 />
             )}
             <Popover
+                disableEnforceFocus
+                disableAutoFocus
                 id={id}
                 sx={{ pointerEvents: "none" }}
                 open={open}
@@ -111,7 +113,7 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
                 onClose={handlePopoverClose}
                 anchorOrigin={{
                     vertical: 'bottom',
-                    horizontal: 'right',
+                    horizontal: 'center',
                 }}
             >
                 <Box sx={{display: "flex", flexDirection: "row", alignItems: "center" ,padding: "5px", backgroundColor: "#b1b1af"}}>
@@ -129,25 +131,20 @@ export const DraggableHero = ({ hero, bestHeroes }: DraggableHeroProps) =>  {
                     </Paper>
                 ))}
                 </Box>
-            </Popover>
-            <Popover
-                id={id}
-                sx={{ pointerEvents: "none" }}
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handlePopoverClose}
-                anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "left",
-                }}
-                transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                }}
-            >
-                <Box sx={{display: "flex", flexDirection: "row", alignItems: "center",padding: "5px", backgroundColor: "#b1b1af" }}>
+                <Box sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    padding: "5px",
+                    backgroundColor: "#b1b1af"
+                }}>
                     {hero.synergies.map(synergie => (
-                        <Paper elevation={6} key={synergie.id} sx={{ padding: "2px" , display: "flex" , alignItems: "center", border: synergie.isTeamUp ? "3px dashed gold" : "2px solid green"}}>
+                        <Paper elevation={6} key={synergie.id} sx={{
+                            padding: "2px",
+                            display: "flex",
+                            alignItems: "center",
+                            border: synergie.isTeamUp ? "3px dashed gold" : "2px solid green"
+                        }}>
                             <img
                                 src={imageBaseUrl + synergie.ally.imageLink}
                                 style={{

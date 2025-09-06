@@ -19,13 +19,12 @@ export const login = async (logs: LoginDTO) => {
 export const register = async (registerDTO: RegisterDTO) => {
     return await Api.post('/auth/register', registerDTO)
         .then((res) => {
-            console.log(res.data)
             toast.success(`Account succesfully created !`);
             return res.data
         })
         .catch((err) => {
-            console.log(err.response.data)
-            return err.response.data
+            console.log(err)
+            return err
         })
 }
 

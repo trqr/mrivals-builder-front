@@ -11,6 +11,8 @@ import Layout from "../pages/layout/Layout.tsx";
 import AdministrationPage from "../pages/AdministrationPage.tsx";
 import {getAllUsers} from "../api/User.api.ts";
 import ProtectedRoute from "../componnents/common/ProtectedRoute.tsx";
+import UserSettings from "../pages/UserSettings.tsx";
+import UserTeamList from "../pages/UserTeamList.tsx";
 
 export const Router = createBrowserRouter([
     {
@@ -58,7 +60,15 @@ export const Router = createBrowserRouter([
                         <AdministrationPage/>
                     </ProtectedRoute>,
                 loader: () => getAllHeroes()
-            }
+            },
+            {
+                path: "/user/settings",
+                element: <UserSettings/>,
+            },
+            {
+                path: "/user/teams",
+                element: <UserTeamList/>,
+            },
         ]
     }
 ]);
