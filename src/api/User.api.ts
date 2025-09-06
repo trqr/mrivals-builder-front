@@ -50,11 +50,10 @@ export const changeUserMRaccount = async (userId: number, accountName: string) =
 export const changeUserPassword = async (oldPassword: string, newPassword: string) => {
     return await Api.patch(`/users/password`, {oldPassword: oldPassword, newPassword: newPassword})
         .then((res) => {
-            toast.success(`Password changed successfully.`);
             return res.data
         })
         .catch(error => {
-            toast.error(`An error occurred: ${error}`);
-            return error;
+            console.log(error);
+            return error.response.data;
         });
 }
