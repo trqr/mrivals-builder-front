@@ -33,7 +33,18 @@ const theme = createTheme({
                         color: 'darkgrey',
                         clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)',
                         borderRadius: '0px',},
-                }],
+                },
+                {
+                    props: {variant: "outlined"},
+                    style: ({theme}) => ({
+                        transform: "skew(-21deg)",
+                        borderRadius: "0px",
+
+                        "& .MuiButton-startIcon, & .MuiButton-endIcon, & span": {
+                            transform: "skew(21deg)",
+                        },
+                    }),
+                },],
             },
         },
 });

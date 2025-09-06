@@ -17,7 +17,7 @@ const AuthContainer = () => {
             {!isAuthenticated ?
                 <Box>
                     <Button variant={"contained"} onClick={() => setOpenLoginDialog(true)}>Login</Button>
-                    <Button variant={"outlined"} onClick={() => setOpenRegisterDialog(true)}>Register</Button>
+                    <Button variant={"outlined"} onClick={() => setOpenRegisterDialog(true)}><span>Register</span></Button>
                 </Box>
                 :
                 <ProfileMenu/>
