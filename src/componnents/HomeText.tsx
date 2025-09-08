@@ -82,13 +82,6 @@ const SplitText = ({
                             duration,
                             ease,
                             stagger: delay / 1000,
-                            scrollTrigger: {
-                                trigger: el,
-                                start,
-                                once: true,
-                                fastScrollEnd: true,
-                                anticipatePin: 0.4,
-                            },
                             onComplete: () => {
                                 animationCompletedRef.current = true;
                                 onLetterAnimationComplete?.();

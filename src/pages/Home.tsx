@@ -1,7 +1,7 @@
-import affiche from "../image/affiche.jpeg";
-import affiche2 from "../image/acceuil2.jpeg";
-import affiche3 from "../image/acceuil3.jpeg";
-import affiche4 from "../image/acceuil4.jpg";
+import affiche from "../image/HomeEsport.jpg";
+import affiche2 from "../image/HomeIker.jpeg";
+import affiche3 from "../image/HomeSeason.jpg";
+import affiche4 from "../image/HomAzha.jpeg";
 import Box from "@mui/material/Box";
 import {useNavigate} from "react-router";
 import TeambuildButton2 from "../componnents/button/TeambuildButton2.tsx";
@@ -12,6 +12,7 @@ import {getAllHeroes} from "../api/Hero.service.ts";
 import {imageBaseUrl} from "../api/axios.config.ts";
 import SplitText from "../componnents/HomeText.tsx";
 import Page from "./layout/Page.tsx";
+import "./Home.css";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -35,7 +36,7 @@ const Home = () => {
             });
     }, []);
 
-    const handleClick = () => {
+    const handleClickBuild = () => {
         navigate("/Builder");
     };
 
@@ -71,17 +72,52 @@ const Home = () => {
                             gridTemplateColumns: "1fr 1fr",
                             gap: 2,
                             justifyItems: "center",
+                            border: "solid 2px #FDDE2B",
+                            padding: "30px",
+                            transform: "skew(-11deg)"
                         }}
                     >
-                        <img src={affiche} alt="affiche 1" style={{ width: "100%", maxWidth: "400px", borderRadius: "8px" }} />
-                        <img src={affiche2} alt="affiche 2" style={{ width: "100%", maxWidth: "400px", borderRadius: "8px" }} />
-                        <img src={affiche3} alt="affiche 3" style={{ width: "100%", maxWidth: "400px", borderRadius: "8px" }} />
-                        <img src={affiche4} alt="affiche 4" style={{ width: "100%", maxWidth: "400px", borderRadius: "8px" }} />
+                        <a href={"https://www.marvelrivals.com/match/"} target={"_blank"} rel={"noopener noreferrer"}>
+                            <img src={affiche} alt="affiche 1" className="affiche-img"
+                                 style={{
+                                     width: "400px",
+                                     height: "250px",
+                                 }} />
+                        </a>
+                        <a href={"https://www.youtube.com/watch?v=8DE2jlXwLyc"} target={"_blank"} rel={"noopener noreferrer"}>
+                            <img src={affiche2} alt="affiche 2" className="affiche-img"
+                                 style={{
+                                     width: "400px",
+                                     height:"250px",
+                                 }} />
+                        </a>
+                        <a href={"https://www.marvelrivals.com/index.html"} target={"_blank"} rel={"noopener noreferrer"}>
+                            <img src={affiche3} alt="affiche 3" className="affiche-img"
+                                 style={{
+                                     width: "400px",
+                                     height: "250px",
+                                 }}
+                            />
+                        </a>
+                        <a href={"https://www.youtube.com/watch?v=p2N2Cn-zQTw"} target="_blank" rel="noopener noreferrer">
+                            <img src={affiche4} alt="affiche 4" className="affiche-img"
+                                 style={{ width: "400px",
+                                        height:"250px",
+                                 }} />
+                        </a>
                     </Box>
-
-                    {/* Texte animé */}
+                    <Box
+                    style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        padding: "0 60px",
+                    }}>
+                        <Box style={{marginLeft: "-130px", paddingRight: "30px"}}>
+                            {/* Texte animé */}
                     <SplitText
-                        text="Le prochain personnage sort le 12/09"
+                        text="Angela is comming up 12/09/2025 !"
                         className="text-3xl font-bold text-center"
                         delay={100}
                         duration={0.4}
@@ -94,10 +130,13 @@ const Home = () => {
                         textAlign="center"
                         onLetterAnimationComplete={handleAnimationComplete}
                     />
+                        </Box>
 
                     {/* Bouton centré */}
                     <Box sx={{ transform: "skew(-21deg)", mt: 2 }}>
-                        <TeambuildButton2 onClick={handleClick}>Build</TeambuildButton2>
+                        <TeambuildButton2 onClick={handleClickBuild}>Build</TeambuildButton2>
+                    </Box>
+
                     </Box>
                 </Box>
 
