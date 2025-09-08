@@ -13,6 +13,7 @@ import {getAllUsers} from "../api/User.api.ts";
 import ProtectedRoute from "../componnents/common/ProtectedRoute.tsx";
 import UserSettings from "../pages/UserSettings.tsx";
 import UserTeamList from "../pages/UserTeamList.tsx";
+import Player from "../pages/Player.tsx";
 
 export const Router = createBrowserRouter([
     {
@@ -69,6 +70,10 @@ export const Router = createBrowserRouter([
                 path: "/user/teams",
                 element: <UserTeamList/>,
             },
+            {
+                path: "/user/player",
+                element: <Player/>
+            }
         ]
     }
 ]);

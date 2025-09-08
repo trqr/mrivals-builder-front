@@ -98,6 +98,7 @@ const Home = () => {
                     {/* Bouton centré */}
                     <Box sx={{ transform: "skew(-21deg)", mt: 2 }}>
                         <TeambuildButton2 onClick={handleClick}>Build</TeambuildButton2>
+                        <TeambuildButton2 onClick={handleClick}>Player</TeambuildButton2>
                     </Box>
                 </Box>
 
