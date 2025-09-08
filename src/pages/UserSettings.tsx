@@ -12,6 +12,7 @@ import {useAuth} from "../hooks/useAuth.tsx";
 import type {UserType} from "../@types/UserType.ts";
 import {changeUserMRaccount, changeUsername, changeUserPassword} from "../api/User.api.ts";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
+import Page from "./layout/Page.tsx";
 
 const UserSettings = () => {
     // @ts-expect-error bien dans le context
@@ -70,7 +71,7 @@ const UserSettings = () => {
     };
 
     return (
-        <>
+        <Page title={"Settings"} description={"User Settings"}>
             <Typography variant={"h4"} sx={{textAlign: "center", margin: "30px"}}>Settings</Typography>
             <Box sx={{mx: "auto", mt: 4, display: "flex", justifyContent: "center", gap: "20px"}}>
                 <Paper sx={{p: 4, borderRadius: 0, boxShadow: 4, width: 400}}>
@@ -217,7 +218,7 @@ const UserSettings = () => {
                     </Stack>
                 </Paper>
             </Box>
-        </>
+        </Page>
 
     );
 };

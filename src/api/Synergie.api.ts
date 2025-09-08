@@ -1,4 +1,4 @@
-import { Api } from "./axios.config";
+import { api } from "./axios.config";
 
 export const addSynergy = async (
     heroId: number,
@@ -6,7 +6,7 @@ export const addSynergy = async (
     value: number,
     isTeamup: boolean
 ) => {
-    return await Api.post("/synergies", {heroId: heroId, allyId: allyId, value: value, isTeamup: isTeamup})
+    return await api.post("/synergies", {heroId: heroId, allyId: allyId, value: value, isTeamup: isTeamup})
         .then(res => res.data)
         .catch(err => console.log(err));
 }
@@ -18,7 +18,7 @@ export const updateSynergy = async (
     value: number,
     isTeamup: boolean
     ) => {
-    return await Api.put(`/synergies/${synergieId}`, {heroId: heroId, allyId: allyId, value: value, isTeamup: isTeamup})
+    return await api.put(`/synergies/${synergieId}`, {heroId: heroId, allyId: allyId, value: value, isTeamup: isTeamup})
         .then(res => res.data)
         .catch(err => console.log(err));
 }

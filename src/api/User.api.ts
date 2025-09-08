@@ -1,8 +1,8 @@
-import { Api } from "./axios.config"
+import { api } from "./axios.config"
 import {toast} from "react-toastify";
 
 export const getAllUsers = async () => {
-    return await Api.get("/users")
+    return await api.get("/users")
         .then((res) => {
             return res.data;
         })
@@ -12,19 +12,19 @@ export const getAllUsers = async () => {
 }
 
 export const changeUsersRoleToAdmin = async (ids: number[]) => {
-    return await Api.put(`/users/role/admin`, ids)
+    return await api.put(`/users/role/admin`, ids)
         .then((res) => res.data)
         .catch(console.error);
 }
 
 export const changeUsersRoleToUser = async (ids: number[]) => {
-    return await Api.put(`/users/role/user`, ids)
+    return await api.put(`/users/role/user`, ids)
         .then((res) => res.data)
         .catch(console.error);
 }
 
 export const changeUsername = async (userName: string) => {
-    return await Api.patch(`/users/username?userName=${userName}`)
+    return await api.patch(`/users/username?userName=${userName}`)
         .then((res) => {
             toast.success(`Username changed to ${userName} successfully.`);
             return res.data
@@ -36,7 +36,7 @@ export const changeUsername = async (userName: string) => {
 }
 
 export const changeUserMRaccount = async (userId: number, accountName: string) => {
-    return await Api.patch(`/users/${userId}/mr-account?accountName=${accountName}`)
+    return await api.patch(`/users/${userId}/mr-account?accountName=${accountName}`)
         .then((res) => {
             toast.success(`Marvel Rivals account changed to ${accountName} successfully.`);
             return res.data
@@ -48,7 +48,7 @@ export const changeUserMRaccount = async (userId: number, accountName: string) =
 }
 
 export const changeUserPassword = async (oldPassword: string, newPassword: string) => {
-    return await Api.patch(`/users/password`, {oldPassword: oldPassword, newPassword: newPassword})
+    return await api.patch(`/users/password`, {oldPassword: oldPassword, newPassword: newPassword})
         .then((res) => {
             return res.data
         })
