@@ -1,4 +1,4 @@
-import type { RankGameSeasonType } from "./RankGameSeasonType";
+import type { RankGameSeasonType } from "./RankGameSeasonType.ts";
 
 export type PlayerInfoType = {
     completedAchievements: number;
