@@ -6,14 +6,13 @@ import {iconBaseUrl, imageBaseUrl} from "../api/axios.config.ts";
 import type {AbilitiesType} from "../@types/AbilitiesType";
 import {parseCustomTags} from "../utils/strParser.ts";
 import Box from "@mui/material/Box";
-import {Grid, Popover, Stack, Tooltip} from "@mui/material";
+import {Button, Grid, Popover, Stack, Tooltip} from "@mui/material";
 import Page from "./layout/Page.tsx";
 import type {SynergieType} from "../@types/SynergieType.ts";
 import {useNavigate} from "react-router";
 import type {MatchUpType} from "../@types/MatchUpType.ts";
 
 const HeroDetails = () => {
-    const [isPending, startTransition] = useTransition();
     const hero = useLoaderData();
     const [activeAbility, setActiveAbility] = useState<AbilitiesType | null>(null);
     const navigate = useNavigate();
@@ -25,6 +24,9 @@ const HeroDetails = () => {
                     <div className="heroName">
                         <h1>{hero.name}</h1>
                         <h2>{hero.role}</h2>
+                        <Button variant={"outlined"} onClick={() => navigate(`/best-players-by-hero/${hero.id}`)}>
+                            <span>Best {hero.name} players</span>
+                        </Button>
                     </div>
                     <img
                         className="image"

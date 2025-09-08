@@ -1,10 +1,10 @@
-import { Api } from "./axios.config"
+import { api } from "./axios.config"
 import type {LoginDTO} from "../componnents/common/dialogs/LoginDialog.tsx";
 import {toast} from "react-toastify";
 import type {RegisterDTO} from "../componnents/common/dialogs/RegisterDialog.tsx";
 
 export const login = async (logs: LoginDTO) => {
-    return await Api.post('/auth/login', logs)
+    return await api.post('/auth/login', logs)
         .then((res) => {
             console.log(res.data)
             toast.success(`Welcome ${res.data.user.username}!`);
@@ -17,7 +17,7 @@ export const login = async (logs: LoginDTO) => {
 }
 
 export const register = async (registerDTO: RegisterDTO) => {
-    return await Api.post('/auth/register', registerDTO)
+    return await api.post('/auth/register', registerDTO)
         .then((res) => {
             toast.success(`Account succesfully created !`);
             return res.data
@@ -32,7 +32,7 @@ export const isTokenValid = async () => {
     const token = localStorage.getItem("MBtoken");
     if (!token) return;
 
-    return await Api.get("/auth", {
+    return await api.get("/auth", {
         headers: {
             Authorization: `Bearer ${token}`
         }
