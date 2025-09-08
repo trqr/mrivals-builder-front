@@ -1,10 +1,32 @@
 import Page from "./layout/Page.tsx";
 import Box from "@mui/material/Box";
-import { fakePlayer } from "./FakePlayer.tsx";
 import PlayerSectionBox from "../componnents/common/PlayerSectionBox.tsx";
+import { getPlayerStats } from "../api/Player.service.ts";
+import {useEffect, useState} from "react";
 
 const Player = () => {
-    const player = fakePlayer;
+    const [player, setPlayer] = useState<any>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        const query = "White_kb";
+
+        getPlayerStats(query)
+            .then((data) => {
+                setPlayer(data);
+                setLoading(false);
+            })
+            .catch((err) => {
+                setError("Impossible de charger les stats du joueur");
+                console.error(err);
+                setLoading(false);
+            });
+    }, []);
+
+    if (loading) return <Page title="PlayerPage" description="Player Page"><p>Chargement...</p></Page>;
+    if (error) return <Page title="PlayerPage" description="Player Page"><p>{error}</p></Page>;
+    if (!player) return null;
 
     return (
         <Page title={"PlayerPage"} description={"Player Page"}>
