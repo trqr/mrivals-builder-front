@@ -81,11 +81,11 @@ const ProfileMenu = () => {
                             Account
                         </MenuItem>
                         <Divider/>
-                        <MenuItem onClick={() => navigate(`/user/teams`)}>
+                        <MenuItem onClick={() => navigate(`/user/player/${user.mrivalsAccount}`)}>
                             <ListItemIcon>
                                 <ViewList fontSize="small"/>
                             </ListItemIcon>
-                            Your Teams
+                            Your Profile
                         </MenuItem>
                         {user.role === "ADMIN" && (
                             <MenuItem onClick={() => navigate("/admin")}>

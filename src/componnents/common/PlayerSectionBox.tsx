@@ -18,8 +18,9 @@ const PlayerSectionBox = ({ title, children }: { title: string; children: React.
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "space-between",
-                width: "300px",
-                height: "250px"
+                width: "250px",
+                height: "250px",
+                boxShadow: 4,
             }}
         >
             {children}

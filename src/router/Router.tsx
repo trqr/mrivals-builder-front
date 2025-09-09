@@ -16,6 +16,7 @@ import UserTeamList from "../pages/UserTeamList.tsx";
 import BestPlayersPage from "../pages/BestPlayersPage.tsx";
 import {getHeroLeaderboard} from "../api/Leaderboard.api.ts";
 import Player from "../pages/Player.tsx";
+import {getPlayerStats} from "../api/Player.service.ts";
 
 export const Router = createBrowserRouter([
     {
@@ -78,8 +79,9 @@ export const Router = createBrowserRouter([
                 element: <UserTeamList/>,
             },
             {
-                path: "/user/player",
-                element: <Player/>
+                path: "/user/player/:account",
+                element: <Player/>,
+                loader: ({params: {account}}) => getPlayerStats(account!)
             }
         ]
     }
