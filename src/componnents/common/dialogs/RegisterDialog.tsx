@@ -78,7 +78,7 @@ const RegisterDialog = ({open, setOpen}: RegisterDialogProps) => {
 
     return (
         <>
-            <Dialog open={open} fullWidth={true}>
+            <Dialog open={open} onClose={() => setOpen(false)} fullWidth={true}>
                 {isPending &&
                     <LinearProgress></LinearProgress>
                 }
