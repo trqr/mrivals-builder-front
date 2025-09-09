@@ -4,7 +4,7 @@ import {DataGrid, type GridColDef} from "@mui/x-data-grid";
 import {Box, Button, MenuItem, Paper, Typography} from "@mui/material";
 import Select from "@mui/material/Select";
 import ConfirmationDialog from "../common/dialogs/ConfirmationDialog.tsx";
-import {changeUsersRoleToAdmin, changeUsersRoleToUser} from "../../api/User.api.ts";
+import {banUsers, changeUsersRoleToAdmin, changeUsersRoleToUser} from "../../api/User.api.ts";
 
 
 type UsersManagementProps = {
@@ -39,7 +39,8 @@ const UsersManagement = ({users}: UsersManagementProps) => {
             headerName: 'Marvel Rivals Account',
             width: 220,
         },
-        {field: 'role', headerName: 'Role', width: 100}
+        {field: 'role', headerName: 'Role', width: 100},
+        {field: 'banned', headerName: 'Banned', width: 100}
     ];
 
     const paginationModel = {page: 0, pageSize: 5};
@@ -56,6 +57,12 @@ const UsersManagement = ({users}: UsersManagementProps) => {
         setSelectedRows([]);
         await revalidate();
     };
+
+    const handleBan = async () => {
+        await banUsers(selectedRows);
+        setSelectedRows([]);
+        await revalidate();
+    }
 
     return (
         <>
@@ -97,8 +104,16 @@ const UsersManagement = ({users}: UsersManagementProps) => {
                         >
                             CHANGE ROLE
                         </Button>
-
+                        <Button
+                            sx={{marginLeft: "30px"}}
+                            variant="text"
+                            color="warning"
+                            onClick={handleBan}
+                        >
+                            BAN USER(S)
+                        </Button>
                     </Box>
+
                 </Paper>
             )}
             <ConfirmationDialog
