@@ -12,3 +12,13 @@ export const getHeroLeaderboard = async (heroId: string, page: number, size: num
         })
 
 }
+
+export const updateLeaderboard = async () => {
+    return await api.get("/leaderboard/update")
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        })
+}

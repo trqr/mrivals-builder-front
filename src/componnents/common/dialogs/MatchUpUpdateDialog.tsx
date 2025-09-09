@@ -1,75 +1,70 @@
 import {
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogActions,
-    Button,
     Box,
-    TextField,
-    Checkbox,
-    FormControlLabel,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    FormControl,
+    InputLabel,
     MenuItem,
     Select,
-    InputLabel,
-    FormControl,
+    TextField,
 } from "@mui/material";
 import {useEffect, useState} from "react";
-import type {SynergieType} from "../../../@types/SynergieType.ts";
-import {deleteSynergy} from "../../../api/Synergie.api.ts";
+import type {MatchUpType} from "../../../@types/MatchUpType.ts";
+import {deleteMatchUp} from "../../../api/MatchUp.api.ts";
 import {useNavigate} from "react-router";
 
-type SynergyUpdateDialogProps = {
+type MatchUpUpdateDialogProps = {
     open: boolean;
     handleClose: () => void;
-    handleSave: (allyId: number, value: number, isTeamUp: boolean, id?: number) => void;
+    handleSave: (counterPickId: number, value: number, id?: number) => void;
     heroes: { id: number; name: string }[];
-    editingSynergy?: SynergieType | null;
+    editingMatchUp?: MatchUpType | null;
 };
 
-const SynergyUpdateDialog = ({open, handleClose, handleSave, heroes, editingSynergy}: SynergyUpdateDialogProps) => {
-    const [allyId, setAllyId] = useState<number | "">("");
+export const MatchUpUpdateDialog = ({open, handleClose, handleSave, heroes, editingMatchUp}: MatchUpUpdateDialogProps) => {
+    const [counterPickId, setCounterPickId] = useState<number | "">("");
     const [value, setValue] = useState<number>(1);
-    const [isTeamUp, setIsTeamUp] = useState<boolean>(false);
     const navigate = useNavigate();
 
     const onSubmit = () => {
-        if (allyId === "") return;
-        handleSave(Number(allyId), value, isTeamUp, editingSynergy?.id);
+        if (counterPickId === "") return;
+        handleSave(Number(counterPickId), value, editingMatchUp?.id);
         handleClose();
     };
 
     const handleDelete = async () => {
-        if (editingSynergy) {
-            await deleteSynergy(editingSynergy.id)
+        if (editingMatchUp) {
+            await deleteMatchUp(editingMatchUp.id)
         }
         navigate("/admin/heroes")
         handleClose();
     }
 
     useEffect(() => {
-        if (editingSynergy) {
-            setAllyId(editingSynergy.ally.id);
-            setValue(editingSynergy.value);
-            setIsTeamUp(editingSynergy.isTeamUp);
+        if (editingMatchUp) {
+            setCounterPickId(editingMatchUp.counterPick.id);
+            setValue(editingMatchUp.value);
         } else {
-            setAllyId("");
+            setCounterPickId("");
             setValue(1);
-            setIsTeamUp(false);
         }
-    }, [editingSynergy, open]);
+    }, [editingMatchUp, open]);
 
     return (
         <Dialog open={open} onClose={handleClose} maxWidth="xs" fullWidth>
-            <DialogTitle>Add or Update a synergy</DialogTitle>
+            <DialogTitle>Add or Update a match up</DialogTitle>
             <DialogContent>
                 <Box sx={{display: "flex", flexDirection: "column", gap: 2, mt: 1}}>
 
                     <FormControl fullWidth>
-                        <InputLabel id="ally-label">Ally</InputLabel>
+                        <InputLabel id="counter-label">Counter Hero</InputLabel>
                         <Select
-                            labelId="ally-label"
-                            value={allyId}
-                            onChange={(e) => setAllyId(e.target.value as number)}
+                            labelId="counter-label"
+                            value={counterPickId}
+                            onChange={(e) => setCounterPickId(e.target.value as number)}
                         >
                             {heroes.map((h) => (
                                 <MenuItem key={h.id} value={h.id}>
@@ -86,19 +81,9 @@ const SynergyUpdateDialog = ({open, handleClose, handleSave, heroes, editingSyne
                         onChange={(e) => setValue(Number(e.target.value))}
                         fullWidth
                     />
-
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                                checked={isTeamUp}
-                                onChange={(e) => setIsTeamUp(e.target.checked)}
-                            />
-                        }
-                        label="Team Up ?"
-                    />
                 </Box>
             </DialogContent>
-            {editingSynergy ?
+            {editingMatchUp ?
                 <DialogActions sx={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                     <Button variant={"text"} color={"warning"} onClick={handleDelete}>Delete</Button>
                     <Box sx={{justifyContent: "flex-end", display: "flex", alignItems: "flex-end"}}>
@@ -110,14 +95,12 @@ const SynergyUpdateDialog = ({open, handleClose, handleSave, heroes, editingSyne
                 </DialogActions>
                 :
                 <DialogActions>
-                        <Button onClick={handleClose}>Annuler</Button>
-                        <Button variant="contained" onClick={onSubmit}>
-                            Submit
-                        </Button>
+                    <Button onClick={handleClose}>Annuler</Button>
+                    <Button variant="contained" onClick={onSubmit}>
+                        Submit
+                    </Button>
                 </DialogActions>
             }
         </Dialog>
     );
 };
-
-export default SynergyUpdateDialog;

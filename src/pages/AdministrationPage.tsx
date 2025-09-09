@@ -6,6 +6,7 @@ import HeroesManagement from "../componnents/administration/HeroesManagement.tsx
 import UsersManagement from "../componnents/administration/UsersManagement.tsx";
 import {useNavigate} from "react-router";
 import {useState} from "react";
+import {UpdateDataPage} from "../componnents/administration/UpdateDataPage.tsx";
 
 const AdministrationPage = () => {
     const users = useLoaderData();
@@ -25,7 +26,7 @@ const AdministrationPage = () => {
                         <TabList onChange={handleChange} aria-label="lab API tabs example" centered>
                             <Tab label="Users" onClick={() => navigate("/admin")} value="1"/>
                             <Tab label="Heroes" onClick={() => navigate("/admin/heroes")} value="2"/>
-                            <Tab label="Updates" onClick={() => navigate("/admin/updates")} value="3"/>
+                            <Tab label="Updates" value="3"/>
                         </TabList>
                     </Box>
                     <TabPanel value="1">
@@ -35,7 +36,7 @@ const AdministrationPage = () => {
                         <HeroesManagement></HeroesManagement>
                     </TabPanel>
                     <TabPanel value="3">
-                        <Typography>Nothing yet...</Typography>
+                        <UpdateDataPage></UpdateDataPage>
                     </TabPanel>
                 </TabContext>
             </Box>

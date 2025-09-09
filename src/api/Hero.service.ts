@@ -31,3 +31,12 @@ export const updateHeroesMainRole = async (ids: number[], mainRole: string) => {
             return err;
         })
 }
+
+export const updateHeroes = async () => {
+    return await api.get(`/heroes/update`).then((res) => {
+        return res.data;
+    })
+        .catch((err) => {
+            throw err;
+        })
+}

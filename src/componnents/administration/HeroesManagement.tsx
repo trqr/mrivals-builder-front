@@ -13,6 +13,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from "@mui/icons-material/Add";
 import SynergyUpdateDialog from "../common/dialogs/SynergyUpdateDialog.tsx";
 import { addSynergy, updateSynergy} from "../../api/Synergie.api.ts";
+import {MatchUpUpdateDialog} from "../common/dialogs/MatchUpUpdateDialog.tsx";
+import type {AbilitiesType} from "../../@types/AbilitiesType";
+import {addMatchUp, updateMatchUp} from "../../api/MatchUp.api.ts";
 
 
 const HeroesManagement = () => {
@@ -22,8 +25,10 @@ const HeroesManagement = () => {
     const [selectedRole, setSelectedRole] = useState<string>("");
     const [openConfirmationDialog, setOpenConfirmationDialog] = useState<boolean>(false);
     const [openSynergieDialog, setOpenSynergieDialog] = useState(false);
+    const [openMatchUpDialog, setOpenMatchUpDialog] = useState(false);
     const [selectedHeroId, setSelectedHeroId] = useState<number | null>(null);
     const [editingSynergy, setEditingSynergy] = useState<SynergieType | null>(null);
+    const [editingMatchUp, setEditingMatchUp] = useState<MatchUpType | null>(null);
     const theme = useTheme();
 
     const handleAddSynergy = async (allyId: number, value: number, isTeamUp: boolean, synergyId?: number) => {
@@ -34,7 +39,17 @@ const HeroesManagement = () => {
         } else {
             await addSynergy(selectedHeroId, allyId, value, isTeamUp);
         }
+        await revalidate();
+    };
 
+    const handleAddMatchUp = async (counterPickId: number, value: number, matchUpId?: number) => {
+        if (!selectedHeroId) return;
+
+        if (matchUpId) {
+            await updateMatchUp(matchUpId, selectedHeroId, counterPickId, value);
+        } else {
+            await addMatchUp(selectedHeroId, counterPickId, value);
+        }
         await revalidate();
     };
 
@@ -50,7 +65,8 @@ const HeroesManagement = () => {
         {field: 'isMainTank', headerName: 'Main Tank', width: 100},
         {field: 'isMainHeal', headerName: 'Main Heal', width: 100},
         {field: 'attackType', headerName: 'Attack Type', width: 150},
-        {field: 'winRate', headerName: 'Win rate', width: 120},
+        {field: 'winRate', headerName: 'Win (%)', width: 80, renderCell: (params) =>
+                (params.row.winRate*100).toFixed(2)},
 
         {
             field: 'abilities',
@@ -58,7 +74,7 @@ const HeroesManagement = () => {
             width: 250,
             renderCell: (params) => (
                 <Box sx={{display: "flex", flexWrap: "wrap", gap: 1}}>
-                    {params.row.abilities?.map((ability: any) => (
+                    {params.row.abilities?.map((ability: AbilitiesType) => (
                         <img
                             key={ability.id}
                             src={iconBaseUrl+ability.icon}
@@ -139,11 +155,21 @@ const HeroesManagement = () => {
                             />
                             <Box>
                                 <IconButton size="small">
-                                    <EditIcon fontSize="inherit"/>
+                                    <EditIcon fontSize="inherit" onClick={() => {
+                                        setSelectedHeroId(params.row.id);
+                                        setEditingMatchUp(counter);
+                                        setOpenMatchUpDialog(true);
+                                    }}/>
                                 </IconButton>
                             </Box>
                         </Box>
                     ))}
+                    <IconButton>
+                        <AddIcon fontSize={"small"} color={"primary"} onClick={() => {
+                            setSelectedHeroId(params.row.id);
+                            setOpenMatchUpDialog(true);
+                        }}></AddIcon>
+                    </IconButton>
                 </Box>
             )
         }
@@ -222,6 +248,16 @@ const HeroesManagement = () => {
                 handleSave={handleAddSynergy}
                 heroes={heroes}
                 editingSynergy={editingSynergy}
+            />
+            <MatchUpUpdateDialog
+                open={openMatchUpDialog}
+                handleClose={() => {
+                    setOpenMatchUpDialog(false);
+                    setEditingMatchUp(null);
+                }}
+                handleSave={handleAddMatchUp}
+                heroes={heroes}
+                editingMatchUp={editingMatchUp}
             />
         </>
     )

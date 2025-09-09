@@ -22,3 +22,9 @@ export const updateSynergy = async (
         .then(res => res.data)
         .catch(err => console.log(err));
 }
+
+export const deleteSynergy = async (heroId: number) => {
+    return await api.delete(`/synergies/${heroId}`)
+        .then(res => res.data)
+        .catch(err => console.log(err));
+}

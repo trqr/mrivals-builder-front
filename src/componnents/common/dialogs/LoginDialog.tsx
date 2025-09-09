@@ -83,7 +83,7 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
 
     return (
         <>
-            <Dialog open={open} fullWidth>
+            <Dialog open={open} onClose={() => setOpen(false)} fullWidth>
                 {isPending &&
                     <LinearProgress></LinearProgress>
                 }
