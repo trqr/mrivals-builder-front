@@ -20,3 +20,9 @@ export const updateMatchUp = async (
         .then(res => res.data)
         .catch(err => console.log(err));
 }
+
+export const deleteMatchUp = async (heroId: number) => {
+    return await api.delete(`/match-up/${heroId}`)
+        .then(res => res.data)
+        .catch(err => console.log(err));
+}

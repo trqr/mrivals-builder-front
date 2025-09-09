@@ -13,6 +13,8 @@ import {
 } from "@mui/material";
 import {useEffect, useState} from "react";
 import type {MatchUpType} from "../../../@types/MatchUpType.ts";
+import {deleteMatchUp} from "../../../api/MatchUp.api.ts";
+import {useNavigate} from "react-router";
 
 type MatchUpUpdateDialogProps = {
     open: boolean;
@@ -25,12 +27,21 @@ type MatchUpUpdateDialogProps = {
 export const MatchUpUpdateDialog = ({open, handleClose, handleSave, heroes, editingMatchUp}: MatchUpUpdateDialogProps) => {
     const [counterPickId, setCounterPickId] = useState<number | "">("");
     const [value, setValue] = useState<number>(1);
+    const navigate = useNavigate();
 
     const onSubmit = () => {
         if (counterPickId === "") return;
         handleSave(Number(counterPickId), value, editingMatchUp?.id);
         handleClose();
     };
+
+    const handleDelete = async () => {
+        if (editingMatchUp) {
+            await deleteMatchUp(editingMatchUp.id)
+        }
+        navigate("/admin/heroes")
+        handleClose();
+    }
 
     useEffect(() => {
         if (editingMatchUp) {
@@ -72,12 +83,24 @@ export const MatchUpUpdateDialog = ({open, handleClose, handleSave, heroes, edit
                     />
                 </Box>
             </DialogContent>
-            <DialogActions>
-                <Button onClick={handleClose}>Annuler</Button>
-                <Button variant="contained" onClick={onSubmit}>
-                    Submit
-                </Button>
-            </DialogActions>
+            {editingMatchUp ?
+                <DialogActions sx={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                    <Button variant={"text"} color={"warning"} onClick={handleDelete}>Delete</Button>
+                    <Box sx={{justifyContent: "flex-end", display: "flex", alignItems: "flex-end"}}>
+                        <Button onClick={handleClose}>Annuler</Button>
+                        <Button variant="contained" onClick={onSubmit}>
+                            Submit
+                        </Button>
+                    </Box>
+                </DialogActions>
+                :
+                <DialogActions>
+                    <Button onClick={handleClose}>Annuler</Button>
+                    <Button variant="contained" onClick={onSubmit}>
+                        Submit
+                    </Button>
+                </DialogActions>
+            }
         </Dialog>
     );
 };

@@ -15,6 +15,8 @@ import {
 } from "@mui/material";
 import {useEffect, useState} from "react";
 import type {SynergieType} from "../../../@types/SynergieType.ts";
+import {deleteSynergy} from "../../../api/Synergie.api.ts";
+import {useNavigate} from "react-router";
 
 type SynergyUpdateDialogProps = {
     open: boolean;
@@ -28,12 +30,21 @@ const SynergyUpdateDialog = ({open, handleClose, handleSave, heroes, editingSyne
     const [allyId, setAllyId] = useState<number | "">("");
     const [value, setValue] = useState<number>(1);
     const [isTeamUp, setIsTeamUp] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     const onSubmit = () => {
         if (allyId === "") return;
         handleSave(Number(allyId), value, isTeamUp, editingSynergy?.id);
         handleClose();
     };
+
+    const handleDelete = async () => {
+        if (editingSynergy) {
+            await deleteSynergy(editingSynergy.id)
+        }
+        navigate("/admin/heroes")
+        handleClose();
+    }
 
     useEffect(() => {
         if (editingSynergy) {
@@ -87,12 +98,24 @@ const SynergyUpdateDialog = ({open, handleClose, handleSave, heroes, editingSyne
                     />
                 </Box>
             </DialogContent>
-            <DialogActions>
-                <Button onClick={handleClose}>Annuler</Button>
-                <Button variant="contained" onClick={onSubmit}>
-                    Submit
-                </Button>
-            </DialogActions>
+            {editingSynergy ?
+                <DialogActions sx={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                    <Button variant={"text"} color={"warning"} onClick={handleDelete}>Delete</Button>
+                    <Box sx={{justifyContent: "flex-end", display: "flex", alignItems: "flex-end"}}>
+                        <Button onClick={handleClose}>Annuler</Button>
+                        <Button variant="contained" onClick={onSubmit}>
+                            Submit
+                        </Button>
+                    </Box>
+                </DialogActions>
+                :
+                <DialogActions>
+                        <Button onClick={handleClose}>Annuler</Button>
+                        <Button variant="contained" onClick={onSubmit}>
+                            Submit
+                        </Button>
+                </DialogActions>
+            }
         </Dialog>
     );
 };
