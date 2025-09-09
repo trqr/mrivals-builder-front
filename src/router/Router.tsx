@@ -14,7 +14,6 @@ import ProtectedRoute from "../componnents/common/ProtectedRoute.tsx";
 import UserSettings from "../pages/UserSettings.tsx";
 import UserTeamList from "../pages/UserTeamList.tsx";
 import BestPlayersPage from "../pages/BestPlayersPage.tsx";
-import {getBestPlayersByHero} from "../api/external.api.ts";
 import {getHeroLeaderboard} from "../api/Leaderboard.api.ts";
 import Player from "../pages/Player.tsx";
 
@@ -40,7 +39,7 @@ export const Router = createBrowserRouter([
             {
                 path: "/best-players-by-hero/:id",
                 element: <BestPlayersPage/>,
-                loader: ({params: {id}}) => getHeroLeaderboard(id!)
+                loader: ({params: {id}}) => getHeroLeaderboard(id!, 0, 25)
             },
             {
                 path: "/list",

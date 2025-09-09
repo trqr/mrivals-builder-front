@@ -38,5 +38,5 @@ export const isTokenValid = async () => {
         }
     })
         .then((res) => res.data)
-        .catch((err) => err)
+        .catch((err) => {throw err})
 }

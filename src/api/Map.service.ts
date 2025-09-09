@@ -22,3 +22,13 @@ export const getMapById = async (id: string) => {
         return err;
     })
 }
+
+export const updateMaps = async () => {
+    return await api.get("/maps/update")
+        .then((res ) => {
+            return res.data;
+        })
+        .catch((err) => {
+            throw err;
+        })
+}
