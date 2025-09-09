@@ -7,9 +7,10 @@ import { iconBaseUrl, imageBaseUrl } from "../api/axios.config.ts";
 import MainButton from "../componnents/button/MainButton.tsx";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {useLoaderData} from "react-router-dom";
+import {useUserData} from "../hooks/useUserData.tsx";
 
 const Player = () => {
-    const player = useLoaderData();
+    const { userGameStats } = useUserData();
     const [error, setError] = useState<string | null>(null);
     const [showAllMatchups, setShowAllMatchups] = useState(false);
     const [showAllRanked, setShowAllRanked] = useState(false);
@@ -36,13 +37,13 @@ const Player = () => {
             </Page>
         );
 
-    if (!player) return null;
+    if (!userGameStats) return null;
 
     return (
         <Page title="PlayerPage" description="Player Page">
             <ThemeProvider theme={theme}>
                     <Typography variant="h5" fontWeight="bold">
-                        {player.player?.name}
+                        {userGameStats.player?.name}
                     </Typography>
             <Box
                 sx={{
@@ -55,11 +56,11 @@ const Player = () => {
             >
                 {/* Player Info */}
                 <PlayerSectionBox title="Player Info">
-                    <Typography>Level: {player.player?.level}</Typography>
-                    <Typography>Rank: {player.player?.rank?.rank}</Typography>
+                    <Typography>Level: {userGameStats.player?.level}</Typography>
+                    <Typography>Rank: {userGameStats.player?.rank?.rank}</Typography>
                     <Box sx={{ mt: 1 }}>
                         <img
-                            src={iconBaseUrl + player.player?.rank?.image}
+                            src={iconBaseUrl + userGameStats.player?.rank?.image}
                             alt="rank icon"
                             style={{ width: "100px", height: "100px", transform: "skew(21deg)" }}
                         />
@@ -68,18 +69,18 @@ const Player = () => {
 
                 {/* Ranked Stats */}
                 <PlayerSectionBox title="Ranked Stats">
-                    <Typography>Total Played: {player.overall_stats?.ranked?.total_matches}</Typography>
-                    <Typography>Total Win: {player.overall_stats?.ranked?.total_wins}</Typography>
-                    <Typography>Total MVP: {player.overall_stats?.ranked?.total_mvp}</Typography>
-                    <Typography>Total SVP: {player.overall_stats?.ranked?.total_svp}</Typography>
+                    <Typography>Total Played: {userGameStats.overall_stats?.ranked?.total_matches}</Typography>
+                    <Typography>Total Win: {userGameStats.overall_stats?.ranked?.total_wins}</Typography>
+                    <Typography>Total MVP: {userGameStats.overall_stats?.ranked?.total_mvp}</Typography>
+                    <Typography>Total SVP: {userGameStats.overall_stats?.ranked?.total_svp}</Typography>
                 </PlayerSectionBox>
 
                 {/* Unranked Stats */}
                 <PlayerSectionBox title="Unranked Stats">
-                    <Typography>Total Played: {player.overall_stats?.unranked?.total_matches}</Typography>
-                    <Typography>Total Win: {player.overall_stats?.unranked?.total_wins}</Typography>
-                    <Typography>Total MVP: {player.overall_stats?.unranked?.total_mvp}</Typography>
-                    <Typography>Total SVP: {player.overall_stats?.unranked?.total_svp}</Typography>
+                    <Typography>Total Played: {userGameStats.overall_stats?.unranked?.total_matches}</Typography>
+                    <Typography>Total Win: {userGameStats.overall_stats?.unranked?.total_wins}</Typography>
+                    <Typography>Total MVP: {userGameStats.overall_stats?.unranked?.total_mvp}</Typography>
+                    <Typography>Total SVP: {userGameStats.overall_stats?.unranked?.total_svp}</Typography>
                 </PlayerSectionBox>
 
                 {/* Team Mates */}
@@ -88,7 +89,7 @@ const Player = () => {
                         Team Mates
                     </Typography>
                     <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
-                        {player.team_mates.slice(0, 6).map((mate: any, index: number) => (
+                        {userGameStats.team_mates.slice(0, 6).map((mate: any, index: number) => (
                             <Box
                                 key={index}
                                 sx={{
@@ -133,7 +134,7 @@ const Player = () => {
                         Hero Matchups
                     </Typography>
                     <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
-                        {(showAllMatchups ? player.hero_matchups : player.hero_matchups.slice(0, 8))
+                        {(showAllMatchups ? userGameStats.hero_matchups : userGameStats.hero_matchups.slice(0, 8))
                             .map((hero: any, index: number) => (
                             <Box
                                 key={index}
@@ -167,7 +168,7 @@ const Player = () => {
                             </Box>
                         ))}
                     </Box>
-                    {player.hero_matchups.length > 8 && (
+                    {userGameStats.hero_matchups.length > 8 && (
                         <Box sx={{mt:2}}>
                             <MainButton onClick={() => setShowAllMatchups(!showAllMatchups)}>
                                 {showAllMatchups ? "see less" : "See more"}
@@ -181,7 +182,7 @@ const Player = () => {
                         Heroes Ranked
                     </Typography>
                     <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, }}>
-                        {(showAllRanked ? player.heroes_ranked : player.heroes_ranked
+                        {(showAllRanked ? userGameStats.heroes_ranked : userGameStats.heroes_ranked
                             .slice(0, 6))
                             .sort((a: any, b: any) => b.matches - a.matches)
                             .map((hero: any, index: number) => (
@@ -231,7 +232,7 @@ const Player = () => {
                                 </Box>
                             ))}
                     </Box>
-                    {player.heroes_ranked.length > 6 && (
+                    {userGameStats.heroes_ranked.length > 6 && (
                         <Box sx={{mt:2}}>
                             <MainButton onClick={() => setShowAllRanked(!showAllRanked)}>
                                 {showAllRanked ? "see less" : "See more"}

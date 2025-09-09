@@ -16,6 +16,7 @@ import Box from "@mui/material/Box";
 import {LockOutlined, Visibility, VisibilityOff} from "@mui/icons-material";
 import {login} from "../../../api/Auth.service.ts";
 import {useAuth} from "../../../hooks/useAuth.tsx";
+import {useUserData} from "../../../hooks/useUserData.tsx";
 
 export type LoginDTO = {
     email: string;
@@ -35,6 +36,7 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
     const [validationErrors, setValidationErrors] = useState<{ email?: string; password?: string }>({})
     // @ts-expect-error bien ds le context
     const { setUser } = useAuth();
+    const {saveUserGameStats} = useUserData();
 
 
     const handleChange = (field: keyof LoginDTO) =>
@@ -51,6 +53,7 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
             if (authData.user) {
                 setUser(authData.user);
                 setOpen(false)
+                saveUserGameStats(authData.user.mrivalsAccount)
                 setLoginValues({email: "", password: ""})
                 localStorage.setItem("MBtoken", authData.token)
             } else {

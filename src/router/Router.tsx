@@ -81,7 +81,6 @@ export const Router = createBrowserRouter([
             {
                 path: "/user/player/:account",
                 element: <Player/>,
-                loader: ({params: {account}}) => getPlayerStats(account!)
             }
         ]
     }
