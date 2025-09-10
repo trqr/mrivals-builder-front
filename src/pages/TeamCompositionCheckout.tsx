@@ -6,13 +6,17 @@ import {imageBaseUrl} from "../api/axios.config.ts";
 import {startTransition, useEffect, useState} from "react";
 import Page from "./layout/Page.tsx";
 import Box from "@mui/material/Box";
-import {getTeamCounter, getTeamSynergie} from "../api/Compo.service.ts";
+import {getTeamCounter, getTeamSynergie, saveCompo} from "../api/Compo.service.ts";
 import TeambuildButton2 from "../componnents/button/TeambuildButton2.tsx";
+import {useNavigate} from "react-router";
 
 const TeamCompositionCheckout = () => {
     const { compo } = useCompo();
     const [teamCounters, setTeamCounters] = useState<any[]>([]);
     const [teamSynergies, setTeamSynergies] = useState<any[]>([]);
+    const [teamSaved, setTeamSaved] = useState<any | null>(null);
+    const navigate = useNavigate();
+
 
 
     useEffect(() => {
@@ -165,7 +169,23 @@ const TeamCompositionCheckout = () => {
                     </ul>
                 </Box>
                 <Box sx={{ transform: "skew(-21deg)", mt: 2, margin: "20px", alignItems: "center"}}>
-                    <TeambuildButton2 style={{marginTop: "20px"}}>Save</TeambuildButton2>
+                    <TeambuildButton2
+                        style={{marginTop: "20px"}}
+                        onClick={async () => {
+                            try {
+                                const heroesIds = compo.map((hero) => hero.id);
+                                const savedTeam = await saveCompo(heroesIds);
+                                const navToTeams = await navigate("../user/teams");
+                                setTeamSaved(savedTeam);
+                                alert("Composition sauvegardée avec succès !");
+                            } catch (error) {
+                                console.error(error);
+                                alert("Erreur lors de la sauvegarde de la composition.");
+                            }
+                        }}
+                    >
+                        Save
+                    </TeambuildButton2>
                 </Box>
             </Grid>
         </Page>

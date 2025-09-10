@@ -40,3 +40,24 @@ export const saveCompo = async (heroesIds: (number | undefined)[]) => {
             return err;
         })
 }
+
+export const getUserTeamCompos = async () => {
+    return await api.get("/compo")
+        .then((res) => res.data)
+        .catch((err) => {
+            console.error("Erreur getUserTeamCompos :", err);
+            return [];
+        });
+}
+
+export const deleteTeam = async (teamId: (number | undefined)[]) => {
+    return await api.delete(`/compo/${teamId}`)
+    .then((res) => res.status)
+    .catch((err) => {console.log(err)})
+}
+
+export const deleteAllTeams = async () => {
+    return await api.delete(`/compo/all`)
+    .then((res) => res.status)
+    .catch((err) => {console.log(err)})
+}
