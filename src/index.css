@@ -14,7 +14,6 @@ kbd {
     white-space: nowrap;
 }
 
-
 @keyframes pulse {
     0% {
         box-shadow: 0 0 0 1px rgba(0, 255, 0, 0.7);

@@ -5,6 +5,8 @@ import {useAuth} from "../../hooks/useAuth.tsx";
 import Box from "@mui/material/Box";
 import * as React from "react";
 import {useState} from "react";
+import ListItem from "@mui/material/ListItem";
+import Typography from "@mui/material/Typography";
 
 const ProfileMenu = () => {
     const navigate = useNavigate()
@@ -75,13 +77,18 @@ const ProfileMenu = () => {
                         transformOrigin={{horizontal: 'right', vertical: 'top'}}
                         anchorOrigin={{horizontal: "right", vertical: 'bottom'}}
                     >
-                        <MenuItem onClick={handleClose}>
+                        <ListItem sx={{px: 2, py: 1}} secondaryAction={<Typography variant={"caption"}>ID: #{user.id}</Typography>}>
                             <Avatar
-                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx7sLJbdmCKh3Ko5fv9ahJsMGSZnIiRbz9Qg&s"/> My
-                            Account
-                        </MenuItem>
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx7sLJbdmCKh3Ko5fv9ahJsMGSZnIiRbz9Qg&s"
+                                sx={{mr: 1}}
+                            />
+                            <Typography variant={"overline"}>{user.username}</Typography>
+                        </ListItem>
                         <Divider/>
-                        <MenuItem onClick={() => navigate(`/user/player/${user.mrivalsAccount}`)}>
+                        <MenuItem
+                            onClick={() => navigate(`/user/player/${user.mrivalsAccount}`)}
+                            disabled={!user.mrivalsAccount}
+                        >
                             <ListItemIcon>
                                 <ViewList fontSize="small"/>
                             </ListItemIcon>
