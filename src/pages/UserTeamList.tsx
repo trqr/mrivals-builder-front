@@ -40,7 +40,7 @@ const UserTeamList = () => {
         fetchTeams();
     };
 
-    const hadleDeleteAll = async () => {
+    const handleDeleteAll = async () => {
         await deleteAllTeams();
         fetchTeams();
     };
@@ -85,7 +85,7 @@ const UserTeamList = () => {
                 ))}
                 <Box sx={{padding: "10px"}}>
                 <DeleteButton
-                    onClick={hadleDeleteAll}
+                    onClick={handleDeleteAll}
                     >Delete All</DeleteButton>
                 </Box>
             </Grid>

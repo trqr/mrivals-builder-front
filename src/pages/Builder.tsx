@@ -30,7 +30,7 @@ const Builder = () => {
     const [recommendationsMessages, setRecommendationsMessages] = useState({archetype: "", mainTank: "", mainHeal: "", ban: ""})
     const navigate = useNavigate();
     const theme = useTheme();
-    const {compo, addToCompo, removeFromCompo} = useCompo();
+    const {compo, addToCompo, removeFromCompo, deleteCompo} = useCompo();
 
     const handleDragStart = (event: any) => {
         const hero = heroes.find((h) => h.id.toString() === event.active.id);
@@ -108,6 +108,8 @@ const Builder = () => {
         setHeroes((prev) => [...prev, hero]);
     };
 
+
+
     const handleSubmitCompo = async () => {
         startTransition(async () => {
             const heroesIds = compo.map((hero) => hero?.id);
@@ -153,19 +155,19 @@ const Builder = () => {
                                 </Grid>
                             ))}
                         </Grid>
-                        <Box
-                            sx={{margin: "10px",
-                        }}>
+                        <Box sx={{margin: "10px"}}>
                         <MainButton style={{margin: "5px"}}
                             disabled={compo.filter((x) => x !== null).length < 6}
                             onClick={handleSubmitCompo}
                         >
                             Validate
                         </MainButton>
-                        <DeleteButton style={{margin: "5px"}}>
-                            Delete
-                        </DeleteButton>
+                            <DeleteButton style={{margin: "5px"}}
+                            onClick={deleteCompo}>
+                                Delete
+                            </DeleteButton>
                         </Box>
+
                     </Box>
                     <Box
                         sx={{
