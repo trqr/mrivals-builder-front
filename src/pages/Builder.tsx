@@ -17,6 +17,8 @@ import Typography from "@mui/material/Typography";
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import {useTheme} from "@mui/material/styles";
 import { getTeamCounter } from "../api/Compo.service.ts";
+import DeleteButton from "../componnents/button/DeleteButton.tsx";
+import MainButton from "../componnents/button/MainButton.tsx";
 
 const Builder = () => {
     const fetchedHeroes = useLoaderData<HeroType[]>();
@@ -151,14 +153,19 @@ const Builder = () => {
                                 </Grid>
                             ))}
                         </Grid>
-                        <Button
-                            variant={"contained"}
-                            sx={{margin: "10px"}}
+                        <Box
+                            sx={{margin: "10px",
+                        }}>
+                        <MainButton style={{margin: "5px"}}
                             disabled={compo.filter((x) => x !== null).length < 6}
                             onClick={handleSubmitCompo}
                         >
                             Validate
-                        </Button>
+                        </MainButton>
+                        <DeleteButton style={{margin: "5px"}}>
+                            Delete
+                        </DeleteButton>
+                        </Box>
                     </Box>
                     <Box
                         sx={{
