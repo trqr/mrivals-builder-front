@@ -113,7 +113,7 @@ const Builder = () => {
     const handleSubmitCompo = async () => {
         startTransition(async () => {
             const heroesIds = compo.map((hero) => hero?.id);
-            const savedCompo = await navigate("/team");
+            const savedCompo = await navigate("/team/{team.id}");
         });
     };
 

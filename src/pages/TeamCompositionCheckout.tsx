@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 import {getTeamCounter, getTeamSynergie, saveCompo} from "../api/Compo.service.ts";
 import TeambuildButton2 from "../componnents/button/TeambuildButton2.tsx";
 import {useNavigate} from "react-router";
+import {toast} from "react-toastify";
 
 const TeamCompositionCheckout = () => {
     const { compo } = useCompo();
@@ -177,10 +178,10 @@ const TeamCompositionCheckout = () => {
                                 const savedTeam = await saveCompo(heroesIds);
                                 const navToTeams = await navigate("../user/teams");
                                 setTeamSaved(savedTeam);
-                                alert("Composition sauvegardée avec succès !");
+                                toast.success("Composition sauvegardée avec succès !");
                             } catch (error) {
                                 console.error(error);
-                                alert("Erreur lors de la sauvegarde de la composition.");
+                                toast.error("Erreur lors de la sauvegarde de la composition.");
                             }
                         }}
                     >

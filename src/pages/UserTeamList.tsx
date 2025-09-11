@@ -1,35 +1,31 @@
 import Page from "./layout/Page.tsx";
-import {Button, Card, CardMedia, Grid} from "@mui/material";
-import {startTransition, useEffect, useState} from "react";
-import {imageBaseUrl} from "../api/axios.config.ts";
-import {deleteAllTeams, deleteTeam, getUserTeamCompos} from "../api/Compo.service.ts";
-import Typography from "@mui/material/Typography";
-import type {HeroType} from "../@types/HeroType";
-import MainButton from "../componnents/button/MainButton.tsx";
+import { Grid, Box } from "@mui/material";
+import { startTransition, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import { getUserTeamCompos, deleteTeam, deleteAllTeams } from "../api/Compo.service.ts";
+import type { HeroType } from "../@types/HeroType";
+import { useCompo } from "../hooks/useCompo.tsx";
 import DeleteButton from "../componnents/button/DeleteButton.tsx";
-import Box from "@mui/material/Box";
-import {useNavigate} from "react-router";
-import {useCompo} from "../hooks/useCompo.tsx";
-
-
+import TeamReview from "../componnents/common/TeamReview.tsx";
+import ConfirmationDialog from "../componnents/common/dialogs/ConfirmationDialog.tsx";
 
 const UserTeamList = () => {
     const [teams, setTeams] = useState<any[]>([]);
     const { compo } = useCompo();
+    const navigate = useNavigate();
+    const [openConfirmationDialog, setOpenConfirmationDialog] = useState<boolean>(false);
 
-    const navigate =useNavigate();
-
-    const handleNavigateToTeam = async () => {
-        startTransition(async () => {
+    const handleNavigateToTeam = () => {
+        startTransition(() => {
             const heroesIds = compo.map((hero: HeroType) => hero?.id);
-            const showDetails = await navigate("../../team");
-        })
-    }
+            navigate("../../team/{team.id}");
+        });
+    };
 
     const fetchTeams = async () => {
         const fetchedTeams = await getUserTeamCompos();
         setTeams(fetchedTeams);
-    }
+    };
 
     useEffect(() => {
         fetchTeams();
@@ -47,50 +43,37 @@ const UserTeamList = () => {
 
     return (
         <Page title={"Team list"} description={"Team list page"}>
+                <Box
+                style={{
+                    boxShadow: "inherit !important",
+                }}>
             <Grid container spacing={2}>
                 {teams.map((team) => (
                     <Grid item xs={12} key={team.id}>
-                        <Card>
-                            <div style={{ display: "flex", flexDirection: "row" }}>
-                                {team.heroes.map((hero: HeroType) => (
-                                    <CardMedia key={hero.id} sx={{padding: "10px"}}>
-                                        <img
-                                            src={imageBaseUrl + hero.imageLink}
-                                            alt={hero.name}
-                                            style={{ width: "80px", height: "100px", objectFit: "cover" }}
-                                        />
-                                        <Typography sx={{padding: "5px"}}>{hero.name}</Typography>
-                                    <Typography sx={{padding: "5px"}}>Winrate: {(hero.winRate * 100).toFixed(1)}%</Typography>
-                                    </CardMedia>
-
-                            ))}
-                            </div>
-                            <div style={{
-                                display: "flex",
-                                flexDirection: "row",
-                                justifyContent: "space-between",
-                                padding: "10px"
-                            }}>
-                            <DeleteButton
-                                onClick={() => handleDelete(team.id)}
-                            >Delete</DeleteButton>
-                            <Typography sx={{padding: "5px", fontSize: "20px"}}>{team.id}</Typography>
-                                <MainButton
-                                onClick={handleNavigateToTeam}>
-                                    Details
-                                </MainButton>
-                            </div>
-                        </Card>
+                        <TeamReview
+                            team={team}
+                            onDelete={handleDelete}
+                            onNavigate={handleNavigateToTeam}
+                        />
                     </Grid>
                 ))}
-                <Box sx={{padding: "10px"}}>
-                <DeleteButton
-                    onClick={handleDeleteAll}
-                    >Delete All</DeleteButton>
-                </Box>
             </Grid>
+                </Box>
+                <Box sx={{ padding: "10px",
+                display: "flex",
+                alignItems: "center",}}>
+                    <DeleteButton onClick={() => setOpenConfirmationDialog(true)}>
+                        Delete All
+                    </DeleteButton>
+                    <ConfirmationDialog
+                        isOpen={openConfirmationDialog}
+                        handleClose={() => setOpenConfirmationDialog(false)}
+                        handleConfirmationClick={() => handleDeleteAll()}
+                        dialogText={"Are you sure you want to delete all teams?"}
+                    ></ConfirmationDialog>
+                </Box>
         </Page>
-    )
-}
+    );
+};
 
-export default UserTeamList
+export default UserTeamList;
