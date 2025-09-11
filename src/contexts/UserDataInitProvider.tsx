@@ -1,5 +1,4 @@
 import {createContext, useState} from "react";
-import {emptyPlayer, type PlayerType} from "../@types/PlayerType/PlayerType.ts";
 import {getPlayerStats} from "../api/Player.api.ts";
 import type {RankGameSeasonType} from "../@types/PlayerType/RankGameSeasonType.ts";
 

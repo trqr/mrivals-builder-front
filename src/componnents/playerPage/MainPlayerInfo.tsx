@@ -1,6 +1,6 @@
 import {Box} from "@mui/material";
 import Typography from "@mui/material/Typography";
-import {iconBaseUrl} from "../../api/axios.config.ts";
+import {iconBaseUrl} from "../../api/config/Axios.config.ts";
 import PlayerSectionBox from "../common/PlayerSectionBox.tsx";
 import {useUserData} from "../../hooks/useUserData.tsx";
 

@@ -1,4 +1,4 @@
-import { api } from "./axios.config"
+import { api } from "./config/Axios.config.ts"
 import type {LoginDTO} from "../componnents/common/dialogs/LoginDialog.tsx";
 import {toast} from "react-toastify";
 import type {RegisterDTO} from "../componnents/common/dialogs/RegisterDialog.tsx";

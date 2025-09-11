@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import {iconBaseUrl} from "../../api/axios.config.ts";
-import MainButton from "../button/MainButton.tsx";
+import {iconBaseUrl} from "../../api/config/Axios.config.ts";
+import MainButton from "../common/buttons/MainButton.tsx";
 import {useState} from "react";
 import {useUserData} from "../../hooks/useUserData.tsx";
 

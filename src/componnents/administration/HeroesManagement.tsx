@@ -1,10 +1,10 @@
-import {useLoaderData, useRevalidator} from "react-router-dom";
+import {useRevalidator} from "react-router-dom";
 import {useState} from "react";
 import {DataGrid, type GridColDef} from "@mui/x-data-grid";
 import {Box, Button, MenuItem, Paper, Typography, useTheme} from "@mui/material";
 import Select from "@mui/material/Select";
 import ConfirmationDialog from "../common/dialogs/ConfirmationDialog.tsx";
-import {iconBaseUrl, imageBaseUrl} from "../../api/axios.config.ts";
+import {iconBaseUrl, imageBaseUrl} from "../../api/config/Axios.config.ts";
 import {updateHeroesMainRole} from "../../api/Hero.api.ts";
 import type {SynergieType} from "../../@types/SynergieType.ts";
 import type {MatchUpType} from "../../@types/MatchUpType.ts";
@@ -12,14 +12,15 @@ import IconButton from "@mui/material/IconButton";
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from "@mui/icons-material/Add";
 import SynergyUpdateDialog from "../common/dialogs/SynergyUpdateDialog.tsx";
-import { addSynergy, updateSynergy} from "../../api/Synergie.api.ts";
+import {addSynergy, updateSynergy} from "../../api/Synergie.api.ts";
 import {MatchUpUpdateDialog} from "../common/dialogs/MatchUpUpdateDialog.tsx";
 import type {AbilitiesType} from "../../@types/AbilitiesType";
 import {addMatchUp, updateMatchUp} from "../../api/MatchUp.api.ts";
+import {useData} from "../../hooks/useData.tsx";
 
 
 const HeroesManagement = () => {
-    const heroes = useLoaderData();
+    const {heroes} = useData();
     const {revalidate} = useRevalidator();
     const [selectedRows, setSelectedRows] = useState<number[]>([])
     const [selectedRole, setSelectedRole] = useState<string>("");
@@ -189,7 +190,6 @@ const HeroesManagement = () => {
 
             <Paper sx={{height: 500, width: '100%'}}>
                 <DataGrid
-
                     rows={heroes}
                     columns={columns}
                     initialState={{pagination: {paginationModel}}}
@@ -200,7 +200,6 @@ const HeroesManagement = () => {
                         scrollbarColor: `${theme.palette.secondary.main} transparent`,}}
                 />
             </Paper>
-
 
             {selectedRows.length > 0 && (
                 <Paper sx={{p: 2, mt: 2}}>

@@ -14,7 +14,6 @@ export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export const AuthProvider = ({ children }: {children: React.ReactNode}) => {
     const [user, setUser] = useState(null);
     const isAuthenticated = !!user;
-    // @ts-expect-error bien dans le context
     const {saveUserGameStats} = useUserData();
 
     const fetchCurrentUser = async () => {

@@ -1,4 +1,4 @@
-import {api} from "./axios.config.ts";
+import {api} from "./config/Axios.config.ts";
 
 export const getAllHeroes = async () => {
     return await api.get("/heroes")

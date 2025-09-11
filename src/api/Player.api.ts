@@ -1,4 +1,4 @@
-import { externalApi } from "./axios.config.ts";
+import { externalApi } from "./config/Axios.config.ts";
 
 
 export const getPlayerStats = async (playerAccount: string) => {
@@ -16,6 +16,7 @@ export const getPlayerStats = async (playerAccount: string) => {
 export const updatePlayerStats = async (playerAccount: string) => {
     return await externalApi.get(`/player/${playerAccount}/update`)
         .then((res) => {
+            console.log(res.data);
             return res.data
         })
         .catch((err) => {

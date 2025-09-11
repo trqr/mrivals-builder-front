@@ -1,22 +1,21 @@
 // router.tsx
 import {createBrowserRouter} from "react-router-dom";
-import Builder from "../pages/Builder.tsx";
-import HeroDetails from "../pages/HeroDetails.tsx";
-import Home from "../pages/Home.tsx";
-import MapDetails from "../pages/MapDetails.tsx";
-import DataList from "../pages/DataList.tsx";
+import Builder from "../pages/builderPage/BuilderPage.tsx";
+import HeroDetails from "../pages/heroDetails/HeroDetails.tsx";
+import Home from "../pages/home/Home.tsx";
+import MapDetails from "../pages/mapDetails/MapDetails.tsx";
+import DataList from "../pages/dataList/DataList.tsx";
 import {getAllHeroes, getHeroes} from "../api/Hero.api.ts";
-import TeamCompositionCheckout from "../pages/TeamCompositionCheckout.tsx";
+import TeamCompositionCheckout from "../pages/teamCompositionCheckout/TeamCompositionCheckout.tsx";
 import Layout from "../pages/layout/Layout.tsx";
-import AdministrationPage from "../pages/AdministrationPage.tsx";
+import AdministrationPage from "../pages/administrationPage/AdministrationPage.tsx";
 import {getAllUsers} from "../api/User.api.ts";
-import ProtectedRoute from "../componnents/common/ProtectedRoute.tsx";
-import UserSettings from "../pages/UserSettings.tsx";
-import UserTeamList from "../pages/UserTeamList.tsx";
-import BestPlayersPage from "../pages/BestPlayersPage.tsx";
+import ProtectedRoute from "./ProtectedRoute.tsx";
+import UserSettings from "../pages/userSettings/UserSettings.tsx";
+import UserTeamList from "../pages/userTeamList/UserTeamList.tsx";
+import BestPlayersPage from "../pages/bestPlayersPage/BestPlayersPage.tsx";
 import {getHeroLeaderboard} from "../api/Leaderboard.api.ts";
-import Player from "../pages/Player.tsx";
-import {getPlayerStats} from "../api/Player.api.ts";
+import Player from "../pages/player/Player.tsx";
 
 export const Router = createBrowserRouter([
     {
@@ -61,14 +60,6 @@ export const Router = createBrowserRouter([
                         <AdministrationPage/>
                     </ProtectedRoute>,
                 loader: ()  => getAllUsers()
-            },
-            {
-                path: "/admin/heroes",
-                element:
-                    <ProtectedRoute>
-                        <AdministrationPage/>
-                    </ProtectedRoute>,
-                loader: () => getAllHeroes()
             },
             {
                 path: "/user/settings",

@@ -1,4 +1,4 @@
-import {externalApi} from "./axios.config.ts";
+import {externalApi} from "./config/Axios.config.ts";
 
 export const getBestPlayersByHero = async (heroName: string) => {
     return await externalApi.get(`/heroes/leaderboard/${heroName}`)

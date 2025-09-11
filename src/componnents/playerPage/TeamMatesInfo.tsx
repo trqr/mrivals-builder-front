@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import {imageBaseUrl} from "../../api/axios.config.ts";
+import {imageBaseUrl} from "../../api/config/Axios.config.ts";
 import {useUserData} from "../../hooks/useUserData.tsx";
 import {Grid} from "@mui/material";
 

@@ -1,4 +1,4 @@
-import { api } from "./axios.config"
+import { api } from "./config/Axios.config.ts"
 import {toast} from "react-toastify";
 
 export const getAllUsers = async () => {

@@ -8,7 +8,7 @@ import {HeroUsageGraph} from "./graphs/HeroUsageGraph.tsx";
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import PieChartIcon from '@mui/icons-material/PieChart';
 import BarChartIcon from '@mui/icons-material/BarChart';
-import {HeroWinrateComparison} from "./graphs/HeroWinrateComparison.tsx";
+import {HeroWinrateComparisonGraph} from "./graphs/HeroWinrateComparisonGraph.tsx";
 
 
 export const GraphsBox = () => {
@@ -21,7 +21,7 @@ export const GraphsBox = () => {
             case 1:
                 return <HeroUsageGraph/>;
             case 2:
-                return <HeroWinrateComparison/>;
+                return <HeroWinrateComparisonGraph/>;
             default:
                 return null;
         }

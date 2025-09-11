@@ -1,12 +1,10 @@
-import {api} from "./axios.config.ts";
+import {api} from "./config/Axios.config.ts";
 
 export const getAllMap = async () => {
     return await api.get("/maps")
         .then((res ) => {
             return res.data;
-        }
-
-)
+        })
         .catch((err) => {
         return err;
     })

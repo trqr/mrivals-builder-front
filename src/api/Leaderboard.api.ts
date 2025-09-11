@@ -1,4 +1,4 @@
-import {api} from "./axios.config.ts";
+import {api} from "./config/Axios.config.ts";
 
 export const getHeroLeaderboard = async (heroId: string, page: number, size: number) => {
     return await api.get(`/leaderboard/${heroId}`, {params: {page, size}})
