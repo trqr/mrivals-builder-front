@@ -7,18 +7,21 @@ import {CssBaseline, ThemeProvider} from "@mui/material";
 import {AuthProvider} from "./contexts/AuthProvider.tsx";
 import {CompoProvider} from "./contexts/CompoProvider.tsx";
 import {UserDataInitProvider} from "./contexts/UserDataInitProvider.tsx";
+import {DataProvider} from "./contexts/DataProvider.tsx";
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-      <UserDataInitProvider>
-          <AuthProvider>
-                  <CompoProvider>
-                      <ThemeProvider theme={theme}>
-                          <CssBaseline/>
-                            <App />
-                      </ThemeProvider>
-                  </CompoProvider>
-          </AuthProvider>
-      </UserDataInitProvider>
+      <DataProvider>
+          <UserDataInitProvider>
+              <AuthProvider>
+                      <CompoProvider>
+                          <ThemeProvider theme={theme}>
+                              <CssBaseline/>
+                                <App />
+                          </ThemeProvider>
+                      </CompoProvider>
+              </AuthProvider>
+          </UserDataInitProvider>
+      </DataProvider>
   </StrictMode>,
 )

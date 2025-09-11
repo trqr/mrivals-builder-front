@@ -24,6 +24,7 @@ export const AuthProvider = ({ children }: {children: React.ReactNode}) => {
             saveUserGameStats(response.mrivalsAccount);
         } catch (e) {
             setUser(null);
+            localStorage.removeItem("MBtoken");
         }
     };
 

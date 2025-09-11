@@ -1,19 +1,21 @@
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 const PlayerSectionBox = ({ title, children }: { title: string; children: React.ReactNode }) => (
     <Box
         sx={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
-            margin: "10px"
+            alignItems: "center"
         }}
     >
-        <h2 style={{ marginBottom: "5px" }}>{title}</h2>
+        <Typography variant="h5" gutterBottom>
+            {title}
+        </Typography>
         <Box
             sx={{
+                padding: "1rem",
                 border: "solid 2px #FDDE2B",
-                transform: "skew(-21deg)",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -22,8 +24,7 @@ const PlayerSectionBox = ({ title, children }: { title: string; children: React.
                 height: "250px",
                 boxShadow: 4,
             }}
-        >
-            {children}
+        >   {children}
         </Box>
     </Box>
 );

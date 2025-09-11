@@ -13,6 +13,7 @@ import type {UserType} from "../@types/UserType.ts";
 import {changeUserMRaccount, changeUsername, changeUserPassword} from "../api/User.api.ts";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import Page from "./layout/Page.tsx";
+import {useUserData} from "../hooks/useUserData.tsx";
 
 const UserSettings = () => {
     // @ts-expect-error bien dans le context
@@ -28,6 +29,8 @@ const UserSettings = () => {
         password?: string;
         confirmPass?: string
     }>({})
+    const {setUser} = useAuth();
+    const {setUserGameStats} = useUserData();
 
     const validatePassword = () => {
         const newErrors: {confirmPass?: string; password?: string } = {};
@@ -47,10 +50,13 @@ const UserSettings = () => {
 
     const handleUsernameChange = async () => {
         await changeUsername(currentUser.username);
+        setUser(currentUser);
     };
 
     const handleMRaccountChange = async () => {
-        await changeUserMRaccount(currentUser.id, currentUser.mrivalsAccount)
+        await changeUserMRaccount(currentUser.id, currentUser.mrivalsAccount);
+        setUser(currentUser);
+        setUserGameStats(currentUser.mrivalsAccount);
     };
 
     const handleChangePassword = async () => {
