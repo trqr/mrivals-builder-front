@@ -2,11 +2,13 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ArchiveIcon from '@mui/icons-material/Archive';
 import Paper from '@mui/material/Paper';
 import {ScoreEvoGraph} from "./graphs/ScoreEvoGraph.tsx";
+import {HeroUsageGraph} from "./graphs/HeroUsageGraph.tsx";
+import ShowChartIcon from '@mui/icons-material/ShowChart';
+import PieChartIcon from '@mui/icons-material/PieChart';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import {HeroWinrateComparison} from "./graphs/HeroWinrateComparison.tsx";
 
 
 export const GraphsBox = () => {
@@ -17,9 +19,9 @@ export const GraphsBox = () => {
             case 0:
                 return <ScoreEvoGraph/>;
             case 1:
-                return <ScoreEvoGraph/>;
+                return <HeroUsageGraph/>;
             case 2:
-                return <ScoreEvoGraph/>;
+                return <HeroWinrateComparison/>;
             default:
                 return null;
         }
@@ -41,9 +43,9 @@ export const GraphsBox = () => {
                         setValue(newValue);
                     }}
                 >
-                    <BottomNavigationAction label="Recents" icon={<RestoreIcon/>}/>
-                    <BottomNavigationAction label="Favorites" icon={<FavoriteIcon/>}/>
-                    <BottomNavigationAction label="Archive" icon={<ArchiveIcon/>}/>
+                    <BottomNavigationAction label="MMR Evolution" icon={<ShowChartIcon/>}/>
+                    <BottomNavigationAction label="Hero Pick Rate" icon={<PieChartIcon/>}/>
+                    <BottomNavigationAction label="Role Win Rate" icon={<BarChartIcon/>}/>
                 </BottomNavigation>
             </Paper>
         </Box>
