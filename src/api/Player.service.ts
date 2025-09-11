@@ -1,8 +1,8 @@
 import { externalApi } from "./axios.config.ts";
 
 
-export const getPlayerStats = async (query: string) => {
-    return await externalApi.get(`/player/${query}`)
+export const getPlayerStats = async (playerAccount: string) => {
+    return await externalApi.get(`/player/${playerAccount}`)
         .then((res) => {
             console.log(res.data);
             return res.data;
@@ -12,3 +12,12 @@ export const getPlayerStats = async (query: string) => {
             return err;
         });
 };
+
+export const updatePlayerStats = async (playerAccount: string) => {
+    return await externalApi.get(`/player/${playerAccount}/update`)
+        .then((res) => {
+            return res
+        })
+        .catch((err) => {
+            return err.response.data})
+}
