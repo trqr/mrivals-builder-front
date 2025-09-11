@@ -5,7 +5,7 @@ import HeroDetails from "../pages/HeroDetails.tsx";
 import Home from "../pages/Home.tsx";
 import MapDetails from "../pages/MapDetails.tsx";
 import DataList from "../pages/DataList.tsx";
-import {getAllHeroes, getHeroes} from "../api/Hero.service.ts";
+import {getAllHeroes, getHeroes} from "../api/Hero.api.ts";
 import TeamCompositionCheckout from "../pages/TeamCompositionCheckout.tsx";
 import Layout from "../pages/layout/Layout.tsx";
 import AdministrationPage from "../pages/AdministrationPage.tsx";
@@ -16,7 +16,7 @@ import UserTeamList from "../pages/UserTeamList.tsx";
 import BestPlayersPage from "../pages/BestPlayersPage.tsx";
 import {getHeroLeaderboard} from "../api/Leaderboard.api.ts";
 import Player from "../pages/Player.tsx";
-import {getPlayerStats} from "../api/Player.service.ts";
+import {getPlayerStats} from "../api/Player.api.ts";
 
 export const Router = createBrowserRouter([
     {

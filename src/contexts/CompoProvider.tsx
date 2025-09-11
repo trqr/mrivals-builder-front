@@ -5,7 +5,7 @@ type CompoContextType = {
     compo: HeroType[];
     addToCompo: (hero: HeroType) => void;
     removeFromCompo: (hero: HeroType) => void;
-    deleteCompo: () => void;
+    clearCompo: () => void;
 }
 
 export const CompoContext = createContext<CompoContextType | undefined>(undefined);
@@ -21,12 +21,12 @@ export const CompoProvider = ({children}: { children: React.ReactNode }) => {
         setCompo(compo.filter(h => h !== hero));
     }
 
-    const deleteCompo = () => {
+    const clearCompo = () => {
         setCompo([]);
     }
 
     return (
-        <CompoContext.Provider value={{compo, addToCompo, removeFromCompo, deleteCompo}}>
+        <CompoContext.Provider value={{compo, addToCompo, removeFromCompo, clearCompo}}>
             {children}
         </CompoContext.Provider>
     );

@@ -5,7 +5,7 @@ import {Box, Button, MenuItem, Paper, Typography, useTheme} from "@mui/material"
 import Select from "@mui/material/Select";
 import ConfirmationDialog from "../common/dialogs/ConfirmationDialog.tsx";
 import {iconBaseUrl, imageBaseUrl} from "../../api/axios.config.ts";
-import {updateHeroesMainRole} from "../../api/Hero.service.ts";
+import {updateHeroesMainRole} from "../../api/Hero.api.ts";
 import type {SynergieType} from "../../@types/SynergieType.ts";
 import type {MatchUpType} from "../../@types/MatchUpType.ts";
 import IconButton from "@mui/material/IconButton";

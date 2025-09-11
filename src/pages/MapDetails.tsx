@@ -1,6 +1,6 @@
 import {useEffect, useState, useTransition} from "react";
 import {useParams} from "react-router-dom";
-import {getMapById} from "../api/Map.service.ts";
+import {getMapById} from "../api/Map.api.ts";
 import type {MapType} from "../@types/MapType.d";
 import {emptyMapType} from "../@types/MapType.d";
 import {imageBaseUrl} from "../api/axios.config.ts";

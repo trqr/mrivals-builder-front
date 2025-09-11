@@ -8,7 +8,7 @@ import {DndContext, DragOverlay} from "@dnd-kit/core";
 import {DroppableSlot} from "../componnents/drag&drop/DroppableSlot.tsx";
 import {DraggableHero} from "../componnents/drag&drop/DraggableHero.tsx";
 import {imageBaseUrl} from "../api/axios.config.ts";
-import {getBestWinRateByRole, getTeamSynergie, saveCompo} from "../api/Compo.service.ts";
+import {getBestWinRateByRole, getTeamSynergie, saveCompo} from "../api/Compo.api.ts";
 import {useCompo} from "../hooks/useCompo.tsx";
 import {useNavigate} from "react-router";
 import Page from "./layout/Page.tsx";
@@ -16,7 +16,7 @@ import {Paper} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import {useTheme} from "@mui/material/styles";
-import { getTeamCounter } from "../api/Compo.service.ts";
+import { getTeamCounter } from "../api/Compo.api.ts";
 import DeleteButton from "../componnents/button/DeleteButton.tsx";
 import MainButton from "../componnents/button/MainButton.tsx";
 
@@ -30,7 +30,7 @@ const Builder = () => {
     const [recommendationsMessages, setRecommendationsMessages] = useState({archetype: "", mainTank: "", mainHeal: "", ban: ""})
     const navigate = useNavigate();
     const theme = useTheme();
-    const {compo, addToCompo, removeFromCompo, deleteCompo} = useCompo();
+    const {compo, addToCompo, removeFromCompo, clearCompo} = useCompo();
 
     const handleDragStart = (event: any) => {
         const hero = heroes.find((h) => h.id.toString() === event.active.id);
@@ -44,6 +44,7 @@ const Builder = () => {
 
     useEffect(() => {
         startTransition(async () => {
+            await new Promise((resolve) => setTimeout(resolve, 500));
             const heroesIds = compo.map((hero) => hero?.id);
             const fetchedBestHeroes = await getBestWinRateByRole(heroesIds);
             setBestHeroes(fetchedBestHeroes);
@@ -119,7 +120,7 @@ const Builder = () => {
 
     return (
         <Page title={"Builder"} description="Builder">
-            {isPending && <LinearProgress variant={"indeterminate"}/>}
+            <LinearProgress variant={isPending ? "indeterminate" : "determinate"}/>
             <DndContext
                 onDragStart={handleDragStart}
                 onDragEnd={handleDragEnd}
@@ -160,11 +161,11 @@ const Builder = () => {
                             disabled={compo.filter((x) => x !== null).length < 6}
                             onClick={handleSubmitCompo}
                         >
-                            Validate
+                            Submit
                         </MainButton>
                             <DeleteButton style={{margin: "5px"}}
-                            onClick={deleteCompo}>
-                                Delete
+                            onClick={clearCompo}>
+                                Clear
                             </DeleteButton>
                         </Box>
 

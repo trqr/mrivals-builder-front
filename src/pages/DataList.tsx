@@ -7,8 +7,8 @@ import {
 } from "@mui/material";
 import type {HeroType} from "../@types/HeroType";
 import type {MapType} from "../@types/MapType";
-import {getAllHeroes} from "../api/Hero.service.ts";
-import {getAllMap} from "../api/Map.service.ts";
+import {getAllHeroes} from "../api/Hero.api.ts";
+import {getAllMap} from "../api/Map.api.ts";
 import "./DataList.css";
 import Header from "../componnents/header/Header.tsx";
 import Typography from "@mui/material/Typography";

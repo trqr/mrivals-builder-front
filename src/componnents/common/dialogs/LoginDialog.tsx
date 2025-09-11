@@ -14,7 +14,7 @@ import {
 import {useState, useTransition} from "react";
 import Box from "@mui/material/Box";
 import {LockOutlined, Visibility, VisibilityOff} from "@mui/icons-material";
-import {login} from "../../../api/Auth.service.ts";
+import {login} from "../../../api/Auth.api.ts";
 import {useAuth} from "../../../hooks/useAuth.tsx";
 import {useUserData} from "../../../hooks/useUserData.tsx";
 

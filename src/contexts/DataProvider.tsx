@@ -1,6 +1,6 @@
 import {createContext, useEffect, useState, useTransition} from "react";
 import type {HeroType} from "../@types/HeroType";
-import {getAllHeroes} from "../api/Hero.service.ts";
+import {getAllHeroes} from "../api/Hero.api.ts";
 
 type DataContextType = {
     heroes: HeroType[];

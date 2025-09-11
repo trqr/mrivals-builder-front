@@ -13,7 +13,7 @@ import {useState, useTransition} from "react";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import {Alert} from "@mui/material";
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import {register} from "../../../api/Auth.service.ts";
+import {register} from "../../../api/Auth.api.ts";
 
 export type RegisterDTO = {
     username: string;

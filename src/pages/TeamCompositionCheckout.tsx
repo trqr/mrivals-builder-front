@@ -6,7 +6,7 @@ import {imageBaseUrl} from "../api/axios.config.ts";
 import {startTransition, useEffect, useState} from "react";
 import Page from "./layout/Page.tsx";
 import Box from "@mui/material/Box";
-import {getTeamCounter, getTeamSynergie, saveCompo} from "../api/Compo.service.ts";
+import {getTeamCounter, getTeamSynergie, saveCompo} from "../api/Compo.api.ts";
 import TeambuildButton2 from "../componnents/button/TeambuildButton2.tsx";
 import {useNavigate} from "react-router";
 

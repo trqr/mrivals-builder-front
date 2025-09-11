@@ -1,6 +1,6 @@
 import {createContext, type Dispatch, type SetStateAction, useEffect, useState} from "react";
 import type {UserType} from "../@types/UserType.ts";
-import {isTokenValid} from "../api/Auth.service.ts";
+import {isTokenValid} from "../api/Auth.api.ts";
 import {useUserData} from "../hooks/useUserData.tsx";
 
 type AuthContextType = {

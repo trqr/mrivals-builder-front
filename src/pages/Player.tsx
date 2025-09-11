@@ -6,7 +6,7 @@ import {PlayerHeroMatchUps} from "../componnents/playerPage/PlayerHeroMatchUps.t
 import {PlayerHeroesStats} from "../componnents/playerPage/PlayerHeroesStats.tsx";
 import {GraphsBox} from "../componnents/playerPage/GraphsBox.tsx";
 import {Alert, Button} from "@mui/material";
-import {updatePlayerStats} from "../api/Player.service.ts";
+import {updatePlayerStats} from "../api/Player.api.ts";
 import {useAuth} from "../hooks/useAuth.tsx";
 import {useState} from "react";
 

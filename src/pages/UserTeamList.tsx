@@ -2,7 +2,7 @@ import Page from "./layout/Page.tsx";
 import {Button, Card, CardMedia, Grid} from "@mui/material";
 import {startTransition, useEffect, useState} from "react";
 import {imageBaseUrl} from "../api/axios.config.ts";
-import {deleteAllTeams, deleteTeam, getUserTeamCompos} from "../api/Compo.service.ts";
+import {deleteAllTeams, deleteTeam, getUserTeamCompos} from "../api/Compo.api.ts";
 import Typography from "@mui/material/Typography";
 import type {HeroType} from "../@types/HeroType";
 import MainButton from "../componnents/button/MainButton.tsx";

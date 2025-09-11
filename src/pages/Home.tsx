@@ -8,7 +8,7 @@ import TeambuildButton2 from "../componnents/button/TeambuildButton2.tsx";
 import InfiniteScroll from "../componnents/InfiniteScroll.tsx";
 import type {HeroType} from "../@types/HeroType";
 import {useEffect, useState} from "react";
-import {getAllHeroes} from "../api/Hero.service.ts";
+import {getAllHeroes} from "../api/Hero.api.ts";
 import {imageBaseUrl} from "../api/axios.config.ts";
 import SplitText from "../componnents/HomeText.tsx";
 import Page from "./layout/Page.tsx";
