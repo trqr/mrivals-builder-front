@@ -5,7 +5,6 @@ import {useUserData} from "../../hooks/useUserData.tsx";
 import {Grid} from "@mui/material";
 
 export const TeamMatesInfo = () => {
-    // @ts-expect-error bien dans le context
     const {userGameStats} = useUserData();
 
     return (

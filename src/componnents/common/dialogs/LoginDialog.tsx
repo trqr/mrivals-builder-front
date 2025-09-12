@@ -34,7 +34,6 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
     const [loginValues, setLoginValues] = useState<LoginDTO>({email: "", password: ""})
     const [serverError, setServerError] = useState<string | null>(null);
     const [validationErrors, setValidationErrors] = useState<{ email?: string; password?: string }>({})
-    // @ts-expect-error bien ds le context
     const { setUser } = useAuth();
     const {saveUserGameStats} = useUserData();
 
@@ -53,7 +52,7 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
             if (authData.user) {
                 setUser(authData.user);
                 setOpen(false)
-                saveUserGameStats(authData.user.mrivalsAccount)
+                saveUserGameStats()
                 setLoginValues({email: "", password: ""})
                 localStorage.setItem("MBtoken", authData.token)
             } else {

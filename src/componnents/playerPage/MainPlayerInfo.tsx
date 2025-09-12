@@ -5,8 +5,8 @@ import PlayerSectionBox from "../common/PlayerSectionBox.tsx";
 import {useUserData} from "../../hooks/useUserData.tsx";
 
 export const MainPlayerInfo = () => {
-    // @ts-expect-error bien dans le context
-    const {userGameStats, getAllTimeHighScore, getCurrentSeasonHighScore} = useUserData();
+    const {userGameStats} = useUserData();
+    const { getAllTimeHighScore, getCurrentSeasonHighScore} = useUserData();
 
     return (
         <Box sx={{display: "flex", flexDirection: "row", minWidth: "50%", gap: "20px"}}>

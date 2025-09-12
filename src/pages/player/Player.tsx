@@ -7,16 +7,14 @@ import {PlayerHeroesStats} from "../../componnents/playerPage/PlayerHeroesStats.
 import {GraphsBox} from "../../componnents/playerPage/GraphsBox.tsx";
 import {Alert, Button} from "@mui/material";
 import {updatePlayerStats} from "../../api/Player.api.ts";
-import {useAuth} from "../../hooks/useAuth.tsx";
 import {useState} from "react";
 
 const Player = () => {
-    const {user} = useAuth();
     const [message, setMessage] = useState<string>("")
     const [alert, setAlert] = useState<"error" | "success">("success")
 
     const updateStats = async () => {
-        const updated = await updatePlayerStats(user.mrivalsAccount);
+        const updated = await updatePlayerStats();
         if (updated.success) {
             setAlert("success")
         } else {

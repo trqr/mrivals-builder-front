@@ -16,7 +16,6 @@ import Page from "../layout/Page.tsx";
 import {useUserData} from "../../hooks/useUserData.tsx";
 
 const UserSettings = () => {
-    // @ts-expect-error bien dans le context
     const { user } = useAuth();
     const [currentUser, setCurrentUser] = useState<UserType>(user);
     const [oldPassword, setOldPassword] = useState("");
@@ -30,7 +29,7 @@ const UserSettings = () => {
         confirmPass?: string
     }>({})
     const {setUser} = useAuth();
-    const {setUserGameStats} = useUserData();
+    const {saveUserGameStats} = useUserData();
 
     const validatePassword = () => {
         const newErrors: {confirmPass?: string; password?: string } = {};
@@ -56,7 +55,7 @@ const UserSettings = () => {
     const handleMRaccountChange = async () => {
         await changeUserMRaccount(currentUser.id, currentUser.mrivalsAccount);
         setUser(currentUser);
-        setUserGameStats(currentUser.mrivalsAccount);
+        saveUserGameStats();
     };
 
     const handleChangePassword = async () => {
