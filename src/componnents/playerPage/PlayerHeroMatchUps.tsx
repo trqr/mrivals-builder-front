@@ -7,7 +7,6 @@ import {useUserData} from "../../hooks/useUserData.tsx";
 
 export const PlayerHeroMatchUps= () => {
     const [showAllMatchups, setShowAllMatchups] = useState(false);
-    // @ts-expect-error bien dans le context
     const {userGameStats} = useUserData();
 
     return (

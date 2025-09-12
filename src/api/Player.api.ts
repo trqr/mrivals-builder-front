@@ -1,11 +1,11 @@
-import { externalApi } from "./config/Axios.config.ts";
+import {api} from "./config/Axios.config.ts";
 
 
-export const getPlayerStats = async (playerAccount: string) => {
-    return await externalApi.get(`/player/${playerAccount}`)
+export const savePlayerStats = async () => {
+    return await api.post(`/player-stats/save`)
         .then((res) => {
-            console.log(res.data);
-            return res.data;
+            console.log(JSON.parse(res.data.statsRawJson));
+            return JSON.parse(res.data.statsRawJson);
         })
         .catch((err) => {
             console.error(err);
@@ -13,11 +13,23 @@ export const getPlayerStats = async (playerAccount: string) => {
         });
 };
 
-export const updatePlayerStats = async (playerAccount: string) => {
-    return await externalApi.get(`/player/${playerAccount}/update`)
+export const getPlayerStats = async () => {
+    return await api.get(`/player-stats`)
         .then((res) => {
-            console.log(res.data);
-            return res.data
+            console.log(JSON.parse(res.data.statsRawJson));
+            return JSON.parse(res.data.statsRawJson);
+        })
+        .catch((err) => {
+            console.error(err);
+            return err;
+        });
+};
+
+export const updatePlayerStats = async () => {
+    return await api.post(`/player-stats/update`)
+        .then((res) => {
+            console.log(JSON.parse(res.data));
+            return JSON.parse(res.data);
         })
         .catch((err) => {
             return err.response.data})
