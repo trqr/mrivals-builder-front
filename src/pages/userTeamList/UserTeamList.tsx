@@ -1,15 +1,14 @@
 import Page from "../layout/Page.tsx";
 import {Button, Card, CardMedia, Grid} from "@mui/material";
 import {startTransition, useEffect, useState} from "react";
-import {imageBaseUrl} from "../../api/config/Axios.config.ts";
 import {deleteAllTeams, deleteTeam, getUserTeamCompos} from "../../api/Compo.api.ts";
-import Typography from "@mui/material/Typography";
 import type {HeroType} from "../../@types/HeroType";
-import MainButton from "../../componnents/common/buttons/MainButton.tsx";
 import DeleteButton from "../../componnents/common/buttons/DeleteButton.tsx";
 import Box from "@mui/material/Box";
 import {useNavigate} from "react-router";
 import {useCompo} from "../../hooks/useCompo.tsx";
+import ConfirmationDialog from "../../componnents/common/dialogs/ConfirmationDialog.tsx";
+import TeamReview from "../../componnents/common/TeamReview.tsx";
 
 
 

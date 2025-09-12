@@ -1,9 +1,9 @@
 import { Card, CardMedia } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import DeleteButton from "../button/DeleteButton.tsx";
-import MainButton from "../button/MainButton.tsx";
+import DeleteButton from "../common/buttons/DeleteButton.tsx";
+import MainButton from "../common/buttons/MainButton.tsx";
 import type { HeroType } from "../../@types/HeroType";
-import {imageBaseUrl} from "../../api/axios.config.ts";
+import {imageBaseUrl} from "../../api/config/Axios.config.ts";
 import ConfirmationDialog from "./dialogs/ConfirmationDialog.tsx";
 import {startTransition, useState} from "react";
 import Box from "@mui/material/Box";
