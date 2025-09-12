@@ -1,6 +1,5 @@
 import Box from "@mui/material/Box";
 import { Grid, LinearProgress} from "@mui/material";
-import {useLoaderData} from "react-router-dom";
 import type {HeroType} from "../../@types/HeroType";
 import {useEffect, useState, useTransition} from "react";
 import HeroRoleFilter from "../../componnents/common/HeroRoleFilter.tsx";
@@ -19,10 +18,11 @@ import {useTheme} from "@mui/material/styles";
 import { getTeamCounter } from "../../api/Compo.api.ts";
 import DeleteButton from "../../componnents/common/buttons/DeleteButton.tsx";
 import MainButton from "../../componnents/common/buttons/MainButton.tsx";
+import {useData} from "../../hooks/useData.tsx";
 
  const BuilderPage = () => {
-    const fetchedHeroes = useLoaderData<HeroType[]>();
-    const [heroes, setHeroes] = useState(fetchedHeroes);
+    const {heroes} = useData();
+    const [availableHeroes, setAvailableHeroes] = useState(heroes);
     const [bestHeroes, setBestHeroes] = useState([]);
     const [role, setRole] = useState("");
     const [activeHero, setActiveHero] = useState<HeroType | null>(null);
@@ -33,7 +33,7 @@ import MainButton from "../../componnents/common/buttons/MainButton.tsx";
     const {compo, addToCompo, removeFromCompo, clearCompo} = useCompo();
 
     const handleDragStart = (event: any) => {
-        const hero = heroes.find((h) => h.id.toString() === event.active.id);
+        const hero = availableHeroes.find((h) => h.id.toString() === event.active.id);
         if (hero) {
             setActiveHero(hero);
         }
@@ -91,10 +91,10 @@ import MainButton from "../../componnents/common/buttons/MainButton.tsx";
         const {over, active} = event;
         if (over) {
             parseInt(over.id.replace("slot-", ""));
-            const hero = heroes.find((h) => h.id.toString() === active.id);
+            const hero = availableHeroes.find((h) => h.id.toString() === active.id);
             if (hero) {
                 addToCompo(hero);
-                setHeroes((prev) => prev.filter((h) => h.id !== hero.id));
+                setAvailableHeroes((prev) => prev.filter((h) => h.id !== hero.id));
             }
         }
         setActiveHero(null);
@@ -106,7 +106,7 @@ import MainButton from "../../componnents/common/buttons/MainButton.tsx";
 
     const handleRemoveHero = (hero: HeroType) => {
         removeFromCompo(hero);
-        setHeroes((prev) => [...prev, hero]);
+        setAvailableHeroes((prev) => [...prev, hero]);
     };
 
 
@@ -190,7 +190,7 @@ import MainButton from "../../componnents/common/buttons/MainButton.tsx";
                                 scrollbarWidth: "thin",
                                 scrollbarColor: `${theme.palette.primary.main} transparent`,
                             }}>
-                                {(role ? heroes.filter((hero: HeroType) => hero.role === role) : heroes)
+                                {(role ? availableHeroes.filter((hero: HeroType) => hero.role === role) : availableHeroes)
                                     .map((hero: HeroType, index: number) => (
                                     <Grid
                                         key={index}
