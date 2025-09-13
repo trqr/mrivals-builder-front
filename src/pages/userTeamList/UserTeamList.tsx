@@ -1,5 +1,5 @@
 import Page from "../layout/Page.tsx";
-import {Button, Card, CardMedia, Grid} from "@mui/material";
+import {Grid} from "@mui/material";
 import {startTransition, useEffect, useState} from "react";
 import {deleteAllTeams, deleteTeam, getUserTeamCompos} from "../../api/Compo.api.ts";
 import type {HeroType} from "../../@types/HeroType";
@@ -9,7 +9,7 @@ import {useNavigate} from "react-router";
 import {useCompo} from "../../hooks/useCompo.tsx";
 import ConfirmationDialog from "../../componnents/common/dialogs/ConfirmationDialog.tsx";
 import TeamReview from "../../componnents/common/TeamReview.tsx";
-
+import Typography from "@mui/material/Typography";
 
 
 const UserTeamList = () => {
@@ -17,13 +17,6 @@ const UserTeamList = () => {
     const { compo } = useCompo();
     const navigate = useNavigate();
     const [openConfirmationDialog, setOpenConfirmationDialog] = useState<boolean>(false);
-
-    const handleNavigateToTeam = () => {
-        startTransition(() => {
-            const heroesIds = compo.map((hero: HeroType) => hero?.id);
-            navigate("../../team/{team.id}");
-        });
-    };
 
     const fetchTeams = async () => {
         const fetchedTeams = await getUserTeamCompos();
@@ -46,25 +39,34 @@ const UserTeamList = () => {
 
     return (
         <Page title={"Team list"} description={"Team list page"}>
-                <Box
-                style={{
-                    boxShadow: "inherit !important",
+            <Typography variant={"h2"} sx={{textAlign: "center", margin: "20px"}}>Your teams</Typography>
+            {teams.length > 0 ?
+                <>
+                    <Box
+                        style={{
+                            boxShadow: "inherit !important",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            alignItems: "center"
+                        }}>
+                        <Grid container spacing={2}>
+                            {teams.map((team) =>
+                                <Grid item xs={12} key={team.id}>
+                                    <TeamReview
+                                        team={team}
+                                        onDelete={handleDelete}
+                                    />
+                                </Grid>
+                            )}
+                        </Grid>
+                    </Box>
+                <Box sx={{
+                    padding: "10px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                 }}>
-            <Grid container spacing={2}>
-                {teams.map((team) => (
-                    <Grid item xs={12} key={team.id}>
-                        <TeamReview
-                            team={team}
-                            onDelete={handleDelete}
-                            onNavigate={handleNavigateToTeam}
-                        />
-                    </Grid>
-                ))}
-            </Grid>
-                </Box>
-                <Box sx={{ padding: "10px",
-                display: "flex",
-                alignItems: "center",}}>
                     <DeleteButton onClick={() => setOpenConfirmationDialog(true)}>
                         Delete All
                     </DeleteButton>
@@ -75,6 +77,10 @@ const UserTeamList = () => {
                         dialogText={"Are you sure you want to delete all teams?"}
                     ></ConfirmationDialog>
                 </Box>
+                </>
+                :
+                <Typography variant={"h4"} sx={{textAlign: "center", margin: "20px"}}>You dont have any teams yet!</Typography>
+            }
         </Page>
     );
 };

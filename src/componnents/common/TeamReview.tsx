@@ -21,20 +21,20 @@ type TeamReviewProps = {
 
 const TeamReview = ({ team, onDelete,}: TeamReviewProps) => {
 
-    const { compo } = useCompo();
     const navigate = useNavigate();
     const [openConfirmationDialog, setOpenConfirmationDialog] = useState<boolean>(false);
 
-    const onNavigate = async () => {
-        startTransition(async () => {
-            const heroesIds = compo.map((hero: HeroType) => hero?.id);
-            const compoDetail = await navigate("../../team/{team.id}", {state: {compo}});
-        });
+    const avgTeamWinRate = () => {
+        let heroesTotalRate = 0
+        team.heroes.forEach((hero) => {
+            heroesTotalRate += hero.winRate;
+        })
+        return (heroesTotalRate/6*100).toFixed(2)
     }
 
     return (
         <Card>
-            <div style={{ display: "flex", flexDirection: "row" }}>
+            <div style={{ display: "flex", flexDirection: "row", }}>
                 {team.heroes.map((hero) => (
                     <CardMedia key={hero.id} sx={{
                         padding: "10px",
@@ -81,8 +81,8 @@ const TeamReview = ({ team, onDelete,}: TeamReviewProps) => {
                     handleConfirmationClick={() => onDelete(team.id)}
                     dialogText={"Are you sure you want to delete this team ?"}
                 ></ConfirmationDialog>
-                <Typography sx={{ padding: "5px", fontSize: "20px" }}>{team.id}</Typography>
-                <MainButton onClick={onNavigate}>Details</MainButton>
+                <Typography sx={{ padding: "5px", fontSize: "20px" }}>Average win rate: {avgTeamWinRate()} %</Typography>
+                <MainButton onClick={() => navigate(`/team/${team.id}`)}>Details</MainButton>
             </div>
         </Card>
     );
