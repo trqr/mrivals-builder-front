@@ -12,11 +12,11 @@ body{
 }
 
 .card:hover, .cardMap:hover {
-    animation: tiltXY 4s linear infinite;
+    animation: tilt 4s linear infinite;
     scale: 1.08;
 }
 
-@keyframes tiltXY {
+@keyframes tilt {
     0% {
         transform: rotateY(0deg) rotateX(0deg);
     }
