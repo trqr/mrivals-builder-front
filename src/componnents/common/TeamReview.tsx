@@ -55,10 +55,10 @@ const TeamReview = ({ team, onDelete,}: TeamReviewProps) => {
                         />
                         <Box
                         style={{
-                            border: "2px solid #FDDE2B",
+                            border: "0.5px dashed #FDDE2B",
                             transform: "skew(-21deg)"
                         }}>
-                        <Typography sx={{ padding: "5px" }}>
+                        <Typography sx={{ padding: "5px", transform: "skew(21deg)" }}>
                             Winrate: {(hero.winRate * 100).toFixed(1)}%
                         </Typography>
                         </Box>
