@@ -5,12 +5,53 @@ body{
 
 .card{
     margin: 10px;
-    width: 200px;
-    height: 400px;
+    width: 180px;
+    height: 350px;
+    transition: all 1s ease-in-out;
+    cursor: pointer;
 }
 
-.card:hover, .cardMap:hover{
-    scale: 110%;
+.card:hover, .cardMap:hover {
+    animation: tiltY 2s linear infinite;
+}
+
+@keyframes tiltY {
+    0% {
+        transform: rotateY(10deg);
+    }
+    10% {
+        transform: rotateY(20deg);
+    }
+    20% {
+        transform: rotateY(30deg);
+    }
+    30% {
+        transform: rotateY(20deg);
+    }
+    40% {
+        transform: rotateY(10deg);
+    }
+    50% {
+        transform: rotateY(0deg);
+    }
+    60% {
+        transform: rotateY(-10deg);
+    }
+    70% {
+        transform: rotateY(-20deg);
+    }
+    80% {
+        transform: rotateY(-30deg);
+    }
+    90% {
+        transform: rotateY(-20deg);
+    }
+    95% {
+        transform: rotateY(-10deg);
+    }
+    100% {
+        transform: rotateY(0deg);
+    }
 }
 
 .container{
