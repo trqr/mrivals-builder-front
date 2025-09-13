@@ -12,45 +12,25 @@ body{
 }
 
 .card:hover, .cardMap:hover {
-    animation: tiltY 2s linear infinite;
+    animation: tiltXY 4s linear infinite;
+    scale: 1.08;
 }
 
-@keyframes tiltY {
+@keyframes tiltXY {
     0% {
-        transform: rotateY(10deg);
+        transform: rotateY(0deg) rotateX(0deg);
     }
-    10% {
-        transform: rotateY(20deg);
-    }
-    20% {
-        transform: rotateY(30deg);
-    }
-    30% {
-        transform: rotateY(20deg);
-    }
-    40% {
-        transform: rotateY(10deg);
+    25% {
+        transform: rotateY(35deg) rotateX(5deg);
     }
     50% {
-        transform: rotateY(0deg);
+        transform: rotateY(0deg) rotateX(0deg);
     }
-    60% {
-        transform: rotateY(-10deg);
-    }
-    70% {
-        transform: rotateY(-20deg);
-    }
-    80% {
-        transform: rotateY(-30deg);
-    }
-    90% {
-        transform: rotateY(-20deg);
-    }
-    95% {
-        transform: rotateY(-10deg);
+    75% {
+        transform: rotateY(-35deg) rotateX(-5deg);
     }
     100% {
-        transform: rotateY(0deg);
+        transform: rotateY(0deg) rotateX(0deg);
     }
 }
 
