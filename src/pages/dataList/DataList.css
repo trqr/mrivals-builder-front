@@ -3,35 +3,16 @@ body{
 }
 
 
-.card{
+.card, .cardMap {
     margin: 10px;
     width: 180px;
     height: 350px;
-    transition: all 1s ease-in-out;
+    transition: transform 0.1s ease-out;
     cursor: pointer;
-}
-
-.card:hover, .cardMap:hover {
-    animation: tilt 4s linear infinite;
-    scale: 1.08;
-}
-
-@keyframes tilt {
-    0% {
-        transform: rotateY(0deg) rotateX(0deg);
-    }
-    25% {
-        transform: rotateY(35deg) rotateX(5deg);
-    }
-    50% {
-        transform: rotateY(0deg) rotateX(0deg);
-    }
-    75% {
-        transform: rotateY(-35deg) rotateX(-5deg);
-    }
-    100% {
-        transform: rotateY(0deg) rotateX(0deg);
-    }
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    display: flex;
+    flex-direction: column;
 }
 
 .container{
