@@ -7,6 +7,7 @@ import {getAllMap} from "../api/Map.api.ts";
 type DataContextType = {
     heroes: HeroType[];
     maps: MapType[];
+    refreshHeroes: () => Promise<void>;
 }
 
 export const DataInitContext = createContext<DataContextType | undefined>(undefined);
@@ -19,12 +20,18 @@ export const DataInitProvider = ({children}: { children: React.ReactNode }) => {
     useEffect(() => {
         startTransition(async () => {
             setMaps(await getAllMap())
-            setHeroes(await getAllHeroes());
+            await refreshHeroes()
         })
     }, []);
 
+    const refreshHeroes = async () => {
+        const data = await getAllHeroes();
+        setHeroes(data);
+    };
+
+
     return (
-        <DataInitContext.Provider value={{heroes, maps}}>
+        <DataInitContext.Provider value={{heroes, maps, refreshHeroes}}>
             {children}
         </DataInitContext.Provider>
     );

@@ -3,8 +3,8 @@ import {useState} from "react";
 import {DataGrid, type GridColDef} from "@mui/x-data-grid";
 import {Box, Button, MenuItem, Paper, Typography} from "@mui/material";
 import Select from "@mui/material/Select";
-import ConfirmationDialog from "../common/dialogs/ConfirmationDialog.tsx";
-import {banUsers, changeUsersRoleToAdmin, changeUsersRoleToUser} from "../../api/User.api.ts";
+import ConfirmationDialog from "../../common/dialogs/ConfirmationDialog.tsx";
+import {banUsers, changeUsersRoleToAdmin, changeUsersRoleToUser} from "../../../api/User.api.ts";
 
 
 type UsersManagementProps = {

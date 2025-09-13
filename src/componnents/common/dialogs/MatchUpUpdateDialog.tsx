@@ -14,7 +14,7 @@ import {
 import {useEffect, useState} from "react";
 import type {MatchUpType} from "../../../@types/MatchUpType.ts";
 import {deleteMatchUp} from "../../../api/MatchUp.api.ts";
-import {useNavigate} from "react-router";
+import {useData} from "../../../hooks/useData.tsx";
 
 type MatchUpUpdateDialogProps = {
     open: boolean;
@@ -27,7 +27,7 @@ type MatchUpUpdateDialogProps = {
 export const MatchUpUpdateDialog = ({open, handleClose, handleSave, heroes, editingMatchUp}: MatchUpUpdateDialogProps) => {
     const [counterPickId, setCounterPickId] = useState<number | "">("");
     const [value, setValue] = useState<number>(1);
-    const navigate = useNavigate();
+    const { refreshHeroes } = useData()
 
     const onSubmit = () => {
         if (counterPickId === "") return;
@@ -38,8 +38,8 @@ export const MatchUpUpdateDialog = ({open, handleClose, handleSave, heroes, edit
     const handleDelete = async () => {
         if (editingMatchUp) {
             await deleteMatchUp(editingMatchUp.id)
+            await refreshHeroes();
         }
-        navigate("/admin/heroes")
         handleClose();
     }
 

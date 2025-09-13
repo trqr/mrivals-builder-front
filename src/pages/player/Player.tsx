@@ -17,10 +17,11 @@ const Player = () => {
         const updated = await updatePlayerStats();
         if (updated.success) {
             setAlert("success")
+            setMessage(updated.message)
         } else {
             setAlert("error")
+            setMessage(updated.message)
         }
-        setMessage(updated.message)
     }
 
     return (

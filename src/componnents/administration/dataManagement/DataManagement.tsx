@@ -1,9 +1,9 @@
 import {Container, Typography, Grid, Button, Card, CardContent} from "@mui/material";
-import {updateHeroes} from "../../api/Hero.api.ts";
-import { updateMaps } from "../../api/Map.api.ts";
-import {updateLeaderboard} from "../../api/Leaderboard.api.ts";
+import {updateHeroes} from "../../../api/Hero.api.ts";
+import { updateMaps } from "../../../api/Map.api.ts";
+import {updateLeaderboard} from "../../../api/Leaderboard.api.ts";
 
-export const UpdateDataRENAME = () => {
+export const DataManagement = () => {
     const handleUpdateHeroes = async () => {
         await updateHeroes()
     };

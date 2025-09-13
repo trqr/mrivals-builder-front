@@ -20,7 +20,9 @@ export const AuthProvider = ({ children }: {children: React.ReactNode}) => {
         try {
             const response = await isTokenValid();
             setUser(response);
-            saveUserGameStats();
+            if (response.mrivalsAccount){
+                saveUserGameStats();
+            }
         } catch (e) {
             setUser(null);
             localStorage.removeItem("MBtoken");

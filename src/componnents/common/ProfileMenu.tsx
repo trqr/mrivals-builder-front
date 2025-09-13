@@ -10,7 +10,6 @@ import Typography from "@mui/material/Typography";
 
 const ProfileMenu = () => {
     const navigate = useNavigate()
-    // @ts-expect-error biendslecontect
     const {user, setUser} = useAuth();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -77,24 +76,32 @@ const ProfileMenu = () => {
                         transformOrigin={{horizontal: 'right', vertical: 'top'}}
                         anchorOrigin={{horizontal: "right", vertical: 'bottom'}}
                     >
-                        <ListItem sx={{px: 2, py: 1}} secondaryAction={<Typography variant={"caption"}>ID: #{user.id}</Typography>}>
+                        <ListItem sx={{px: 2, py: 1}} secondaryAction={<Typography variant={"caption"}>ID: #{user!.id}</Typography>}>
                             <Avatar
                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx7sLJbdmCKh3Ko5fv9ahJsMGSZnIiRbz9Qg&s"
                                 sx={{mr: 1}}
                             />
-                            <Typography variant={"overline"}>{user.username}</Typography>
+                            <Typography variant={"overline"}>{user!.username}</Typography>
                         </ListItem>
                         <Divider/>
                         <MenuItem
-                            onClick={() => navigate(`/user/player/${user.mrivalsAccount}`)}
-                            disabled={!user.mrivalsAccount}
+                            onClick={() => navigate(`/user/player/${user!.mrivalsAccount}`)}
+                            disabled={!user!.mrivalsAccount}
                         >
                             <ListItemIcon>
                                 <ViewList fontSize="small"/>
                             </ListItemIcon>
                             Your Profile
                         </MenuItem>
-                        {user.role === "ADMIN" && (
+                        <MenuItem
+                            onClick={() => navigate(`/user/teams`)}
+                        >
+                            <ListItemIcon>
+                                <ViewList fontSize="small"/>
+                            </ListItemIcon>
+                            Your Teams
+                        </MenuItem>
+                        {user!.role === "ADMIN" && (
                             <MenuItem onClick={() => navigate("/admin")}>
                                 <ListItemIcon>
                                     <AdminPanelSettings fontSize="small"/>

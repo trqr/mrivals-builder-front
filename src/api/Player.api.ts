@@ -7,10 +7,7 @@ export const savePlayerStats = async () => {
             console.log(JSON.parse(res.data.statsRawJson));
             return JSON.parse(res.data.statsRawJson);
         })
-        .catch((err) => {
-            console.error(err);
-            return err;
-        });
+        .catch();
 };
 
 export const getPlayerStats = async () => {
@@ -31,6 +28,14 @@ export const updatePlayerStats = async () => {
             console.log(JSON.parse(res.data));
             return JSON.parse(res.data);
         })
-        .catch((err) => {
-            return err.response.data})
+        .catch((error) => {
+            const match = error.response.data.match(/{.*}/);
+            if (match) {
+                const parsed = JSON.parse(match[0]);
+                return parsed
+            }
+        return (error || "Erreur inconnue");
+        })
 }
+
+

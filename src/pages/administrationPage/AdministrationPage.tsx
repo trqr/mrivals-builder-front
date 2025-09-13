@@ -2,10 +2,10 @@ import {useLoaderData} from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import { Box, Tab } from "@mui/material";
 import {TabContext, TabList, TabPanel} from "@mui/lab";
-import HeroesManagement from "../../componnents/administration/HeroesManagement.tsx";
-import UsersManagement from "../../componnents/administration/UsersManagement.tsx";
+import HeroesManagement from "../../componnents/administration/heroesManagement/HeroesManagement.tsx";
+import UsersManagement from "../../componnents/administration/usersManagement/UsersManagement.tsx";
 import {useState} from "react";
-import {UpdateDataRENAME} from "../../componnents/administration/UpdateDataRENAME.tsx";
+import {DataManagement} from "../../componnents/administration/dataManagement/DataManagement.tsx";
 import Page from "../layout/Page.tsx";
 
 const AdministrationPage = () => {
@@ -35,7 +35,7 @@ const AdministrationPage = () => {
                         <HeroesManagement></HeroesManagement>
                     </TabPanel>
                     <TabPanel value="3">
-                        <UpdateDataRENAME></UpdateDataRENAME>
+                        <DataManagement></DataManagement>
                     </TabPanel>
                 </TabContext>
             </Box>

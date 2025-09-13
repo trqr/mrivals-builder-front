@@ -5,7 +5,7 @@ export const addMatchUp = async (
     counterPickId: number,
     value: number
 ) => {
-    return await api.post("/match-ups", {heroId: heroId, allyId: counterPickId, value: value})
+    return await api.post("/match-up", {heroId: heroId, counterPickId: counterPickId, value: value})
         .then(res => res.data)
         .catch(err => console.log(err));
 }
@@ -16,7 +16,7 @@ export const updateMatchUp = async (
     counterPickId: number,
     value: number
 ) => {
-    return await api.put(`/match-ups/${matchUpId}`, {heroId: heroId, allyId: counterPickId, value: value})
+    return await api.put(`/match-up/${matchUpId}`, {heroId: heroId, counterPickId: counterPickId, value: value})
         .then(res => res.data)
         .catch(err => console.log(err));
 }

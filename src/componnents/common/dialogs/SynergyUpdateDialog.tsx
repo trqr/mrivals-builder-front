@@ -1,22 +1,22 @@
 import {
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogActions,
-    Button,
     Box,
-    TextField,
+    Button,
     Checkbox,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    FormControl,
     FormControlLabel,
+    InputLabel,
     MenuItem,
     Select,
-    InputLabel,
-    FormControl,
+    TextField,
 } from "@mui/material";
 import {useEffect, useState} from "react";
 import type {SynergieType} from "../../../@types/SynergieType.ts";
 import {deleteSynergy} from "../../../api/Synergie.api.ts";
-import {useNavigate} from "react-router";
+import {useData} from "../../../hooks/useData.tsx";
 
 type SynergyUpdateDialogProps = {
     open: boolean;
@@ -30,7 +30,7 @@ const SynergyUpdateDialog = ({open, handleClose, handleSave, heroes, editingSyne
     const [allyId, setAllyId] = useState<number | "">("");
     const [value, setValue] = useState<number>(1);
     const [isTeamUp, setIsTeamUp] = useState<boolean>(false);
-    const navigate = useNavigate();
+    const {refreshHeroes} = useData()
 
     const onSubmit = () => {
         if (allyId === "") return;
@@ -41,8 +41,8 @@ const SynergyUpdateDialog = ({open, handleClose, handleSave, heroes, editingSyne
     const handleDelete = async () => {
         if (editingSynergy) {
             await deleteSynergy(editingSynergy.id)
+            await refreshHeroes();
         }
-        navigate("/admin/heroes")
         handleClose();
     }
 
