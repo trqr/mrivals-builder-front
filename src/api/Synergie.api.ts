@@ -6,9 +6,8 @@ export const addSynergy = async (
     value: number,
     isTeamup: boolean
 ) => {
-    return await api.post("/synergies", {heroId: heroId, allyId: allyId, value: value, isTeamup: isTeamup})
-        .then(res => res.data)
-        .catch(err => console.log(err));
+    const res = await api.post("/synergies", {heroId: heroId, allyId: allyId, value: value, isTeamup: isTeamup})
+    return res.data;
 }
 
 export const updateSynergy = async (
@@ -18,13 +17,11 @@ export const updateSynergy = async (
     value: number,
     isTeamup: boolean
     ) => {
-    return await api.put(`/synergies/${synergieId}`, {heroId: heroId, allyId: allyId, value: value, isTeamup: isTeamup})
-        .then(res => res.data)
-        .catch(err => console.log(err));
+    const res =  await api.put(`/synergies/${synergieId}`, {heroId: heroId, allyId: allyId, value: value, isTeamup: isTeamup})
+    return res.data;
 }
 
 export const deleteSynergy = async (heroId: number) => {
-    return await api.delete(`/synergies/${heroId}`)
-        .then(res => res.data)
-        .catch(err => console.log(err));
+    const res = await api.delete(`/synergies/${heroId}`)
+    return res.data;
 }

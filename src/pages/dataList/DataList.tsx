@@ -23,8 +23,8 @@ const DataList = () => {
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
 
-        const rotateY = ((x - centerX) / centerX) * 30;
-        const rotateX = ((y - centerY) / centerY) * 15;
+        const rotateY = ((x - centerX) / centerX) * 22;
+        const rotateX = ((y - centerY) / centerY) * 11;
 
         card.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(1.04)`;
     };
@@ -66,9 +66,9 @@ const DataList = () => {
                 {show === "maps" && (
                     <Grid container className={"containerMaps"}>
                         {maps.map((map: MapType) => (
-                            <CardContent key={map.id}>
+                            <CardContent key={map.id} sx={{cursor: "pointer"}}>
                                 <CardMedia>
-                                    <Typography>{map.name}</Typography>
+                                    <Typography variant={"h5"} sx={{textAlign: "center", margin: "5px"}}>{map.name}</Typography>
                                     <img
                                         src={`${imageBaseUrl}${map.mapImages[1].imageLink}`}
                                         alt={map.name}

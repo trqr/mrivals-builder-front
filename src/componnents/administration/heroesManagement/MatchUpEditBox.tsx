@@ -28,9 +28,9 @@ const MatchUpEditBox = ({
             }}
         >
             <img
-                src={imageBaseUrl + matchUp.ally.imageLink}
-                alt={matchUp.ally.name}
-                title={matchUp.ally.name}
+                src={imageBaseUrl + matchUp.counterPick.imageLink}
+                alt={matchUp.counterPick.name}
+                title={matchUp.counterPick.name}
                 style={{
                     width: 38,
                     height: 38,

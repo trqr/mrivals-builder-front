@@ -6,12 +6,10 @@ import type {RegisterDTO} from "../componnents/common/dialogs/RegisterDialog.tsx
 export const login = async (logs: LoginDTO) => {
     return await api.post('/auth/login', logs)
         .then((res) => {
-            console.log(res.data)
             toast.success(`Welcome ${res.data.user.username}!`);
             return res.data
         })
         .catch((err) => {
-            console.log(err.response.data)
             return err.response.data
         })
 }
@@ -23,7 +21,6 @@ export const register = async (registerDTO: RegisterDTO) => {
             return res.data
         })
         .catch((err) => {
-            console.log(err)
             return err
         })
 }

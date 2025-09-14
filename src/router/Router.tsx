@@ -5,7 +5,7 @@ import HeroDetails from "../pages/heroDetails/HeroDetails.tsx";
 import Home from "../pages/home/Home.tsx";
 import MapDetails from "../pages/mapDetails/MapDetails.tsx";
 import DataList from "../pages/dataList/DataList.tsx";
-import {getAllHeroes, getHeroes} from "../api/Hero.api.ts";
+import {getAllHeroes, getHero} from "../api/Hero.api.ts";
 import TeamCompositionCheckout from "../pages/teamCompositionCheckout/TeamCompositionCheckout.tsx";
 import Layout from "../pages/layout/Layout.tsx";
 import AdministrationPage from "../pages/administrationPage/AdministrationPage.tsx";
@@ -35,7 +35,7 @@ export const Router = createBrowserRouter([
             {
                 path: "/heroDetails/:id",
                 element: <HeroDetails />,
-                loader: ({params: {id}}) => getHeroes(id!)
+                loader: ({params: {id}}) => getHero(id!)
             },
             {
                 path: "/best-players-by-hero/:id",

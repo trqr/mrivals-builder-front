@@ -19,28 +19,6 @@ api.interceptors.request.use((config) => {
 });
 
 api.interceptors.response.use(
-    (response) => response,
-    (error) => {
-        if (error.response) {
-            switch (error.response.status) {
-                case 401:
-                    toast.error(error.response.data.message);
-                    break;
-                case 403:
-                    toast.error(error.response.data.message);
-                    break;
-                case 500:
-                    toast.error(error.response.data.message);
-                    break;
-                default:
-                    toast.error(`⚠️ error ${error.response.status}: ${error.response.data.message}`);
-            }
-        } else if (error.request) {
-            toast.error("No server response");
-        } else {
-            toast.error(`Axios error:  ${error.response.data}`);
-        }
-
-        return Promise.reject(error);
-    }
+    (res) => res,
+    (error) => Promise.reject(error.response?.data || error)
 );

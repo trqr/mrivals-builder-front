@@ -1,11 +1,9 @@
 import {Box, IconButton} from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
-import {type GridColDef} from "@mui/x-data-grid";
 import type {SynergieType} from "../../../@types/SynergieType.ts";
 import type {MatchUpType} from "../../../@types/MatchUpType.ts";
 import type {AbilitiesType} from "../../../@types/AbilitiesType";
-import {iconBaseUrl, imageBaseUrl} from "../../../api/config/Axios.config.ts";
+import {iconBaseUrl} from "../../../api/config/Axios.config.ts";
 import SynergyEditBox from "./SynergyEditBox.tsx";
 import MatchUpEditBox from "./MatchUpEditBox.tsx";
 
@@ -58,8 +56,9 @@ export const HeroesColumns = ({
         field: "synergies",
         headerName: "Synergies",
         width: 370,
+        type: "element",
         renderCell: (params) => (
-            <Box sx={{display: "flex", flexDirection: "row", gap: 0.5}}>
+            <Box sx={{display: "flex", flexDirection: "row", alignContent: "center", gap: 0.5}}>
                 {params.row.synergies?.map((synergie: SynergieType) => (
                     <SynergyEditBox setEditingSynergy={setEditingSynergy} setOpenSynergieDialog={setOpenSynergieDialog}
                                     setSelectedHeroId={setSelectedHeroId} params={params} synergie={synergie}></SynergyEditBox>
