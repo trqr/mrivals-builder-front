@@ -53,13 +53,11 @@ export const changeUserPassword = async (oldPassword: string, newPassword: strin
             return res.data
         })
         .catch(error => {
-            console.log(error);
             return error.response.data;
         });
 }
 
 export const banUsers = async (ids: number[]) => {
-    return await api.put(`/users/ban`, ids)
-        .then((res) => res.data)
-        .catch(console.error);
+    const res = await api.put(`/users/ban`, ids);
+    return res.data;
 }
