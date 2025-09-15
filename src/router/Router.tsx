@@ -73,9 +73,9 @@ export const Router = createBrowserRouter([
                 element: <UserTeamList/>,
             },
             {
-                path: "/user/player/:account",
+                path: "/user/player/:id",
                 element: <Player/>,
-                loader: () => getPlayerStats()
+                loader: ({params: {id}}) => getPlayerStats(id!)
             }
         ]
     }

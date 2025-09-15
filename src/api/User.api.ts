@@ -35,8 +35,8 @@ export const changeUsername = async (userName: string) => {
         });
 }
 
-export const changeUserMRaccount = async (userId: number, accountName: string) => {
-    return await api.patch(`/users/${userId}/mr-account?accountName=${accountName}`)
+export const changeUserMRaccount = async (accountId: number, accountName: string) => {
+    return await api.patch(`/users/mr-account/${accountId}?accountName=${accountName}`)
         .then((res) => {
             toast.success(`Marvel Rivals account changed to ${accountName} successfully.`);
             return res.data

@@ -1,4 +1,4 @@
-import {createContext, useEffect, useState, useTransition} from "react";
+import {createContext, startTransition, useEffect, useState, useTransition} from "react";
 import {getAllPlayersStats, getPlayerStats, savePlayerStats} from "../api/Player.api.ts";
 import type {RankGameSeasonType} from "../@types/PlayerType/RankGameSeasonType.ts";
 
@@ -25,6 +25,10 @@ export const UserDataInitProvider = ({children}: { children: React.ReactNode }) 
         const fetchedAccounts = await getAllPlayersStats()
         setAccounts(fetchedAccounts);
     }
+
+    useEffect(() => {
+        getAllAccounts()
+    }, []);
 
     function getCurrentSeasonHighScore(): number {
 

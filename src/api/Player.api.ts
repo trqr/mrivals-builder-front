@@ -13,16 +13,14 @@ export const savePlayerStats = async (account: string) => {
 export const getAllPlayersStats = async () => {
     return await api.get(`/player-stats`)
         .then((res) => {
-            console.log(JSON.parse(res.data));
-            return JSON.parse(res.data.statsRawJson);
+            return res.data;
         })
         .catch((err) => {
-            console.error(err);
             return err;
         });
 };
 
-export const getPlayerStats = async (accountId: number) => {
+export const getPlayerStats = async (accountId: string) => {
     return await api.get(`/player-stats/${accountId}`)
         .then((res) => {
             console.log(JSON.parse(res.data));

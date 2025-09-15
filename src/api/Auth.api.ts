@@ -29,11 +29,6 @@ export const isTokenValid = async () => {
     const token = localStorage.getItem("MBtoken");
     if (!token) return;
 
-    return await api.get("/auth", {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    })
-        .then((res) => res.data)
-        .catch((err) => {throw err})
+    const res = await api.get("/auth");
+    return res.data;
 }
