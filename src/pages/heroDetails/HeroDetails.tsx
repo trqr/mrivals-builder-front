@@ -15,8 +15,7 @@ const HeroDetails = () => {
             <div className="heroDetails">
                 <div className="leftColumn">
                     <div className="heroName">
-                        <HeroName hero={hero}>
-                        </HeroName>
+                        <HeroName hero={hero}/>
                     </div>
                     <img
                         className="image"
@@ -32,8 +31,7 @@ const HeroDetails = () => {
                         <p>{hero.bio}</p>
                     </div>
                     <div className="synergies">
-                        <SynergiesHeroDetails hero={hero}>
-                        </SynergiesHeroDetails>
+                        <SynergiesHeroDetails hero={hero}/>
                     </div>
                 </div>
 

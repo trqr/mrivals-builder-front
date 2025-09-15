@@ -5,6 +5,7 @@ import {startTransition, useEffect, useState} from "react";
 import {useCompo} from "../../hooks/useCompo.tsx";
 import {getTeamSynergie} from "../../api/Compo.api.ts";
 
+
 const SynergiesTeam = () => {
 
     const [teamSynergies, setTeamSynergies] = useState<any[]>([]);
@@ -19,7 +20,7 @@ const SynergiesTeam = () => {
                 setTeamSynergies(fetchedTeamSynergies);
             }
         })
-    });
+    }, [compo]);
 
     return (
         <Box>
@@ -30,7 +31,7 @@ const SynergiesTeam = () => {
                 {Array.isArray(teamSynergies) &&
                     teamSynergies.map((synergy) => (
                         <li
-                            key={synergy.teamHeroId}
+                            key={synergy.id}
                             style={{
                                 display: "flex",
                                 alignItems: "center",
