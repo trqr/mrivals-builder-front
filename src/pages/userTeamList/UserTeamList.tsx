@@ -52,7 +52,7 @@ const UserTeamList = () => {
                         }}>
                         <Grid container spacing={2}>
                             {teams.map((team) =>
-                                <Grid item xs={12} key={team.id}>
+                                <Grid size={{xs:12}} key={team.id}>
                                     <TeamReview
                                         team={team}
                                         onDelete={handleDelete}

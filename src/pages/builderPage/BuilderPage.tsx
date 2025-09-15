@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import { Grid, LinearProgress} from "@mui/material";
 import type {HeroType} from "../../@types/HeroType";
-import {useEffect, useState, useTransition} from "react";
+import {useEffect, useState, useTransition, type SetStateAction} from "react";
 import HeroRoleFilter from "../../componnents/common/HeroRoleFilter.tsx";
 import {DndContext, DragOverlay} from "@dnd-kit/core";
 import {DroppableSlot} from "../../componnents/builder/drag&drop/DroppableSlot.tsx";
@@ -18,15 +18,21 @@ import {useData} from "../../hooks/useData.tsx";
 import RecommendationMessages from "../../componnents/builder/RecommendationMessages.tsx";
 import TeamSynergy from "../../componnents/builder/TeamSynergy.tsx";
 import TeamCounter from "../../componnents/builder/TeamCounter.tsx";
+import DragDropContainer from "../../componnents/builder/Drag&DropContainer.tsx";
 
- const BuilderPage = () => {
+const BuilderPage = () => {
     const {heroes} = useData();
     const [availableHeroes, setAvailableHeroes] = useState(heroes);
     const [bestHeroes, setBestHeroes] = useState([]);
     const [role, setRole] = useState("");
     const [activeHero, setActiveHero] = useState<HeroType | null>(null);
     const [isPending, startTransition] = useTransition();
-    const [recommendationsMessages, setRecommendationsMessages] = useState({archetype: "", mainTank: "", mainHeal: "", ban: ""})
+    const [recommendationsMessages, setRecommendationsMessages] = useState({
+        archetype: "",
+        mainTank: "",
+        mainHeal: "",
+        ban: ""
+    })
     const navigate = useNavigate();
     const theme = useTheme();
     const {compo, addToCompo, removeFromCompo, clearCompo} = useCompo();
@@ -96,13 +102,6 @@ import TeamCounter from "../../componnents/builder/TeamCounter.tsx";
         setActiveHero(null);
     };
 
-    const handleRemoveHero = (hero: HeroType) => {
-        removeFromCompo(hero);
-        setAvailableHeroes((prev) => [...prev, hero]);
-    };
-
-
-
     const handleSubmitCompo = async () => {
         startTransition(async () => {
             const heroesIds = compo.map((hero) => hero?.id);
@@ -119,7 +118,7 @@ import TeamCounter from "../../componnents/builder/TeamCounter.tsx";
                 onDragCancel={handleDragCancel}
             >
                 <Box
-                    sx={{display: "flex", justifyContent: "space-between", width: "100%", }}
+                    sx={{display: "flex", justifyContent: "space-between", width: "100%",}}
                 >
                     <Box
                         sx={{
@@ -133,21 +132,13 @@ import TeamCounter from "../../componnents/builder/TeamCounter.tsx";
                             height: "85vh",
                         }}
                     >
-                        <Grid
-                            container
-                            gap={2}
-                            sx={{display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "10px"}}
-                        >
-                            {Array.from({length: 6}).map((_, i) => (
-                                <Grid key={i} size={{md: 5.5, lg: 5.5, xl: 5.5}} sx={{textAlign: "center", display: "flex", justifyContent: "center"}}>
-                                    <DroppableSlot
-                                        id={`slot-${i}`}
-                                        hero={compo[i] || undefined}
-                                        handleClick={() => compo[i] && handleRemoveHero(compo[i])}
-                                    />
-                                </Grid>
-                            ))}
-                        </Grid>
+                        <DragDropContainer
+                            compo={compo}
+                            availableHeroes={availableHeroes}
+                            setAvailableHeroes={setAvailableHeroes}
+                            activeHero={activeHero}
+                            setActiveHero={setActiveHero}
+                        />
                         <Box sx={{margin: "10px"}}>
                         <MainButton style={{margin: "5px"}}
                             disabled={compo.filter((x) => x !== null).length < 6}
@@ -214,8 +205,6 @@ import TeamCounter from "../../componnents/builder/TeamCounter.tsx";
                                         <TeamSynergy/>
                                     </Box>
                                 }
-
-
                             </Box>
                         </Box>
                     </Box>
@@ -224,6 +213,7 @@ import TeamCounter from "../../componnents/builder/TeamCounter.tsx";
                     {activeHero ? (
                         <img
                             src={imageBaseUrl + activeHero.imageLink}
+                            alt={activeHero.name}
                             style={{
                                 objectFit: "cover",
                                 objectPosition: "center",
@@ -231,7 +221,6 @@ import TeamCounter from "../../componnents/builder/TeamCounter.tsx";
                                 maxWidth: "175px",
                                 pointerEvents: "none",
                             }}
-                            alt={activeHero.name}
                         />
                     ) : null}
                 </DragOverlay>
