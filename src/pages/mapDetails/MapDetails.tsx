@@ -1,22 +1,11 @@
-import {useEffect, useState, useTransition} from "react";
-import {useParams} from "react-router-dom";
-import {getMapById} from "../../api/Map.api.ts";
+import {useLoaderData} from "react-router-dom";
 import {imageBaseUrl} from "../../api/config/Axios.config.ts";
 import "./MapDetails.css"
 import Page from "../layout/Page.tsx";
-import {emptyMapType, type MapType} from "../../@types/MapType.ts";
 
 const MapDetails = () => {
-    const [map, setMap] = useState<MapType>(emptyMapType)
-    const [isPending, startTransition] = useTransition()
-    const { id } = useParams<{id: string}>();
+    const map = useLoaderData();
 
-    useEffect(() => {
-        startTransition(async () => {
-            const fetchedMap = await getMapById(id!);
-            setMap(fetchedMap);
-        })
-    }, [id])
 
     console.log(map.mapImages)
     return (
