@@ -4,7 +4,6 @@ import type {HeroType} from "../../@types/HeroType";
 import {useEffect, useState, useTransition, type SetStateAction} from "react";
 import HeroRoleFilter from "../../componnents/common/HeroRoleFilter.tsx";
 import {DndContext, DragOverlay} from "@dnd-kit/core";
-import {DroppableSlot} from "../../componnents/builder/drag&drop/DroppableSlot.tsx";
 import {DraggableHero} from "../../componnents/builder/drag&drop/DraggableHero.tsx";
 import {imageBaseUrl} from "../../api/config/Axios.config.ts";
 import {getBestWinRateByRole} from "../../api/Compo.api.ts";
@@ -109,6 +108,11 @@ const BuilderPage = () => {
         });
     };
 
+    const handleRemoveAllHeroes = () => {
+        clearCompo();
+        setAvailableHeroes(heroes);
+    }
+
     return (
         <Page title={"Builder"} description="Builder">
             <LinearProgress variant={isPending ? "indeterminate" : "determinate"}/>
@@ -147,7 +151,7 @@ const BuilderPage = () => {
                             Submit
                         </MainButton>
                             <DeleteButton style={{margin: "5px"}}
-                            onClick={clearCompo}>
+                            onClick={handleRemoveAllHeroes}>
                                 Clear
                             </DeleteButton>
                         </Box>
