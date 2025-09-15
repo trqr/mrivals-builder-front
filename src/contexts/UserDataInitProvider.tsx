@@ -1,10 +1,12 @@
 import {createContext, useEffect, useState, useTransition} from "react";
-import {getPlayerStats, savePlayerStats} from "../api/Player.api.ts";
+import {getAllPlayersStats, getPlayerStats, savePlayerStats} from "../api/Player.api.ts";
 import type {RankGameSeasonType} from "../@types/PlayerType/RankGameSeasonType.ts";
 
 type UserDataInitContextType = {
     userGameStats: never;
-    saveUserGameStats: () => void;
+    saveUserGameStats: (account: string) => void;
+    accounts: never[];
+    setUserGameStats: (account: never) => void;
     getCurrentSeasonHighScore: () => number;
     getAllTimeHighScore: () => number;
 }
@@ -13,17 +15,15 @@ export const UserDataInitContext = createContext<UserDataInitContextType | undef
 
 export const UserDataInitProvider = ({children}: { children: React.ReactNode }) => {
     const [userGameStats, setUserGameStats] = useState<never>()
-    const [isPending, startTransition] = useTransition()
+    const [accounts, setAccounts] = useState([])
 
+    const saveUserGameStats = async (account: string) => {
+        setUserGameStats(await savePlayerStats(account))
+    }
 
-    useEffect(() => {
-        startTransition(async () => {
-            setUserGameStats(await getPlayerStats())
-        })
-    }, []);
-
-    const saveUserGameStats = async () => {
-        setUserGameStats(await savePlayerStats())
+    const getAllAccounts = async () => {
+        const fetchedAccounts = await getAllPlayersStats()
+        setAccounts(fetchedAccounts);
     }
 
     function getCurrentSeasonHighScore(): number {
@@ -53,7 +53,7 @@ export const UserDataInitProvider = ({children}: { children: React.ReactNode }) 
 
     return (
         <UserDataInitContext.Provider value={{userGameStats, saveUserGameStats, getCurrentSeasonHighScore,
-            getAllTimeHighScore}}>
+            getAllTimeHighScore, accounts, setUserGameStats}}>
             {children}
         </UserDataInitContext.Provider>
     );

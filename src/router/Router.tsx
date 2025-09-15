@@ -17,6 +17,7 @@ import BestPlayersPage from "../pages/bestPlayersPage/BestPlayersPage.tsx";
 import {getHeroLeaderboard} from "../api/Leaderboard.api.ts";
 import Player from "../pages/player/Player.tsx";
 import {getPlayerStats} from "../api/Player.api.ts";
+import {getMapById} from "../api/Map.api.ts";
 
 export const Router = createBrowserRouter([
     {
@@ -49,6 +50,7 @@ export const Router = createBrowserRouter([
             {
                 path: "/maps/:id",
                 element: <MapDetails />,
+                loader: ({params: {id}}) => getMapById(id!)
             },
             {
                 path: "/team/:teamId",

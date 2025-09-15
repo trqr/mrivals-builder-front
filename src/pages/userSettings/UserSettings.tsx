@@ -52,11 +52,16 @@ const UserSettings = () => {
         setUser(currentUser);
     };
 
-    const handleMRaccountChange = async () => {
+/*    const handleMRaccountChange = async () => {
         await changeUserMRaccount(currentUser.id, currentUser.mrivalsAccount);
         setUser(currentUser);
-        saveUserGameStats();
-    };
+        saveUserGameStats(currentUser.mrivalsAccount);
+    };*/
+
+    const handleAddAccount = async () => {
+        await saveUserGameStats(currentUser.mrivalsAccount);
+
+    }
 
     const handleChangePassword = async () => {
         if (!validatePassword()) {
@@ -113,8 +118,8 @@ const UserSettings = () => {
                                 fullWidth
                                 InputProps={{
                                     endAdornment: (
-                                        <Button variant={"contained"} size={"small"} onClick={handleMRaccountChange}>
-                                            save
+                                        <Button variant={"contained"} size={"small"} onClick={handleAddAccount}>
+                                            add
                                         </Button>
                                     ),
                                 }}

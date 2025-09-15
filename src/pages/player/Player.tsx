@@ -8,6 +8,7 @@ import {GraphsBox} from "../../componnents/playerPage/GraphsBox.tsx";
 import {Alert, Button} from "@mui/material";
 import {updatePlayerStats} from "../../api/Player.api.ts";
 import {useState} from "react";
+import Select from "@mui/material/Select";
 
 const Player = () => {
     const [message, setMessage] = useState<string>("")

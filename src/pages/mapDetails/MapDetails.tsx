@@ -6,8 +6,6 @@ import Page from "../layout/Page.tsx";
 const MapDetails = () => {
     const map = useLoaderData();
 
-
-    console.log(map.mapImages)
     return (
         <Page title={"Map details"} description={"Map details"}>
             <div className="mapDetails">
