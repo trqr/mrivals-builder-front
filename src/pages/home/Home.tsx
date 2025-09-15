@@ -1,7 +1,3 @@
-import affiche from "../../images/HomeEsport.webp";
-import affiche2 from "../../images/HomeIker.webp";
-import affiche3 from "../../images/HomeSeason.webp";
-import affiche4 from "../../images/HomeAzha.webp";
 import Box from "@mui/material/Box";
 import {useNavigate} from "react-router";
 import TeambuildButton from "../../componnents/common/buttons/TeambuildButton.tsx";
@@ -11,6 +7,7 @@ import SplitText from "../../componnents/home/HomeText.tsx";
 import Page from "../layout/Page.tsx";
 import "./Home.css";
 import {useData} from "../../hooks/useData.tsx";
+import ImageHome from "../../componnents/home/ImageHome.tsx";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -35,7 +32,6 @@ const Home = () => {
                     alignItems: "start",
                 }}
             >
-                {/* Colonne gauche : images + texte + bouton */}
                 <Box
                     className="actuality"
                     sx={{
@@ -45,47 +41,7 @@ const Home = () => {
                         gap: 3,
                     }}
                 >
-                    {/* Grille des 4 images */}
-                    <Box
-                        sx={{
-                            display: "grid",
-                            gridTemplateColumns: "1fr 1fr",
-                            gap: 2,
-                            justifyItems: "center",
-                            border: "solid 2px #FDDE2B",
-                            padding: "30px",
-                            transform: "skew(-11deg)"
-                        }}
-                    >
-                        <a href={"https://www.marvelrivals.com/match/"} target={"_blank"} rel={"noopener noreferrer"}>
-                            <img src={affiche} alt="affiche 1" className="affiche-img"
-                                 style={{
-                                     width: "400px",
-                                     height: "250px",
-                                 }} />
-                        </a>
-                        <a href={"https://www.youtube.com/watch?v=8DE2jlXwLyc"} target={"_blank"} rel={"noopener noreferrer"}>
-                            <img src={affiche2} alt="affiche 2" className="affiche-img"
-                                 style={{
-                                     width: "400px",
-                                     height:"250px",
-                                 }} />
-                        </a>
-                        <a href={"https://www.marvelrivals.com/index.html"} target={"_blank"} rel={"noopener noreferrer"}>
-                            <img src={affiche3} alt="affiche 3" className="affiche-img"
-                                 style={{
-                                     width: "400px",
-                                     height: "250px",
-                                 }}
-                            />
-                        </a>
-                        <a href={"https://www.youtube.com/watch?v=p2N2Cn-zQTw"} target="_blank" rel="noopener noreferrer">
-                            <img src={affiche4} alt="affiche 4" className="affiche-img"
-                                 style={{ width: "400px",
-                                        height:"250px",
-                                 }} />
-                        </a>
-                    </Box>
+                    <ImageHome/>
                     <Box
                     style={{
                         display: "flex",
@@ -95,7 +51,6 @@ const Home = () => {
                         padding: "0 60px",
                     }}>
                         <Box style={{marginLeft: "-130px", paddingRight: "30px"}}>
-                            {/* Texte animé */}
                     <SplitText
                         text="Angela is Here !"
                         className="text-3xl font-bold text-center"
@@ -119,8 +74,6 @@ const Home = () => {
 
                     </Box>
                 </Box>
-
-                {/* Colonne droite : carrousel */}
                 <Box
                     className="caroussel"
                     sx={{
