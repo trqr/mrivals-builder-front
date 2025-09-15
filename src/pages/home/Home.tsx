@@ -6,9 +6,6 @@ import Box from "@mui/material/Box";
 import {useNavigate} from "react-router";
 import TeambuildButton from "../../componnents/common/buttons/TeambuildButton.tsx";
 import InfiniteScroll from "../../componnents/home/InfiniteScroll.tsx";
-import type {HeroType} from "../../@types/HeroType";
-import {useEffect, useState} from "react";
-import {getAllHeroes} from "../../api/Hero.api.ts";
 import {imageBaseUrl} from "../../api/config/Axios.config.ts";
 import SplitText from "../../componnents/home/HomeText.tsx";
 import Page from "../layout/Page.tsx";
@@ -100,7 +97,7 @@ const Home = () => {
                         <Box style={{marginLeft: "-130px", paddingRight: "30px"}}>
                             {/* Texte animé */}
                     <SplitText
-                        text="Angela is comming up 12/09/2025 !"
+                        text="Angela is Here !"
                         className="text-3xl font-bold text-center"
                         delay={100}
                         duration={0.4}

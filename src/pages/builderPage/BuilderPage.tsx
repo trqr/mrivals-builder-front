@@ -7,18 +7,17 @@ import {DndContext, DragOverlay} from "@dnd-kit/core";
 import {DroppableSlot} from "../../componnents/builder/drag&drop/DroppableSlot.tsx";
 import {DraggableHero} from "../../componnents/builder/drag&drop/DraggableHero.tsx";
 import {imageBaseUrl} from "../../api/config/Axios.config.ts";
-import {getBestWinRateByRole, getTeamSynergie} from "../../api/Compo.api.ts";
+import {getBestWinRateByRole} from "../../api/Compo.api.ts";
 import {useCompo} from "../../hooks/useCompo.tsx";
 import {useNavigate} from "react-router";
 import Page from "../layout/Page.tsx";
-import {Paper} from "@mui/material";
-import Typography from "@mui/material/Typography";
-import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import {useTheme} from "@mui/material/styles";
-import { getTeamCounter } from "../../api/Compo.api.ts";
 import DeleteButton from "../../componnents/common/buttons/DeleteButton.tsx";
 import MainButton from "../../componnents/common/buttons/MainButton.tsx";
 import {useData} from "../../hooks/useData.tsx";
+import RecommendationMessages from "../../componnents/builder/RecommendationMessages.tsx";
+import TeamSynergy from "../../componnents/builder/TeamSynergy.tsx";
+import TeamCounter from "../../componnents/builder/TeamCounter.tsx";
 
  const BuilderPage = () => {
     const {heroes} = useData();
@@ -39,8 +38,6 @@ import {useData} from "../../hooks/useData.tsx";
         }
     };
 
-    const [teamCounters, setTeamCounters] = useState<any[]>([]);
-    const [teamSynergies, setTeamSynergies] = useState<any[]>([]);
 
     useEffect(() => {
         startTransition(async () => {
@@ -48,12 +45,7 @@ import {useData} from "../../hooks/useData.tsx";
             const heroesIds = compo.map((hero) => hero?.id);
             const fetchedBestHeroes = await getBestWinRateByRole(heroesIds);
             setBestHeroes(fetchedBestHeroes);
-            if (compo.length > 0) {
-                const fetchedTeamCounters = await getTeamCounter(heroesIds);
-                const fetchedTeamSynergies = await getTeamSynergie(heroesIds);
-                setTeamCounters(fetchedTeamCounters);
-                setTeamSynergies(fetchedTeamSynergies);
-            }
+
         });
 
         recommend();
@@ -208,77 +200,10 @@ import {useData} from "../../hooks/useData.tsx";
                                         padding: "10px",
                                         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)"
                                     }}>
-                                        <Typography variant="h6" gutterBottom>
-                                            Worst Counters
-                                        </Typography>
-                                        <ul style={{
-                                            listStyle: "none",
-                                            padding: 0,
-                                            display: "flex",
-                                            flexDirection: "row",
-                                            justifyContent: "center",
-                                            alignItems: "center"
-                                        }}>
-                                            {teamCounters.slice(0, 2).map((counter) => (
-                                                <li
-                                                    key={counter.enemyHeroId}
-                                                    style={{
-                                                        display: "flex",
-                                                        alignItems: "center",
-                                                        marginBottom: "10px",
-                                                    }}
-                                                >
-                                                    <img
-                                                        src={imageBaseUrl + counter.imageLink}
-                                                        alt={counter.name}
-                                                        style={{
-                                                            objectFit: "cover",
-                                                            objectPosition: "top",
-                                                            height: "80px",
-                                                            width: "80px",
-                                                            borderRadius: "5px",
-                                                            border: "3px solid violet",
-                                                            marginRight: "10px",
-                                                        }}
-                                                    />
-                                                </li>
-                                            ))}
-                                        </ul>
+                                        <TeamCounter/>
                                     </Box>
                                 }
-                                {compo.length > 0 &&
-                                    <Paper elevation={1} square sx={{margin: "30px", padding: "5px"}}>
-                                        {recommendationsMessages.archetype &&
-                                            <Typography sx={{display: "flex", alignItems: "center"}}
-                                                        variant={"subtitle2"}>
-                                                <PriorityHighIcon color={"error"}/>
-                                                {recommendationsMessages.archetype}
-                                            </Typography>
-                                        }
-                                        {recommendationsMessages.mainTank &&
-                                            <Typography sx={{display: "flex", alignItems: "center"}}
-                                                        variant={"subtitle2"}>
-                                                <PriorityHighIcon color={"error"}/>
-                                                {recommendationsMessages.mainTank}
-                                            </Typography>
-                                        }
-                                        {recommendationsMessages.mainHeal &&
-                                            <Typography sx={{display: "flex", alignItems: "center"}}
-                                                        variant={"subtitle2"}>
-                                                <PriorityHighIcon color={"error"}/>
-                                                {recommendationsMessages.mainHeal}
-                                            </Typography>
-                                        }
-                                        {recommendationsMessages.ban &&
-                                            <Typography sx={{display: "flex", alignItems: "center"}}
-                                                        variant={"subtitle2"}>
-                                                <PriorityHighIcon color={"error"}/>
-                                                {recommendationsMessages.ban}
-                                            </Typography>
-                                        }
-                                    </Paper>
-                                }
-
+                                <RecommendationMessages messages={recommendationsMessages}/>
                                 {compo.length > 0 &&
                                     <Box sx={{
                                         marginTop: "20px",
@@ -286,41 +211,7 @@ import {useData} from "../../hooks/useData.tsx";
                                         padding: "10px",
                                         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)"
                                     }}>
-                                        <Typography variant="h6" gutterBottom>
-                                            Best Synergies
-                                        </Typography>
-                                        <ul style={{
-                                            listStyle: "none",
-                                            padding: 0,
-                                            display: "flex",
-                                            flexDirection: "row"
-                                        }}>
-                                            {Array.isArray(teamSynergies) &&
-                                                teamSynergies.slice(0, 2).map((synergy) => (
-                                                    <li
-                                                        key={synergy.teamHeroId}
-                                                        style={{
-                                                            display: "flex",
-                                                            alignItems: "center",
-                                                            marginBottom: "10px",
-                                                        }}
-                                                    >
-                                                        <img
-                                                            src={imageBaseUrl + synergy.imageLink}
-                                                            alt={synergy.name}
-                                                            style={{
-                                                                objectFit: "cover",
-                                                                objectPosition: "top",
-                                                                height: "80px",
-                                                                width: "80px",
-                                                                borderRadius: "5px",
-                                                                border: "3px solid blue",
-                                                                marginRight: "10px",
-                                                            }}
-                                                        />
-                                                    </li>
-                                                ))}
-                                        </ul>
+                                        <TeamSynergy/>
                                     </Box>
                                 }
 
