@@ -115,7 +115,7 @@ const BuilderPage = () => {
 
     return (
         <Page title={"Builder"} description="Builder">
-            <LinearProgress variant={isPending ? "indeterminate" : "determinate"}/>
+            <LinearProgress sx={{height: "2px"}} variant={isPending ? "indeterminate" : "determinate"}/>
             <DndContext
                 onDragStart={handleDragStart}
                 onDragEnd={handleDragEnd}

@@ -1,13 +1,13 @@
 import {Alert, Box, Button, MenuItem} from "@mui/material";
 import Select from "@mui/material/Select";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useTransition} from "react";
 import {useUserData} from "../../hooks/useUserData.tsx";
 import type {AccountType} from "../../@types/UserType.ts";
 import {updatePlayerStats} from "../../api/Player.api.ts";
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "../../hooks/useAuth.tsx";
 
-const SelectAccount = () => {
+const SelectAccount = ({startTransition, isPending}) => {
     const [message, setMessage] = useState<string>("")
     const [alert, setAlert] = useState<"error" | "success">("success")
     const { setActiveAccount} = useUserData();
@@ -16,14 +16,16 @@ const SelectAccount = () => {
     const navigate = useNavigate();
 
     const updateStats = async () => {
-        const updated = await updatePlayerStats();
-        if (updated.success) {
-            setAlert("success")
-            setMessage(updated.message)
-        } else {
-            setAlert("error")
-            setMessage(updated.message)
-        }
+        startTransition( async () => {
+            const updated = await updatePlayerStats();
+            if (updated.success) {
+                setAlert("success")
+                setMessage(updated.message)
+            } else {
+                setAlert("error")
+                setMessage(updated.message)
+            }
+        })
     }
 
     useEffect(() => {
@@ -47,7 +49,12 @@ const SelectAccount = () => {
                         ))}
                     </Select>
                 </Box>
-                <Button sx={{margin: "10px"}} variant={"contained"} onClick={updateStats}>update</Button>
+                <Button sx={{margin: "10px"}}
+                        variant={"contained"}
+                        onClick={updateStats}
+                        disabled={isPending}
+                >{isPending ? "updating..." : "update"}
+                </Button>
                 {message && <Alert sx={{margin: "10px"}} severity={alert}>{message}</Alert>}
             </Box>
         </>

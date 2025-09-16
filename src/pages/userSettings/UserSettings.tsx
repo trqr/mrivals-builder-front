@@ -1,5 +1,16 @@
-import {useState} from "react";
-import {Alert, Box, Button, MenuItem, Paper, Select, Stack, TextField, Typography,} from "@mui/material";
+import {useState, useTransition} from "react";
+import {
+    Alert,
+    Box,
+    Button,
+    LinearProgress,
+    MenuItem,
+    Paper,
+    Select,
+    Stack,
+    TextField,
+    Typography,
+} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import {useAuth} from "../../hooks/useAuth.tsx";
 import type {UserType} from "../../@types/UserType.ts";
@@ -19,6 +30,7 @@ const UserSettings = () => {
     const [selectedAccountId, setSelectedAccountId] = useState<number | null>(
         currentUser.accounts.length > 0 ? currentUser.accounts[0].id : null
     );
+    const [isPending, startTransition] = useTransition()
 
     const handleUsernameChange = async () => {
         if (!user?.username.trim()) return;
@@ -36,19 +48,21 @@ const UserSettings = () => {
 
     const handleAddAccount = async () => {
         if (!newAccountName.trim()) return;
+        startTransition(async () => {
+            const createdAccount = await addAccountName(newAccountName);
 
-        const createdAccount = await addAccountName(newAccountName);
+            setUser((prev) => {
+                if (!prev) return prev;
+                return {
+                    ...prev,
+                    accounts: [...prev.accounts, createdAccount],
+                };
+            });
+            toast.success("Account added successfully!");
+            setNewAccountName("");
+            setSelectedAccountId(createdAccount.id);
+        })
 
-        setUser((prev) => {
-            if (!prev) return prev;
-            return {
-                ...prev,
-                accounts: [...prev.accounts, createdAccount],
-            };
-        });
-        toast.success("Account added successfully!");
-        setNewAccountName("");
-        setSelectedAccountId(createdAccount.id);
     };
 
     const handleDeleteAccount = async (accountId: number) => {
@@ -77,6 +91,7 @@ const UserSettings = () => {
 
     return (
         <Page title={"Settings"} description={"User Settings"}>
+            <LinearProgress sx={{height: "2px"}} variant={isPending ? "indeterminate" : "determinate"}/>
             <Typography variant={"h4"} sx={{textAlign: "center", margin: "30px"}}>Settings</Typography>
             <Box sx={{mx: "auto", mt: 4, display: "flex", justifyContent: "center", gap: "20px"}}>
                 <Paper sx={{p: 4, borderRadius: 0, boxShadow: 4, width: 400}}>
@@ -160,8 +175,9 @@ const UserSettings = () => {
                                     variant="contained"
                                     size="small"
                                     onClick={handleAddAccount}
+                                    disabled={isPending}
                                 >
-                                    Add
+                                    {isPending ? "pending" : "Add"}
                                 </Button>
                             </Box>
                         </Box>

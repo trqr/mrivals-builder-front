@@ -1,5 +1,5 @@
 import {useCompo} from "../../hooks/useCompo.tsx";
-import {Grid,} from "@mui/material";
+import {Grid, LinearProgress,} from "@mui/material";
 import {useState} from "react";
 import Page from "../layout/Page.tsx";
 import Box from "@mui/material/Box";
@@ -19,7 +19,8 @@ const TeamCompositionCheckout = () => {
 
     return (
         <Page title={"Team review"} description={"Team review"}>
-                <HeroCard/>
+            <LinearProgress sx={{height: "2px"}} variant={isPending ? "indeterminate" : "determinate"}/>
+            <HeroCard/>
             <Grid style={{
                 display: "flex",
                 flexDirection: "row",

@@ -1,7 +1,17 @@
 import Page from "../layout/Page.tsx";
 import {useLoaderData} from "react-router-dom";
 import Typography from "@mui/material/Typography";
-import {Card, CardContent, CardHeader, CardMedia, Container, Grid, Pagination, TextField} from "@mui/material";
+import {
+    Card,
+    CardContent,
+    CardHeader,
+    CardMedia,
+    Container,
+    Grid,
+    LinearProgress,
+    Pagination,
+    TextField
+} from "@mui/material";
 import {type ChangeEvent, useEffect, useState, useTransition} from "react";
 import type {LeaderboardPlayerType, LeaderboardType} from "../../@types/LeaderboardType.ts";
 import {iconBaseUrl} from "../../api/config/Axios.config.ts";
@@ -34,6 +44,7 @@ const BestPlayersPage = () => {
 
     return (
         <Page title={"Best Players"} description={`Best Players with ${fetchedPlayers.hero?.name}`}>
+            <LinearProgress sx={{height: "2px"}} variant={isPending ? "indeterminate" : "determinate"}/>
             <Container maxWidth="xl" sx={{display: "flex", flexDirection:"column", justifyContent: "center", alignItems: "center", gap: "20px"}}>
             <Typography variant={"h4"} sx={{marginTop: "20px"}}>Best {fetchedPlayers.hero?.name} players</Typography>
             <TextField
