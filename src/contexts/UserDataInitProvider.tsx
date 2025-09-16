@@ -1,37 +1,57 @@
 import {createContext, useEffect, useState, useTransition} from "react";
-import {getPlayerStats, savePlayerStats} from "../api/Player.api.ts";
+import {getAllPlayersStats, savePlayerStats} from "../api/Player.api.ts";
 import type {RankGameSeasonType} from "../@types/PlayerType/RankGameSeasonType.ts";
+import {type AccountType} from "../@types/UserType.ts";
 
 type UserDataInitContextType = {
-    userGameStats: never;
-    saveUserGameStats: () => void;
+    activeAccount: AccountType;
+    addAccountName: (account: string) => Promise<AccountType>;
+    accounts: AccountType[];
+    setActiveAccount: (account: AccountType) => void;
     getCurrentSeasonHighScore: () => number;
     getAllTimeHighScore: () => number;
+    activeStats: never;
 }
 
 export const UserDataInitContext = createContext<UserDataInitContextType | undefined>(undefined);
 
 export const UserDataInitProvider = ({children}: { children: React.ReactNode }) => {
-    const [userGameStats, setUserGameStats] = useState<never>()
+    const [accounts, setAccounts] = useState<AccountType[]>([])
+    const [activeAccount, setActiveAccount] = useState<AccountType>(accounts[0])
+    const [activeStats, setActiveStats] = useState<never>()
     const [isPending, startTransition] = useTransition()
 
+    const addAccountName = async (accountName: string) => {
+        const savedAccount = await savePlayerStats(accountName)
+        setActiveAccount(savedAccount)
+        return savedAccount;
+    }
+
+    const getAllAccountsAndSetFirstAccount = async () => {
+        const fetchedAccounts = await getAllPlayersStats()
+        setAccounts(fetchedAccounts);
+        if (accounts.length === 0) return;
+        setActiveAccount(fetchedAccounts[0])
+    }
 
     useEffect(() => {
         startTransition(async () => {
-            setUserGameStats(await getPlayerStats())
+            await getAllAccountsAndSetFirstAccount()
+            if (activeAccount)
+            setActiveStats(JSON.parse(activeAccount.statsRawJson))
         })
     }, []);
 
-    const saveUserGameStats = async () => {
-        setUserGameStats(await savePlayerStats())
-    }
-
     function getCurrentSeasonHighScore(): number {
+        if (!activeAccount)
+            return 0;
+        const stats= JSON.parse(activeAccount.statsRawJson);
 
-        const seasonsObj = userGameStats!.player.info.rank_game_season;
+        const seasonsObj = stats.player.info.rank_game_season;
         if (!seasonsObj) return 0;
 
         const seasons = Object.values(seasonsObj) as never[];
+
         if (seasons.length === 0) return 0;
 
         const currentSeason: RankGameSeasonType = seasons[seasons.length - 1];
@@ -40,7 +60,12 @@ export const UserDataInitProvider = ({children}: { children: React.ReactNode }) 
     }
 
     function getAllTimeHighScore(): number {
-        const seasonsObj = userGameStats!.player.info.rank_game_season;
+        if (!activeAccount)
+            return 0;
+
+            const stats= JSON.parse(activeAccount.statsRawJson);
+
+        const seasonsObj = stats.player.info.rank_game_season;
         if (!seasonsObj) return 0;
 
         const seasons = Object.values(seasonsObj) as never[];
@@ -52,8 +77,9 @@ export const UserDataInitProvider = ({children}: { children: React.ReactNode }) 
     }
 
     return (
-        <UserDataInitContext.Provider value={{userGameStats, saveUserGameStats, getCurrentSeasonHighScore,
-            getAllTimeHighScore}}>
+        <UserDataInitContext.Provider value={{
+            activeAccount, addAccountName, getCurrentSeasonHighScore, activeStats,
+            getAllTimeHighScore, accounts, setActiveAccount}}>
             {children}
         </UserDataInitContext.Provider>
     );

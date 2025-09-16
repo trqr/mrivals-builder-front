@@ -5,9 +5,8 @@ import MainButton from "../common/buttons/MainButton.tsx";
 import {useState} from "react";
 import {useUserData} from "../../hooks/useUserData.tsx";
 
-export const PlayerHeroMatchUps= () => {
+export const PlayerHeroMatchUps= ({playerStats}) => {
     const [showAllMatchups, setShowAllMatchups] = useState(false);
-    const {userGameStats} = useUserData();
 
     return (
         <Box sx={{flex: "1 1 100%", mt: 3}}>
@@ -15,7 +14,7 @@ export const PlayerHeroMatchUps= () => {
                 Hero Matchups
             </Typography>
             <Box sx={{display: "flex", flexWrap: "wrap", gap: 2}}>
-                {(showAllMatchups ? userGameStats.hero_matchups : userGameStats.hero_matchups.slice(0, 8))
+                {(showAllMatchups ? playerStats.hero_matchups : playerStats.hero_matchups.slice(0, 8))
                     .map((hero: any, index: number) => (
                         <Box
                             key={index}
@@ -49,7 +48,7 @@ export const PlayerHeroMatchUps= () => {
                         </Box>
                     ))}
             </Box>
-            {userGameStats.hero_matchups.length > 8 && (
+            {playerStats.hero_matchups.length > 8 && (
                 <Box sx={{mt: 2}}>
                     <MainButton onClick={() => setShowAllMatchups(!showAllMatchups)}>
                         <span>{showAllMatchups ? "see less" : "See more"}</span>

@@ -11,17 +11,17 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import {HeroWinrateComparisonGraph} from "./graphs/HeroWinrateComparisonGraph.tsx";
 
 
-export const GraphsBox = () => {
+export const GraphsBox = ({playerStats}) => {
     const [value, setValue] = React.useState(0);
 
     const renderGraph = () => {
         switch (value) {
             case 0:
-                return <ScoreEvoGraph/>;
+                return <ScoreEvoGraph playerStats={playerStats}/>;
             case 1:
-                return <HeroUsageGraph/>;
+                return <HeroUsageGraph playerStats={playerStats}/>;
             case 2:
-                return <HeroWinrateComparisonGraph/>;
+                return <HeroWinrateComparisonGraph playerStats={playerStats}/>;
             default:
                 return null;
         }

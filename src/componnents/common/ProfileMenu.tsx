@@ -85,8 +85,8 @@ const ProfileMenu = () => {
                         </ListItem>
                         <Divider/>
                         <MenuItem
-                            onClick={() => navigate(`/user/player/${user!.mrivalsAccount}`)}
-                            disabled={!user!.mrivalsAccount}
+                            onClick={() => navigate(`/user/player/${user?.accounts[0].id}`)}
+                            disabled={user!.accounts.length < 1}
                         >
                             <ListItemIcon>
                                 <ViewList fontSize="small"/>

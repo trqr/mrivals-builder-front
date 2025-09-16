@@ -1,15 +1,7 @@
-import {PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer} from "recharts";
+import {Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip} from "recharts";
 import {Paper} from "@mui/material";
-import {useUserData} from "../../../hooks/useUserData.tsx";
-import type {HeroesRankedType, HeroRanked} from "../../../@types/PlayerType/HeroesRankedType.ts";
+import type {HeroRanked} from "../../../@types/PlayerType/HeroesRankedType.ts";
 import Typography from "@mui/material/Typography";
-
-type HeroUsageGraphProps = {
-    heroesRanked: {
-        hero_name: string;
-        games_played: number;
-    }[];
-};
 
 const colors = [
     "#8884d8",
@@ -25,16 +17,14 @@ const colors = [
     "#20b2aa",
     "#ffd700",
 ];
-export const HeroUsageGraph = () => {
-    // @ts-expect-error bien dans le context
-    const { userGameStats } = useUserData();
+export const HeroUsageGraph = ({playerStats}) => {
 
-    const filteredStats = userGameStats.heroes_ranked.filter((h) => h.matches > 0 );
+    const filteredStats = playerStats.heroes_ranked.filter((h) => h.matches > 0 );
 
     const data = filteredStats.map((hero: HeroRanked) => ({
         name: hero.hero_name,
         value: hero.matches,
-        percent: ((hero.matches / userGameStats.overall_stats.ranked.total_matches) * 100).toFixed(1),
+        percent: ((hero.matches / playerStats.overall_stats.ranked.total_matches) * 100).toFixed(1),
     }));
 
     return (

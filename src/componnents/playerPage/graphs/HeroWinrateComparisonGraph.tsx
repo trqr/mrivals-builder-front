@@ -5,13 +5,11 @@ import {useUserData} from "../../../hooks/useUserData.tsx";
 import Typography from "@mui/material/Typography";
 
 
-export const HeroWinrateComparisonGraph = () => {
-    // @ts-expect-error bien dans le context
+export const HeroWinrateComparisonGraph = ({playerStats}) => {
     const {heroes} = useData();
-    // @ts-expect-error bien dans le context
-    const {userGameStats} = useUserData();
 
-    const filteredData = userGameStats.heroes_ranked.filter((hero) => hero.matches !== 0)
+
+    const filteredData = playerStats.heroes_ranked.filter((hero) => hero.matches !== 0)
 
     const data = filteredData.map((hero) => {
 

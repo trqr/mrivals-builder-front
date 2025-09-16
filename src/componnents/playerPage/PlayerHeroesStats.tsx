@@ -3,12 +3,10 @@ import Typography from "@mui/material/Typography";
 import {iconBaseUrl} from "../../api/config/Axios.config.ts";
 import MainButton from "../common/buttons/MainButton.tsx";
 import {useState} from "react";
-import {useUserData} from "../../hooks/useUserData.tsx";
 
-export const PlayerHeroesStats = () => {
+export const PlayerHeroesStats = ({playerStats}) => {
     const [showAllRanked, setShowAllRanked] = useState(false);
     const [showAllKDA, setShowAllKDA] = useState(false);
-    const {userGameStats} = useUserData();
 
     return (
         <Box sx={{flex: "1 1 100%", mt: 3, marginLeft: "40px"}}>
@@ -16,7 +14,7 @@ export const PlayerHeroesStats = () => {
                 Heroes Ranked
             </Typography>
             <Box sx={{display: "flex", flexWrap: "wrap", gap: 2,}}>
-                {(showAllRanked ? userGameStats.heroes_ranked : userGameStats.heroes_ranked
+                {(showAllRanked ? playerStats.heroes_ranked : playerStats.heroes_ranked
                     .slice(0, 6))
                     .sort((a: any, b: any) => b.matches - a.matches)
                     .map((hero: any, index: number) => (
@@ -67,7 +65,7 @@ export const PlayerHeroesStats = () => {
                         </Box>
                     ))}
             </Box>
-            {userGameStats.heroes_ranked.length > 6 && (
+            {playerStats.heroes_ranked.length > 6 && (
                 <Box sx={{mt: 2 , }}>
                     <MainButton onClick={() => setShowAllRanked(!showAllRanked)}>
                         <span>{showAllRanked ? "see less" : "See more"}</span>
