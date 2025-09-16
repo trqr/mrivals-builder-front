@@ -4,11 +4,10 @@ import DeleteButton from "../common/buttons/DeleteButton.tsx";
 import MainButton from "../common/buttons/MainButton.tsx";
 import type { HeroType } from "../../@types/HeroType";
 import {imageBaseUrl} from "../../api/config/Axios.config.ts";
-import ConfirmationDialog from "./dialogs/ConfirmationDialog.tsx";
-import {startTransition, useState} from "react";
+import ConfirmationDialog from "../common/dialogs/ConfirmationDialog.tsx";
+import {useState} from "react";
 import Box from "@mui/material/Box";
 import {useNavigate} from "react-router";
-import {useCompo} from "../../hooks/useCompo.tsx";
 
 
 type TeamReviewProps = {

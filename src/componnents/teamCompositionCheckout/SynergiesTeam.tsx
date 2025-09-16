@@ -2,25 +2,27 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {imageBaseUrl} from "../../api/config/Axios.config.ts";
 import {startTransition, useEffect, useState} from "react";
-import {useCompo} from "../../hooks/useCompo.tsx";
 import {getTeamSynergie} from "../../api/Compo.api.ts";
+import type {HeroType} from "../../@types/HeroType";
 
+type SynergiesTeamProps = {
+    heroes: HeroType[];
+};
 
-const SynergiesTeam = () => {
+const SynergiesTeam = ({heroes}: SynergiesTeamProps) => {
 
     const [teamSynergies, setTeamSynergies] = useState<any[]>([]);
-    const { compo } = useCompo();
 
     useEffect(() => {
         startTransition(async () => {
-            if (compo.length > 0) {
-                const heroesIds = compo.map((hero) => hero?.id);
+            if (heroes.length > 0) {
+                const heroesIds = heroes.map((hero) => hero?.id);
                 const fetchedTeamSynergies = await getTeamSynergie(heroesIds);
 
                 setTeamSynergies(fetchedTeamSynergies);
             }
         })
-    }, [compo]);
+    }, [heroes]);
 
     return (
         <Box>

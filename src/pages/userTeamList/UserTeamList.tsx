@@ -8,7 +8,7 @@ import Box from "@mui/material/Box";
 import {useNavigate} from "react-router";
 import {useCompo} from "../../hooks/useCompo.tsx";
 import ConfirmationDialog from "../../componnents/common/dialogs/ConfirmationDialog.tsx";
-import TeamReview from "../../componnents/common/TeamReview.tsx";
+import TeamReview from "../../componnents/userTeamList/TeamReview.tsx";
 import Typography from "@mui/material/Typography";
 
 

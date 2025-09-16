@@ -6,7 +6,7 @@ import HeroRoleFilter from "../../componnents/common/HeroRoleFilter.tsx";
 import {DndContext, DragOverlay} from "@dnd-kit/core";
 import {DraggableHero} from "../../componnents/builder/drag&drop/DraggableHero.tsx";
 import {imageBaseUrl} from "../../api/config/Axios.config.ts";
-import {getBestWinRateByRole} from "../../api/Compo.api.ts";
+import {getBestWinRateByRole, saveCompo} from "../../api/Compo.api.ts";
 import {useCompo} from "../../hooks/useCompo.tsx";
 import {useNavigate} from "react-router";
 import Page from "../layout/Page.tsx";
@@ -104,7 +104,9 @@ const BuilderPage = () => {
     const handleSubmitCompo = async () => {
         startTransition(async () => {
             const heroesIds = compo.map((hero) => hero?.id);
-            const savedCompo = await navigate("/team/{team.id}");
+            const savedCompo = await saveCompo(heroesIds);
+            console.log(savedCompo);
+            navigate(`/team/${savedCompo?.id}`);
         });
     };
 
