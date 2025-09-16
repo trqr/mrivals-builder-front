@@ -4,11 +4,14 @@ import {useUserData} from "../../../hooks/useUserData.tsx";
 import type {MatchHistoryItem} from "../../../@types/PlayerType/MatchHistoryType.ts";
 import Typography from "@mui/material/Typography";
 
-export const ScoreEvoGraph = () => {
-    // @ts-expect-error bien dans le context
-    const {getCurrentSeasonHighScore, userGameStats, getAllTimeHighScore} = useUserData();
+export const ScoreEvoGraph = ({playerStats}) => {
+    const {getCurrentSeasonHighScore, getAllTimeHighScore} = useUserData();
 
-    const sortedHistory = [...userGameStats.match_history].sort(
+    const matchHistory = Array.isArray(playerStats?.match_history)
+        ? playerStats.match_history
+        : [];
+
+    const sortedHistory = [...matchHistory].sort(
         (a, b) => a.match_time_stamp - b.match_time_stamp
     );
 

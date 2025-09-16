@@ -11,7 +11,7 @@ type AuthContextType = {
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: {children: React.ReactNode}) => {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState<UserType | null>(null);
     const isAuthenticated = !!user;
 
     const fetchCurrentUser = async () => {

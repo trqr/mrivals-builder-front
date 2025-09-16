@@ -1,5 +1,4 @@
 import axios from "axios";
-import {toast} from "react-toastify";
 
 export const imageBaseUrl = "https://marvelrivalsapi.com"
 export const iconBaseUrl = "https://marvelrivalsapi.com/rivals"
@@ -7,7 +6,7 @@ export const BASE_URL = "https://marvelrivalsapi.com/api/v1"
 
 export const api = axios.create({
     baseURL: "http://localhost:8080"
-});    // globaliser les try catchs ds la config
+});
 
 
 api.interceptors.request.use((config) => {

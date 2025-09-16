@@ -2,16 +2,16 @@ import {api} from "./config/Axios.config.ts";
 
 
 export const savePlayerStats = async (account: string) => {
-    return await api.post(`/player-stats/save/${account}`)
+    return await api.post(`/mr-accounts/add/${account}`)
         .then((res) => {
-            console.log(JSON.parse(res.data.statsRawJson));
-            return JSON.parse(res.data.statsRawJson);
+            console.log(res.data);
+            return res.data;
         })
         .catch();
 };
 
 export const getAllPlayersStats = async () => {
-    return await api.get(`/player-stats`)
+    return await api.get(`/mr-accounts`)
         .then((res) => {
             return res.data;
         })
@@ -21,9 +21,9 @@ export const getAllPlayersStats = async () => {
 };
 
 export const getPlayerStats = async (accountId: string) => {
-    return await api.get(`/player-stats/${accountId}`)
+    return await api.get(`/mr-accounts/${accountId}`)
         .then((res) => {
-            console.log(JSON.parse(res.data));
+            console.log(JSON.parse(res.data.statsRawJson));
             return JSON.parse(res.data.statsRawJson);
         })
         .catch((err) => {
@@ -33,7 +33,7 @@ export const getPlayerStats = async (accountId: string) => {
 };
 
 export const updatePlayerStats = async () => {
-    return await api.post(`/player-stats/update`)
+    return await api.post(`/mr-accounts/update`)
         .then((res) => {
             console.log(JSON.parse(res.data));
             return JSON.parse(res.data);
@@ -46,6 +46,10 @@ export const updatePlayerStats = async () => {
             }
         return (error || "Erreur inconnue");
         })
+}
+
+export const deleteAccount = async (accountId: number) => {
+    return await api.delete(`/mr-accounts/${accountId}`)
 }
 
 

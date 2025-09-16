@@ -1,84 +1,79 @@
 import {useState} from "react";
-import {
-    Box,
-    Button,
-    Paper,
-    TextField,
-    Typography,
-    Stack, Alert,
-} from "@mui/material";
+import {Alert, Box, Button, MenuItem, Paper, Select, Stack, TextField, Typography,} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import {useAuth} from "../../hooks/useAuth.tsx";
 import type {UserType} from "../../@types/UserType.ts";
-import {changeUserMRaccount, changeUsername, changeUserPassword} from "../../api/User.api.ts";
-import {Visibility, VisibilityOff} from "@mui/icons-material";
+import {changeUsername, changeUserPassword} from "../../api/User.api.ts";
+import {Delete, Visibility, VisibilityOff} from "@mui/icons-material";
 import Page from "../layout/Page.tsx";
 import {useUserData} from "../../hooks/useUserData.tsx";
+import PasswordChangeBox from "../../componnents/settings/PasswordChangeBox.tsx";
+import {deleteAccount} from "../../api/Player.api.ts";
+import {toast} from "react-toastify";
 
 const UserSettings = () => {
-    const { user } = useAuth();
-    const [currentUser, setCurrentUser] = useState<UserType>(user);
-    const [oldPassword, setOldPassword] = useState("");
-    const [newPassword, setNewPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [showPassword, setShowPassword] = useState(false);
-    const [successMsg, setSuccessMsg] = useState<string | null>(null)
-    const [serverError, setServerError] = useState<string | null>(null)
-    const [passwordValidationErrors, setPasswordValidationErrors] = useState<{
-        password?: string;
-        confirmPass?: string
-    }>({})
-    const {setUser} = useAuth();
-    const {saveUserGameStats} = useUserData();
-
-    const validatePassword = () => {
-        const newErrors: {confirmPass?: string; password?: string } = {};
-        if (!newPassword) {
-            newErrors.password = "Password is required";
-        } else if (newPassword.length < 8) {
-            newErrors.password = "Password must be at least 8 characters";
-        } else if (!/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&._-])[A-Za-z\d@$!%*?&._-]{8,}$/.test(newPassword)) {
-            newErrors.password = "Password must have one uppercase letter, one number, and one special character.";
-        }
-        if (newPassword !== confirmPassword) {
-            newErrors.confirmPass = "Passwords does not match.";
-        }
-        setPasswordValidationErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
-    }
+    const { user, setUser } = useAuth();
+    const [currentUser, setCurrentUser] = useState<UserType>(user!);
+    const {addAccountName} = useUserData();
+    const [newAccountName, setNewAccountName] = useState<string>("")
+    const [selectedAccountId, setSelectedAccountId] = useState<number | null>(
+        currentUser.accounts.length > 0 ? currentUser.accounts[0].id : null
+    );
 
     const handleUsernameChange = async () => {
-        await changeUsername(currentUser.username);
-        setUser(currentUser);
-    };
+        if (!user?.username.trim()) return;
 
-/*    const handleMRaccountChange = async () => {
-        await changeUserMRaccount(currentUser.id, currentUser.mrivalsAccount);
-        setUser(currentUser);
-        saveUserGameStats(currentUser.mrivalsAccount);
-    };*/
+        await changeUsername(user.username);
+
+        setUser((prev) => {
+            if (!prev) return prev;
+            return {
+                ...prev,
+                username: user.username,
+            };
+        });
+    };
 
     const handleAddAccount = async () => {
-        await saveUserGameStats(currentUser.mrivalsAccount);
+        if (!newAccountName.trim()) return;
 
-    }
+        const createdAccount = await addAccountName(newAccountName);
 
-    const handleChangePassword = async () => {
-        if (!validatePassword()) {
-            return;
-        }
-        const responseData = await changeUserPassword(oldPassword, newPassword);
-        if (responseData.email === user.email) {
-            setSuccessMsg(`Password changed successfully.`)
-            setNewPassword("")
-            setConfirmPassword("")
-            setOldPassword("")
-            setShowPassword(false);
-        } else {
-            setServerError(responseData)
-        }
-
+        setUser((prev) => {
+            if (!prev) return prev;
+            return {
+                ...prev,
+                accounts: [...prev.accounts, createdAccount],
+            };
+        });
+        toast.success("Account added successfully!");
+        setNewAccountName("");
+        setSelectedAccountId(createdAccount.id);
     };
+
+    const handleDeleteAccount = async (accountId: number) => {
+        await deleteAccount(accountId);
+        toast.success("Account deleted successfully.");
+
+        setUser((prev) => {
+            if (!prev) return prev;
+            const updatedAccounts = prev.accounts.filter((acc) => acc.id !== accountId);
+            return {
+                ...prev,
+                accounts: updatedAccounts,
+            };
+        });
+
+        setSelectedAccountId((prevId) => {
+            if (prevId === accountId) {
+                return user && user.accounts.length > 1
+                    ? user.accounts.find((acc) => acc.id !== accountId)?.id ?? null
+                    : null;
+            }
+            return prevId;
+        });
+    };
+
 
     return (
         <Page title={"Settings"} description={"User Settings"}>
@@ -88,19 +83,22 @@ const UserSettings = () => {
                     <Typography variant="h5" gutterBottom>
                         User Information
                     </Typography>
-
                     <Stack spacing={3}>
                             <TextField
                                 label="Username"
-                                value={currentUser.username}
-                                onChange={(e) => setCurrentUser({...currentUser, username: e.target.value})}
-                                fullWidth
-                                error={!currentUser.username}
-                                helperText={!currentUser.username ? "Please enter your username" : ""}
+                                value={user!.username}
+                                onChange={(e) =>
+                                    setUser((prev) => {
+                                        if (!prev) return prev;
+                                        return { ...prev, username: e.target.value };
+                                    })
+                                }                                fullWidth
+                                error={!user!.username}
+                                helperText={!user!.username ? "Please enter your username" : ""}
                                 InputProps={{
                                     endAdornment: (
                                         <Button variant={"contained"} size={"small"} onClick={handleUsernameChange}
-                                                disabled={!currentUser.username}
+                                                disabled={!user!.username}
                                         >
                                             save
                                         </Button>
@@ -108,22 +106,65 @@ const UserSettings = () => {
                                 }}
                             />
 
+                        <Box>
+                            <Typography variant="subtitle1" gutterBottom>
+                                Marvel Rivals Accounts
+                            </Typography>
 
-                            <TextField
-                                label="M-Rivals Account"
-                                value={currentUser.mrivalsAccount}
-                                onChange={(e) =>
-                                    setCurrentUser({...currentUser, mrivalsAccount: e.target.value})
-                                }
-                                fullWidth
-                                InputProps={{
-                                    endAdornment: (
-                                        <Button variant={"contained"} size={"small"} onClick={handleAddAccount}>
-                                            add
-                                        </Button>
-                                    ),
-                                }}
-                            />
+                            {user!.accounts.length > 0 ? (
+                                <Select
+                                    fullWidth
+                                    size="small"
+                                    value={selectedAccountId ?? ""}
+                                    onChange={(e) => setSelectedAccountId(Number(e.target.value))}
+                                >
+                                    {user!.accounts.map((acc) => (
+                                        <MenuItem key={acc.id} value={acc.id}>
+                                            <Box
+                                                sx={{
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    justifyContent: "space-between",
+                                                    width: "100%",
+                                                }}
+                                            >
+                                                {acc.mrivalsAccount}
+                                                <IconButton
+                                                    size="small"
+                                                    onClick={(ev) => {
+                                                        ev.stopPropagation();
+                                                        handleDeleteAccount(acc.id);
+                                                    }}
+                                                >
+                                                    <Delete fontSize="small" />
+                                                </IconButton>
+                                            </Box>
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            ) : (
+                                <Typography variant="body2" color="text.secondary">
+                                    No accounts yet.
+                                </Typography>
+                            )}
+
+                            <Box sx={{ display: "flex", mt: 2, gap: 1 }}>
+                                <TextField
+                                    size="small"
+                                    label="Add account"
+                                    value={newAccountName}
+                                    onChange={(e) => setNewAccountName(e.target.value)}
+                                    fullWidth
+                                />
+                                <Button
+                                    variant="contained"
+                                    size="small"
+                                    onClick={handleAddAccount}
+                                >
+                                    Add
+                                </Button>
+                            </Box>
+                        </Box>
 
                         <TextField
                             label="Email"
@@ -140,93 +181,7 @@ const UserSettings = () => {
                         />
                     </Stack>
                 </Paper>
-                <Paper sx={{p: 4, borderRadius: 0, boxShadow: 4, width: 400}}>
-                    <Typography variant="h5" gutterBottom>
-                        Change Password
-                    </Typography>
-                    {serverError && (
-                        <Alert sx={{margin: "10px 0px"}} severity="error" onClose={() => setServerError(null)}>
-                            {serverError}
-                        </Alert>
-                    )}
-                    {successMsg && (
-                        <Alert sx={{margin: "10px 0px"}} severity="success" onClose={() => setSuccessMsg(null)}>
-                            {successMsg}
-                        </Alert>
-                    )}
-                    <Stack spacing={3}>
-                        <TextField
-                            type={showPassword ? "text" : "password"}
-                            label="Current Password"
-                            value={oldPassword}
-                            onChange={(e) => setOldPassword(e.target.value)}
-                            fullWidth
-                            InputProps={{
-                                endAdornment: (
-                                    <IconButton
-                                        aria-label={showPassword ? "Hide password" : "Show password"}
-                                        onClick={() => setShowPassword((s) => !s)}
-                                        edge="end"
-                                    >
-                                        {showPassword ? <VisibilityOff/> : <Visibility/>}
-                                    </IconButton>
-                                ),
-                            }}
-                        />
-
-                        <TextField
-                            type={showPassword ? "text" : "password"}
-                            label="New Password"
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
-                            fullWidth
-                            error={!!passwordValidationErrors.password}
-                            helperText={passwordValidationErrors.password}
-                            InputProps={{
-                                endAdornment: (
-                                    <IconButton
-                                        aria-label={showPassword ? "Hide password" : "Show password"}
-                                        onClick={() => setShowPassword((s) => !s)}
-                                        edge="end"
-                                    >
-                                        {showPassword ? <VisibilityOff/> : <Visibility/>}
-                                    </IconButton>
-                                ),
-                            }}
-                        />
-
-                        <TextField
-                            type={showPassword ? "text" : "password"}
-                            label="Confirm New Password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            fullWidth
-                            error={!!passwordValidationErrors.confirmPass}
-                            helperText={passwordValidationErrors.confirmPass}
-                            InputProps={{
-                                endAdornment: (
-                                    <IconButton
-                                        aria-label={showPassword ? "Hide password" : "Show password"}
-                                        onClick={() => setShowPassword((s) => !s)}
-                                        edge="end"
-                                    >
-                                        {showPassword ? <VisibilityOff/> : <Visibility/>}
-                                    </IconButton>
-                                ),
-                            }}
-                        />
-
-                        <Box sx={{textAlign: "right"}}>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={handleChangePassword}
-                            >
-                                Update Password
-                            </Button>
-                        </Box>
-                    </Stack>
-                </Paper>
+                <PasswordChangeBox></PasswordChangeBox>
             </Box>
         </Page>
 
