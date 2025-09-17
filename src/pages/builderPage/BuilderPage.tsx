@@ -19,6 +19,9 @@ import TeamSynergy from "../../componnents/builder/TeamSynergy.tsx";
 import TeamCounter from "../../componnents/builder/TeamCounter.tsx";
 import DragDropContainer from "../../componnents/builder/Drag&DropContainer.tsx";
 import {useLoading} from "../../hooks/useLoading.tsx";
+import Typography from "@mui/material/Typography";
+import iconTank from "../../images/mainTank.webp";
+import iconHeal from "../../images/mainHeal.webp";
 
 const BuilderPage = () => {
     const {heroes} = useData();
@@ -150,7 +153,7 @@ const BuilderPage = () => {
                             disabled={compo.filter((x) => x !== null).length < 6}
                             onClick={handleSubmitCompo}
                         >
-                            Submit
+                            Save
                         </MainButton>
                             <DeleteButton style={{margin: "5px"}}
                             onClick={handleRemoveAllHeroes}>
@@ -169,8 +172,24 @@ const BuilderPage = () => {
                     >
                         <Box>
                             <Box
-                                sx={{display: "flex", justifyContent: "center", margin: "30px 10px"}}>
+                                sx={{display: "flex", justifyContent: "space-between", margin: "30px 20px", mr: "100px", alignItems: "center"}}>
                                 <HeroRoleFilter role={role} setRole={setRole}/>
+                                <Box sx={{display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "flex-end", gap: 3, height: "60px"}}>
+                                    <Box sx={{display: "flex", flexDirection: "column" ,justifyContent: "center", alignItems: "center"}}>
+                                        <img src={iconTank} alt="Main Tank" style={{width: "22px", height: "30px",}}/>
+                                        <Typography variant={"caption"}>Main Tank</Typography>
+                                    </Box>
+                                    <Box sx={{display: "flex", flexDirection: "column" ,justifyContent: "center", alignItems: "center"}}>
+                                        <img src={iconHeal} alt="Main Heal" style={{width: "22px", height: "30px",}}/>
+                                        <Typography variant={"caption"}>Main Heal</Typography>
+                                    </Box>
+                                    <Box>
+                                        <Box sx={{animation: "pulse 1.5s infinite", border: "1px solid green"}}></Box><Typography variant={"caption"}>Best win rates</Typography>
+                                    </Box>
+                                    <Box>
+                                        <Box sx={{animation: "teamup-pulse 1.5s infinite", border: "1px dashed gold"}}></Box><Typography variant={"caption"}>Team Ups</Typography>
+                                    </Box>
+                                </Box>
                             </Box>
                             <Grid container gap={1} sx={{
                                 height: "550px",
