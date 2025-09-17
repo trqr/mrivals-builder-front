@@ -1,24 +1,18 @@
-import {useCompo} from "../../hooks/useCompo.tsx";
 import {Grid, LinearProgress,} from "@mui/material";
-import {useState} from "react";
-import {Grid,} from "@mui/material";
-import {useEffect, useState} from "react";
 import Page from "../layout/Page.tsx";
 import Box from "@mui/material/Box";
-import {getTeamById, saveCompo} from "../../api/Compo.api.ts";
 import TeambuildButton from "../../componnents/common/buttons/TeambuildButton.tsx";
 import {useNavigate} from "react-router";
-import {toast} from "react-toastify";
 import SynergiesTeam from "../../componnents/teamCompositionCheckout/SynergiesTeam.tsx";
 import CountersTeam from "../../componnents/teamCompositionCheckout/CountersTeam.tsx";
 import HeroCard from "../../componnents/teamCompositionCheckout/HeroCard.tsx";
-import {useLoaderData, useParams} from "react-router-dom";
-import type {HeroType} from "../../@types/HeroType";
+import {useLoaderData,} from "react-router-dom";
+import {useTransition} from "react";
 
 const TeamCompositionCheckout = () => {
-    const [teamSaved, setTeamSaved] = useState<any | null>(null);
     const navigate = useNavigate();
     const compo = useLoaderData();
+    const [isPending, startTransition] = useTransition();
 
     return (
         <Page title={"Team review"} description={"Team review"}>
