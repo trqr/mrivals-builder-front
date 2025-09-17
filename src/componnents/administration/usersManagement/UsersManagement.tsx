@@ -5,6 +5,7 @@ import {Box, Button, MenuItem, Paper, Typography} from "@mui/material";
 import Select from "@mui/material/Select";
 import ConfirmationDialog from "../../common/dialogs/ConfirmationDialog.tsx";
 import {banUsers, changeUsersRoleToAdmin, changeUsersRoleToUser} from "../../../api/User.api.ts";
+import SpotlightCard from "../../common/cards/spotlightCard/SpotlightCard.tsx";
 
 
 type UsersManagementProps = {
@@ -79,7 +80,7 @@ const UsersManagement = ({users}: UsersManagementProps) => {
                 />
             </Paper>
             {selectedRows.length > 0 && (
-                <Paper sx={{p: 2, mt: 2}}>
+                <SpotlightCard width={"auto"} className="settings-card" spotlightColor="rgba(0, 229, 255, 0.2)">
                     <Typography variant="body1">
                         {selectedRows.length} order(s) selected: {selectedRows.join(', ')}
                     </Typography>
@@ -113,8 +114,7 @@ const UsersManagement = ({users}: UsersManagementProps) => {
                             BAN USER(S)
                         </Button>
                     </Box>
-
-                </Paper>
+                </SpotlightCard>
             )}
             <ConfirmationDialog
                 isOpen={openConfirmationDialog}

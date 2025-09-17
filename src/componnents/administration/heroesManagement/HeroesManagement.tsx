@@ -12,6 +12,7 @@ import {MatchUpUpdateDialog} from "../../common/dialogs/MatchUpUpdateDialog.tsx"
 import {addMatchUp, updateMatchUp} from "../../../api/MatchUp.api.ts";
 import {useData} from "../../../hooks/useData.tsx";
 import {HeroesColumns} from "./HeroesColumns.tsx";
+import SpotlightCard from "../../common/cards/spotlightCard/SpotlightCard.tsx";
 
 
 const HeroesManagement = () => {
@@ -88,7 +89,7 @@ const HeroesManagement = () => {
             </Paper>
 
             {selectedRows.length > 0 && (
-                <Paper sx={{p: 2, mt: 2}}>
+                <SpotlightCard width={"auto"} className="settings-card" spotlightColor="rgba(0, 229, 255, 0.2)">
                     <Typography variant="body1">
                         {selectedRows.length} order(s) selected: {selectedRows.join(', ')}
                     </Typography>
@@ -116,7 +117,7 @@ const HeroesManagement = () => {
                         </Button>
 
                     </Box>
-                </Paper>
+                </SpotlightCard>
             )}
             <ConfirmationDialog
                 isOpen={openConfirmationDialog}

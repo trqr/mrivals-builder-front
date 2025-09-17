@@ -17,6 +17,7 @@ import {LockOutlined, Visibility, VisibilityOff} from "@mui/icons-material";
 import {login} from "../../../api/Auth.api.ts";
 import {useAuth} from "../../../hooks/useAuth.tsx";
 import {useUserData} from "../../../hooks/useUserData.tsx";
+import SpotlightCard from "../cards/spotlightCard/SpotlightCard.tsx";
 
 export type LoginDTO = {
     email: string;
@@ -54,7 +55,7 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
                 setLoginValues({email: "", password: ""})
                 localStorage.setItem("MBtoken", authData.token)
             } else {
-                setServerError(authData)
+                setServerError(authData);
             }
         })
     }
@@ -75,7 +76,6 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
             newErrors.password = "Password must have one uppercase letter, one number, and one special character.";
         }
         setValidationErrors(newErrors);
-        console.log("test")
         return Object.keys(newErrors).length === 0;
     }
 
@@ -83,10 +83,12 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
 
     return (
         <>
-            <Dialog open={open} onClose={() => setOpen(false)} fullWidth>
+            <Dialog open={open}
+                    onClose={() => setOpen(false)} fullWidth>
                 {isPending &&
                     <LinearProgress></LinearProgress>
                 }
+                <SpotlightCard width={"auto"} className="dialog-card" spotlightColor="rgba(0, 229, 255, 0.2)">
                 <DialogTitle sx={{display: "flex", alignItems: "center"}}>
                     <LockOutlined fontSize={"small"}/>Sign in</DialogTitle>
                 <DialogContent sx={{display: 'flex', gap: '10px', flexDirection: 'column', margin: '5px auto', width: '100%', alignItems: 'center'}}>
@@ -142,6 +144,7 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
                     <Button variant={"contained"} onClick={handleLogin} disabled={isPending}>{isPending ? "Loging in..." : "Login"}</Button>
                     <Button variant={"text"} onClick={() => setOpen(false)}>Cancel</Button>
                 </DialogActions>
+                </SpotlightCard>
             </Dialog>
         </>
     )

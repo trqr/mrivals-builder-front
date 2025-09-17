@@ -30,7 +30,7 @@ const theme = createTheme({
                     props: { variant: 'contained'} ,
                     style: {
                         fontSize: '1rem',
-                        color: 'darkgrey',
+                        color: '#3c3c3c',
                         clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)',
                         borderRadius: '0px',},
                 },

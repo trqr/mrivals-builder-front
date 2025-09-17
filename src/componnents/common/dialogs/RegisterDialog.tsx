@@ -14,6 +14,7 @@ import {Visibility, VisibilityOff} from "@mui/icons-material";
 import {Alert} from "@mui/material";
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import {register} from "../../../api/Auth.api.ts";
+import SpotlightCard from "../cards/spotlightCard/SpotlightCard.tsx";
 
 export type RegisterDTO = {
     username: string;
@@ -82,6 +83,7 @@ const RegisterDialog = ({open, setOpen}: RegisterDialogProps) => {
                 {isPending &&
                     <LinearProgress></LinearProgress>
                 }
+                <SpotlightCard width={"auto"} className="dialog-card" spotlightColor="rgba(0, 229, 255, 0.2)">
                 <DialogTitle sx={{display: "flex", alignItems: "center"}}>
                     <PersonAddIcon  fontSize={"small"}/>{" Register"}
                 </DialogTitle>
@@ -154,6 +156,7 @@ const RegisterDialog = ({open, setOpen}: RegisterDialogProps) => {
                     <Button variant={"contained"} onClick={handleSubmit} disabled={isPending}>{isPending ? "Registering..." : "Submit"}</Button>
                     <Button variant={"text"} onClick={() => setOpen(false)}>Cancel</Button>
                 </DialogActions>
+                </SpotlightCard>
             </Dialog>
         </>
     )

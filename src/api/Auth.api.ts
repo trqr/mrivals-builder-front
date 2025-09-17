@@ -10,7 +10,7 @@ export const login = async (logs: LoginDTO) => {
             return res.data
         })
         .catch((err) => {
-            return err.response.data
+            return err
         })
 }
 

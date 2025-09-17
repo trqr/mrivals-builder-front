@@ -17,6 +17,7 @@ import {useEffect, useState} from "react";
 import type {SynergieType} from "../../../@types/SynergieType.ts";
 import {deleteSynergy} from "../../../api/Synergie.api.ts";
 import {useData} from "../../../hooks/useData.tsx";
+import SpotlightCard from "../cards/spotlightCard/SpotlightCard.tsx";
 
 type SynergyUpdateDialogProps = {
     open: boolean;
@@ -60,6 +61,7 @@ const SynergyUpdateDialog = ({open, handleClose, handleSave, heroes, editingSyne
 
     return (
         <Dialog open={open} onClose={handleClose} maxWidth="xs" fullWidth>
+            <SpotlightCard width={"auto"} className="dialog-card" spotlightColor="rgba(0, 229, 255, 0.2)">
             <DialogTitle>Add or Update a synergy</DialogTitle>
             <DialogContent>
                 <Box sx={{display: "flex", flexDirection: "column", gap: 2, mt: 1}}>
@@ -116,6 +118,7 @@ const SynergyUpdateDialog = ({open, handleClose, handleSave, heroes, editingSyne
                         </Button>
                 </DialogActions>
             }
+            </SpotlightCard>
         </Dialog>
     );
 };

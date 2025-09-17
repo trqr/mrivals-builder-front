@@ -21,6 +21,8 @@ import {useUserData} from "../../hooks/useUserData.tsx";
 import PasswordChangeBox from "../../componnents/settings/PasswordChangeBox.tsx";
 import {deleteAccount} from "../../api/Player.api.ts";
 import {toast} from "react-toastify";
+import SpotlightCard from "../../componnents/common/cards/spotlightCard/SpotlightCard.tsx";
+
 
 const UserSettings = () => {
     const { user, setUser } = useAuth();
@@ -89,12 +91,13 @@ const UserSettings = () => {
     };
 
 
+
     return (
         <Page title={"Settings"} description={"User Settings"}>
             <LinearProgress sx={{height: "2px"}} variant={isPending ? "indeterminate" : "determinate"}/>
             <Typography variant={"h4"} sx={{textAlign: "center", margin: "30px"}}>Settings</Typography>
             <Box sx={{mx: "auto", mt: 4, display: "flex", justifyContent: "center", gap: "20px"}}>
-                <Paper sx={{p: 4, borderRadius: 0, boxShadow: 4, width: 400}}>
+                <SpotlightCard width={"400px"} className="settings-card" spotlightColor="rgba(0, 229, 255, 0.2)">
                     <Typography variant="h5" gutterBottom>
                         User Information
                     </Typography>
@@ -112,7 +115,8 @@ const UserSettings = () => {
                                 helperText={!user!.username ? "Please enter your username" : ""}
                                 InputProps={{
                                     endAdornment: (
-                                        <Button variant={"contained"} size={"small"} onClick={handleUsernameChange}
+                                        <Button variant={"contained"} size={"small"}
+                                                onClick={handleUsernameChange}
                                                 disabled={!user!.username}
                                         >
                                             save
@@ -173,11 +177,12 @@ const UserSettings = () => {
                                 />
                                 <Button
                                     variant="contained"
+                                    sx={{width: isPending ? "140px" : "auto"}}
                                     size="small"
                                     onClick={handleAddAccount}
                                     disabled={isPending}
                                 >
-                                    {isPending ? "pending" : "Add"}
+                                    {isPending ? "pending..." : "Add"}
                                 </Button>
                             </Box>
                         </Box>
@@ -196,7 +201,7 @@ const UserSettings = () => {
                             fullWidth
                         />
                     </Stack>
-                </Paper>
+                </SpotlightCard>
                 <PasswordChangeBox></PasswordChangeBox>
             </Box>
         </Page>

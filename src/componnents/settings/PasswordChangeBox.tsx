@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import {changeUserPassword} from "../../api/User.api.ts";
 import {useState} from "react";
 import {useAuth} from "../../hooks/useAuth.tsx";
+import SpotlightCard from "../common/cards/spotlightCard/SpotlightCard.tsx";
 
 const PasswordChangeBox = () => {
     const [oldPassword, setOldPassword] = useState("");
@@ -53,7 +54,7 @@ const PasswordChangeBox = () => {
 
     return (
         <>
-            <Paper sx={{p: 4, borderRadius: 0, boxShadow: 4, width: 400}}>
+            <SpotlightCard width={"400px"} className="settings-card" spotlightColor="rgba(0, 229, 255, 0.2)">
                 <Typography variant="h5" gutterBottom>
                     Change Password
                 </Typography>
@@ -139,7 +140,7 @@ const PasswordChangeBox = () => {
                         </Button>
                     </Box>
                 </Stack>
-            </Paper>
+            </SpotlightCard>
         </>
     )
 }

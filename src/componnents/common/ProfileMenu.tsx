@@ -29,6 +29,7 @@ const ProfileMenu = () => {
         handleClose();
         setUser(null);
         localStorage.removeItem("MBtoken");
+        navigate("/");
     }
 
     return (

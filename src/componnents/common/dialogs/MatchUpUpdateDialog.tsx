@@ -15,6 +15,7 @@ import {useEffect, useState} from "react";
 import type {MatchUpType} from "../../../@types/MatchUpType.ts";
 import {deleteMatchUp} from "../../../api/MatchUp.api.ts";
 import {useData} from "../../../hooks/useData.tsx";
+import SpotlightCard from "../cards/spotlightCard/SpotlightCard.tsx";
 
 type MatchUpUpdateDialogProps = {
     open: boolean;
@@ -55,6 +56,7 @@ export const MatchUpUpdateDialog = ({open, handleClose, handleSave, heroes, edit
 
     return (
         <Dialog open={open} onClose={handleClose} maxWidth="xs" fullWidth>
+            <SpotlightCard width={"auto"} className="dialog-card" spotlightColor="rgba(0, 229, 255, 0.2)">
             <DialogTitle>Add or Update a match up</DialogTitle>
             <DialogContent>
                 <Box sx={{display: "flex", flexDirection: "column", gap: 2, mt: 1}}>
@@ -101,6 +103,7 @@ export const MatchUpUpdateDialog = ({open, handleClose, handleSave, heroes, edit
                     </Button>
                 </DialogActions>
             }
+            </SpotlightCard>
         </Dialog>
     );
 };

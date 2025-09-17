@@ -2,6 +2,7 @@ import {Container, Typography, Grid, Button, Card, CardContent} from "@mui/mater
 import {updateHeroes} from "../../../api/Hero.api.ts";
 import { updateMaps } from "../../../api/Map.api.ts";
 import {updateLeaderboard} from "../../../api/Leaderboard.api.ts";
+import SpotlightCard from "../../common/cards/spotlightCard/SpotlightCard.tsx";
 
 export const DataManagement = () => {
     const handleUpdateHeroes = async () => {
@@ -31,8 +32,7 @@ export const DataManagement = () => {
 
             <Grid container spacing={3}>
                 <Grid size={{xs: 12, sm: 6}}>
-                    <Card>
-                        <CardContent>
+                    <SpotlightCard width={"auto"} className="settings-card" spotlightColor="rgba(0, 229, 255, 0.2)">
                             <Typography variant="h6" sx={{textAlign: "center"}}>Heroes</Typography>
                             <Button
                                 variant="contained"
@@ -43,13 +43,11 @@ export const DataManagement = () => {
                             >
                                 Update Heroes
                             </Button>
-                        </CardContent>
-                    </Card>
+                    </SpotlightCard>
                 </Grid>
 
                 <Grid size={{xs: 12, sm: 6}}>
-                    <Card>
-                        <CardContent>
+                        <SpotlightCard width={"auto"} className="settings-card" spotlightColor="rgba(0, 229, 255, 0.2)">
                             <Typography variant="h6" sx={{textAlign: "center"}}>Maps</Typography>
                             <Button
                                 variant="contained"
@@ -60,13 +58,11 @@ export const DataManagement = () => {
                             >
                                 Update Maps
                             </Button>
-                        </CardContent>
-                    </Card>
+                        </SpotlightCard>
                 </Grid>
 
                 <Grid size={{xs: 12, sm: 6}}>
-                    <Card>
-                        <CardContent>
+                    <SpotlightCard width={"auto"} className="settings-card" spotlightColor="rgba(0, 229, 255, 0.2)">
                             <Typography variant="h6" sx={{textAlign: "center"}}>Leaderboards</Typography>
                             <Button
                                 variant="contained"
@@ -77,13 +73,11 @@ export const DataManagement = () => {
                             >
                                 Update Leaderboards
                             </Button>
-                        </CardContent>
-                    </Card>
+                    </SpotlightCard>
                 </Grid>
 
                 <Grid size={{xs: 12, sm: 6}}>
-                    <Card>
-                        <CardContent>
+                    <SpotlightCard width={"auto"} className="settings-card" spotlightColor="rgba(0, 229, 255, 0.2)">
                             <Typography variant="h6" sx={{textAlign: "center"}}>Stats</Typography>
                             <Button
                                 variant="contained"
@@ -95,8 +89,7 @@ export const DataManagement = () => {
                             >
                                 Update Stats
                             </Button>
-                        </CardContent>
-                    </Card>
+                    </SpotlightCard>
                 </Grid>
             </Grid>
         </Container>
