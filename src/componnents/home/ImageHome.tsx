@@ -1,23 +1,14 @@
 import Box from "@mui/material/Box";
 import affiche from "../../images/HomeEsport.webp";
-import affiche2 from "../../images/HomeIker.webp";
+import affiche2 from "../../images/HomeIker.jpg";
 import affiche3 from "../../images/HomeSeason.webp";
-import affiche4 from "../../images/HomeAzha.webp";
+import affiche4 from "../../images/NewChar.jpeg";
+import SpotlightCard from "../common/cards/spotlightCard/SpotlightCard.tsx";
 
 const ImageHome = () => {
 
     return (
-        <Box
-            sx={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: 2,
-                justifyItems: "center",
-                border: "solid 2px #FDDE2B",
-                padding: "30px",
-                transform: "skew(-11deg)"
-            }}
-        >
+        <SpotlightCard width={undefined}>
             <a href={"https://www.marvelrivals.com/match/"} target={"_blank"} rel={"noopener noreferrer"}>
                 <img src={affiche} alt="affiche 1" className="affiche-img"
                      style={{
@@ -46,7 +37,7 @@ const ImageHome = () => {
                          height:"250px",
                      }} />
             </a>
-        </Box>
+        </SpotlightCard>
     )
 }
 

@@ -3,6 +3,8 @@ import {useNavigate} from 'react-router';
 import AuthBox from "../../componnents/common/AuthBox.tsx";
 import Box from "@mui/material/Box";
 import MainButton from "../../componnents/common/buttons/MainButton.tsx";
+import logo from "../../images/IconSite.png";
+import texte from "../../images/texte.png";
 
 const menuPages = [
     {name: 'Home', path: '/'},
@@ -20,9 +22,8 @@ export default function Header() {
                     sx={{display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer"}}
                     onClick={() => navigate('/')}
                 >
-                    <img height={40} style={{margin: "0 10px"}} src={"assets/logo.png"}/>Rivals Builder
-                    <Typography variant="h6" noWrap component="div">
-                    </Typography>
+                    <img height={70} src={logo}/>
+                    <img height={90} width={120} src={texte}/>
                 </Box>
 
                     <Box>

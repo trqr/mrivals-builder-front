@@ -7,21 +7,21 @@ import SplitText from "../../componnents/home/HomeText.tsx";
 import Page from "../layout/Page.tsx";
 import "./Home.css";
 import {useData} from "../../hooks/useData.tsx";
-import ImageHome from "../../componnents/home/ImageHome.tsx";
 import {LinearProgress} from "@mui/material";
 import {useTransition} from "react";
+import Carousel from "../../componnents/home/Carousel.tsx";
+import SecondButton from "../../componnents/common/buttons/SecondButton.tsx";
+import FuzzyText from "../../componnents/home/FuzzyText.tsx";
+
 
 const Home = () => {
     const navigate = useNavigate();
     const {heroes} = useData();
     const [isPending, startTransition] = useTransition()
 
+
     const handleClickBuild = () => {
         navigate("/builder");
-    };
-
-    const handleAnimationComplete = () => {
-
     };
 
     return (
@@ -45,7 +45,7 @@ const Home = () => {
                         gap: 3,
                     }}
                 >
-                    <ImageHome/>
+                    <Carousel/>
                     <Box
                     style={{
                         display: "flex",
@@ -55,30 +55,21 @@ const Home = () => {
                         padding: "0 60px",
                     }}>
                         <Box style={{marginLeft: "-130px", paddingRight: "30px"}}>
-                    <SplitText
-                        text="Angela is Here !"
-                        className="text-3xl font-bold text-center"
-                        delay={100}
-                        duration={0.4}
-                        ease="power3.out"
-                        splitType="chars"
-                        from={{ opacity: 0, y: 40 }}
-                        to={{ opacity: 1, y: 0 }}
-                        threshold={0.1}
-                        rootMargin="-100px"
-                        textAlign="center"
-                        onLetterAnimationComplete={handleAnimationComplete}
-                    />
+                            <FuzzyText
+                                baseIntensity={0.2}
+                            >
+                                Angela is here !
+                            </FuzzyText>
                         </Box>
 
                     {/* Bouton centré */}
                     <Box sx={{ transform: "skew(-21deg)", mt: 2 }}>
-                        <TeambuildButton onClick={handleClickBuild}>Build</TeambuildButton>
+                        <SecondButton onClick={handleClickBuild}/>
                     </Box>
 
                     </Box>
                 </Box>
-                <Box
+                {/*<Box
                     className="caroussel"
                     sx={{
                         display: "flex",
@@ -106,7 +97,7 @@ const Home = () => {
                         isTilted
                         tiltDirection="left"
                     />
-                </Box>
+                </Box>*/}
             </Box>
         </Page>
     );
