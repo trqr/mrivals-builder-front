@@ -1,4 +1,4 @@
-import {Grid, LinearProgress,} from "@mui/material";
+import {Grid,} from "@mui/material";
 import Page from "../layout/Page.tsx";
 import Box from "@mui/material/Box";
 import TeambuildButton from "../../componnents/common/buttons/TeambuildButton.tsx";
@@ -7,16 +7,13 @@ import SynergiesTeam from "../../componnents/teamCompositionCheckout/SynergiesTe
 import CountersTeam from "../../componnents/teamCompositionCheckout/CountersTeam.tsx";
 import HeroCard from "../../componnents/teamCompositionCheckout/HeroCard.tsx";
 import {useLoaderData,} from "react-router-dom";
-import {useTransition} from "react";
 
 const TeamCompositionCheckout = () => {
     const navigate = useNavigate();
     const compo = useLoaderData();
-    const [isPending, startTransition] = useTransition();
 
     return (
         <Page title={"Team review"} description={"Team review"}>
-            <LinearProgress sx={{height: "2px"}} variant={isPending ? "indeterminate" : "determinate"}/>
                 <HeroCard heroes={compo.heroes}/>
             <Grid style={{
                 display: "flex",

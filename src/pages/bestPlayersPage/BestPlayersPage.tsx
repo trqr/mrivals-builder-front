@@ -1,36 +1,27 @@
 import Page from "../layout/Page.tsx";
 import {useLoaderData} from "react-router-dom";
 import Typography from "@mui/material/Typography";
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardMedia,
-    Container,
-    Grid,
-    LinearProgress,
-    Pagination,
-    TextField
-} from "@mui/material";
-import {type ChangeEvent, useEffect, useState, useTransition} from "react";
+import {Card, CardContent, CardHeader, CardMedia, Container, Grid, Pagination, TextField} from "@mui/material";
+import {type ChangeEvent, useEffect, useState} from "react";
 import type {LeaderboardPlayerType, LeaderboardType} from "../../@types/LeaderboardType.ts";
 import {iconBaseUrl} from "../../api/config/Axios.config.ts";
 import {getHeroLeaderboard} from "../../api/Leaderboard.api.ts";
 import Box from "@mui/material/Box";
+import {useLoading} from "../../hooks/useLoading.tsx";
 
 const BestPlayersPage = () => {
     const fetchedPlayers: LeaderboardType = useLoaderData();
     const [showedPlayers, setShowedPlayers] = useState<LeaderboardPlayerType[]>(fetchedPlayers.players)
     const [page, setPage] = useState<number>(1)
     const [search, setSearch] = useState<string>("")
-    const [isPending, startTransition] = useTransition()
+    const {startTransition} = useLoading();
 
     const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
         setPage(0);
     };
 
-    const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value);
     };
 
@@ -44,7 +35,6 @@ const BestPlayersPage = () => {
 
     return (
         <Page title={"Best Players"} description={`Best Players with ${fetchedPlayers.hero?.name}`}>
-            <LinearProgress sx={{height: "2px"}} variant={isPending ? "indeterminate" : "determinate"}/>
             <Container maxWidth="xl" sx={{display: "flex", flexDirection:"column", justifyContent: "center", alignItems: "center", gap: "20px"}}>
             <Typography variant={"h4"} sx={{marginTop: "20px"}}>Best {fetchedPlayers.hero?.name} players</Typography>
             <TextField

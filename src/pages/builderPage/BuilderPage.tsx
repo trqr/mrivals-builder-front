@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
-import { Grid, LinearProgress} from "@mui/material";
+import {Grid} from "@mui/material";
 import type {HeroType} from "../../@types/HeroType";
-import {useEffect, useState, useTransition, type SetStateAction} from "react";
+import {useEffect, useState} from "react";
 import HeroRoleFilter from "../../componnents/common/HeroRoleFilter.tsx";
 import {DndContext, DragOverlay} from "@dnd-kit/core";
 import {DraggableHero} from "../../componnents/builder/drag&drop/DraggableHero.tsx";
@@ -18,6 +18,7 @@ import RecommendationMessages from "../../componnents/builder/RecommendationMess
 import TeamSynergy from "../../componnents/builder/TeamSynergy.tsx";
 import TeamCounter from "../../componnents/builder/TeamCounter.tsx";
 import DragDropContainer from "../../componnents/builder/Drag&DropContainer.tsx";
+import {useLoading} from "../../hooks/useLoading.tsx";
 
 const BuilderPage = () => {
     const {heroes} = useData();
@@ -25,7 +26,7 @@ const BuilderPage = () => {
     const [bestHeroes, setBestHeroes] = useState([]);
     const [role, setRole] = useState("");
     const [activeHero, setActiveHero] = useState<HeroType | null>(null);
-    const [isPending, startTransition] = useTransition();
+    const {startTransition} = useLoading();
     const [recommendationsMessages, setRecommendationsMessages] = useState({
         archetype: "",
         mainTank: "",
@@ -34,7 +35,7 @@ const BuilderPage = () => {
     })
     const navigate = useNavigate();
     const theme = useTheme();
-    const {compo, addToCompo, removeFromCompo, clearCompo} = useCompo();
+    const {compo, addToCompo, clearCompo} = useCompo();
 
     const handleDragStart = (event: any) => {
         const hero = availableHeroes.find((h) => h.id.toString() === event.active.id);
@@ -59,7 +60,7 @@ const BuilderPage = () => {
     }, [compo]);
 
     const recommend = () => {
-        let newMessages = {...recommendationsMessages};
+        const newMessages = {...recommendationsMessages};
 
         if (compo.length === 0) {
             setRecommendationsMessages({...recommendationsMessages, archetype: ""});
@@ -117,7 +118,6 @@ const BuilderPage = () => {
 
     return (
         <Page title={"Builder"} description="Builder">
-            <LinearProgress sx={{height: "2px"}} variant={isPending ? "indeterminate" : "determinate"}/>
             <DndContext
                 onDragStart={handleDragStart}
                 onDragEnd={handleDragEnd}
