@@ -1,6 +1,6 @@
-import {useState, useTransition} from "react";
+import {useState} from "react";
 import {imageBaseUrl} from "../../api/config/Axios.config.ts";
-import {CardContent, CardMedia, Container, Grid, LinearProgress} from "@mui/material";
+import {CardContent, CardMedia, Container, Grid} from "@mui/material";
 import type {HeroType} from "../../@types/HeroType";
 import type {MapType} from "../../@types/MapType.ts";
 import "./DataList.css";
@@ -10,11 +10,9 @@ import Page from "../layout/Page.tsx";
 import {useData} from "../../hooks/useData.tsx";
 
 const DataList = () => {
-    const [role, setRole] = useState("");
     const [show, setShow] = useState<"heroes" | "maps">("heroes");
     const {heroes, maps} = useData();
     const navigate = useNavigate();
-    const [isPending, startTransition] = useTransition()
 
     const handleMouseMove = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
         const card = e.currentTarget;
@@ -37,7 +35,6 @@ const DataList = () => {
 
     return (
         <Page description={"Heroes and maps listing"} title={"Heroes and maps listing"}>
-            <LinearProgress sx={{height: "2px"}} variant={isPending ? "indeterminate" : "determinate"}/>
             <Container maxWidth="xl">
                 <div className={'filterButton'} style={{marginTop: "80px", textAlign: "center"}}>
                     <button className={show === "heroes" ? "btn active" : "btn inactive"}
@@ -50,8 +47,8 @@ const DataList = () => {
 
                 {show === "heroes" && (
                     <Grid container className={"containerHeroes"}>
-                        {(role ? heroes.filter((hero: HeroType) => hero.role === role) : heroes).map((hero: HeroType) => (
-                            <Grid item xs={2} key={hero.id}>
+                        {heroes.map((hero: HeroType) => (
+                            <Grid size={{xs: 12, sm: 6, md: 3, lg: 2, xl: 2}} key={hero.id} sx={{ display: "flex", justifyContent: "center", alignItems: "center"}} >
                                 <img
                                     src={imageBaseUrl + hero.imageLink}
                                     alt={hero.name}

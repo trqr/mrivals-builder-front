@@ -1,23 +1,16 @@
 import Page from "../layout/Page.tsx";
-import {Grid, LinearProgress} from "@mui/material";
-import {startTransition, useEffect, useState, useTransition} from "react";
+import {Grid} from "@mui/material";
+import {useEffect, useState} from "react";
 import {deleteAllTeams, deleteTeam, getUserTeamCompos} from "../../api/Compo.api.ts";
-import type {HeroType} from "../../@types/HeroType";
 import DeleteButton from "../../componnents/common/buttons/DeleteButton.tsx";
 import Box from "@mui/material/Box";
-import {useNavigate} from "react-router";
-import {useCompo} from "../../hooks/useCompo.tsx";
 import ConfirmationDialog from "../../componnents/common/dialogs/ConfirmationDialog.tsx";
 import TeamReview from "../../componnents/userTeamList/TeamReview.tsx";
 import Typography from "@mui/material/Typography";
 
-
 const UserTeamList = () => {
     const [teams, setTeams] = useState<any[]>([]);
-    const { compo } = useCompo();
-    const navigate = useNavigate();
     const [openConfirmationDialog, setOpenConfirmationDialog] = useState<boolean>(false);
-    const [isPending, startTransition] = useTransition()
 
     const fetchTeams = async () => {
         const fetchedTeams = await getUserTeamCompos();
@@ -40,7 +33,6 @@ const UserTeamList = () => {
 
     return (
         <Page title={"Team list"} description={"Team list page"}>
-            <LinearProgress sx={{height: "2px"}} variant={isPending ? "indeterminate" : "determinate"}/>
             <Typography variant={"h2"} sx={{textAlign: "center", margin: "20px"}}>Your teams</Typography>
             {teams.length > 0 ?
                 <>

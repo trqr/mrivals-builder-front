@@ -9,18 +9,21 @@ import {CompoProvider} from "./contexts/CompoProvider.tsx";
 import {UserDataInitProvider} from "./contexts/UserDataInitProvider.tsx";
 import {DataInitProvider} from "./contexts/DataInitProvider.tsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {LoadingProvider} from "./contexts/LoadingProvider.tsx";
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
       <DataInitProvider>
           <UserDataInitProvider>
               <AuthProvider>
+                  <LoadingProvider>
                       <CompoProvider>
                           <ThemeProvider theme={theme}>
                               <CssBaseline/>
                                 <App />
                           </ThemeProvider>
                       </CompoProvider>
+                  </LoadingProvider>
               </AuthProvider>
           </UserDataInitProvider>
       </DataInitProvider>

@@ -2,16 +2,12 @@ import {useLoaderData} from "react-router-dom";
 import {imageBaseUrl} from "../../api/config/Axios.config.ts";
 import "./MapDetails.css"
 import Page from "../layout/Page.tsx";
-import {LinearProgress} from "@mui/material";
-import {useTransition} from "react";
 
 const MapDetails = () => {
     const map = useLoaderData();
-    const [isPending, startTransition] = useTransition()
 
     return (
         <Page title={"Map details"} description={"Map details"}>
-            <LinearProgress sx={{height: "2px"}} variant={isPending ? "indeterminate" : "determinate"}/>
             <div className="mapDetails">
                 <div className="leftColumn">
                     <div className="mapName">

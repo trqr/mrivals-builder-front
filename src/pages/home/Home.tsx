@@ -13,11 +13,11 @@ import Carousel from "../../componnents/home/Carousel.tsx";
 import SecondButton from "../../componnents/common/buttons/SecondButton.tsx";
 import FuzzyText from "../../componnents/home/FuzzyText.tsx";
 
+import ImageHome from "../../componnents/home/ImageHome.tsx";
 
 const Home = () => {
     const navigate = useNavigate();
     const {heroes} = useData();
-    const [isPending, startTransition] = useTransition()
 
 
     const handleClickBuild = () => {
@@ -26,7 +26,6 @@ const Home = () => {
 
     return (
         <Page title={"Homepage"} description={"Homepage"}>
-            <LinearProgress sx={{height: "2px"}} variant={isPending ? "indeterminate" : "determinate"}/>
             <Box
                 sx={{
                     display: "grid",
