@@ -1,21 +1,17 @@
 import {useLoaderData} from "react-router-dom";
 import "./HeroDetails.css";
-import { imageBaseUrl} from "../../api/config/Axios.config.ts";
+import {imageBaseUrl} from "../../api/config/Axios.config.ts";
 import Page from "../layout/Page.tsx";
 import Abilities from "../../componnents/heroDetails/Abilities.tsx";
 import SynergiesHeroDetails from "../../componnents/heroDetails/SynergiesHeroDetails.tsx";
 import CountersHeroDetails from "../../componnents/heroDetails/CountersHeroDetails.tsx";
 import HeroName from "../../componnents/heroDetails/HeroName.tsx";
-import {LinearProgress} from "@mui/material";
-import {useTransition} from "react";
 
 const HeroDetails = () => {
     const hero = useLoaderData();
-    const [isPending, startTransition] = useTransition()
 
     return (
         <Page title={"Hero details"} description={"Hero details"}>
-            <LinearProgress sx={{height: "2px"}} variant={isPending ? "indeterminate" : "determinate"}/>
             <div className="heroDetails">
                 <div className="leftColumn">
                     <div className="heroName">

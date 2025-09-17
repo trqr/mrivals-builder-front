@@ -8,13 +8,10 @@ import Page from "../layout/Page.tsx";
 import "./Home.css";
 import {useData} from "../../hooks/useData.tsx";
 import ImageHome from "../../componnents/home/ImageHome.tsx";
-import {LinearProgress} from "@mui/material";
-import {useTransition} from "react";
 
 const Home = () => {
     const navigate = useNavigate();
     const {heroes} = useData();
-    const [isPending, startTransition] = useTransition()
 
     const handleClickBuild = () => {
         navigate("/builder");
@@ -26,7 +23,6 @@ const Home = () => {
 
     return (
         <Page title={"Homepage"} description={"Homepage"}>
-            <LinearProgress sx={{height: "2px"}} variant={isPending ? "indeterminate" : "determinate"}/>
             <Box
                 sx={{
                     display: "grid",

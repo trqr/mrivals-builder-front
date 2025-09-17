@@ -1,28 +1,17 @@
 import {useState, useTransition} from "react";
-import {
-    Alert,
-    Box,
-    Button,
-    LinearProgress,
-    MenuItem,
-    Paper,
-    Select,
-    Stack,
-    TextField,
-    Typography,
-} from "@mui/material";
+import {Box, Button, LinearProgress, MenuItem, Select, Stack, TextField, Typography,} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import {useAuth} from "../../hooks/useAuth.tsx";
 import type {UserType} from "../../@types/UserType.ts";
-import {changeUsername, changeUserPassword} from "../../api/User.api.ts";
-import {Delete, Visibility, VisibilityOff} from "@mui/icons-material";
+import {changeUsername} from "../../api/User.api.ts";
+import {Delete} from "@mui/icons-material";
 import Page from "../layout/Page.tsx";
 import {useUserData} from "../../hooks/useUserData.tsx";
 import PasswordChangeBox from "../../componnents/settings/PasswordChangeBox.tsx";
 import {deleteAccount} from "../../api/Player.api.ts";
 import {toast} from "react-toastify";
 import SpotlightCard from "../../componnents/common/cards/spotlightCard/SpotlightCard.tsx";
-
+import {useLoading} from "../../hooks/useLoading.tsx";
 
 const UserSettings = () => {
     const { user, setUser } = useAuth();
@@ -32,7 +21,7 @@ const UserSettings = () => {
     const [selectedAccountId, setSelectedAccountId] = useState<number | null>(
         currentUser.accounts.length > 0 ? currentUser.accounts[0].id : null
     );
-    const [isPending, startTransition] = useTransition()
+    const {isPending, startTransition} = useLoading();
 
     const handleUsernameChange = async () => {
         if (!user?.username.trim()) return;
@@ -94,7 +83,6 @@ const UserSettings = () => {
 
     return (
         <Page title={"Settings"} description={"User Settings"}>
-            <LinearProgress sx={{height: "2px"}} variant={isPending ? "indeterminate" : "determinate"}/>
             <Typography variant={"h4"} sx={{textAlign: "center", margin: "30px"}}>Settings</Typography>
             <Box sx={{mx: "auto", mt: 4, display: "flex", justifyContent: "center", gap: "20px"}}>
                 <SpotlightCard width={"400px"} className="settings-card" spotlightColor="rgba(0, 229, 255, 0.2)">

@@ -1,17 +1,19 @@
 import {Alert, Box, Button, MenuItem} from "@mui/material";
 import Select from "@mui/material/Select";
-import {useEffect, useState, useTransition} from "react";
+import {useEffect, useState} from "react";
 import {useUserData} from "../../hooks/useUserData.tsx";
 import type {AccountType} from "../../@types/UserType.ts";
 import {updatePlayerStats} from "../../api/Player.api.ts";
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "../../hooks/useAuth.tsx";
+import {useLoading} from "../../hooks/useLoading.tsx";
 
-const SelectAccount = ({startTransition, isPending}) => {
+const SelectAccount = () => {
     const [message, setMessage] = useState<string>("")
     const [alert, setAlert] = useState<"error" | "success">("success")
     const { setActiveAccount} = useUserData();
     const { user } = useAuth();
+    const {isPending, startTransition} = useLoading()
     const [selectedOption, setSelectedOption] = useState(user?.accounts[0].id);
     const navigate = useNavigate();
 
