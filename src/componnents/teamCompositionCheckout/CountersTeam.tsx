@@ -2,24 +2,27 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {imageBaseUrl} from "../../api/config/Axios.config.ts";
 import {startTransition, useEffect, useState} from "react";
-import {useCompo} from "../../hooks/useCompo.tsx";
 import {getTeamCounter} from "../../api/Compo.api.ts";
+import type {HeroType} from "../../@types/HeroType";
 
-const CountersTeam = () => {
+type CountersTeamProps = {
+    heroes: HeroType[];
+};
 
+const CountersTeam = ({heroes}: CountersTeamProps) => {
     const [teamCounters, setTeamCounters] = useState<any[]>([]);
-    const { compo } = useCompo();
+
 
     useEffect(() => {
         startTransition(async () => {
-            if (compo.length > 0) {
-                const heroesIds = compo.map((hero) => hero?.id);
+            if (heroes.length > 0) {
+                const heroesIds = heroes.map((hero) => hero?.id);
                 const fetchedTeamCounter = await getTeamCounter(heroesIds);
 
                 setTeamCounters(fetchedTeamCounter);
             }
         })
-    }, [compo])
+    }, [heroes])
 
     return (
         <Box>

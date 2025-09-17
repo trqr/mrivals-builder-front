@@ -34,3 +34,8 @@
         const res = await api.delete(`/compo/all`);
         return res.status;
     };
+
+    export const getTeamById = async (teamId: string | undefined) => {
+        const res = await api.get(`/compo/${teamId}`);
+        return res.data;
+    }

@@ -21,8 +21,7 @@ const Abilities = ({ hero }: AbilitiesProps) => {
 
                     {hero.abilities?.map((ability: AbilitiesType, index: number) => (
                         <Grid
-                            key={index}
-                        >
+                            key={index} size={{md:3}}>
                             <Tooltip title={ability.name} followCursor>
 
                                 <img
@@ -41,7 +40,10 @@ const Abilities = ({ hero }: AbilitiesProps) => {
             </div>
         </div>
     {activeAbility && (
-        <div className="ability-description">
+        <div className="ability-description"
+        style={{
+            marginTop: "10px"
+        }}>
             <h3>{activeAbility.name}</h3>
             <p
                 dangerouslySetInnerHTML={{

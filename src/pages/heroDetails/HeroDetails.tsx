@@ -2,7 +2,7 @@ import {useLoaderData} from "react-router-dom";
 import "./HeroDetails.css";
 import { imageBaseUrl} from "../../api/config/Axios.config.ts";
 import Page from "../layout/Page.tsx";
-import Abilities from "../../componnents/hero/Abilities.tsx";
+import Abilities from "../../componnents/heroDetails/Abilities.tsx";
 import SynergiesHeroDetails from "../../componnents/heroDetails/SynergiesHeroDetails.tsx";
 import CountersHeroDetails from "../../componnents/heroDetails/CountersHeroDetails.tsx";
 import HeroName from "../../componnents/heroDetails/HeroName.tsx";

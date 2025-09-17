@@ -18,6 +18,7 @@ import {getHeroLeaderboard} from "../api/Leaderboard.api.ts";
 import Player from "../pages/player/Player.tsx";
 import {getMapById} from "../api/Map.api.ts";
 import {getPlayerStats} from "../api/Player.api.ts";
+import {getTeamById} from "../api/Compo.api.ts";
 
 export const Router = createBrowserRouter([
     {
@@ -55,6 +56,7 @@ export const Router = createBrowserRouter([
             {
                 path: "/team/:teamId",
                 element: <TeamCompositionCheckout />,
+                loader: ({params: {teamId}}) => getTeamById(teamId!)
             },
             {
                 path: "/admin",
