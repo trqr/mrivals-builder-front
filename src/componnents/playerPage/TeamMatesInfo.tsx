@@ -1,11 +1,9 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {imageBaseUrl} from "../../api/config/Axios.config.ts";
-import {useUserData} from "../../hooks/useUserData.tsx";
 import {Grid} from "@mui/material";
 
-export const TeamMatesInfo = () => {
-    const {userGameStats} = useUserData();
+export const TeamMatesInfo = ({playerStats}) => {
 
     return (
         <Box>
@@ -13,7 +11,7 @@ export const TeamMatesInfo = () => {
                 Team Mates
             </Typography>
             <Grid container spacing={1} sx={{display: "flex", flexWrap: "wrap"}}>
-                {userGameStats.team_mates.slice(0, 6).map((mate: any, index: number) => (
+                {playerStats.team_mates.slice(0, 6).map((mate: any, index: number) => (
                     <Grid
                         key={index}
                         size={{ xl: 6}}

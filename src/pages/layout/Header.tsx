@@ -15,7 +15,7 @@ export default function Header() {
 
     return (
         <>
-            <Box sx={{borderBottom: '1px solid #FDDE2B' , display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0 10px"}}>
+            <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0 10px"}}>
                 <Box
                     sx={{display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer"}}
                     onClick={() => navigate('/')}
