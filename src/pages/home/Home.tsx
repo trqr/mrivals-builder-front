@@ -10,6 +10,8 @@ import {useData} from "../../hooks/useData.tsx";
 import ImageHome from "../../componnents/home/ImageHome.tsx";
 import {LinearProgress} from "@mui/material";
 import {useTransition} from "react";
+import TestButton from "../../componnents/common/buttons/TestButton.tsx";
+import MagicBento from "../../componnents/home/MagicBento.tsx";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -36,6 +38,7 @@ const Home = () => {
                     alignItems: "start",
                 }}
             >
+
                 <Box
                     className="actuality"
                     sx={{
@@ -73,7 +76,7 @@ const Home = () => {
 
                     {/* Bouton centré */}
                     <Box sx={{ transform: "skew(-21deg)", mt: 2 }}>
-                        <TeambuildButton onClick={handleClickBuild}>Build</TeambuildButton>
+                        <TestButton onClick={handleClickBuild}>Build</TestButton>
                     </Box>
 
                     </Box>
