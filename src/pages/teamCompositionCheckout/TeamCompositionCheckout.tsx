@@ -35,18 +35,7 @@ const TeamCompositionCheckout = () => {
                 <Box sx={{ transform: "skew(-21deg)", mt: 2, margin: "20px", alignItems: "center"}}>
                     <TeambuildButton
                         style={{marginTop: "20px"}}
-                        onClick={async () => {
-                            try {
-                                const heroesIds = compo.heroes.map((hero: HeroType) => hero.id);
-                                const savedTeam = await saveCompo(heroesIds);
-                                const navToTeams = await navigate("../user/teams");
-                                setTeamSaved(savedTeam);
-                                toast.success("Composition sauvegardée avec succès !");
-                            } catch (error) {
-                                console.error(error);
-                                toast.error("Erreur lors de la sauvegarde de la composition.");
-                            }
-                        }}
+                        onClick={() => navigate("../user/teams")}
                     >
                         Save
                     </TeambuildButton>
