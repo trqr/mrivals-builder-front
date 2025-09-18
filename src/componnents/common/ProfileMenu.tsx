@@ -1,4 +1,5 @@
-import {Avatar, Divider, ListItemIcon, Menu, MenuItem} from "@mui/material"
+import {Avatar, Divider, ListItemIcon, Menu, MenuItem, } from "@mui/material"
+import HistoryIcon from '@mui/icons-material/History';
 import {AdminPanelSettings, Logout, Settings, ViewList} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "../../hooks/useAuth.tsx";
@@ -98,9 +99,9 @@ const ProfileMenu = () => {
                             onClick={() => navigate(`/user/teams`)}
                         >
                             <ListItemIcon>
-                                <ViewList fontSize="small"/>
+                                <HistoryIcon fontSize="small"/>
                             </ListItemIcon>
-                            Your Teams
+                            Teams History
                         </MenuItem>
                         {user!.role === "ADMIN" && (
                             <MenuItem onClick={() => navigate("/admin")}>
