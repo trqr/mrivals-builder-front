@@ -1,5 +1,5 @@
 import Page from "../layout/Page.tsx";
-import {Grid} from "@mui/material";
+import {Container, Grid} from "@mui/material";
 import {useEffect, useState} from "react";
 import {deleteAllTeams, deleteTeam, getUserTeamCompos} from "../../api/Compo.api.ts";
 import DeleteButton from "../../componnents/common/buttons/DeleteButton.tsx";
@@ -32,8 +32,9 @@ const UserTeamList = () => {
     };
 
     return (
-        <Page title={"Team list"} description={"Team list page"}>
-            <Typography variant={"h2"} sx={{textAlign: "center", margin: "20px"}}>Your teams</Typography>
+        <Page title={"Team history"} description={"Team history page"}>
+            <Container maxWidth="xl">
+            <Typography variant={"h2"} sx={{textAlign: "center", margin: "20px"}}>Your team history</Typography>
             {teams.length > 0 ?
                 <>
                     <Box
@@ -75,6 +76,7 @@ const UserTeamList = () => {
                 :
                 <Typography variant={"h4"} sx={{textAlign: "center", margin: "20px"}}>You dont have any teams yet!</Typography>
             }
+            </Container>
         </Page>
     );
 };
