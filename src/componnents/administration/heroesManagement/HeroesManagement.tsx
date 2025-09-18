@@ -62,7 +62,7 @@ const HeroesManagement = () => {
         setOpenMatchUpDialog,
     });
 
-    const paginationModel = {page: 0, pageSize: 5};
+    const paginationModel = {page: 0, pageSize: 10};
 
     const handleRoleChaning = async () => {
         await updateHeroesMainRole(selectedRows, selectedRole);

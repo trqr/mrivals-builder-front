@@ -6,6 +6,7 @@ import Select from "@mui/material/Select";
 import ConfirmationDialog from "../../common/dialogs/ConfirmationDialog.tsx";
 import {banUsers, changeUsersRoleToAdmin, changeUsersRoleToUser} from "../../../api/User.api.ts";
 import SpotlightCard from "../../common/cards/spotlightCard/SpotlightCard.tsx";
+import theme from "../../../theme/theme.ts";
 
 
 type UsersManagementProps = {
@@ -41,10 +42,10 @@ const UsersManagement = ({users}: UsersManagementProps) => {
             width: 220,
         },
         {field: 'role', headerName: 'Role', width: 100},
-        {field: 'banned', headerName: 'Banned', width: 100}
+        {field: 'banned', headerName: 'Banned', width: 1200}
     ];
 
-    const paginationModel = {page: 0, pageSize: 5};
+    const paginationModel = {page: 0, pageSize: 10};
 
     const handleRoleChaning = async () => {
         if (!selectedRole) return;
@@ -76,8 +77,31 @@ const UsersManagement = ({users}: UsersManagementProps) => {
                     pageSizeOptions={[5, 10]}
                     checkboxSelection
                     onRowSelectionModelChange={handleSelectionChange}
-                    sx={{border: 0}}
-                />
+                    sx={{border: "0", scrollbarWidth: "thin",
+                        scrollbarColor: `${theme.palette.secondary.main} transparent`,
+                        "& .MuiDataGrid-cell": {
+                            display: "flex",
+                            alignItems: "center",
+                        },
+
+                        "& .MuiDataGrid-row:nth-of-type(even)": {
+                            backgroundColor: "rgba(255, 255, 0, 0.05)",
+                        },
+                        "& .MuiDataGrid-row:nth-of-type(odd)": {
+                            backgroundColor: "transparent",
+                        },
+
+                        "& .MuiDataGrid-row:hover": {
+                            backgroundColor: "rgba(255, 255, 0, 0.15) !important",
+                        },
+                        "& .MuiDataGrid-columnHeaders, & .MuiDataGrid-columnHeader": {
+                            backgroundColor: `${theme.palette.background.paper} !important`,
+                        },
+                        "& .MuiDataGrid-columnHeaderTitle": {
+                            color: `${theme.palette.common.white} !important`,
+                            textAlign: "center",
+                            fontWeight: "600",
+                        },}}                />
             </Paper>
             {selectedRows.length > 0 && (
                 <SpotlightCard width={"auto"} className="settings-card" spotlightColor="rgba(0, 229, 255, 0.2)">
