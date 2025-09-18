@@ -59,7 +59,7 @@ const TeamReview = ({team, onDelete,}: TeamReviewProps) => {
                                             border: "0.5px dashed #FDDE2B",
                                             transform: "skew(-21deg)"
                                         }}>
-                                        <Typography sx={{ display: {xs: "none"},padding: "5px", transform: "skew(21deg)"}}>
+                                        <Typography sx={{ display: {xs: "none", md: "block"},padding: "5px", transform: "skew(21deg)"}}>
                                             Winrate: {(hero.winRate * 100).toFixed(1)}%
                                         </Typography>
                                         <Typography sx={{ display: {md: "none"},padding: "5px", transform: "skew(21deg)"}}>
