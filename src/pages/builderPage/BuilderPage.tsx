@@ -126,8 +126,9 @@ const BuilderPage = () => {
                 onDragEnd={handleDragEnd}
                 onDragCancel={handleDragCancel}
             >
+
                 <Box
-                    sx={{display: "flex", justifyContent: "space-between", width: "100%",}}
+                    sx={{display: {xs: "none", md: "flex"}, justifyContent: "space-between", width: "100%",}}
                 >
                     <Box
                         sx={{
@@ -250,6 +251,34 @@ const BuilderPage = () => {
                     ) : null}
                 </DragOverlay>
             </DndContext>
+            <Grid container sx={{ display: {xs: "flex", md: "none"} }}>
+                <DragDropContainer
+                    compo={compo}
+                    availableHeroes={availableHeroes}
+                    setAvailableHeroes={setAvailableHeroes}
+                    activeHero={activeHero}
+                    setActiveHero={setActiveHero}
+                />
+                <Grid size={12}>
+                    <Grid container spacing={1} sx={{
+                        height: "490px",
+                        overflowY: "auto",
+                        padding: "10px",
+                        scrollbarWidth: "thin",
+                        scrollbarColor: `${theme.palette.primary.main} transparent`,
+                    }}>
+                        {(role ? availableHeroes.filter((hero: HeroType) => hero.role === role) : availableHeroes)
+                            .map((hero: HeroType, index: number) => (
+                                <Grid
+                                    key={index}
+                                    size={{xs: 3}}
+                                >
+                                    <DraggableHero hero={hero} bestHeroes={bestHeroes}/>
+                                </Grid>
+                            ))}
+                    </Grid>
+                </Grid>
+            </Grid>
         </Page>
     );
 };

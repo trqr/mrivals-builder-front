@@ -18,7 +18,7 @@ export const DroppableSlot = ({ id, hero, handleClick }: DroppableSlotProps) => 
         <Card
             ref={setNodeRef}
             sx={{
-                height: "220px",
+                height: {xs: "75px", md: "220px"},
                 width: "80%",
                 border: isOver ? "2px solid green" : "1px solid lightgrey",
                 transition: "0.2s",

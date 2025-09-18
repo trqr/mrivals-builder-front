@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router';
 import AuthBox from "../../componnents/common/AuthBox.tsx";
 import Box from "@mui/material/Box";
 import MainButton from "../../componnents/common/buttons/MainButton.tsx";
-import {Button, IconButton, Menu, MenuItem} from "@mui/material";
+import {Button, IconButton, Menu, MenuItem, Slide, useScrollTrigger} from "@mui/material";
 import {useState} from "react";
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -12,6 +12,7 @@ const menuPages = [
     {name: 'Builder', path: '/builder'},
     {name: 'Heroes', path: '/list'},
 ];
+
 
 export default function Header() {
     const navigate = useNavigate();
@@ -28,57 +29,57 @@ export default function Header() {
 
     return (
         <>
-            <Box sx={{display: 'flex', justifyContent: "space-between", alignItems: "center", padding: "0 10px"}}>
-                <Box sx={{ display: { xs: 'flex', sm: 'flex', md: 'none', lg: 'none', xl: 'none' }}}>
-                    <IconButton
-                        id="demo-positioned-button"
-                        aria-controls={open ? 'demo-positioned-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={open ? 'true' : undefined}
-                        onClick={handleClick}
-                    >
-                        <MenuIcon></MenuIcon>
-                    </IconButton>
-                    <Menu
-                        id="demo-positioned-menu"
-                        aria-labelledby="demo-positioned-button"
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
-                        anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'left',
-                        }}
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'left',
-                        }}
-                    >
-                        {menuPages.map((menuItem) => (
-                            <MenuItem onClick={() => navigate(menuItem.path)}>{menuItem.name}</MenuItem>
-                        ))}
-                    </Menu>
-                </Box>
-                <Box
-                    sx={{display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer"}}
-                    onClick={() => navigate('/')}
-                >
-                    <img height={40} style={{margin: "0 10px"}} src={"assets/logo.png"}/>Rivals Builder
-                    <Typography variant="h6" noWrap component="div">
-                    </Typography>
-                </Box>
+                    <Box sx={{display: 'flex', justifyContent: "space-between", alignItems: "center", padding: "0 10px"}}>
+                        <Box sx={{ display: { xs: 'flex', sm: 'flex', md: 'none', lg: 'none', xl: 'none' }}}>
+                            <IconButton
+                                id="demo-positioned-button"
+                                aria-controls={open ? 'demo-positioned-menu' : undefined}
+                                aria-haspopup="true"
+                                aria-expanded={open ? 'true' : undefined}
+                                onClick={handleClick}
+                            >
+                                <MenuIcon></MenuIcon>
+                            </IconButton>
+                            <Menu
+                                id="demo-positioned-menu"
+                                aria-labelledby="demo-positioned-button"
+                                anchorEl={anchorEl}
+                                open={open}
+                                onClose={handleClose}
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'left',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                }}
+                            >
+                                {menuPages.map((menuItem) => (
+                                    <MenuItem onClick={() => navigate(menuItem.path)}>{menuItem.name}</MenuItem>
+                                ))}
+                            </Menu>
+                        </Box>
+                        <Box
+                            sx={{display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer"}}
+                            onClick={() => navigate('/')}
+                        >
+                            <img height={40} style={{margin: "0 10px"}} src={"assets/logo.png"}/>Rivals Builder
+                            <Typography variant="h6" noWrap component="div">
+                            </Typography>
+                        </Box>
 
-                    <Box sx={{ display: { xs: 'none', sm: 'none', md: 'flex', lg: 'flex', xl: 'flex' } }}>
-                        {menuPages.map((page) => (
-                        <MainButton
-                            key={page.name}
-                            onClick={() => navigate(page.path)}>
-                            <span>{page.name}</span>
-                        </MainButton>
-                        ))}
+                        <Box sx={{ display: { xs: 'none', sm: 'none', md: 'flex', lg: 'flex', xl: 'flex' } }}>
+                            {menuPages.map((page) => (
+                                <MainButton
+                                    key={page.name}
+                                    onClick={() => navigate(page.path)}>
+                                    <span>{page.name}</span>
+                                </MainButton>
+                            ))}
+                        </Box>
+                        <AuthBox></AuthBox>
                     </Box>
-                    <AuthBox></AuthBox>
-            </Box>
         </>
     );
 }
