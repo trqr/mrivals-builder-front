@@ -9,6 +9,7 @@ import HeroName from "../../componnents/heroDetails/HeroName.tsx";
 
 const HeroDetails = () => {
     const hero = useLoaderData();
+    console.log("hero de la page :", hero);
 
     return (
         <Page title={"Hero details"} description={"Hero details"}>
