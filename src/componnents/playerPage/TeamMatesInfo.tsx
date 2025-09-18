@@ -6,7 +6,7 @@ import {Grid} from "@mui/material";
 export const TeamMatesInfo = ({playerStats}) => {
 
     return (
-        <Box>
+        <Box sx={{ml: "40px"}}>
             <Typography variant="h5" gutterBottom>
                 Team Mates
             </Typography>
@@ -14,7 +14,7 @@ export const TeamMatesInfo = ({playerStats}) => {
                 {playerStats.team_mates.slice(0, 6).map((mate: any, index: number) => (
                     <Grid
                         key={index}
-                        size={{ xl: 6}}
+                        size={{md: 2, xl: 4}}
                         sx={{
                             display: "flex",
                             alignItems: "center",

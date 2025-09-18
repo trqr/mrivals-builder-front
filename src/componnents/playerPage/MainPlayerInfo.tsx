@@ -1,4 +1,4 @@
-import {Box} from "@mui/material";
+import {Box, Grid} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {iconBaseUrl} from "../../api/config/Axios.config.ts";
 import PlayerSectionBox from "../common/PlayerSectionBox.tsx";
@@ -12,7 +12,7 @@ export const MainPlayerInfo = ({playerStats}: MainPlayerInfoProps ) => {
     const { getAllTimeHighScore, getCurrentSeasonHighScore} = useUserData();
 
     return (
-        <Box sx={{display: "flex", flexDirection: "row", minWidth: "50%", gap: "20px"}}>
+        <Grid container sx={{display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "20px", justifyContent: "space-around"}}>
             <PlayerSectionBox title="Player Info">
                 <Typography>Name: {playerStats.player?.name}</Typography>
                 <Typography>Level: {playerStats.player?.level}</Typography>
@@ -50,6 +50,6 @@ export const MainPlayerInfo = ({playerStats}: MainPlayerInfoProps ) => {
                 <Typography >Total MVP: {playerStats.overall_stats?.unranked?.total_mvp}</Typography>
                 <Typography >Total SVP: {playerStats.overall_stats?.unranked?.total_svp}</Typography>
             </PlayerSectionBox>
-        </Box>
+        </Grid>
     )
 }

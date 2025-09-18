@@ -39,6 +39,7 @@ export const updatePlayerStats = async () => {
             return JSON.parse(res.data);
         })
         .catch((error) => {
+            console.log(error);
             const match = error.response.data.match(/{.*}/);
             if (match) {
                 const parsed = JSON.parse(match[0]);

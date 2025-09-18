@@ -7,26 +7,26 @@ import {PlayerHeroesStats} from "../../componnents/playerPage/PlayerHeroesStats.
 import {GraphsBox} from "../../componnents/playerPage/GraphsBox.tsx";
 import SelectAccount from "../../componnents/playerPage/SelectAccount.tsx";
 import {useLoaderData} from "react-router-dom";
+import {Grid} from "@mui/material";
 
 const Player = () => {
     const playerStats = useLoaderData();
 
     return (
         <Page title="PlayerPage" description="Player Page">
-            <Box sx={{display: "flex", flexDirection: "column", flexWrap: "wrap", margin: "20px 40px"}}>
-                <Box sx={{display: "flex", flexDirection: "row", margin: "20px", gap: "60px"}}>
-                    <Box sx={{display: "flex", flexDirection: "column", minWidth: "45%", gap: "40px"}}>
-                        <SelectAccount></SelectAccount>
+            <SelectAccount></SelectAccount>
+            <Box sx={{display: "flex", flexDirection: "column", flexWrap: "wrap", margin: "20px", justifyContent: "center", alignItems: "center"}}>
+                <Grid container spacing={5}>
+                    <Grid size={{xs: 12, md: 12, xl: 6}}>
                         <MainPlayerInfo playerStats={playerStats}></MainPlayerInfo>
                         <GraphsBox playerStats={playerStats}></GraphsBox>
-                    </Box>
-                    <Box>
-                        <TeamMatesInfo playerStats={playerStats}></TeamMatesInfo>
-                        <PlayerHeroesStats playerStats={playerStats}></PlayerHeroesStats>
-                    </Box>
-                </Box>
-                    <PlayerHeroMatchUps playerStats={playerStats}></PlayerHeroMatchUps>
-
+                    </Grid>
+                    <Grid size={{xs: 12, md: 12, xl: 6}}>
+                            <TeamMatesInfo playerStats={playerStats}></TeamMatesInfo>
+                            <PlayerHeroesStats playerStats={playerStats}></PlayerHeroesStats>
+                    </Grid>
+                </Grid>
+                <PlayerHeroMatchUps playerStats={playerStats}></PlayerHeroMatchUps>
             </Box>
         </Page>
     );
