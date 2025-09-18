@@ -22,9 +22,42 @@ const HeroRoleFilter = ({role, setRole}: FilterProps) => {
             onChange={handleChange}
             aria-label="Platform"
         >
-            <ToggleButton className={"filterButton"} color={"primary"} value="Vanguard">Vanguard</ToggleButton>
-            <ToggleButton className={"filterButton"} value="Duelist">Duelist</ToggleButton>
-            <ToggleButton className={"filterButton"} value="Strategist">Strategist</ToggleButton>
-        </ToggleButtonGroup>)
+            <ToggleButton
+                value="Vanguard"
+                sx={{
+                    fontSize: {xs: "0.7rem", sm: "0.85rem"},
+                    px: {xs: 1, sm: 2},
+                    py: {xs: 0.5, sm: 1},
+                    minWidth: {xs: 50, sm: 80}
+                }}
+            >
+                Vanguard
+            </ToggleButton>
+
+            <ToggleButton
+                value="Duelist"
+                sx={{
+                    fontSize: {xs: "0.7rem", sm: "0.85rem"},
+                    px: {xs: 1, sm: 2},
+                    py: {xs: 0.5, sm: 1},
+                    minWidth: {xs: 50, sm: 80}
+                }}
+            >
+                Duelist
+            </ToggleButton>
+
+            <ToggleButton
+                value="Strategist"
+                sx={{
+                    fontSize: {xs: "0.7rem", sm: "0.85rem"},
+                    px: {xs: 1, sm: 2},
+                    py: {xs: 0.5, sm: 1},
+                    minWidth: {xs: 50, sm: 80}
+                }}
+            >
+                Strategist
+            </ToggleButton>
+        </ToggleButtonGroup>
+    )
 }
 export default HeroRoleFilter
