@@ -27,11 +27,11 @@ const ForgotPasswordDialog = ({open, onClose}: ForgotPasswordDialogProps) => {
         setMessage("");
         startTransition(async () => {
             try {
-                await forgotPassword(email);
-                setMessage("success");
+                const data = await forgotPassword(email);
+                setMessage(data);
                 setSeverity("success");
             } catch (error: any) {
-                setMessage("error");
+                setMessage(error);
                 setSeverity("error");
             }
         })
