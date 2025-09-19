@@ -19,8 +19,8 @@ const SelectAccount = () => {
 
     const updateStats = async () => {
         startTransition( async () => {
-            const updated = await updatePlayerStats();
-            if (updated.success) {
+            const updated = await updatePlayerStats(selectedOption!);
+            if (!updated.error) {
                 setAlert("success")
                 setMessage(updated.message)
             } else {

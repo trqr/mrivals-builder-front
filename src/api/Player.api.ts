@@ -32,19 +32,14 @@ export const getPlayerStats = async (accountId: string) => {
         });
 };
 
-export const updatePlayerStats = async () => {
-    return await api.post(`/mr-accounts/update`)
+export const updatePlayerStats = async (accountId: number) => {
+    return await api.post(`/mr-accounts/update/${accountId}`)
         .then((res) => {
-            console.log(JSON.parse(res.data));
-            return JSON.parse(res.data);
+            console.log(res.data);
+            return res.data;
         })
         .catch((error) => {
             console.log(error);
-            const match = error.response.data.match(/{.*}/);
-            if (match) {
-                const parsed = JSON.parse(match[0]);
-                return parsed
-            }
         return (error || "Erreur inconnue");
         })
 }

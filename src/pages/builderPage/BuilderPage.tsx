@@ -185,10 +185,10 @@ const BuilderPage = () => {
                                         <Typography variant={"caption"}>Main Heal</Typography>
                                     </Box>
                                     <Box>
-                                        <Box sx={{animation: "pulse 1.5s infinite", border: "1px solid green"}}></Box><Typography variant={"caption"}>Best win rates</Typography>
+                                        <Box sx={{border: "1px solid green"}}></Box><Typography variant={"caption"}>Best win rates</Typography>
                                     </Box>
                                     <Box>
-                                        <Box sx={{animation: "teamup-pulse 1.5s infinite", border: "1px dashed gold"}}></Box><Typography variant={"caption"}>Team Ups</Typography>
+                                        <Box sx={{border: "1px dashed gold"}}></Box><Typography variant={"caption"}>Team Ups</Typography>
                                     </Box>
                                 </Box>
                             </Box>
