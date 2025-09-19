@@ -1,4 +1,5 @@
 import type {ReactNode} from "react";
+import logo from "../../images/IconSite.png";
 
 type PagesProps = {
     children: ReactNode;
@@ -12,7 +13,7 @@ const Page = ({children, title, description}: PagesProps) => {
         <>
             <title>{title}</title>
             <meta name={description} content="Movie App"/>
-            <link rel="icon" href={"assets/keyboard.png"}/>
+            <link rel="icon" href={logo}/>
 
             <meta property="og:title" content={title}/>
             <meta property="og:description" content={description}/>

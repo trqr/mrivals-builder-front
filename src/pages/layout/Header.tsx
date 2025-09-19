@@ -7,6 +7,10 @@ import {Button, IconButton, Menu, MenuItem, Slide, useScrollTrigger} from "@mui/
 import {useState} from "react";
 import MenuIcon from '@mui/icons-material/Menu';
 
+import logo from "../../images/IconSite.png";
+import texte from "../../images/texte.png";
+
+
 const menuPages = [
     {name: 'Home', path: '/'},
     {name: 'Builder', path: '/builder'},
@@ -64,9 +68,8 @@ export default function Header() {
                             sx={{display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer"}}
                             onClick={() => navigate('/')}
                         >
-                            <img height={40} style={{margin: "0 10px"}} src={"assets/logo.png"}/>Rivals Builder
-                            <Typography variant="h6" noWrap component="div">
-                            </Typography>
+                            <img height={70} src={logo}/>
+                            <img height={90} width={120} src={texte}/>
                         </Box>
 
                         <Box sx={{ display: { xs: 'none', sm: 'none', md: 'flex', lg: 'flex', xl: 'flex' } }}>
