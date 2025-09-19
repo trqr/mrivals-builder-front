@@ -8,7 +8,6 @@ import {AuthProvider} from "./contexts/AuthProvider.tsx";
 import {CompoProvider} from "./contexts/CompoProvider.tsx";
 import {UserDataInitProvider} from "./contexts/UserDataInitProvider.tsx";
 import {DataInitProvider} from "./contexts/DataInitProvider.tsx";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import {LoadingProvider} from "./contexts/LoadingProvider.tsx";
 
 createRoot(document.getElementById('root')!).render(

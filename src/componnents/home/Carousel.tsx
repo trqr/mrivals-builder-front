@@ -1,4 +1,6 @@
-import { Carousel } from "react-bootstrap";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 import affiche from "../../images/HomeEsport.webp";
 import affiche2 from "../../images/HomeIker.jpg";
 import affiche3 from "../../images/HomeSeason.webp";
@@ -29,24 +31,38 @@ export default function HomeCarousel() {
     ];
 
     return (
-        <Carousel >
-            {slides.map((slide, index) => (
-                <Carousel.Item key={index}>
-
-                    <a href={slide.link} target="_blank" rel="noopener noreferrer">
-                        <img
-                            src={slide.src}
-                            alt={slide.alt}
-
-                            style={{
-                                objectFit: "contain",
-                                height: "600px",
-                                width: "1000px"
-                            }}
-                        />
-                    </a>
-                </Carousel.Item>
-            ))}
-        </Carousel>
+        <div className="max-w-[1000px] mx-auto">
+            <Carousel
+                showThumbs={false}
+                showStatus={false}
+                infiniteLoop
+                autoPlay
+                interval={4000}
+                stopOnHover
+                swipeable
+                emulateTouch
+                dynamicHeight={false}
+            >
+                {slides.map((slide, index) => (
+                    <div key={index}>
+                        <a
+                            href={slide.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <img
+                                src={slide.src}
+                                alt={slide.alt}
+                                style={{
+                                    objectFit: "contain",
+                                    height: "600px",
+                                    width: "100%",
+                                }}
+                            />
+                        </a>
+                    </div>
+                ))}
+            </Carousel>
+        </div>
     );
 }
