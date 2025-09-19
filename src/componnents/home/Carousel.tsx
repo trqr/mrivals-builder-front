@@ -5,6 +5,7 @@ import affiche from "../../images/HomeEsport.webp";
 import affiche2 from "../../images/HomeIker.jpg";
 import affiche3 from "../../images/HomeSeason.webp";
 import affiche4 from "../../images/NewChar.jpeg";
+import Box from "@mui/material/Box";
 
 export default function HomeCarousel() {
     const slides = [
@@ -31,7 +32,7 @@ export default function HomeCarousel() {
     ];
 
     return (
-        <div className="max-w-[1000px] mx-auto">
+        <Box className="max-w-[1000px] mx-auto">
             <Carousel
                 showThumbs={false}
                 showStatus={false}
@@ -42,27 +43,30 @@ export default function HomeCarousel() {
                 swipeable
                 emulateTouch
                 dynamicHeight={false}
+                renderItem={(slide, props) => slide}
             >
                 {slides.map((slide, index) => (
-                    <div key={index}>
+                    <Box key={index}>
                         <a
+                            key={index}
                             href={slide.link}
                             target="_blank"
                             rel="noopener noreferrer"
+                            style={{display: "block"}}
                         >
                             <img
                                 src={slide.src}
                                 alt={slide.alt}
                                 style={{
                                     objectFit: "contain",
-                                    height: "600px",
+                                    height: "100%",
                                     width: "100%",
                                 }}
                             />
                         </a>
-                    </div>
+                    </Box>
                 ))}
             </Carousel>
-        </div>
+        </Box>
     );
 }

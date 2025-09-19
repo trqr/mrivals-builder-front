@@ -19,7 +19,7 @@ const BestHeroesSection = () => {
 
             const flattenedHeroes = await fetchedBestHeroes.flatMap((group) => group.heroes);
             setBestHeroes(flattenedHeroes);
-            console.log(fetchedBestHeroes);
+            console.log("fetched heroes", fetchedBestHeroes);
             console.log("flattened heroes", flattenedHeroes);
         });
     }, []);

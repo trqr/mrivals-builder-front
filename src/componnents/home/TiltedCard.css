@@ -46,9 +46,9 @@
     left: 0;
     z-index: 2;
     will-change: transform;
-    transform: translateZ(30px);
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 20px;
+    transform: translateZ(30px) skewX(-21deg) ;
+    background-color: rgb(30, 30, 47, 0.8);
+    border: #FDDE2B 1px solid;
 }
 
 .tilted-card-caption {
