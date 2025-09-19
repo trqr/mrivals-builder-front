@@ -21,8 +21,8 @@ const Home = () => {
                     <Grid size={{
                         xs: 12,
                         sm: 12,
-                        md: 8,
-                        lg: 8,
+                        md: 7,
+                        lg: 7,
                     }}
                           style={{
                               display: "flex",
@@ -35,17 +35,19 @@ const Home = () => {
                 <Grid size={{
                     xs: 12,
                     sm: 12,
-                    md: 4,
-                    lg: 4,
-                }}>
+                    md: 5,
+                    lg: 5,
+                }}
+
+                >
                     <h2 style={{ textAlign: "center" }}>Best Winrate :</h2>
                     <BestHeroesSection />
                 </Grid>
                         <Grid size={{
                             xs: 12,
                             sm: 12,
-                            md: 8,
-                            lg: 8,
+                            md: 7,
+                            lg: 7,
                         }}
                         style={{
                             display: "flex",
@@ -62,17 +64,18 @@ const Home = () => {
                             </GlitchText>
                         </Grid>
                     <Grid size={{
-                        xs: 4,
-                        sm: 4,
-                        md: 4,
-                        lg: 4,
+                        xs: 12,
+                        sm: 12,
+                        md: 5,
+                        lg: 5,
                     }}
                           style={{
                               display: "flex",
                               alignItems: "center",
                               justifyContent: "center",
+
                           }}>
-                        <SecondButton onClick={handleClickBuild}/>
+                        <SecondButton onClick={handleClickBuild} style={{margin: "10px"}}/>
                     </Grid>
             </Grid>
         </Page>
