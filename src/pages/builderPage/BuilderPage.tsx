@@ -22,6 +22,9 @@ import {useLoading} from "../../hooks/useLoading.tsx";
 import Typography from "@mui/material/Typography";
 import iconTank from "../../images/mainTank.webp";
 import iconHeal from "../../images/mainHeal.webp";
+import {useAuth} from "../../hooks/useAuth.tsx";
+import LoginDialog from "../../componnents/common/dialogs/LoginDialog.tsx";
+import useRecommendations from "../../hooks/useRecommendations.tsx";
 
 const BuilderPage = () => {
     const {heroes} = useData();
@@ -29,16 +32,13 @@ const BuilderPage = () => {
     const [bestHeroes, setBestHeroes] = useState([]);
     const [role, setRole] = useState("");
     const [activeHero, setActiveHero] = useState<HeroType | null>(null);
+    const [openLoginDialog, setOpenLoginDialog] = useState(false);
     const {startTransition} = useLoading();
-    const [recommendationsMessages, setRecommendationsMessages] = useState({
-        archetype: "",
-        mainTank: "",
-        mainHeal: "",
-        ban: ""
-    })
     const navigate = useNavigate();
     const theme = useTheme();
     const {compo, addToCompo, clearCompo} = useCompo();
+    const {isAuthenticated} = useAuth();
+    const recommendationsMessages = useRecommendations(compo);
 
     const handleDragStart = (event: any) => {
         const hero = availableHeroes.find((h) => h.id.toString() === event.active.id);
@@ -46,7 +46,6 @@ const BuilderPage = () => {
             setActiveHero(hero);
         }
     };
-
 
     useEffect(() => {
         startTransition(async () => {
@@ -56,33 +55,10 @@ const BuilderPage = () => {
             setBestHeroes(fetchedBestHeroes);
 
         });
-
-        recommend();
         localStorage.setItem("currentCompo", JSON.stringify(compo.map((hero) => hero?.id)));
         console.log("Compo actuelle:", compo);
     }, [compo]);
 
-    const recommend = () => {
-        const newMessages = {...recommendationsMessages};
-
-        if (compo.length === 0) {
-            setRecommendationsMessages({...recommendationsMessages, archetype: ""});
-        } else if (compo.filter(hero => hero.role === "Duelist").length > 2) {
-            newMessages.archetype = "You have way too much Duelist ! Consider replacing one duelist by a Vanguard or a Strategist"
-        } else if (compo.filter(hero => hero.role === "Vanguard").length > 3) {
-            newMessages.archetype = "You have way too much Vanguard ! Consider replacing one Vanguard by a Strategist or a Duelist"
-        } else if (compo.filter(hero => hero.role === "Strategist").length > 3) {
-            newMessages.archetype = "You have way too much Strategist ! Consider replacing one Strategist by a Vanguard or a Duelist"
-        } else newMessages.archetype = ""
-        if (compo.length > 0 && compo.filter(hero => hero.isMainTank).length === 0) {
-            newMessages.mainTank = "You're team lack tanking. Consider picking one main Tank."
-        } else newMessages.mainTank = ""
-        if (compo.length > 0 && compo.filter(hero => hero.isMainHeal).length === 0) {
-            newMessages.mainHeal = "You're team lack healing. Consider picking one main Heal."
-        } else newMessages.mainHeal = ""
-
-        setRecommendationsMessages(newMessages);
-    }
 
     const handleDragEnd = (event: any) => {
         if (compo.length > 5) {
@@ -106,12 +82,16 @@ const BuilderPage = () => {
     };
 
     const handleSubmitCompo = async () => {
-        startTransition(async () => {
-            const heroesIds = compo.map((hero) => hero?.id);
-            const savedCompo = await saveCompo(heroesIds);
-            console.log(savedCompo);
-            navigate(`/team/${savedCompo?.id}`);
-        });
+        if (!isAuthenticated){
+            setOpenLoginDialog(true);
+        } else {
+            startTransition(async () => {
+                const heroesIds = compo.map((hero) => hero?.id);
+                const savedCompo = await saveCompo(heroesIds);
+                console.log(savedCompo);
+                navigate(`/team/${savedCompo?.id}`);
+            });
+        }
     };
 
     const handleRemoveAllHeroes = () => {
@@ -154,7 +134,7 @@ const BuilderPage = () => {
                             disabled={compo.filter((x) => x !== null).length < 6}
                             onClick={handleSubmitCompo}
                         >
-                            Save
+                            Checkout
                         </MainButton>
                             <DeleteButton style={{margin: "5px"}}
                             onClick={handleRemoveAllHeroes}>
@@ -311,6 +291,7 @@ const BuilderPage = () => {
                     </Grid>
                 </Grid>
             </Grid>
+            <LoginDialog open={openLoginDialog} setOpen={setOpenLoginDialog}></LoginDialog>
         </Page>
     );
 };

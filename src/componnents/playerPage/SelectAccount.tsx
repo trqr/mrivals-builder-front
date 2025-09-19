@@ -10,7 +10,7 @@ import {useLoading} from "../../hooks/useLoading.tsx";
 
 const SelectAccount = () => {
     const [message, setMessage] = useState<string>("")
-    const [alert, setAlert] = useState<"error" | "success">("success")
+    const [alert, setAlert] = useState<"warning" | "success">("success")
     const { setActiveAccount} = useUserData();
     const { user } = useAuth();
     const {isPending, startTransition} = useLoading()
@@ -24,7 +24,7 @@ const SelectAccount = () => {
                 setAlert("success")
                 setMessage(updated.message)
             } else {
-                setAlert("error")
+                setAlert("warning")
                 setMessage(updated.message)
             }
         })
