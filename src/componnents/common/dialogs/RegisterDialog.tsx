@@ -18,7 +18,6 @@ import SpotlightCard from "../cards/spotlightCard/SpotlightCard.tsx";
 
 export type RegisterDTO = {
     username: string;
-    mrivalsAccount: string;
     email: string;
     password: string;
 }
@@ -31,7 +30,7 @@ type RegisterDialogProps = {
 const RegisterDialog = ({open, setOpen}: RegisterDialogProps) => {
     const [isPending, startTransition] = useTransition()
     const [showPassword, setShowPassword] = useState(false);
-    const [registerValues, setRegisterValues] = useState<RegisterDTO>({username: "", mrivalsAccount: "", email: "", password: ""})
+    const [registerValues, setRegisterValues] = useState<RegisterDTO>({username: "", email: "", password: ""})
     const [serverError, setServerError] = useState<string | null>(null);
     const [validationErrors, setValidationErrors] = useState<{username?: string; email?: string; password?: string }>({})
 
@@ -70,9 +69,9 @@ const RegisterDialog = ({open, setOpen}: RegisterDialogProps) => {
             const registerData = await register(registerValues);
             if (registerData.user){
                 setOpen(false);
-                setRegisterValues({username: "", mrivalsAccount: "", email: "", password: ""});
+                setRegisterValues({username: "", email: "", password: ""});
             } else {
-                setServerError(registerData.data.message);
+                setServerError(registerData.data?.message ?? registerData);
             }
         })
     }
@@ -104,15 +103,6 @@ const RegisterDialog = ({open, setOpen}: RegisterDialogProps) => {
                                 error={!!validationErrors.username}
                                 helperText={validationErrors.username}
                                 required={true}
-                            ></TextField>
-                            <TextField
-                                label="MRivals Account"
-                                type="text"
-                                autoComplete="mrivalsAccount"
-                                fullWidth
-                                disabled={isPending}
-                                value={registerValues.mrivalsAccount}
-                                onChange={handleChange("mrivalsAccount")}
                             ></TextField>
                             <TextField
                                 label="Email"

@@ -20,9 +20,9 @@ export const register = async (registerDTO: RegisterDTO) => {
             toast.success(`Account succesfully created !`);
             return res.data
         })
-        .catch((err) => {
-            return err
-        })
+        .catch((e) => {
+            return e;
+        });
 }
 
 export const isTokenValid = async () => {
