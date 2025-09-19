@@ -18,6 +18,7 @@ import {login} from "../../../api/Auth.api.ts";
 import {useAuth} from "../../../hooks/useAuth.tsx";
 import {useUserData} from "../../../hooks/useUserData.tsx";
 import SpotlightCard from "../cards/spotlightCard/SpotlightCard.tsx";
+import ForgotPasswordDialog from "./ForgotPasswordDialog.tsx";
 
 export type LoginDTO = {
     email: string;
@@ -31,6 +32,7 @@ type loginDialogProps = {
 
 const LoginDialog = ({open, setOpen}: loginDialogProps) => {
     const [isPending, startTransition] = useTransition()
+    const [openForgotPassDialog, setOpenForgotPassDialog] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [loginValues, setLoginValues] = useState<LoginDTO>({email: "", password: ""})
     const [serverError, setServerError] = useState<string | null>(null);
@@ -77,6 +79,11 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
         }
         setValidationErrors(newErrors);
         return Object.keys(newErrors).length === 0;
+    }
+
+    const handleForgotPassword = () => {
+        setOpenForgotPassDialog(true);
+        setOpen(false);
     }
 
 
@@ -136,7 +143,7 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
                     ></TextField>
                 </DialogContent>
                 <Box sx={{display: "flex", alignItems: "center", margin: "0 20px"}}>
-                    <Link  underline="hover">
+                    <Link  underline="hover" onClick={handleForgotPassword}>
                         Forgotten password?
                     </Link>
                 </Box>
@@ -146,6 +153,7 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
                 </DialogActions>
                 </SpotlightCard>
             </Dialog>
+            <ForgotPasswordDialog open={openForgotPassDialog} onClose={() => setOpenForgotPassDialog(false)}></ForgotPasswordDialog>
         </>
     )
 }

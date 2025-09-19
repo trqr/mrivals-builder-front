@@ -32,3 +32,8 @@ export const isTokenValid = async () => {
     const res = await api.get("/auth");
     return res.data;
 }
+
+export const forgotPassword = async (email: string) => {
+    const res = await api.post(`/auth/forgotPassword${email}`)
+    return res.data;
+}
