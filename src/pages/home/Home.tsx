@@ -17,6 +17,7 @@ const Home = () => {
     return (
         <Page title={"Homepage"} description={"Homepage"}>
             <Grid container spacing={2}
+                  style={{margin: "10px"}}
             >
                     <Grid size={{
                         xs: 12,

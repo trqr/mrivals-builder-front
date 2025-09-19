@@ -43,13 +43,16 @@ export default function HomeCarousel() {
                 swipeable
                 emulateTouch
                 dynamicHeight={false}
+                renderItem={(slide, props) => slide}
             >
                 {slides.map((slide, index) => (
                     <Box key={index}>
                         <a
+                            key={index}
                             href={slide.link}
                             target="_blank"
                             rel="noopener noreferrer"
+                            style={{display: "block"}}
                         >
                             <img
                                 src={slide.src}
