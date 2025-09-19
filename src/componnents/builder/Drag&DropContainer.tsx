@@ -3,6 +3,7 @@ import { Grid } from "@mui/material";
 import { DroppableSlot } from "./drag&drop/DroppableSlot.tsx";
 import type { HeroType } from "../../@types/HeroType";
 import { useCompo } from "../../hooks/useCompo.tsx";
+import theme from "../../theme/theme.ts";
 
 interface DragDropContainerProps {
     compo: HeroType[];
@@ -42,18 +43,23 @@ const DragDropContainer = ({
         <Box>
             <Grid
                 container
-                gap={2}
+                gap={1}
                 sx={{
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    zIndex: {xs: 10, sm: "auto"},
                     marginBottom: "10px",
+                    position: {xs: "fixed", md: "static" },
+                    padding: "5px",
+                    backgroundColor: {xs: theme.palette.background.paper, md: "transparent" } ,
+                    bottom: {xs: -10},
                 }}
             >
                 {Array.from({ length: 6 }).map((_, i) => (
                     <Grid
                         key={i}
-                        size={{ md: 5.5, lg: 5.5, xl: 5.5 }}
+                        size={{ xs: 1.7, md: 5.5, lg: 5.5, xl: 5.5 }}
                         sx={{
                             textAlign: "center",
                             display: "flex",

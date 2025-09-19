@@ -1,8 +1,9 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import {Grid} from "@mui/material";
 
 const PlayerSectionBox = ({ title, children }: { title: string; children: React.ReactNode }) => (
-    <Box
+    <Grid size={{xs: 12, md: 12, xl: 3, lg: 3}}
         sx={{
             display: "flex",
             flexDirection: "column",
@@ -26,7 +27,7 @@ const PlayerSectionBox = ({ title, children }: { title: string; children: React.
             }}
         >   {children}
         </Box>
-    </Box>
+    </Grid>
 );
 
 export default PlayerSectionBox;

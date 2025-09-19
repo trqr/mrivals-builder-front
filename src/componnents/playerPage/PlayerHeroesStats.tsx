@@ -42,24 +42,15 @@ export const PlayerHeroesStats = ({playerStats}) => {
                                     margin: "2px"
                                 }}
                             />
-                            <Box onClick={() => setShowAllKDA(!showAllKDA)} sx={{cursor: "pointer",
-                                transform: "skew(21deg)"}}>
-                                {showAllKDA ? (
+                            <Box onClick={() => setShowAllKDA(!showAllKDA)} sx={{transform: "skew(21deg)"}}>
                                     <Box className="allKDA">
                                         <Typography fontWeight="bold">{hero.hero_name}</Typography>
                                         <Typography>Matches: {hero.matches}</Typography>
                                         <Typography>Wins: {hero.wins}</Typography>
                                         <Typography>MVP: {hero.mvp}</Typography>
-                                        <Typography>SVP: {hero.svp}</Typography>
+                                        <Typography>Winrate: {(hero.wins/hero.matches*100).toFixed(1)}%</Typography>
+                                        <Typography>KDA: {((hero.kills+hero.assists)/hero.deaths).toFixed(2)}</Typography>
                                     </Box>
-                                ) : (
-                                    <Box className="KDA">
-                                        <Typography fontWeight="bold">{hero.hero_name}</Typography>
-                                        <Typography>
-                                            KDA: {hero.kills} / {hero.deaths} / {hero.assists}
-                                        </Typography>
-                                    </Box>
-                                )}
                             </Box>
 
                         </Box>

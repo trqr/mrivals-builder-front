@@ -2,30 +2,31 @@ import {useLoaderData} from "react-router-dom";
 import {imageBaseUrl} from "../../api/config/Axios.config.ts";
 import "./MapDetails.css"
 import Page from "../layout/Page.tsx";
+import {Grid} from "@mui/material";
 
 const MapDetails = () => {
     const map = useLoaderData();
 
     return (
         <Page title={"Map details"} description={"Map details"}>
-            <div className="mapDetails">
-                <div className="leftColumn">
+            <Grid container className="mapDetails" spacing={2} sx={{justifyContent: "center"}}>
+                <Grid size={{xs: 12, md: 4, lg: 4, xl: 4}} className="leftColumn">
                     <div className="mapName">
                         <h1>{map.name}</h1>
                         <h2>{map.fullName ?? "Nom complet indisponible"}</h2>
                     </div>
-                </div>
+                </Grid>
 
-                <div className="centerColumn">
+                <Grid size={{xs: 12, md: 4, lg: 4, xl: 4}} className="centerColumn">
                     <div className="mapLore">
                         <h2>Description :</h2>
                         <p>{map.description}</p>
                         <h2>Location :</h2>
                         <p>{map.location}</p>
                     </div>
-                </div>
+                </Grid>
 
-                <div className="rightColumn">
+                <Grid size={{xs: 12, md: 4, lg: 4, xl: 4}} className="rightColumn">
                     {map?.mapImages?.length > 0 && (
                         <img
                             className="mapImage"
@@ -38,8 +39,8 @@ const MapDetails = () => {
                         <p>Mode de jeu : {map.gameMode ?? "Non défini"}</p>
                         <p>Compétitif : {map.competitive ? "Oui" : "Non"}</p>
                     </div>
-                </div>
-            </div>
+                </Grid>
+            </Grid>
 
         </Page>
     )

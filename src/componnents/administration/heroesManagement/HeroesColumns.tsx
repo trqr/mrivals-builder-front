@@ -75,7 +75,7 @@ export const HeroesColumns = ({
     {
         field: "matchUps",
         headerName: "Counters",
-        width: 360,
+        width: 500,
         renderCell: (params) => (
             <Box sx={{display: "flex", flexDirection: "row", gap: 0.5}}>
                 {params.row.matchUps?.map((counter: MatchUpType) => (

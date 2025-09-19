@@ -126,8 +126,9 @@ const BuilderPage = () => {
                 onDragEnd={handleDragEnd}
                 onDragCancel={handleDragCancel}
             >
+
                 <Box
-                    sx={{display: "flex", justifyContent: "space-between", width: "100%",}}
+                    sx={{display: {xs: "none", md: "flex"}, justifyContent: "space-between", width: "100%",}}
                 >
                     <Box
                         sx={{
@@ -250,6 +251,66 @@ const BuilderPage = () => {
                     ) : null}
                 </DragOverlay>
             </DndContext>
+
+
+            {/* Mobile version  */}
+            <Grid container sx={{ display: {xs: "flex", md: "none"} }}>
+                <DragDropContainer
+                    compo={compo}
+                    availableHeroes={availableHeroes}
+                    setAvailableHeroes={setAvailableHeroes}
+                    activeHero={activeHero}
+                    setActiveHero={setActiveHero}
+                />
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "flex-end",
+                        gap: 1,
+                        pb: "5px"
+                    }}>
+                    <Box sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "flex-end",
+                        gap: 2,
+                        height: "40px"
+                    }}>
+                        <Box>
+                            <Box sx={{border: "1px solid green"}}/>
+                            <Typography
+                                variant={"caption"} fontSize={10}>Best win rates</Typography>
+                        </Box>
+                        <Box>
+                            <Box sx={{border: "1px dashed gold"}}/>
+                            <Typography variant={"caption"} fontSize={10}>Team Ups</Typography>
+                        </Box>
+                    </Box>
+                    <HeroRoleFilter role={role} setRole={setRole}/>
+
+                </Box>
+                <Grid size={12}>
+                    <Grid container spacing={1} sx={{
+                        height: "auto",
+                        overflowY: "auto",
+                        padding: "10px",
+                        scrollbarWidth: "thin",
+                        scrollbarColor: `${theme.palette.primary.main} transparent`,
+                    }}>
+                        {(role ? availableHeroes.filter((hero: HeroType) => hero.role === role) : availableHeroes)
+                            .map((hero: HeroType, index: number) => (
+                                <Grid
+                                    key={index}
+                                    size={{xs: 3}}
+                                >
+                                    <DraggableHero hero={hero} bestHeroes={bestHeroes}/>
+                                </Grid>
+                            ))}
+                    </Grid>
+                </Grid>
+            </Grid>
         </Page>
     );
 };

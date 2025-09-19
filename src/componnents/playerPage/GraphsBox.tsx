@@ -28,7 +28,7 @@ export const GraphsBox = ({playerStats}) => {
     };
 
     return (
-        <Box sx={{pb: 7, position: "relative"}}>
+        <Box sx={{pb: 7, position: "relative", mt: "30px"}}>
 
             <Box>{renderGraph()}</Box>
 

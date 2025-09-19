@@ -1,5 +1,4 @@
-import Box from "@mui/material/Box";
-import {Button} from "@mui/material";
+import {Button, Stack} from "@mui/material";
 import {useState} from "react";
 import ProfileMenu from "./ProfileMenu.tsx";
 import LoginDialog from "./dialogs/LoginDialog.tsx";
@@ -7,7 +6,6 @@ import RegisterDialog from "./dialogs/RegisterDialog.tsx";
 import {useAuth} from "../../hooks/useAuth.tsx";
 
 const AuthBox = () => {
-    // @ts-expect-error bien ds le context
     const { isAuthenticated } = useAuth();
     const [openLoginDialog, setOpenLoginDialog] = useState<boolean>(false);
     const [openRegisterDialog, setOpenRegisterDialog] = useState<boolean>(false);
@@ -15,10 +13,10 @@ const AuthBox = () => {
     return (
         <>
             {!isAuthenticated ?
-                <Box>
+                <Stack direction={"row"}>
                     <Button variant={"contained"} onClick={() => setOpenLoginDialog(true)}>Login</Button>
                     <Button variant={"outlined"} onClick={() => setOpenRegisterDialog(true)}><span>Register</span></Button>
-                </Box>
+                </Stack>
                 :
                 <ProfileMenu/>
             }

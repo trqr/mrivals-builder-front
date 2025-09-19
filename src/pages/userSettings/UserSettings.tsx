@@ -84,7 +84,7 @@ const UserSettings = () => {
     return (
         <Page title={"Settings"} description={"User Settings"}>
             <Typography variant={"h4"} sx={{textAlign: "center", margin: "30px"}}>Settings</Typography>
-            <Box sx={{mx: "auto", mt: 4, display: "flex", justifyContent: "center", gap: "20px"}}>
+            <Box sx={{mx: "auto", mt: 4, display: "flex",flexWrap: "wrap", justifyContent: "center", gap: "20px"}}>
                 <SpotlightCard width={"400px"} className="settings-card" spotlightColor="rgba(0, 229, 255, 0.2)">
                     <Typography variant="h5" gutterBottom>
                         User Information

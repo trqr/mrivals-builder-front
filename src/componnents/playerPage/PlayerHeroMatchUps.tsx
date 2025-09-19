@@ -3,17 +3,16 @@ import Typography from "@mui/material/Typography";
 import {iconBaseUrl} from "../../api/config/Axios.config.ts";
 import MainButton from "../common/buttons/MainButton.tsx";
 import {useState} from "react";
-import {useUserData} from "../../hooks/useUserData.tsx";
 
 export const PlayerHeroMatchUps= ({playerStats}) => {
     const [showAllMatchups, setShowAllMatchups] = useState(false);
 
     return (
-        <Box sx={{flex: "1 1 100%", mt: 3}}>
+        <Box sx={{mt: 3}}>
             <Typography variant="h5" gutterBottom>
                 Hero Matchups
             </Typography>
-            <Box sx={{display: "flex", flexWrap: "wrap", gap: 2}}>
+            <Box sx={{display: "flex", flexWrap: "wrap", gap: 2, justifyContent: "center"}}>
                 {(showAllMatchups ? playerStats.hero_matchups : playerStats.hero_matchups.slice(0, 8))
                     .map((hero: any, index: number) => (
                         <Box

@@ -1,4 +1,4 @@
-import {Alert, Box, Button, MenuItem} from "@mui/material";
+import {Alert, Box, Button, FormControl, FormHelperText, InputLabel, MenuItem} from "@mui/material";
 import Select from "@mui/material/Select";
 import {useEffect, useState} from "react";
 import {useUserData} from "../../hooks/useUserData.tsx";
@@ -38,20 +38,25 @@ const SelectAccount = () => {
 
     return (
         <>
-            <Box sx={{display: "flex", width: "100%", justifyContent: "space-around", alignItems: "center"}}>
-                <Box sx={{ width: "100%"}}>
-                    <Select
-                        value={selectedOption}
-                        onChange={(e) => setSelectedOption(e.target.value)}
-                        fullWidth
-                        size="small"
-                    >
-                        {user!.accounts.map((account: AccountType, index: number) => (
-                            <MenuItem key={index} value={account.id}>{account.mrivalsAccount}</MenuItem>
-                        ))}
-                    </Select>
+            <Box sx={{display: "flex", width: "100%", justifyContent: "center", alignItems: "flex-start", margin: "20px"}}>
+                <Box sx={{ width: "300px"}}>
+                    <FormControl fullWidth size="medium">
+                        <Select
+                            labelId="account-select-label"
+                            value={selectedOption}
+                            onChange={(e) => setSelectedOption(e.target.value)}
+                        >
+                            {user!.accounts.map((account: AccountType, index: number) => (
+                                <MenuItem key={index} value={account.id}>
+                                    {account.mrivalsAccount}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                        <FormHelperText>Choose your MR account</FormHelperText>
+                    </FormControl>
                 </Box>
                 <Button sx={{margin: "10px"}}
+                        size={"large"}
                         variant={"contained"}
                         onClick={updateStats}
                         disabled={isPending}

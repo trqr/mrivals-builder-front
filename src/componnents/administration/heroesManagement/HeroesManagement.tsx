@@ -83,8 +83,34 @@ const HeroesManagement = () => {
                     pageSizeOptions={[5, 10]}
                     checkboxSelection
                     onRowSelectionModelChange={handleSelectionChange}
-                    sx={{border: 0, scrollbarWidth: "thin",
-                        scrollbarColor: `${theme.palette.secondary.main} transparent`,}}
+                    sx={{border: "0", scrollbarWidth: "thin",
+                        scrollbarColor: `${theme.palette.secondary.main} transparent`,
+                        "& .MuiDataGrid-cell": {
+                            display: "flex",
+                            alignItems: "center",
+                        },
+
+                        "& .MuiDataGrid-row:nth-of-type(even)": {
+                            backgroundColor: "rgba(255, 255, 0, 0.05)",
+                        },
+                        "& .MuiDataGrid-row:nth-of-type(odd)": {
+                            backgroundColor: "transparent",
+                        },
+
+                        "& .MuiDataGrid-row:hover": {
+                            backgroundColor: "rgba(255, 255, 0, 0.15) !important",
+                        },
+                        "& .MuiDataGrid-columnHeaders, & .MuiDataGrid-columnHeader": {
+                            backgroundColor: `${theme.palette.background.paper} !important`,
+                        },
+                        "& .MuiDataGrid-columnHeaderTitle": {
+                            color: `${theme.palette.common.white} !important`,
+                            textAlign: "center",
+                            fontWeight: "600",
+                        },}}
+                    rowHeight={70}
+
+
                 />
             </Paper>
 
