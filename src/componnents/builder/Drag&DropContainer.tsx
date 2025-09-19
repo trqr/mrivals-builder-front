@@ -52,8 +52,8 @@ const DragDropContainer = ({
                     marginBottom: "10px",
                     position: {xs: "fixed", md: "static" },
                     padding: "5px",
-                    backgroundColor: theme.palette.background.paper,
-                    bottom: 0,
+                    backgroundColor: {xs: theme.palette.background.paper, md: "transparent" } ,
+                    bottom: {xs: -10},
                 }}
             >
                 {Array.from({ length: 6 }).map((_, i) => (
