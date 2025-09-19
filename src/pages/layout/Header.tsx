@@ -69,7 +69,9 @@ export default function Header() {
                             onClick={() => navigate('/')}
                         >
                             <img height={70} src={logo}/>
-                            <img height={90} width={120} src={texte}/>
+                            <Box sx={{display: {xs: "none", sm: "flex"} }}>
+                                <img height={90} width={120} src={texte}/>
+                            </Box>
                         </Box>
 
                         <Box sx={{ display: { xs: 'none', sm: 'none', md: 'flex', lg: 'flex', xl: 'flex' } }}>
