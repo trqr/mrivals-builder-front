@@ -15,7 +15,8 @@ import {useLoading} from "../../hooks/useLoading.tsx";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router";
 import SpotlightCard from "../../componnents/common/cards/spotlightCard/SpotlightCard.tsx";
-import {Visibility, VisibilityOff } from "@mui/icons-material";
+import {Visibility, VisibilityOff} from "@mui/icons-material";
+import Page from "../layout/Page.tsx";
 
 const ResetPasswordPage = () => {
     const [searchParams] = useSearchParams();
@@ -77,69 +78,71 @@ const ResetPasswordPage = () => {
     }
 
     return (
-        <Container maxWidth="sm" sx={{mt: 5}}>
-            <SpotlightCard width={"auto"} className="dialog-card" spotlightColor="rgba(0, 229, 255, 0.2)">
-            <Typography variant="h5" gutterBottom>
-                    Reset Password
-                </Typography>
+        <Page title={"Password Reset"} description={"Password reset page"}>
+            <Container maxWidth="sm" sx={{mt: 5}}>
+                <SpotlightCard width={"auto"} className="dialog-card" spotlightColor="rgba(0, 229, 255, 0.2)">
+                    <Typography variant="h5" gutterBottom>
+                        Reset Password
+                    </Typography>
 
-                <Box sx={{display: "flex", flexDirection: "column", gap: 2}}>
-                    {serverMsg && <Alert severity={serverMsgSeverity}>{serverMsg}</Alert>}
-                    <TextField
-                        label="New Password"
-                        type={showPassword ? "text" : "password"}
-                        value={password}
-                        error={!!validationErrors.password}
-                        helperText={validationErrors.password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label={showPassword ? "Hide password" : "Show password"}
-                                        onClick={() => setShowPassword((s) => !s)}
-                                        edge="end"
-                                        disabled={isPending}
-                                    >
-                                        {showPassword ? <VisibilityOff/> : <Visibility/>}
-                                    </IconButton>
-                                </InputAdornment>
-                            )
-                        }}
-                    />
-                    <TextField
-                        label="Confirm Password"
-                        type={showPassword ? "text" : "password"}
-                        value={confirmPassword}
-                        error={!!validationErrors.confirmPassword}
-                        helperText={validationErrors.confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label={showPassword ? "Hide password" : "Show password"}
-                                        onClick={() => setShowPassword((s) => !s)}
-                                        edge="end"
-                                        disabled={isPending}
-                                    >
-                                        {showPassword ? <VisibilityOff/> : <Visibility/>}
-                                    </IconButton>
-                                </InputAdornment>
-                            )
-                        }}
-                    />
-                    <Button
-                        variant="contained"
-                        onClick={handleSubmit}
-                        disabled={isPending || !password || !confirmPassword}
-                    >
-                        {isPending ? "Saving..." : "Reset Password"}
-                    </Button>
-                </Box>
+                    <Box sx={{display: "flex", flexDirection: "column", gap: 2}}>
+                        {serverMsg && <Alert severity={serverMsgSeverity}>{serverMsg}</Alert>}
+                        <TextField
+                            label="New Password"
+                            type={showPassword ? "text" : "password"}
+                            value={password}
+                            error={!!validationErrors.password}
+                            helperText={validationErrors.password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label={showPassword ? "Hide password" : "Show password"}
+                                            onClick={() => setShowPassword((s) => !s)}
+                                            edge="end"
+                                            disabled={isPending}
+                                        >
+                                            {showPassword ? <VisibilityOff/> : <Visibility/>}
+                                        </IconButton>
+                                    </InputAdornment>
+                                )
+                            }}
+                        />
+                        <TextField
+                            label="Confirm Password"
+                            type={showPassword ? "text" : "password"}
+                            value={confirmPassword}
+                            error={!!validationErrors.confirmPassword}
+                            helperText={validationErrors.confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label={showPassword ? "Hide password" : "Show password"}
+                                            onClick={() => setShowPassword((s) => !s)}
+                                            edge="end"
+                                            disabled={isPending}
+                                        >
+                                            {showPassword ? <VisibilityOff/> : <Visibility/>}
+                                        </IconButton>
+                                    </InputAdornment>
+                                )
+                            }}
+                        />
+                        <Button
+                            variant="contained"
+                            onClick={handleSubmit}
+                            disabled={isPending || !password || !confirmPassword}
+                        >
+                            {isPending ? "Saving..." : "Reset Password"}
+                        </Button>
+                    </Box>
 
-            </SpotlightCard>
-        </Container>
+                </SpotlightCard>
+            </Container>
+        </Page>
     );
 };
 
