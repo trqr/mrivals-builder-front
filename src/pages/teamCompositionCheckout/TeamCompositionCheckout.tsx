@@ -7,10 +7,18 @@ import SynergiesTeam from "../../componnents/teamCompositionCheckout/SynergiesTe
 import CountersTeam from "../../componnents/teamCompositionCheckout/CountersTeam.tsx";
 import HeroCard from "../../componnents/teamCompositionCheckout/HeroCard.tsx";
 import {useLoaderData,} from "react-router-dom";
+import StreamingAiResponse from "../../componnents/teamCompositionCheckout/StreamingAiResponse.tsx";
 
 const TeamCompositionCheckout = () => {
     const navigate = useNavigate();
     const compo = useLoaderData();
+
+    const setPromptWithHeroesNames = () => {
+        const heroesNames =  compo.heroes.map(hero => hero.name).join(", ");
+        return `What do you think about this composition? ${heroesNames}`;
+    }
+
+
 
     return (
         <Page title={"Team review"} description={"Team review"}>
@@ -21,6 +29,7 @@ const TeamCompositionCheckout = () => {
                 justifyContent: "center",
                 alignItems: "flex-start",
             }}>
+                <StreamingAiResponse prompt={setPromptWithHeroesNames()}></StreamingAiResponse>
                 <Box sx={{ margin: "20px", backgroundColor: "rgba(0, 0, 0, 0.2)", padding: "10px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)"}}>
                     <SynergiesTeam heroes={compo.heroes}/>
                 </Box>
