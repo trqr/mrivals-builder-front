@@ -6,13 +6,16 @@ import {
     Button,
     Typography,
     Box,
-    Paper, Alert
+    Paper, Alert,
+    InputAdornment, IconButton
 } from "@mui/material";
 import axios from "axios";
 import {resetPassword} from "../../api/Auth.api.ts";
 import {useLoading} from "../../hooks/useLoading.tsx";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router";
+import SpotlightCard from "../../componnents/common/cards/spotlightCard/SpotlightCard.tsx";
+import {Visibility, VisibilityOff } from "@mui/icons-material";
 
 const ResetPasswordPage = () => {
     const [searchParams] = useSearchParams();
@@ -24,6 +27,7 @@ const ResetPasswordPage = () => {
     const [serverMsg, setServerMsg] = useState("")
     const [serverMsgSeverity, setServerMsgSeverity] = useState<"success" | "error">()
     const {isPending, startTransition} = useLoading();
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async () => {
@@ -74,8 +78,8 @@ const ResetPasswordPage = () => {
 
     return (
         <Container maxWidth="sm" sx={{mt: 5}}>
-            <Paper sx={{p: 4}}>
-                <Typography variant="h5" gutterBottom>
+            <SpotlightCard width={"auto"} className="dialog-card" spotlightColor="rgba(0, 229, 255, 0.2)">
+            <Typography variant="h5" gutterBottom>
                     Reset Password
                 </Typography>
 
@@ -83,19 +87,47 @@ const ResetPasswordPage = () => {
                     {serverMsg && <Alert severity={serverMsgSeverity}>{serverMsg}</Alert>}
                     <TextField
                         label="New Password"
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         value={password}
                         error={!!validationErrors.password}
                         helperText={validationErrors.password}
                         onChange={(e) => setPassword(e.target.value)}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label={showPassword ? "Hide password" : "Show password"}
+                                        onClick={() => setShowPassword((s) => !s)}
+                                        edge="end"
+                                        disabled={isPending}
+                                    >
+                                        {showPassword ? <VisibilityOff/> : <Visibility/>}
+                                    </IconButton>
+                                </InputAdornment>
+                            )
+                        }}
                     />
                     <TextField
                         label="Confirm Password"
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         value={confirmPassword}
                         error={!!validationErrors.confirmPassword}
                         helperText={validationErrors.confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label={showPassword ? "Hide password" : "Show password"}
+                                        onClick={() => setShowPassword((s) => !s)}
+                                        edge="end"
+                                        disabled={isPending}
+                                    >
+                                        {showPassword ? <VisibilityOff/> : <Visibility/>}
+                                    </IconButton>
+                                </InputAdornment>
+                            )
+                        }}
                     />
                     <Button
                         variant="contained"
@@ -105,7 +137,8 @@ const ResetPasswordPage = () => {
                         {isPending ? "Saving..." : "Reset Password"}
                     </Button>
                 </Box>
-            </Paper>
+
+            </SpotlightCard>
         </Container>
     );
 };
