@@ -21,11 +21,10 @@ export const askAIStream = async (
         if (value) {
             const chunk = decoder.decode(value);
 
-            // LM Studio peut renvoyer plusieurs JSON concaténés, séparés par des sauts de ligne
             const lines = chunk.split("\n").filter((l) => l.trim() !== "");
             lines.forEach((line) => {
                 try {
-                    // Supprime le préfixe 'data:' si présent
+
                     const cleaned = line.replace(/^data:/, "").trim();
                     if (!cleaned) return;
 
@@ -35,7 +34,6 @@ export const askAIStream = async (
                         onChunk(content);
                     }
                 } catch (e) {
-                    // ignore si ce n'est pas du JSON valide
                     console.error("Parsing chunk failed:", e);
                 }
             });

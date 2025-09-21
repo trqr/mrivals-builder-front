@@ -1,6 +1,7 @@
 import {Card, CardContent, CardHeader, Typography} from "@mui/material";
 import {useEffect, useState} from "react";
 import {askAIStream} from "../../api/AI.api.ts";
+import SpotlightCard from "../common/cards/spotlightCard/SpotlightCard.tsx";
 
 type StreamingAIProps = {
     prompt: string;
@@ -23,14 +24,12 @@ const StreamingAiResponse = ({prompt}: StreamingAIProps) => {
         }, [prompt]);
 
     return (
-        <Card sx={{minWidth: 300, margin: 2}}>
-            <CardHeader title="AI Response"/>
-            <CardContent>
+        <SpotlightCard width={"auto"} className="settings-card" spotlightColor="rgba(0, 229, 255, 0.2)">
+                <Typography variant={"h6"} color={"primary"} margin={"20px"} textAlign={"center"}>Advantages and weaknesses by artificial inteligence</Typography>
                 <Typography variant="subtitle2" sx={{whiteSpace: "pre-wrap"}}>
                     {response}
                 </Typography>
-            </CardContent>
-        </Card>
+        </SpotlightCard>
     );
 };
 

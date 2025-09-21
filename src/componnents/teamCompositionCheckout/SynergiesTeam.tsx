@@ -26,10 +26,10 @@ const SynergiesTeam = ({heroes}: SynergiesTeamProps) => {
 
     return (
         <Box>
-            <Typography variant="h6" gutterBottom>
+            <Typography variant="h6" textAlign={"center"} gutterBottom>
                 Best Synergies
             </Typography>
-            <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "row" }}>
+            <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "row", justifyContent: "center" }}>
                 {Array.isArray(teamSynergies) &&
                     teamSynergies.map((synergy) => (
                         <li
@@ -46,8 +46,8 @@ const SynergiesTeam = ({heroes}: SynergiesTeamProps) => {
                                 style={{
                                     objectFit: "cover",
                                     objectPosition: "top",
-                                    height: "80px",
-                                    width: "80px",
+                                    height: "60px",
+                                    width: "60px",
                                     borderRadius: "5px",
                                     border: "3px solid blue",
                                     marginRight: "10px",

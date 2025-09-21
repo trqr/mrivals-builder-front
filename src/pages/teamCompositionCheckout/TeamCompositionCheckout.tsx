@@ -1,4 +1,4 @@
-import {Grid,} from "@mui/material";
+import {Container, Grid, Stack,} from "@mui/material";
 import Page from "../layout/Page.tsx";
 import Box from "@mui/material/Box";
 import TeambuildButton from "../../componnents/common/buttons/TeambuildButton.tsx";
@@ -8,43 +8,54 @@ import CountersTeam from "../../componnents/teamCompositionCheckout/CountersTeam
 import HeroCard from "../../componnents/teamCompositionCheckout/HeroCard.tsx";
 import {useLoaderData,} from "react-router-dom";
 import StreamingAiResponse from "../../componnents/teamCompositionCheckout/StreamingAiResponse.tsx";
+import SpotlightCard from "../../componnents/common/cards/spotlightCard/SpotlightCard.tsx";
+import Typography from "@mui/material/Typography";
 
 const TeamCompositionCheckout = () => {
     const navigate = useNavigate();
     const compo = useLoaderData();
 
     const setPromptWithHeroesNames = () => {
-        const heroesNames =  compo.heroes.map(hero => hero.name).join(", ");
+        const heroesNames = compo.heroes.map(hero => hero.name).join(", ");
         return `What do you think about this composition? ${heroesNames}`;
     }
 
 
-
     return (
         <Page title={"Team review"} description={"Team review"}>
+            <Container maxWidth={"xl"}>
+                <Typography variant={"h4"} sx={{textAlign: "center", margin: "30px"}}>Team composition summary</Typography>
                 <HeroCard heroes={compo.heroes}/>
-            <Grid style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "flex-start",
-            }}>
-                <StreamingAiResponse prompt={setPromptWithHeroesNames()}></StreamingAiResponse>
-                <Box sx={{ margin: "20px", backgroundColor: "rgba(0, 0, 0, 0.2)", padding: "10px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)"}}>
-                    <SynergiesTeam heroes={compo.heroes}/>
-                </Box>
-                <Box sx={{ margin: "20px", backgroundColor: "rgba(0, 0, 0, 0.2)", padding: "10px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)" }}>
-                   <CountersTeam heroes={compo.heroes}/>
-                </Box>
-                <Box sx={{ transform: "skew(-21deg)", mt: 2, margin: "20px", alignItems: "center"}}>
-                    <TeambuildButton
-                        style={{marginTop: "20px"}}
-                        onClick={() => navigate("../user/teams")}
-                    >
-                        Save
-                    </TeambuildButton>
-                </Box>
-            </Grid>
+                <Grid container spacing={3} style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    margin: "20px"
+                }}>
+                    <Grid size={3.5}>
+                        <SpotlightCard width={"auto"} className="settings-card" spotlightColor="rgba(0, 229, 255, 0.2)">
+                            <SynergiesTeam heroes={compo.heroes}/>
+                        </SpotlightCard>
+                        <SpotlightCard width={"auto"} className="settings-card" spotlightColor="rgba(0, 229, 255, 0.2)">
+                            <CountersTeam heroes={compo.heroes}/>
+                        </SpotlightCard>
+                    </Grid>
+                    <Grid size={6}>
+                        <StreamingAiResponse prompt={setPromptWithHeroesNames()}></StreamingAiResponse>
+                    </Grid>
+                    <Grid size={2}>
+                        <Stack sx={{transform: "skew(-21deg)", mt: 2, margin: "20px", alignItems: "center", justifyContent: "center"}}>
+                            <TeambuildButton
+                                style={{marginTop: "20px"}}
+                                onClick={() => navigate("../user/teams")}
+                            >
+                                Save
+                            </TeambuildButton>
+                        </Stack>
+                    </Grid>
+                </Grid>
+            </Container>
         </Page>
     )
 }
