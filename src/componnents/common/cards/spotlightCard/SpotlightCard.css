@@ -3,6 +3,7 @@
     border-radius: 1px;
     background-color: #2a2a40;
     padding: 2rem;
+    margin-bottom: 5px;
     overflow: hidden;
     --mouse-x: 50%;
     --mouse-y: 50%;

@@ -1,5 +1,5 @@
-import {useState, useTransition} from "react";
-import {Box, Button, LinearProgress, MenuItem, Select, Stack, TextField, Typography,} from "@mui/material";
+import {useState} from "react";
+import {Box, Button, MenuItem, Select, Stack, TextField, Typography,} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import {useAuth} from "../../hooks/useAuth.tsx";
 import type {UserType} from "../../@types/UserType.ts";
@@ -78,8 +78,6 @@ const UserSettings = () => {
             return prevId;
         });
     };
-
-
 
     return (
         <Page title={"Settings"} description={"User Settings"}>

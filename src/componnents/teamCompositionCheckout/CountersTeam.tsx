@@ -26,10 +26,10 @@ const CountersTeam = ({heroes}: CountersTeamProps) => {
 
     return (
         <Box>
-            <Typography variant="h6" gutterBottom>
-                Worst Counters
+            <Typography variant="h6" textAlign={"center"} gutterBottom>
+                Best Counters
             </Typography>
-            <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "row" }}>
+            <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "row", justifyContent: "center" }}>
                 {teamCounters.map((counter) => (
                     <li
                         key={counter.enemyHeroId}
@@ -45,8 +45,8 @@ const CountersTeam = ({heroes}: CountersTeamProps) => {
                             style={{
                                 objectFit: "cover",
                                 objectPosition: "top",
-                                height: "80px",
-                                width: "80px",
+                                height: "60px",
+                                width: "60px",
                                 borderRadius: "5px",
                                 border: "3px solid violet",
                                 marginRight: "10px",
