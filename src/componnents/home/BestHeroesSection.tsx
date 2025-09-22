@@ -1,28 +1,11 @@
 import { useData } from "../../hooks/useData.tsx";
-import {useEffect, useState} from "react";
-import { getBestWinRateByRole } from "../../api/Compo.api.ts";
 import type { HeroType } from "../../@types/HeroType";
-import {useLoading} from "../../hooks/useLoading.tsx";
 import {Grid} from "@mui/material";
 import TiltedCard from "./TiltedCard.tsx";
 import {imageBaseUrl} from "../../api/config/Axios.config.ts";
 
 const BestHeroesSection = () => {
-    const { heroes } = useData();
-    const [bestHeroes, setBestHeroes] = useState<HeroType[]>([]);
-    const { startTransition } = useLoading();
-
-    useEffect(() => {
-        startTransition(async () => {
-            const heroesIds = heroes.map((hero) => hero?.id);
-            const fetchedBestHeroes = await getBestWinRateByRole(heroesIds);
-
-            const flattenedHeroes = await fetchedBestHeroes.flatMap((group) => group.heroes);
-            setBestHeroes(flattenedHeroes);
-            console.log("fetched heroes", fetchedBestHeroes);
-            console.log("flattened heroes", flattenedHeroes);
-        });
-    }, []);
+    const { bestHeroes } = useData();
 
     return (
         <Grid container spacing={2}>
