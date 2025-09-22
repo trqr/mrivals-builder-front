@@ -1,12 +1,16 @@
 import {useRevalidator} from "react-router-dom";
 import {useState} from "react";
 import {DataGrid, type GridColDef} from "@mui/x-data-grid";
-import {Box, Button, MenuItem, Paper, Typography} from "@mui/material";
+import {alpha, Box, Button, MenuItem, Paper, Typography} from "@mui/material";
 import Select from "@mui/material/Select";
 import ConfirmationDialog from "../../common/dialogs/ConfirmationDialog.tsx";
-import {banUsers, changeUsersRoleToAdmin, changeUsersRoleToUser} from "../../../api/User.api.ts";
+import {banUsers, changeUsersRoleToAdmin, changeUsersRoleToUser, unBanUsers} from "../../../api/User.api.ts";
 import SpotlightCard from "../../common/cards/spotlightCard/SpotlightCard.tsx";
 import theme from "../../../theme/theme.ts";
+import {toast} from "react-toastify";
+import type {AbilitiesType} from "../../../@types/AbilitiesType";
+import {iconBaseUrl} from "../../../api/config/Axios.config.ts";
+import type {AccountType} from "../../../@types/UserType.ts";
 
 
 type UsersManagementProps = {
@@ -18,6 +22,7 @@ const UsersManagement = ({users}: UsersManagementProps) => {
     const [selectedRows, setSelectedRows] = useState<number[]>([])
     const [selectedRole, setSelectedRole] = useState<string>("");
     const [openConfirmationDialog, setOpenConfirmationDialog] = useState<boolean>(false);
+    const [openBanConfirmation, setOpenBanConfirmation] = useState(false);
 
     const handleSelectionChange = (newSelection: any) => {
         const ids: never[] = Array.from(newSelection.ids)
@@ -37,9 +42,28 @@ const UsersManagement = ({users}: UsersManagementProps) => {
             width: 200
         },
         {
-            field: 'mrivalsAccount',
+            field: 'accounts',
             headerName: 'Marvel Rivals Account',
             width: 220,
+            renderCell: (params) => (
+                <>
+                {
+                    params.row.accounts.length === 0 && (<Typography variant={"subtitle2"}>No account</Typography>)
+                }
+                <Box sx={{display: "flex", gap: 1}}>
+                    {params.row.accounts?.map((account: AccountType) => (
+                        <Box   sx={{
+                            boxShadow: (theme) =>
+                                `0 1px 3px 0.2px ${alpha(theme.palette.primary.light, 0.2)}`,
+                            p: "2px",
+                            borderRadius: "5px",
+                        }}>
+                            <Typography variant={"subtitle2"}> {account.mrivalsAccount} </Typography>
+                        </Box>
+                    ))}
+                </Box>
+                </>
+            )
         },
         {field: 'role', headerName: 'Role', width: 100},
         {field: 'banned', headerName: 'Banned', width: 1200}
@@ -61,9 +85,28 @@ const UsersManagement = ({users}: UsersManagementProps) => {
     };
 
     const handleBan = async () => {
-        await banUsers(selectedRows);
-        setSelectedRows([]);
-        await revalidate();
+        try {
+            await banUsers(selectedRows);
+            toast.success(`User(s) id ${selectedRows} has been banned.`)
+            setSelectedRows([]);
+            await revalidate();
+        }
+        catch (error) {
+            toast.error(error.response.data.message);
+        }
+        setOpenBanConfirmation(false);
+    }
+
+    const handleUnBan = async () => {
+        try {
+            await unBanUsers(selectedRows);
+            toast.success(`User(s) id ${selectedRows} has been unbanned.`)
+            setSelectedRows([]);
+            await revalidate();
+        }
+        catch (error) {
+            toast.error(error.response.data.message);
+        }
     }
 
     return (
@@ -130,12 +173,23 @@ const UsersManagement = ({users}: UsersManagementProps) => {
                             CHANGE ROLE
                         </Button>
                         <Button
+                            sx={{rginLeft: "30px"}}
+                            variant="outlined"
+                            color="error"
+                            onClick={() => setOpenBanConfirmation(true)}
+                        >
+                            <span style={{    transform: "skew(21deg)"
+                            }}>
+                                BAN
+                            </span>
+                        </Button>
+                        <Button
                             sx={{marginLeft: "30px"}}
                             variant="text"
-                            color="warning"
-                            onClick={handleBan}
+                            color="primary"
+                            onClick={handleUnBan}
                         >
-                            BAN USER(S)
+                            UNBAN
                         </Button>
                     </Box>
                 </SpotlightCard>
@@ -145,6 +199,12 @@ const UsersManagement = ({users}: UsersManagementProps) => {
                 handleClose={() => setOpenConfirmationDialog(false)}
                 handleConfirmationClick={handleRoleChaning}
                 dialogText={"Are you sure you want to change role to this user(s)?"}
+            ></ConfirmationDialog>
+            <ConfirmationDialog
+                isOpen={openBanConfirmation}
+                handleClose={() => setOpenBanConfirmation(false)}
+                handleConfirmationClick={handleBan}
+                dialogText={"Are you sure you want to ban this user(s)?"}
             ></ConfirmationDialog>
         </>
     )

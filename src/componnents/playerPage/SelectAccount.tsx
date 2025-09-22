@@ -1,4 +1,4 @@
-import {Alert, Box, Button, FormControl, FormHelperText, InputLabel, MenuItem} from "@mui/material";
+import {Alert, Box, Button, FormControl, FormHelperText, MenuItem} from "@mui/material";
 import Select from "@mui/material/Select";
 import {useEffect, useState} from "react";
 import {useUserData} from "../../hooks/useUserData.tsx";

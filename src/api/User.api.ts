@@ -61,3 +61,8 @@ export const banUsers = async (ids: number[]) => {
     const res = await api.put(`/users/ban`, ids);
     return res.data;
 }
+
+export const unBanUsers = async (ids: number[]) => {
+    const res = await api.put(`/users/unban`, ids);
+    return res.data;
+}
