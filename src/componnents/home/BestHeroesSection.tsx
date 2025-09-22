@@ -14,18 +14,18 @@ const BestHeroesSection = () => {
             <Grid size={{
                 xs: 6,
                 sm: 6,
-                md: 4,
-                lg: 4,
+                md: 2,
+                lg: 2,
             }}>
                 <TiltedCard
                     imageSrc={imageBaseUrl + hero.imageLink}
                     altText={hero.name}
                     captionText={hero.name}
-                    containerHeight="250px"
-                    containerWidth="150px"
-                    imageHeight="250px"
-                    imageWidth="150px"
-                    rotateAmplitude={12}
+                    containerHeight="225px"
+                    containerWidth="125px"
+                    imageHeight="225px"
+                    imageWidth="125px"
+                    rotateAmplitude={20}
                     scaleOnHover={1.2}
                     showMobileWarning={false}
                     showTooltip={true}
