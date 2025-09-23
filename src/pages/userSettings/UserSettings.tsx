@@ -19,7 +19,7 @@ const UserSettings = () => {
     const {addAccountName} = useUserData();
     const [newAccountName, setNewAccountName] = useState<string>("")
     const [selectedAccountId, setSelectedAccountId] = useState<number | null>(
-        currentUser.accounts.length > 0 ? currentUser.accounts[0].id : null
+        user.accounts.length > 0 ? user.accounts[0].id : null
     );
     const {isPending, startTransition} = useLoading();
 

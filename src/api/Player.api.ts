@@ -13,6 +13,7 @@ export const savePlayerStats = async (account: string) => {
 export const getAllPlayersStats = async () => {
     return await api.get(`/mr-accounts`)
         .then((res) => {
+            console.log(res.data);
             return res.data;
         })
         .catch((err) => {

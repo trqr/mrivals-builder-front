@@ -17,7 +17,7 @@ import BestPlayersPage from "../pages/bestPlayersPage/BestPlayersPage.tsx";
 import {getHeroLeaderboard} from "../api/Leaderboard.api.ts";
 import Player from "../pages/player/Player.tsx";
 import {getMapById} from "../api/Map.api.ts";
-import {getPlayerStats} from "../api/Player.api.ts";
+import {getAllPlayersStats, getPlayerStats} from "../api/Player.api.ts";
 import {getTeamById} from "../api/Compo.api.ts";
 import ResetPasswordPage from "../pages/resetPasswordPage/ResetPasswordPage.tsx";
 
@@ -70,6 +70,7 @@ export const Router = createBrowserRouter([
             {
                 path: "/user/settings",
                 element: <UserSettings/>,
+                loader: () => getAllPlayersStats()
             },
             {
                 path: "/user/teams",

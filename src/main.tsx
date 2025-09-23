@@ -1,5 +1,5 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import {StrictMode} from 'react'
+import {createRoot} from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import theme from "./theme/theme.ts";
@@ -11,20 +11,20 @@ import {DataInitProvider} from "./contexts/DataInitProvider.tsx";
 import {LoadingProvider} from "./contexts/LoadingProvider.tsx";
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-      <DataInitProvider>
-          <UserDataInitProvider>
-              <AuthProvider>
-                  <LoadingProvider>
-                      <CompoProvider>
-                          <ThemeProvider theme={theme}>
-                              <CssBaseline/>
-                                <App />
-                          </ThemeProvider>
-                      </CompoProvider>
-                  </LoadingProvider>
-              </AuthProvider>
-          </UserDataInitProvider>
-      </DataInitProvider>
-  </StrictMode>,
+    <StrictMode>
+        <LoadingProvider>
+            <DataInitProvider>
+                <UserDataInitProvider>
+                    <AuthProvider>
+                        <CompoProvider>
+                            <ThemeProvider theme={theme}>
+                                <CssBaseline/>
+                                <App/>
+                            </ThemeProvider>
+                        </CompoProvider>
+                    </AuthProvider>
+                </UserDataInitProvider>
+            </DataInitProvider>
+        </LoadingProvider>
+    </StrictMode>,
 )

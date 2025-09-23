@@ -1,6 +1,7 @@
 import {createContext, type Dispatch, type SetStateAction, useEffect, useState} from "react";
 import type {UserType} from "../@types/UserType.ts";
 import {isTokenValid} from "../api/Auth.api.ts";
+import {useLoading} from "../hooks/useLoading.tsx";
 
 type AuthContextType = {
     user: UserType | null;
@@ -13,6 +14,7 @@ export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export const AuthProvider = ({ children }: {children: React.ReactNode}) => {
     const [user, setUser] = useState<UserType | null>(null);
     const isAuthenticated = !!user;
+    const {startTransition} = useLoading();
 
     const fetchCurrentUser = async () => {
         try {
@@ -25,7 +27,9 @@ export const AuthProvider = ({ children }: {children: React.ReactNode}) => {
     };
 
     useEffect(() => {
-        fetchCurrentUser();
+        startTransition(async () => {
+            await fetchCurrentUser();
+        })
     }, []);
 
     return (
