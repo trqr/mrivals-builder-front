@@ -37,8 +37,6 @@ body{
 }
 
 .btn {
-    font-family: "Avenger";
-    padding: 10px;
     border: 1px solid #FDDE2B;
     cursor: pointer;
     font-weight: bold;

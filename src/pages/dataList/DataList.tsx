@@ -40,10 +40,13 @@ const DataList = () => {
             <Container maxWidth="xl">
                 <div className={'filterButton'} style={{ textAlign: "center"}}>
                     <button className={show === "heroes" ? "btn active" : "btn inactive"}
-                            onClick={() => setShow("heroes")}>Heroes
+                            onClick={() => setShow("heroes")}>
+                        <Typography variant={"h6"} sx={{paddingTop: "8px"}}>Heroes</Typography>
                     </button>
                     <button className={show === "maps" ? "btn active" : "btn inactive"}
-                            onClick={() => setShow("maps")}>Maps
+                            onClick={() => setShow("maps")}>
+                        <Typography variant={"h6"} sx={{paddingTop: "8px"}}>Maps</Typography>
+
                     </button>
                 </div>
 
@@ -58,8 +61,8 @@ const DataList = () => {
                                     captionText={hero.name}
                                     containerHeight="225px"
                                     containerWidth="125px"
-                                    imageHeight="225px"
-                                    imageWidth="125px"
+                                    imageHeight="230px"
+                                    imageWidth="140px"
                                     rotateAmplitude={20}
                                     scaleOnHover={1.2}
                                     showMobileWarning={false}

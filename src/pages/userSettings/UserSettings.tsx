@@ -110,7 +110,6 @@ const UserSettings = () => {
                                     ),
                                 }}
                             />
-
                         <Box>
                             <Typography variant="subtitle1"  gutterBottom>
                                 Marvel Rivals Accounts
