@@ -20,7 +20,7 @@ import {getMapById} from "../api/Map.api.ts";
 import {getAllPlayersStats, getPlayerStats} from "../api/Player.api.ts";
 import {getTeamById} from "../api/Compo.api.ts";
 import ResetPasswordPage from "../pages/resetPasswordPage/ResetPasswordPage.tsx";
-import ErrorPage from "../pages/errorGlobalPage/ErrorPage.tsx";
+import ErrorPage from "../pages/layout/errorGlobalPage/ErrorPage.tsx";
 
 
 export const Router = createBrowserRouter([
@@ -40,12 +40,14 @@ export const Router = createBrowserRouter([
             {
                 path: "/heroDetails/:id",
                 element: <HeroDetails />,
-                loader: ({params: {id}}) => getHero(id!)
+                loader: ({params: {id}}) => getHero(id!),
+                errorElement: <ErrorPage />
             },
             {
                 path: "/best-players-by-hero/:id",
                 element: <BestPlayersPage/>,
-                loader: ({params: {id}}) => getHeroLeaderboard(id!, 0, 25)
+                loader: ({params: {id}}) => getHeroLeaderboard(id!, 0, 25),
+                errorElement: <ErrorPage />
             },
             {
                 path: "/list",
@@ -54,12 +56,14 @@ export const Router = createBrowserRouter([
             {
                 path: "/maps/:id",
                 element: <MapDetails />,
-                loader: ({params: {id}}) => getMapById(id!)
+                loader: ({params: {id}}) => getMapById(id!),
+                errorElement: <ErrorPage />
             },
             {
                 path: "/team/:teamId",
                 element: <TeamCompositionCheckout />,
-                loader: ({params: {teamId}}) => getTeamById(teamId!)
+                loader: ({params: {teamId}}) => getTeamById(teamId!),
+                errorElement: <ErrorPage />
             },
             {
                 path: "/admin",
@@ -81,7 +85,8 @@ export const Router = createBrowserRouter([
             {
                 path: "/user/player/:id",
                 element: <Player/>,
-                loader: ({params: {id}}) => getPlayerStats(id!)
+                loader: ({params: {id}}) => getPlayerStats(id!),
+                errorElement: <ErrorPage />
             },
             {
                 path: "/reset-password",
@@ -89,6 +94,10 @@ export const Router = createBrowserRouter([
             },
             {
                 path: "/*",
+                element: <ErrorPage/>
+            },
+            {
+                path: "/error",
                 element: <ErrorPage/>
             }
         ]
