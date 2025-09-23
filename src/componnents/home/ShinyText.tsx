@@ -9,7 +9,9 @@ const ShinyText = ({ text, disabled = false, speed = 5, className = '' }) => {
                  display: "flex",
                  flexDirection: "column",
                 justifyContent: "center",
-                alignItems: "center"}}>
+                alignItems: "center",
+                fontSize: "20px",
+        }}>
 
 
 

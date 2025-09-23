@@ -38,7 +38,7 @@ const Home = () => {
                     alignItems: "center",
                     justifyContent: "center",
                 }}>
-                    <Typography variant={"h2"} sx={{fontWeight: "bold"}}>Build the Perfect Team on Marvel Rivals ⚡</Typography>
+                    <Typography variant={"h2"} sx={{fontWeight: "bold", marginTop: "15px"}}>Build the Perfect Team on Marvel Rivals ⚡</Typography>
                     </Grid>
 
 
