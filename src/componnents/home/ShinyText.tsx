@@ -11,7 +11,7 @@ const ShinyText = ({ text, disabled = false, speed = 5, className = '' }) => {
                 justifyContent: "center",
                 alignItems: "center"}}>
 
-            <h4>Build the Perfect Team on Marvel Rivals ⚡</h4>
+
 
             <p>
                 Tired of unbalanced comps?<br/>

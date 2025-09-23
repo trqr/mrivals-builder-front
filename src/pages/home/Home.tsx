@@ -6,7 +6,8 @@ import SecondButton from "../../componnents/common/buttons/SecondButton.tsx";
 import BestHeroesSection from "../../componnents/home/BestHeroesSection.tsx";
 import {Container, Grid} from "@mui/material";
 import ShinyText from "../../componnents/home/ShinyText.tsx";
-import SpotlightCard from "../../componnents/common/cards/spotlightCard/SpotlightCard.tsx";
+import Typography from "@mui/material/Typography";
+import HomeCard from "../../componnents/home/HomeCard.tsx";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -18,10 +19,29 @@ const Home = () => {
 
     return (
         <Page title={"Homepage"} description={"Homepage"}>
+            <div className="Homepage">
             <Container maxWidth="xl">
             <Grid container spacing={2}
-                  style={{margin: "10px"}}
+                  style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                  }}
             >
+                <Grid size={{
+                        xs: 12,
+                        sm: 12,
+                        md: 12,
+                        lg: 12}}
+                sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                }}>
+                    <Typography variant={"h2"} sx={{fontWeight: "bold"}}>Build the Perfect Team on Marvel Rivals ⚡</Typography>
+                    </Grid>
+
+
                     <Grid size={{
                         xs: 12,
                         sm: 12,
@@ -33,21 +53,26 @@ const Home = () => {
                               flexDirection: "column",
                               alignItems: "center",
                               justifyContent: "center",
-                          }}>
-                        <SpotlightCard width={"auto"} className="settings-card" spotlightColor="rgba(0, 229, 255, 0.2)">
+                          }}
+                    >
+                        <HomeCard
+                            width="auto"
+                            spotlightColor="rgba(0, 229, 255, 0.2)"
+                            backgroundColor="rgba(42, 42, 64, 0.6)"
+                        >
                             <ShinyText
                                 text
                                 disabled={false}
                                 speed={3}
                                 className='custom-class'
                             />
-                        </SpotlightCard>
-                    <SecondButton onClick={handleClickBuild} style={{margin: "10px"}}/>
-                    </Grid>
 
+                    <SecondButton onClick={handleClickBuild} style={{margin: "10px"}}/>
+                    </HomeCard>
+                    </Grid>
                         <Grid size={{
                             xs: 12,
-                            sm: 12,
+                            sm: 6,
                             md: 6,
                             lg: 6,
                         }}
@@ -59,6 +84,7 @@ const Home = () => {
                         }}>
                            <Carousel/>
                         </Grid>
+
                     <Grid size={{
                         xs: 12,
                         sm: 12,
@@ -72,14 +98,21 @@ const Home = () => {
                               justifyContent: "center",
                               marginTop: "10px",
 
-                          }}>
-                        <SpotlightCard width={"auto"} className="settings-card" spotlightColor="rgba(0, 229, 255, 0.2)">
-                        <h2 style={{ textAlign: "center" }}>Best Winrate :</h2>
-                        <BestHeroesSection />
-                            </SpotlightCard>
+                          }}
+                    >
+                        <HomeCard
+                            width="auto"
+                            spotlightColor="rgba(0, 229, 255, 0.2)"
+                            backgroundColor="rgba(42, 42, 64, 0.6)"
+                        >
+                            <h2 style={{ textAlign: "center" }}>Best Winrate :</h2>
+                            <BestHeroesSection />
+                        </HomeCard>
                     </Grid>
             </Grid>
             </Container>
+
+            </div>
         </Page>
     );
 };
