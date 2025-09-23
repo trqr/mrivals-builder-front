@@ -8,8 +8,6 @@ import {banUsers, changeUsersRoleToAdmin, changeUsersRoleToUser, unBanUsers} fro
 import SpotlightCard from "../../common/cards/spotlightCard/SpotlightCard.tsx";
 import theme from "../../../theme/theme.ts";
 import {toast} from "react-toastify";
-import type {AbilitiesType} from "../../../@types/AbilitiesType";
-import {iconBaseUrl} from "../../../api/config/Axios.config.ts";
 import type {AccountType} from "../../../@types/UserType.ts";
 
 

@@ -28,7 +28,7 @@ const Abilities = ({ hero }: AbilitiesProps) => {
                                     src={iconBaseUrl + ability.icon}
                                     alt={ability.name}
                                     onClick={() => setActiveAbility(ability)}
-                                    style={{cursor: "pointer", transition: "scale","&:hover": { scale: 0.5 }}}
+                                    style={{cursor: "pointer", transition: "scale"}}
 
                                 />
 

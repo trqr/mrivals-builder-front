@@ -4,6 +4,7 @@ import {getAllHeroes} from "../api/Hero.api.ts";
 import type {MapType} from "../@types/MapType.ts";
 import {getAllMap} from "../api/Map.api.ts";
 import {getBestWinRateByRole} from "../api/Compo.api.ts";
+import {useLoading} from "../hooks/useLoading.tsx";
 
 type DataContextType = {
     heroes: HeroType[];
@@ -17,7 +18,7 @@ export const DataInitContext = createContext<DataContextType | undefined>(undefi
 export const DataInitProvider = ({children}: { children: React.ReactNode }) => {
     const [heroes, setHeroes] = useState<HeroType[]>([])
     const [maps, setMaps] = useState<MapType[]>([])
-    const [isPending, startTransition] = useTransition()
+    const {startTransition} = useLoading();
     const [bestHeroes, setBestHeroes] = useState<HeroType[]>([])
 
     useEffect(() => {
