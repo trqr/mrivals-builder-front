@@ -20,6 +20,8 @@ import {getMapById} from "../api/Map.api.ts";
 import {getAllPlayersStats, getPlayerStats} from "../api/Player.api.ts";
 import {getTeamById} from "../api/Compo.api.ts";
 import ResetPasswordPage from "../pages/resetPasswordPage/ResetPasswordPage.tsx";
+import ErrorPage from "../pages/errorGlobalPage/ErrorPage.tsx";
+
 
 export const Router = createBrowserRouter([
     {
@@ -84,6 +86,10 @@ export const Router = createBrowserRouter([
             {
                 path: "/reset-password",
                 element: <ResetPasswordPage/>
+            },
+            {
+                path: "/*",
+                element: <ErrorPage/>
             }
         ]
     }

@@ -12,19 +12,19 @@ import {LoadingProvider} from "./contexts/LoadingProvider.tsx";
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <LoadingProvider>
-            <DataInitProvider>
-                <UserDataInitProvider>
-                    <AuthProvider>
-                        <CompoProvider>
-                            <ThemeProvider theme={theme}>
-                                <CssBaseline/>
-                                <App/>
-                            </ThemeProvider>
-                        </CompoProvider>
-                    </AuthProvider>
-                </UserDataInitProvider>
-            </DataInitProvider>
-        </LoadingProvider>
+            <LoadingProvider>
+                <DataInitProvider>
+                    <UserDataInitProvider>
+                        <AuthProvider>
+                            <CompoProvider>
+                                <ThemeProvider theme={theme}>
+                                    <CssBaseline/>
+                                    <App/>
+                                </ThemeProvider>
+                            </CompoProvider>
+                        </AuthProvider>
+                    </UserDataInitProvider>
+                </DataInitProvider>
+            </LoadingProvider>
     </StrictMode>,
 )
