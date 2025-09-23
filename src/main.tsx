@@ -3,6 +3,7 @@ import {createRoot} from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import theme from "./theme/theme.ts";
+import "./assets/fonts/fonts.css";
 import {CssBaseline, ThemeProvider} from "@mui/material";
 import {AuthProvider} from "./contexts/AuthProvider.tsx";
 import {CompoProvider} from "./contexts/CompoProvider.tsx";

@@ -6,8 +6,8 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import {Paper} from "@mui/material";
 import {useCompo} from "../../../hooks/useCompo.tsx";
-import iconTank from "../../../images/mainTank.webp";
-import iconHeal from "../../../images/mainHeal.webp";
+import iconTank from "../../../assets/images/mainTank.webp";
+import iconHeal from "../../../assets/images/mainHeal.webp";
 
 type DraggableHeroProps = {
     hero: HeroType;

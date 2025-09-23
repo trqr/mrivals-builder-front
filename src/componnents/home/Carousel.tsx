@@ -1,10 +1,10 @@
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-import affiche from "../../images/HomeEsport.webp";
-import affiche2 from "../../images/HomeIker.jpg";
-import affiche3 from "../../images/HomeSeason.webp";
-import affiche4 from "../../images/NewChar.jpeg";
+import affiche from "../../assets/images/HomeEsport.webp";
+import affiche2 from "../../assets/images/HomeIker.jpg";
+import affiche3 from "../../assets/images/HomeSeason.webp";
+import affiche4 from "../../assets/images/NewChar.jpeg";
 import Box from "@mui/material/Box";
 
 export default function HomeCarousel() {

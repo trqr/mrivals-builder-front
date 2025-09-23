@@ -22,6 +22,14 @@ const theme = createTheme({
             secondary: "#e1dfdf",
         },
     },
+    typography: {
+        h1: { fontFamily: "Avenger, Arial, sans-serif" },
+        h2: { fontFamily: "Avenger, Arial, sans-serif" },
+        h3: { fontFamily: "Avenger, Arial, sans-serif" },
+        h4: { fontFamily: "Avenger, Arial, sans-serif" },
+        h5: { fontFamily: "Avenger, Arial, sans-serif" },
+        h6: { fontFamily: "Avenger, Arial, sans-serif" },
+    },
     components: {
         // Name of the component
         MuiButton: {

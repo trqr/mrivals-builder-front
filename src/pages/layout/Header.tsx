@@ -7,8 +7,8 @@ import {Button, IconButton, Menu, MenuItem, Slide, useScrollTrigger} from "@mui/
 import {useState} from "react";
 import MenuIcon from '@mui/icons-material/Menu';
 
-import logo from "../../images/IconSite.png";
-import texte from "../../images/texte.png";
+import logo from "../../assets/images/IconSite.png";
+import texte from "../../assets/images/texte.png";
 
 
 const menuPages = [
