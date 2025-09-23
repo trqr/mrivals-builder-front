@@ -15,7 +15,7 @@ const Player = () => {
     return (
         <Page title="PlayerPage" description="Player Page">
             <SelectAccount></SelectAccount>
-            <Box sx={{display: "flex", flexDirection: "column", flexWrap: "wrap", margin: "20px", justifyContent: "center", alignItems: "center"}}>
+            <Box sx={{display: "flex", flexDirection: "column", flexWrap: "wrap", justifyContent: "center", alignItems: "center"}}>
                 <Grid container spacing={5}>
                     <Grid size={{xs: 12, md: 12, xl: 6}}>
                         <MainPlayerInfo playerStats={playerStats}></MainPlayerInfo>

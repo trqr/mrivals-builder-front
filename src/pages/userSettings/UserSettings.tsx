@@ -84,7 +84,7 @@ const UserSettings = () => {
             <Typography variant={"h4"} sx={{textAlign: "center", margin: "30px"}}>Settings</Typography>
             <Box sx={{mx: "auto", mt: 4, display: "flex",flexWrap: "wrap", justifyContent: "center", gap: "20px"}}>
                 <SpotlightCard width={"400px"} className="settings-card" spotlightColor="rgba(0, 229, 255, 0.2)">
-                    <Typography variant="h5" gutterBottom>
+                    <Typography variant="h5" sx={{mb: 3}} gutterBottom>
                         User Information
                     </Typography>
                     <Stack spacing={3}>
@@ -112,7 +112,7 @@ const UserSettings = () => {
                             />
 
                         <Box>
-                            <Typography variant="subtitle1" gutterBottom>
+                            <Typography variant="subtitle1"  gutterBottom>
                                 Marvel Rivals Accounts
                             </Typography>
 

@@ -23,12 +23,12 @@ const theme = createTheme({
         },
     },
     typography: {
-        h1: { fontFamily: "Avenger, Arial, sans-serif" },
-        h2: { fontFamily: "Avenger, Arial, sans-serif" },
-        h3: { fontFamily: "Avenger, Arial, sans-serif" },
-        h4: { fontFamily: "Avenger, Arial, sans-serif" },
-        h5: { fontFamily: "Avenger, Arial, sans-serif" },
-        h6: { fontFamily: "Avenger, Arial, sans-serif" },
+        h1: { fontFamily: "Avenger, Arial, sans-serif", letterSpacing: 1.5 },
+        h2: { fontFamily: "Avenger, Arial, sans-serif", letterSpacing: 1.5  },
+        h3: { fontFamily: "Avenger, Arial, sans-serif", letterSpacing: 1.5  },
+        h4: { fontFamily: "Avenger, Arial, sans-serif", letterSpacing: 1.5 },
+        h5: { fontFamily: "Avenger, Arial, sans-serif", letterSpacing: 1.5 },
+        h6: { fontFamily: "Avenger, Arial, sans-serif", letterSpacing: 1.5 },
     },
     components: {
         // Name of the component

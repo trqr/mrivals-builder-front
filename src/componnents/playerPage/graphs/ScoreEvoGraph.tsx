@@ -17,9 +17,9 @@ export const ScoreEvoGraph = ({playerStats}) => {
 
     const scoreData = sortedHistory.map((match: MatchHistoryItem, index: number) => ({
         x: index +1 ,
-        y: match.player_performance.new_score.toFixed(0),
-        record: getCurrentSeasonHighScore().toFixed(0),
-        allTimeRecord: getAllTimeHighScore().toFixed(0),
+        y: match.player_performance?.new_score?.toFixed(0) ?? 0,
+        record: getCurrentSeasonHighScore()?.toFixed(0),
+        allTimeRecord: getAllTimeHighScore()?.toFixed(0),
         timestamp: match.match_time_stamp,
     }));
 

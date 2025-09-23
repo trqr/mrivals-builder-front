@@ -36,8 +36,9 @@ const DataList = () => {
 
     return (
         <Page description={"Heroes and maps listing"} title={"Heroes and maps listing"}>
+            <Typography variant={"h4"} sx={{textAlign: "center", margin: "30px"}}>Heroes and maps</Typography>
             <Container maxWidth="xl">
-                <div className={'filterButton'} style={{marginTop: "80px", textAlign: "center"}}>
+                <div className={'filterButton'} style={{ textAlign: "center"}}>
                     <button className={show === "heroes" ? "btn active" : "btn inactive"}
                             onClick={() => setShow("heroes")}>Heroes
                     </button>

@@ -55,7 +55,7 @@ const PasswordChangeBox = () => {
     return (
         <>
             <SpotlightCard width={"400px"} className="settings-card" spotlightColor="rgba(0, 229, 255, 0.2)">
-                <Typography variant="h5" gutterBottom>
+                <Typography variant="h5" sx={{mb: 3}} gutterBottom>
                     Change Password
                 </Typography>
                 {serverError && (

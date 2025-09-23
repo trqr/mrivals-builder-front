@@ -34,8 +34,8 @@ const UserTeamList = () => {
     return (
         <Page title={"Team history"} description={"Team history page"}>
             <Container maxWidth="xl">
-            <Typography variant={"h2"} sx={{textAlign: "center", margin: "20px"}}>Your team history</Typography>
-            {teams.length > 0 ?
+                <Typography variant={"h4"} sx={{textAlign: "center", margin: "30px"}}>Your team history</Typography>
+                {teams.length > 0 ?
                 <>
                     <Box
                         style={{

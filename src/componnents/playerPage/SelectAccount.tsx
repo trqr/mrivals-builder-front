@@ -38,7 +38,7 @@ const SelectAccount = () => {
 
     return (
         <>
-            <Box sx={{display: "flex", width: "100%", justifyContent: "center", alignItems: "flex-start", margin: "20px"}}>
+            <Box sx={{display: "flex", width: "100%", justifyContent: "center", alignItems: "flex-start", margin: "20px 0"}}>
                 <Box sx={{ width: "300px"}}>
                     <FormControl fullWidth size="medium">
                         <Select
