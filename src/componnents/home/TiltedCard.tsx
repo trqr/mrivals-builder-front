@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import './TiltedCard.css';
+import {useNavigate} from "react-router-dom";
 
 const springValues = {
     damping: 30,
@@ -21,9 +22,10 @@ export default function TiltedCard({
                                        showMobileWarning = true,
                                        showTooltip = true,
                                        overlayContent = null,
-                                       displayOverlayContent = false
+                                       displayOverlayContent = false,
                                    }) {
     const ref = useRef(null);
+
 
     const x = useMotionValue();
     const y = useMotionValue();
@@ -73,17 +75,20 @@ export default function TiltedCard({
         rotateFigcaption.set(0);
     }
 
+
     return (
         <figure
             ref={ref}
             className="tilted-card-figure"
             style={{
                 height: containerHeight,
-                width: containerWidth
+                width: containerWidth,
+
             }}
             onMouseMove={handleMouse}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+
         >
             {showMobileWarning && (
                 <div className="tilted-card-mobile-alert">This effect is not optimized for mobile. Check on desktop.</div>

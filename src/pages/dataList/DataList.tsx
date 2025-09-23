@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import {useNavigate} from "react-router";
 import Page from "../layout/Page.tsx";
 import {useData} from "../../hooks/useData.tsx";
+import TiltedCard from "../../componnents/home/TiltedCard.tsx";
 
 const DataList = () => {
     const [show, setShow] = useState<"heroes" | "maps">("heroes");
@@ -48,16 +49,28 @@ const DataList = () => {
                 {show === "heroes" && (
                     <Grid container className={"containerHeroes"}>
                         {heroes.map((hero: HeroType) => (
-                            <Grid size={{xs: 12, sm: 6, md: 3, lg: 2, xl: 2}} key={hero.id} sx={{ display: "flex", justifyContent: "center", alignItems: "center"}} >
-                                <img
-                                    src={imageBaseUrl + hero.imageLink}
-                                    alt={hero.name}
-                                    className="card"
-                                    onClick={() => navigate(`/HeroDetails/${hero.id}`)}
-                                    onMouseMove={handleMouseMove}
-                                    onMouseLeave={handleMouseLeave}
+                            <Grid size={{xs: 12, sm: 6, md: 3, lg: 2, xl: 2}} key={hero.id} sx={{ display: "flex", justifyContent: "center", alignItems: "center"}}
+                                  onClick={() => navigate(`/heroDetails/${hero.id}`)} >
+                                <TiltedCard
+                                    imageSrc={imageBaseUrl + hero.imageLink}
+                                    altText={hero.name}
+                                    captionText={hero.name}
+                                    containerHeight="225px"
+                                    containerWidth="125px"
+                                    imageHeight="225px"
+                                    imageWidth="125px"
+                                    rotateAmplitude={20}
+                                    scaleOnHover={1.2}
+                                    showMobileWarning={false}
+                                    showTooltip={true}
+                                    displayOverlayContent={true}
+                                    overlayContent={
+                                        <p className="tilted-card-demo-text">
+                                            Winrate : {(hero.winRate * 100).toFixed(1)}%
+                                        </p>
+                                    }
                                 />
-                            </Grid>
+                                </Grid>
                         ))}
                     </Grid>
                 )}
