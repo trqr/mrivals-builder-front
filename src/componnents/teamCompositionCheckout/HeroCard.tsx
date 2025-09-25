@@ -37,7 +37,7 @@ const HeroCard = ({heroes}: HeroCardProps) => {
                             <CardMedia>
                                 <img src={imageBaseUrl + hero.imageLink} alt={hero.name}></img>
                             </CardMedia>
-                            <Typography variant={"h4"} style={{fontSize: "20px"}}>
+                            <Typography variant={"caption"} style={{fontSize: "20px"}}>
                                 Winrate : {(hero.winRate * 100).toFixed(1)}%
                             </Typography>
 

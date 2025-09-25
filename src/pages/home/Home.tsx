@@ -59,6 +59,7 @@ const Home = () => {
                             width="auto"
                             spotlightColor="rgba(0, 229, 255, 0.2)"
                             backgroundColor="rgba(42, 42, 64, 0.6)"
+                            className={"homepage-card"}
                         >
                             <ShinyText
                                 text
@@ -104,6 +105,7 @@ const Home = () => {
                             width="auto"
                             spotlightColor="rgba(0, 229, 255, 0.2)"
                             backgroundColor="rgba(42, 42, 64, 0.6)"
+                            className={"homepage-card"}
                         >
                             <h2 style={{ textAlign: "center" }}>Best Winrate :</h2>
                             <BestHeroesSection />

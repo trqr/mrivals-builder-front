@@ -1,12 +1,6 @@
-.card-spotlight {
-    position: relative;
-    border-radius: 1px;
-    padding: 2rem;
-    margin-bottom: 5px;
-    overflow: hidden;
-    --mouse-x: 50%;
-    --mouse-y: 50%;
-    --spotlight-color: rgba(255, 255, 255, 0.05);
+
+
+.homepage-card {
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), 15px 100%);
 }
 
