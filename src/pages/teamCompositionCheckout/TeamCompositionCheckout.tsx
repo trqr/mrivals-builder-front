@@ -1,6 +1,5 @@
 import {Container, Grid, Stack,} from "@mui/material";
 import Page from "../layout/Page.tsx";
-import Box from "@mui/material/Box";
 import TeambuildButton from "../../componnents/common/buttons/TeambuildButton.tsx";
 import {useNavigate} from "react-router";
 import SynergiesTeam from "../../componnents/teamCompositionCheckout/SynergiesTeam.tsx";

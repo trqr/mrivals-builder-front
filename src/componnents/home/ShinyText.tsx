@@ -14,15 +14,14 @@ const ShinyText = ({ text, disabled = false, speed = 5, className = '' }) => {
         }}>
 
 
-
-            <p>
+            <p style={{lineHeight: "1.6"}}>
                 Tired of unbalanced comps?<br/>
                 With Rivals Builder, you can create, analyze, and optimize your teams in just a few clicks.<br/>
-
+                <br/>
                 🔥 Smart Team Builder: synergies, counter-picks, and role balance.<br/>
                 📊 Detailed Stats: winrate per hero, against each character, and with your teammates.<br/>
                 🎯 Goal: help you improve and dominate your matches.<br/>
-
+                <br/>
                 Test your ideas, find your ideal comp, and become an unbeatable strategist!<br/>
             </p>
         </div>

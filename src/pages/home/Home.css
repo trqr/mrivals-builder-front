@@ -1,9 +1,9 @@
 .Homepage {
     background-image: url('../../assets/images/HomeWallpaper.jpg');
-    background-size: cover;
-    background-position: center;
+    background-size: contain;
+    background-position: top;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: local;
 
 }
 

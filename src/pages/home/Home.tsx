@@ -20,99 +20,106 @@ const Home = () => {
     return (
         <Page title={"Homepage"} description={"Homepage"}>
             <div className="Homepage">
-            <Container maxWidth="xl">
-            <Grid container spacing={2}
-                  style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                  }}
-            >
-                <Grid size={{
-                        xs: 12,
-                        sm: 12,
-                        md: 12,
-                        lg: 12}}
-                sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                }}>
-                    <Typography variant={"h2"} sx={{fontWeight: "bold", marginTop: "30px"}}>Build the Perfect Team on Marvel Rivals ⚡</Typography>
-                    </Grid>
-
-
-                    <Grid size={{
-                        xs: 12,
-                        sm: 12,
-                        md: 6,
-                        lg: 6,
-                    }}
+                <Container maxWidth="xl">
+                    <Grid container spacing={2}
                           style={{
                               display: "flex",
-                              flexDirection: "column",
-                              alignItems: "center",
                               justifyContent: "center",
+                              alignItems: "center",
                           }}
                     >
-                        <HomeCard
-                            width="auto"
-                            spotlightColor="rgba(0, 229, 255, 0.2)"
-                            backgroundColor="rgba(42, 42, 64, 0.6)"
-                            className={"homepage-card"}
-                        >
-                            <ShinyText
-                                text
-                                disabled={false}
-                                speed={3}
-                                className='custom-class'
-                            />
+                        <Grid size={{lg:2}}></Grid>
+                        <Grid size={{
+                            xs: 12,
+                            sm: 12,
+                            md: 12,
+                            lg: 10
+                        }}
+                              sx={{
+                                  height: "550px",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                              }}>
+                            <Typography variant={"h1"} sx={{marginTop: "30px"}}>Build the Perfect
+                                Team<br/> on Marvel Rivals</Typography>
+                        </Grid>
+                        <Grid size={{lg: 12}} sx={{display: "flex", justifyContent: "center", height: "200px"}}>
+                            <SecondButton onClick={handleClickBuild} style={{margin: "10px",}}>START BUILDING</SecondButton>
+                        </Grid>
 
-                    <SecondButton onClick={handleClickBuild} style={{margin: "10px"}}/>
-                    </HomeCard>
-                    </Grid>
+
+                        <Grid size={{
+                            xs: 12,
+                            sm: 12,
+                            md: 12,
+                            lg: 12,
+                        }}
+                              style={{
+                                  display: "flex",
+                                  flexDirection: "column",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                              }}
+                        >
+                            <HomeCard
+                                width="auto"
+                                spotlightColor="rgba(0, 229, 255, 0.2)"
+                                backgroundColor="rgba(42, 42, 64, 0.6)"
+                                className={"homepage-card"}
+                            >
+                                <ShinyText
+                                    text
+                                    disabled={false}
+                                    speed={3}
+                                    className='custom-class'
+                                />
+
+                            </HomeCard>
+                        </Grid>
+                        <Grid size={{
+                            xs: 12,
+                            sm: 12,
+                            md: 12,
+                            lg: 12,
+                        }}
+                              style={{
+                                  display: "flex",
+                                  flexDirection: "column",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  marginTop: "60px",
+
+                              }}
+                        >
+                            <HomeCard
+                                width="auto"
+                                spotlightColor="rgba(0, 229, 255, 0.2)"
+                                backgroundColor="rgba(42, 42, 64, 0.6)"
+                                className={"homepage-card"}
+                            >
+                                <h2 style={{textAlign: "center"}}>Best Winrates</h2>
+                                <BestHeroesSection/>
+                            </HomeCard>
+                        </Grid>
                         <Grid size={{
                             xs: 12,
                             sm: 6,
                             md: 6,
                             lg: 6,
                         }}
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            marginTop: "10px",
-                        }}>
-                           <Carousel/>
+                              style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  marginTop: "60px",
+                              }}>
+                            <Carousel/>
                         </Grid>
 
-                    <Grid size={{
-                        xs: 12,
-                        sm: 12,
-                        md: 12,
-                        lg: 12,
-                    }}
-                          style={{
-                              display: "flex",
-                              flexDirection: "column",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              marginTop: "10px",
 
-                          }}
-                    >
-                        <HomeCard
-                            width="auto"
-                            spotlightColor="rgba(0, 229, 255, 0.2)"
-                            backgroundColor="rgba(42, 42, 64, 0.6)"
-                            className={"homepage-card"}
-                        >
-                            <h2 style={{ textAlign: "center" }}>Best Winrate :</h2>
-                            <BestHeroesSection />
-                        </HomeCard>
                     </Grid>
-            </Grid>
-            </Container>
+                </Container>
 
             </div>
         </Page>

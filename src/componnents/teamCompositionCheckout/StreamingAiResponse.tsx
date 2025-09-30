@@ -1,6 +1,6 @@
-import {Card, CardContent, CardHeader, Typography} from "@mui/material";
+import {Typography} from "@mui/material";
 import {useEffect, useState} from "react";
-import {askAIStream} from "../../api/AI.api.ts";
+import {askAI} from "../../api/AI.api.ts";
 import SpotlightCard from "../common/cards/spotlightCard/SpotlightCard.tsx";
 
 type StreamingAIProps = {
@@ -9,19 +9,25 @@ type StreamingAIProps = {
 
 const StreamingAiResponse = ({prompt}: StreamingAIProps) => {
     const [response, setResponse] = useState("");
-    const [lastLength, setLastLength] = useState(0);
 
-        useEffect(() => {
-            setResponse("");
-            setLastLength(0);
+    useEffect(() => {
+        if (!prompt) return;
 
-            askAIStream(prompt, (fullText) => {
-                const newChunk = fullText.substring(lastLength);
-                setLastLength(fullText.length);
-                setResponse((prev) => prev + newChunk);
-                console.log(response);
-            });
-        }, [prompt]);
+        setResponse("...");
+
+        const fetchAI = async () => {
+            try {
+                const aiResponse = await askAI(prompt);
+                setResponse(aiResponse);
+                console.log(aiResponse);
+            } catch (err) {
+                console.error("Error fetching AI:", err);
+                setResponse("Error fetching AI response.");
+            }
+        };
+
+        fetchAI();
+    }, [prompt]);
 
     return (
         <SpotlightCard width={"auto"} className="settings-card" spotlightColor="rgba(0, 229, 255, 0.2)">

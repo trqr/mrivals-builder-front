@@ -6,7 +6,7 @@ type ButtonProps = {
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 
-const Button: FC<ButtonProps> = ({ children = "Start to Build", ...props }) => {
+const Button: FC<ButtonProps> = ({ children, ...props }) => {
     return (
         <StyledWrapper>
             <button className="cta" {...props}>
@@ -26,19 +26,21 @@ const Button: FC<ButtonProps> = ({ children = "Start to Build", ...props }) => {
 }
 
 const StyledWrapper = styled.div`
-  .cta {
-    display: flex;
-    padding: 11px 33px;
-    text-decoration: none;
-    font-size: 25px;
-    color: white;
-    background: #6225e6;
-    transition: 1s;
-    box-shadow: 6px 6px 0 black;
-    transform: skewX(-15deg);
-    border: none;
-    cursor: pointer;
-  }
+    .cta {
+        display: flex;
+        padding: 20px 60px;
+        min-width: 250px;
+        justify-content: center;
+        text-decoration: none;
+        font-size: 25px;
+        color: white;
+        background: #6225e6;
+        transition: 1s;
+        box-shadow: 6px 6px 0 black;
+        transform: skewX(-15deg);
+        border: none;
+        cursor: pointer;
+    }
 
   .cta:focus {
     outline: none;
