@@ -16,7 +16,6 @@ import Box from "@mui/material/Box";
 import {LockOutlined, Visibility, VisibilityOff} from "@mui/icons-material";
 import {login} from "../../../api/Auth.api.ts";
 import {useAuth} from "../../../hooks/useAuth.tsx";
-import {useUserData} from "../../../hooks/useUserData.tsx";
 import SpotlightCard from "../cards/spotlightCard/SpotlightCard.tsx";
 import ForgotPasswordDialog from "./ForgotPasswordDialog.tsx";
 
@@ -49,7 +48,6 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
         if (!validate())
             return;
         startTransition( async () => {
-            await new Promise(resolve => setTimeout(resolve, 1000));
             const authData = await login(loginValues);
             if (authData.user) {
                 setUser(authData.user);

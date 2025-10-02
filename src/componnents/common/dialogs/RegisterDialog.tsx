@@ -1,4 +1,5 @@
 import {
+    Alert,
     Button,
     Dialog,
     DialogActions,
@@ -11,7 +12,6 @@ import {
 } from "@mui/material";
 import {useState, useTransition} from "react";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
-import {Alert} from "@mui/material";
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import {register} from "../../../api/Auth.api.ts";
 import SpotlightCard from "../cards/spotlightCard/SpotlightCard.tsx";
@@ -64,8 +64,6 @@ const RegisterDialog = ({open, setOpen}: RegisterDialogProps) => {
     const handleSubmit = () => {
         if (!validate()) {return}
         startTransition( async () => {
-            await new Promise(resolve => setTimeout(resolve, 1000));
-
             const registerData = await register(registerValues);
             if (registerData.user){
                 setOpen(false);

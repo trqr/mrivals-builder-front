@@ -41,7 +41,10 @@ const Home = () => {
                                   alignItems: "center",
                                   justifyContent: "center",
                               }}>
-                            <Typography variant={"h1"} sx={{marginTop: "30px"}}>Build the Perfect
+                            <Typography sx={{
+                                marginTop: "30px",
+                                typography: {xs: "h3", sm: "h2", md: "h2", lg: "h1", xl: "h1"}
+                            }}>Build the Perfect
                                 Team<br/> on Marvel Rivals</Typography>
                         </Grid>
                         <Grid size={{lg: 12}} sx={{display: "flex", justifyContent: "center", height: "200px"}}>

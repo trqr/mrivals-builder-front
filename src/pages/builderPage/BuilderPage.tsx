@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import {Grid} from "@mui/material";
+import {Button, Grid, IconButton} from "@mui/material";
 import type {HeroType} from "../../@types/HeroType";
 import {useEffect, useState} from "react";
 import HeroRoleFilter from "../../componnents/common/HeroRoleFilter.tsx";
@@ -12,7 +12,7 @@ import {useNavigate} from "react-router";
 import Page from "../layout/Page.tsx";
 import {useTheme} from "@mui/material/styles";
 import DeleteButton from "../../componnents/common/buttons/DeleteButton.tsx";
-import MainButton from "../../componnents/common/buttons/MainButton.tsx";
+import ClearIcon from '@mui/icons-material/Clear';
 import {useData} from "../../hooks/useData.tsx";
 import RecommendationMessages from "../../componnents/builder/RecommendationMessages.tsx";
 import TeamSynergy from "../../componnents/builder/TeamSynergy.tsx";
@@ -49,7 +49,6 @@ const BuilderPage = () => {
 
     useEffect(() => {
         startTransition(async () => {
-            await new Promise((resolve) => setTimeout(resolve, 500));
             const heroesIds = compo.map((hero) => hero?.id);
             const fetchedBestHeroes = await getBestWinRateByRole(heroesIds);
             setBestHeroes(fetchedBestHeroes);
@@ -130,16 +129,15 @@ const BuilderPage = () => {
                             setActiveHero={setActiveHero}
                         />
                         <Box sx={{margin: "10px"}}>
-                        <MainButton style={{margin: "5px"}}
+                        <Button variant={"contained"} sx={{margin: "5px"}}
                             disabled={compo.filter((x) => x !== null).length < 6}
                             onClick={handleSubmitCompo}
                         >
                             Checkout
-                        </MainButton>
-                            <DeleteButton style={{margin: "5px"}}
-                            onClick={handleRemoveAllHeroes}>
-                                Clear
-                            </DeleteButton>
+                        </Button>
+                            <IconButton>
+                                <ClearIcon color={"action"} onClick={handleRemoveAllHeroes}/>
+                            </IconButton>
                         </Box>
 
                     </Box>
@@ -189,7 +187,7 @@ const BuilderPage = () => {
                                     </Grid>
                                 ))}
                             </Grid>
-                            <Box sx={{display: "flex", justifyContent: "space-around"}}>
+                            <Box sx={{display: "flex", justifyContent: "space-around", alignItems: "center"}}>
                                 {compo.length > 0 &&
                                     <Box sx={{
                                         marginTop: "20px",

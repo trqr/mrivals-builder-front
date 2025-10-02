@@ -23,7 +23,7 @@ const TeamSynergy = () => {
 
     return (
         <Box>
-            <Typography variant="h6" gutterBottom>
+            <Typography variant="h6" textAlign={"center"} gutterBottom>
                 Best Synergies
             </Typography>
             <ul style={{

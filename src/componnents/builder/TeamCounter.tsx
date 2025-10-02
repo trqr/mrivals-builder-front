@@ -22,8 +22,8 @@ const TeamCounter = () => {
 
     return (
         <Box>
-            <Typography variant="h6" gutterBottom>
-                Worst Counters
+            <Typography variant="h6" textAlign={"center"} gutterBottom>
+                Best Counters
             </Typography>
             <ul style={{
                 listStyle: "none",

@@ -5,7 +5,7 @@ export const iconBaseUrl = "https://marvelrivalsapi.com/rivals"
 export const BASE_URL = "https://marvelrivalsapi.com/api/v1"
 
 export const api = axios.create({
-    baseURL: "/api"
+    baseURL: "http://localhost:8080",
 });
 
 api.interceptors.request.use((config) => {
