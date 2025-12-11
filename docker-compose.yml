@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  mrivals-front:
+    build: .
+    container_name: mrivals-front
+    ports:
+      - "8082:80"
+    restart: always
+    networks:
+      - mrivals_network
+
+networks:
+  mrivals_network:
+    external: true
