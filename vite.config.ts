@@ -7,4 +7,14 @@ export default defineConfig({
   plugins: [react(),
         tailwindcss(),
     ],
+    server: {
+        port: 5173,
+        host: true, // 👈 permet d’y accéder depuis d'autres appareils du réseau
+        proxy: {
+            "/api": {
+                target: "http://127.0.0.1:8080",
+                changeOrigin: true,
+            },
+        },
+    },
 })

@@ -4,9 +4,9 @@ export const imageBaseUrl = "https://marvelrivalsapi.com"
 export const iconBaseUrl = "https://marvelrivalsapi.com/rivals"
 export const BASE_URL = "https://marvelrivalsapi.com/api/v1"
 
-export const api = axios.create({
-    baseURL: "/api",
-});
+const baseURL = import.meta.env.VITE_API_URL || "/api";
+
+export const api = axios.create({ baseURL });
 
 api.interceptors.request.use((config) => {
     const token = localStorage.getItem("MBtoken");
