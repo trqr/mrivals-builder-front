@@ -60,6 +60,6 @@ kbd {
 }
 
 .draggable-card:hover {
-    transform: perspective(600px) rotateZ(2deg) scale(1.05);
+    transform: perspective(600px) rotateZ(0deg) scale(1.05);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
 }

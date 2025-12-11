@@ -20,15 +20,14 @@ const Home = () => {
     return (
         <Page title={"Homepage"} description={"Homepage"}>
             <div className="Homepage">
-                <Container maxWidth="xl">
+                <Container maxWidth="xl" >
                     <Grid container spacing={2}
-                          style={{
+                          sx={{
                               display: "flex",
                               justifyContent: "center",
                               alignItems: "center",
                           }}
                     >
-                        <Grid size={{lg:2}}></Grid>
                         <Grid size={{
                             xs: 12,
                             sm: 12,
@@ -36,19 +35,22 @@ const Home = () => {
                             lg: 10
                         }}
                               sx={{
-                                  height: "550px",
+                                  marginTop: "80px",
+                                  height: "45vh",
                                   display: "flex",
                                   alignItems: "center",
                                   justifyContent: "center",
                               }}>
                             <Typography sx={{
                                 marginTop: "30px",
-                                typography: {xs: "h3", sm: "h2", md: "h2", lg: "h1", xl: "h1"}
+                                typography: {xs: "h3", sm: "h2", md: "h2", lg: "h1", xl: "h1"},
+                                textAlign: "center",
+                                textShadow: "1px 1px 3px rgba(0,0,0,1)"
                             }}>Build the Perfect
                                 Team<br/> on Marvel Rivals</Typography>
                         </Grid>
-                        <Grid size={{lg: 12}} sx={{display: "flex", justifyContent: "center", height: "200px"}}>
-                            <SecondButton onClick={handleClickBuild} style={{margin: "10px",}}>START BUILDING</SecondButton>
+                        <Grid size={{lg: 12}} sx={{display: "flex", justifyContent: "center", height: "220px"}}>
+                            <SecondButton onClick={handleClickBuild} style={{margin: "10px",}}><Typography variant={"h4"}>Start Building</Typography></SecondButton>
                         </Grid>
 
 
@@ -69,7 +71,7 @@ const Home = () => {
                                 width="auto"
                                 spotlightColor="rgba(0, 229, 255, 0.2)"
                                 backgroundColor="rgba(42, 42, 64, 0.6)"
-                                className={"homepage-card"}
+                                className={"homepage-card home-shiny-text"}
                             >
                                 <ShinyText
                                     text

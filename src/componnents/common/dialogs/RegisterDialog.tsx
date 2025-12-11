@@ -15,6 +15,7 @@ import {Visibility, VisibilityOff} from "@mui/icons-material";
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import {register} from "../../../api/Auth.api.ts";
 import SpotlightCard from "../cards/spotlightCard/SpotlightCard.tsx";
+import Box from "@mui/material/Box";
 
 export type RegisterDTO = {
     username: string;
@@ -84,6 +85,14 @@ const RegisterDialog = ({open, setOpen}: RegisterDialogProps) => {
                 <DialogTitle sx={{display: "flex", alignItems: "center"}}>
                     <PersonAddIcon  fontSize={"small"}/>{" Register"}
                 </DialogTitle>
+                    <Box
+                        component="form"
+                        noValidate
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            handleSubmit();
+                        }}
+                    >
                 <DialogContent sx={{display: 'flex', gap: '10px', flexDirection: 'column', margin: '10px auto', width: '100%', alignItems: 'center'}}>
                     {serverError && (
                         <Alert severity="error" onClose={() => setServerError(null)}>
@@ -141,9 +150,10 @@ const RegisterDialog = ({open, setOpen}: RegisterDialogProps) => {
                             ></TextField>
                 </DialogContent>
                 <DialogActions>
-                    <Button variant={"contained"} onClick={handleSubmit} disabled={isPending}>{isPending ? "Registering..." : "Submit"}</Button>
+                    <Button type={"submit"} variant={"contained"} disabled={isPending}>{isPending ? "Registering..." : "Submit"}</Button>
                     <Button variant={"text"} onClick={() => setOpen(false)}>Cancel</Button>
                 </DialogActions>
+                    </Box>
                 </SpotlightCard>
             </Dialog>
         </>

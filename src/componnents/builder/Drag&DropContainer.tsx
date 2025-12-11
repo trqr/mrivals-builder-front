@@ -1,8 +1,8 @@
 import Box from "@mui/material/Box";
-import { Grid } from "@mui/material";
-import { DroppableSlot } from "./drag&drop/DroppableSlot.tsx";
-import type { HeroType } from "../../@types/HeroType";
-import { useCompo } from "../../hooks/useCompo.tsx";
+import {Grid} from "@mui/material";
+import {DroppableSlot} from "./drag&drop/DroppableSlot.tsx";
+import type {HeroType} from "../../@types/HeroType";
+import {useCompo} from "../../hooks/useCompo.tsx";
 import theme from "../../theme/theme.ts";
 
 interface DragDropContainerProps {
@@ -48,8 +48,9 @@ const DragDropContainer = ({
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    zIndex: {xs: 10, sm: "auto"},
+                    zIndex: {xs: 10, sm: 10, md: "auto"},
                     marginBottom: "10px",
+                    width: "100%",
                     position: {xs: "fixed", md: "static" },
                     padding: "5px",
                     backgroundColor: {xs: theme.palette.background.paper, md: "transparent" } ,

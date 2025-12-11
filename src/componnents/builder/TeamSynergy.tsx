@@ -29,8 +29,12 @@ const TeamSynergy = () => {
             <ul style={{
                 listStyle: "none",
                 padding: 0,
+                margin: 0,
                 display: "flex",
-                flexDirection: "row"
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "10px"
             }}>
                 {Array.isArray(teamSynergies) &&
                     teamSynergies.slice(0, 2).map((synergy) => (
@@ -39,7 +43,6 @@ const TeamSynergy = () => {
                             style={{
                                 display: "flex",
                                 alignItems: "center",
-                                marginBottom: "10px",
                             }}
                         >
                             <img
@@ -48,11 +51,10 @@ const TeamSynergy = () => {
                                 style={{
                                     objectFit: "cover",
                                     objectPosition: "top",
-                                    height: "80px",
-                                    width: "80px",
+                                    height: "60px",
+                                    width: "60px",
                                     borderRadius: "5px",
-                                    border: "3px solid blue",
-                                    marginRight: "10px",
+                                    border: "2px solid blue",
                                 }}
                             />
                         </li>

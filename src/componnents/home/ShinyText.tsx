@@ -1,4 +1,5 @@
 import './ShinyText.css';
+import Typography from "@mui/material/Typography";
 
 const ShinyText = ({ text, disabled = false, speed = 5, className = '' }) => {
     const animationDuration = `${speed}s`;
@@ -13,9 +14,8 @@ const ShinyText = ({ text, disabled = false, speed = 5, className = '' }) => {
                 fontSize: "20px",
         }}>
 
-
-            <p style={{lineHeight: "1.6"}}>
-                Tired of unbalanced comps?<br/>
+            <Typography variant={"h5"} color={"action"}>Tired of unbalanced comps?</Typography>
+            <p style={{lineHeight: "1.4"}}>
                 With Rivals Builder, you can create, analyze, and optimize your teams in just a few clicks.<br/>
                 <br/>
                 🔥 Smart Team Builder: synergies, counter-picks, and role balance.<br/>

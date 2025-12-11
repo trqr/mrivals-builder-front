@@ -28,13 +28,13 @@ const Button: FC<ButtonProps> = ({ children, ...props }) => {
 const StyledWrapper = styled.div`
     .cta {
         display: flex;
-        padding: 20px 60px;
+        padding: 25px 60px;
         min-width: 250px;
         justify-content: center;
         text-decoration: none;
         font-size: 25px;
         color: white;
-        background: #6225e6;
+        background: #343345;
         transition: 1s;
         box-shadow: 6px 6px 0 black;
         transform: skewX(-15deg);
@@ -48,7 +48,8 @@ const StyledWrapper = styled.div`
 
   .cta:hover {
     transition: 0.5s;
-    box-shadow: 10px 10px 0 #fbc638;
+    box-shadow: 10px 10px 0 #FDDE2B;
+      color: #FDDE2B;
   }
 
   .cta .second {
@@ -102,7 +103,7 @@ const StyledWrapper = styled.div`
     }
 
     50% {
-      fill: #fbc638;
+      fill: #FDDE2B;
     }
 
     100% {

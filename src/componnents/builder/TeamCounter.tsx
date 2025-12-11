@@ -28,10 +28,12 @@ const TeamCounter = () => {
             <ul style={{
                 listStyle: "none",
                 padding: 0,
+                margin: 0,
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "center",
-                alignItems: "center"
+                alignItems: "center",
+                gap: "10px"
             }}>
                 {teamCounters.slice(0, 2).map((counter) => (
                     <li
@@ -39,7 +41,7 @@ const TeamCounter = () => {
                         style={{
                             display: "flex",
                             alignItems: "center",
-                            marginBottom: "10px",
+                            justifyContent: "center"
                         }}
                     >
                         <img
@@ -48,11 +50,10 @@ const TeamCounter = () => {
                             style={{
                                 objectFit: "cover",
                                 objectPosition: "top",
-                                height: "80px",
-                                width: "80px",
+                                height: "60px",
+                                width: "60px",
                                 borderRadius: "5px",
-                                border: "3px solid violet",
-                                marginRight: "10px",
+                                border: "2px solid violet",
                             }}
                         />
                     </li>

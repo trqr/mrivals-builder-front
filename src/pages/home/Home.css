@@ -4,7 +4,9 @@
     background-position: top;
     background-repeat: no-repeat;
     background-attachment: local;
-
+    position: relative;
+    top: -80px;
+    z-index: 1000;
 }
 
 .homeText, .homeBestHeroes {
@@ -13,4 +15,8 @@
     padding: 20px;
     overflow: auto;
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), 15px 100%);
+}
+
+.home-shiny-text {
+    padding-bottom: 10px;
 }

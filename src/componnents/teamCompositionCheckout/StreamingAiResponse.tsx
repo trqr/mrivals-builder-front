@@ -2,6 +2,7 @@ import {Typography} from "@mui/material";
 import {useEffect, useState} from "react";
 import {askAI} from "../../api/AI.api.ts";
 import SpotlightCard from "../common/cards/spotlightCard/SpotlightCard.tsx";
+import TextType from "../common/Text/TextType.tsx";
 
 type StreamingAIProps = {
     prompt: string;
@@ -13,7 +14,7 @@ const StreamingAiResponse = ({prompt}: StreamingAIProps) => {
     useEffect(() => {
         if (!prompt) return;
 
-        setResponse("...");
+        setResponse("");
 
         const fetchAI = async () => {
             try {
@@ -32,9 +33,13 @@ const StreamingAiResponse = ({prompt}: StreamingAIProps) => {
     return (
         <SpotlightCard width={"auto"} className="settings-card" spotlightColor="rgba(0, 229, 255, 0.2)">
                 <Typography variant={"h6"} color={"primary"} margin={"20px"} textAlign={"center"}>Advantages and weaknesses by artificial inteligence</Typography>
-                <Typography variant="subtitle2" sx={{whiteSpace: "pre-wrap"}}>
-                    {response}
-                </Typography>
+                    <TextType
+                        text={[response]}
+                        pauseDuration={1500}
+                        showCursor={true}
+                        cursorCharacter="█"
+                        variableSpeed={{min: 100, max: 5}}
+                    />
         </SpotlightCard>
     );
 };
