@@ -1,13 +1,14 @@
 .Homepage {
     background-image: url('../../assets/images/HomeWallpaper.jpg');
-    background-size: contain;
+    background-size: cover;
     background-position: top;
     background-repeat: no-repeat;
-    background-attachment: local;
+    background-attachment: fixed;
     position: relative;
     top: -80px;
     z-index: 1000;
 }
+
 
 .homeText, .homeBestHeroes {
     background-color: rgba(0,0,0,0.7);
