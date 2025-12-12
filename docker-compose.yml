@@ -4,6 +4,8 @@ services:
   mrivals-front:
     build: .
     container_name: mrivals-front
+    expose:
+      - "5173"   # 🔥 obligatoire pour Traefik
     restart: always
 
     labels:
