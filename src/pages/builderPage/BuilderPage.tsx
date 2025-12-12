@@ -1,43 +1,43 @@
 import Box from "@mui/material/Box";
-import {Button, Grid, IconButton} from "@mui/material";
-import type {HeroType} from "../../@types/HeroType";
-import {useEffect, useState} from "react";
+import { Button, Grid, IconButton } from "@mui/material";
+import type { HeroType } from "../../@types/HeroType";
+import { useEffect, useState } from "react";
 import HeroRoleFilter from "../../componnents/common/HeroRoleFilter.tsx";
-import {DndContext, DragOverlay} from "@dnd-kit/core";
-import {DraggableHero} from "../../componnents/builder/drag&drop/DraggableHero.tsx";
-import {imageBaseUrl} from "../../api/config/Axios.config.ts";
-import {getBestWinRateByRole, saveCompo} from "../../api/Compo.api.ts";
-import {useCompo} from "../../hooks/useCompo.tsx";
-import {useNavigate} from "react-router";
+import { DndContext, DragOverlay } from "@dnd-kit/core";
+import { DraggableHero } from "../../componnents/builder/drag&drop/DraggableHero.tsx";
+import { imageBaseUrl } from "../../api/config/Axios.config.ts";
+import { getBestWinRateByRole, saveCompo } from "../../api/Compo.api.ts";
+import { useCompo } from "../../hooks/useCompo.tsx";
+import { useNavigate } from "react-router";
 import Page from "../layout/Page.tsx";
-import {useTheme} from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import ClearIcon from '@mui/icons-material/Clear';
-import {useData} from "../../hooks/useData.tsx";
+import { useData } from "../../hooks/useData.tsx";
 import RecommendationMessages from "../../componnents/builder/RecommendationMessages.tsx";
 import TeamSynergy from "../../componnents/builder/TeamSynergy.tsx";
 import TeamCounter from "../../componnents/builder/TeamCounter.tsx";
 import DragDropContainer from "../../componnents/builder/Drag&DropContainer.tsx";
-import {useLoading} from "../../hooks/useLoading.tsx";
+import { useLoading } from "../../hooks/useLoading.tsx";
 import Typography from "@mui/material/Typography";
 import ShieldIcon from '@mui/icons-material/Shield';
 import MedicationIcon from '@mui/icons-material/Medication';
-import {useAuth} from "../../hooks/useAuth.tsx";
+import { useAuth } from "../../hooks/useAuth.tsx";
 import LoginDialog from "../../componnents/common/dialogs/LoginDialog.tsx";
 import useRecommendations from "../../hooks/useRecommendations.tsx";
 import StartMessage from "../../componnents/builder/StartMessage.tsx";
 
 const BuilderPage = () => {
-    const {heroes} = useData();
+    const { heroes } = useData();
     const [availableHeroes, setAvailableHeroes] = useState(heroes);
     const [bestHeroes, setBestHeroes] = useState([]);
     const [role, setRole] = useState("");
     const [activeHero, setActiveHero] = useState<HeroType | null>(null);
     const [openLoginDialog, setOpenLoginDialog] = useState(false);
-    const {startTransition} = useLoading();
+    const { startTransition } = useLoading();
     const navigate = useNavigate();
     const theme = useTheme();
-    const {compo, addToCompo, clearCompo} = useCompo();
-    const {isAuthenticated, user} = useAuth();
+    const { compo, addToCompo, clearCompo } = useCompo();
+    const { isAuthenticated, user } = useAuth();
     const recommendationsMessages = useRecommendations(compo);
 
     const handleDragStart = (event: any) => {
@@ -62,7 +62,7 @@ const BuilderPage = () => {
             handleDragCancel()
             return;
         }
-        const {over, active} = event;
+        const { over, active } = event;
         if (over) {
             parseInt(over.id.replace("slot-", ""));
             const hero = availableHeroes.find((h) => h.id.toString() === active.id);
@@ -76,6 +76,14 @@ const BuilderPage = () => {
 
     const handleDragCancel = () => {
         setActiveHero(null);
+    };
+
+    const handleHeroClick = (hero: HeroType) => {
+        if (compo.length >= 6) {
+            return;
+        }
+        addToCompo(hero);
+        setAvailableHeroes((prev) => prev.filter((h) => h.id !== hero.id));
     };
 
     const handleSubmitCompo = async () => {
@@ -105,7 +113,7 @@ const BuilderPage = () => {
             >
 
                 <Box
-                    sx={{display: {xs: "none", md: "flex"}, justifyContent: "space-between", width: "100%",}}
+                    sx={{ display: { xs: "none", md: "flex" }, justifyContent: "space-between", width: "100%", }}
                 >
                     <Box
                         sx={{
@@ -126,15 +134,15 @@ const BuilderPage = () => {
                             activeHero={activeHero}
                             setActiveHero={setActiveHero}
                         />
-                        <Box sx={{margin: "10px"}}>
-                            <Button variant={"contained"} sx={{margin: "5px"}}
-                                    disabled={compo.filter((x) => x !== null).length < 6}
-                                    onClick={handleSubmitCompo}
+                        <Box sx={{ margin: "10px" }}>
+                            <Button variant={"contained"} sx={{ margin: "5px" }}
+                                disabled={compo.filter((x) => x !== null).length < 6}
+                                onClick={handleSubmitCompo}
                             >
                                 Checkout
                             </Button>
                             <IconButton disabled={compo.length === 0}>
-                                <ClearIcon onClick={handleRemoveAllHeroes}/>
+                                <ClearIcon onClick={handleRemoveAllHeroes} />
                             </IconButton>
                         </Box>
 
@@ -156,7 +164,7 @@ const BuilderPage = () => {
                                     mr: "100px",
                                     alignItems: "center"
                                 }}>
-                                <HeroRoleFilter role={role} setRole={setRole}/>
+                                <HeroRoleFilter role={role} setRole={setRole} />
                                 <Box sx={{
                                     display: "flex",
                                     flexDirection: "row",
@@ -171,7 +179,7 @@ const BuilderPage = () => {
                                         justifyContent: "center",
                                         alignItems: "center"
                                     }}>
-                                        <ShieldIcon sx={{height: "20px", marginBottom: "2px"}}/>
+                                        <ShieldIcon sx={{ height: "20px", marginBottom: "2px" }} />
                                         <Typography variant={"caption"}>Main Tank</Typography>
                                     </Box>
                                     <Box sx={{
@@ -180,21 +188,21 @@ const BuilderPage = () => {
                                         justifyContent: "center",
                                         alignItems: "center"
                                     }}>
-                                        <MedicationIcon sx={{height: "20px", marginBottom: "2px"}}/>
+                                        <MedicationIcon sx={{ height: "20px", marginBottom: "2px" }} />
                                         <Typography variant={"caption"}>Main Heal</Typography>
                                     </Box>
                                     <Box>
-                                        <Box sx={{border: "1px solid green"}}></Box><Typography variant={"caption"}>Best
-                                        win rates</Typography>
+                                        <Box sx={{ border: "1px solid green" }}></Box><Typography variant={"caption"}>Best
+                                            win rates</Typography>
                                     </Box>
                                     <Box>
-                                        <Box sx={{border: "1px dashed gold"}}></Box><Typography variant={"caption"}>Team
-                                        Ups</Typography>
+                                        <Box sx={{ border: "1px dashed gold" }}></Box><Typography variant={"caption"}>Team
+                                            Ups</Typography>
                                     </Box>
                                 </Box>
                             </Box>
                             <Grid container gap={1} sx={{
-                                height: {md: "45vh", lg: "50vh", xl: "58vh"},
+                                height: { md: "45vh", lg: "50vh", xl: "58vh" },
                                 boxShadow: "1px 1px 6px rgba(0, 0, 0, 0.5)",
                                 overflowY: "auto",
                                 marginRight: "5px",
@@ -206,9 +214,9 @@ const BuilderPage = () => {
                                     .map((hero: HeroType, index: number) => (
                                         <Grid
                                             key={index}
-                                            size={{md: 1}}
+                                            size={{ md: 1 }}
                                         >
-                                            <DraggableHero hero={hero} bestHeroes={bestHeroes}/>
+                                            <DraggableHero hero={hero} bestHeroes={bestHeroes} onClick={handleHeroClick} />
                                         </Grid>
                                     ))}
                             </Grid>
@@ -224,15 +232,15 @@ const BuilderPage = () => {
                                         padding: "10px",
                                         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)"
                                     }}>
-                                        <TeamCounter/>
+                                        <TeamCounter />
                                     </Box>
                                 }
                                 {compo.length > 0 ? (
-                                        <RecommendationMessages messages={recommendationsMessages}/>
-                                    )
+                                    <RecommendationMessages messages={recommendationsMessages} />
+                                )
                                     :
                                     (
-                                        <StartMessage/>
+                                        <StartMessage />
                                     )}
                                 {compo.length > 0 &&
                                     <Box sx={{
@@ -240,7 +248,7 @@ const BuilderPage = () => {
                                         padding: "10px",
                                         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)"
                                     }}>
-                                        <TeamSynergy/>
+                                        <TeamSynergy />
                                     </Box>
                                 }
                             </Box>
@@ -266,7 +274,7 @@ const BuilderPage = () => {
 
 
             {/* Mobile version  */}
-            <Grid container sx={{display: {xs: "flex", md: "none"}}}>
+            <Grid container sx={{ display: { xs: "flex", md: "none" } }}>
                 <DragDropContainer
                     compo={compo}
                     availableHeroes={availableHeroes}
@@ -291,16 +299,16 @@ const BuilderPage = () => {
                         height: "40px"
                     }}>
                         <Box>
-                            <Box sx={{border: "1px solid green"}}/>
+                            <Box sx={{ border: "1px solid green" }} />
                             <Typography
                                 variant={"caption"} fontSize={10}>Best win rates</Typography>
                         </Box>
                         <Box>
-                            <Box sx={{border: "1px dashed gold"}}/>
+                            <Box sx={{ border: "1px dashed gold" }} />
                             <Typography variant={"caption"} fontSize={10}>Team Ups</Typography>
                         </Box>
                     </Box>
-                    <HeroRoleFilter role={role} setRole={setRole}/>
+                    <HeroRoleFilter role={role} setRole={setRole} />
 
                 </Box>
                 <Grid size={12}>
@@ -315,10 +323,9 @@ const BuilderPage = () => {
                             .map((hero: HeroType, index: number) => (
                                 <Grid
                                     key={index}
-                                    size={{xs: 3}}
+                                    size={{ xs: 3 }}
                                 >
-                                    <DraggableHero hero={hero} bestHeroes={bestHeroes}/>
-                                </Grid>
+                                    <DraggableHero hero={hero} bestHeroes={bestHeroes} onClick={handleHeroClick} />                                </Grid>
                             ))}
                     </Grid>
                 </Grid>

@@ -1,12 +1,12 @@
-import type {HeroType} from "../../../@types/HeroType";
-import {useDraggable} from "@dnd-kit/core";
-import {imageBaseUrl} from "../../../api/config/Axios.config.ts";
+import type { HeroType } from "../../../@types/HeroType";
+import { useDraggable } from "@dnd-kit/core";
+import { imageBaseUrl } from "../../../api/config/Axios.config.ts";
 import Popover from "@mui/material/Popover";
 import * as React from "react";
 import Box from "@mui/material/Box";
-import {LinearProgress, Paper, Popper} from "@mui/material";
-import {useCompo} from "../../../hooks/useCompo.tsx";
-import {useAuth} from "../../../hooks/useAuth.tsx";
+import { LinearProgress, Paper, Popper, useMediaQuery, useTheme } from "@mui/material";
+import { useCompo } from "../../../hooks/useCompo.tsx";
+import { useAuth } from "../../../hooks/useAuth.tsx";
 import ShieldIcon from '@mui/icons-material/Shield';
 import MedicationIcon from '@mui/icons-material/Medication';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
@@ -14,15 +14,25 @@ import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 type DraggableHeroProps = {
     hero: HeroType;
     bestHeroes: never[];
+    onClick?: (hero: HeroType) => void;
 }
 
-export const DraggableHero = ({hero, bestHeroes}: DraggableHeroProps) => {
-    const {attributes, listeners, setNodeRef, transform, isDragging} = useDraggable({
+export const DraggableHero = ({ hero, bestHeroes, onClick }: DraggableHeroProps) => {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+    const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
         id: hero.id.toString(),
     });
+
+    const handleClick = () => {
+        if (isMobile && onClick) {
+            onClick(hero);
+        }
+    };
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
-    const {compo} = useCompo();
-    const {user} = useAuth();
+    const { compo } = useCompo();
+    const { user } = useAuth();
     const [popperAnchorEl, setPopperAnchorEl] = React.useState<HTMLElement | null>(null);
     const openPopper = Boolean(popperAnchorEl);
     const popperId = openPopper ? `hero-wr-popper-${hero.id}` : undefined;
@@ -86,19 +96,20 @@ export const DraggableHero = ({hero, bestHeroes}: DraggableHeroProps) => {
             className="draggable-card"
             onMouseEnter={handlePopoverOpen}
             onMouseLeave={handlePopoverClose}
+            onClick={handleClick}
             ref={setNodeRef}
             sx={{
                 transform: transform
                     ? `translate(${transform.x}px, ${transform.y}px)`
                     : undefined,
-                cursor: "grab",
+                cursor: isMobile ? "pointer" : "grab",
                 opacity: isDragging ? 0 : 1,
                 position: "relative",
                 margin: "0px 5px"
 
             }}
-            {...listeners}
-            {...attributes}
+            {...(!isMobile && listeners)}
+            {...(!isMobile && attributes)}
         >
             <Box sx={{
                 border: bestHeroes.some(r =>
@@ -130,7 +141,7 @@ export const DraggableHero = ({hero, bestHeroes}: DraggableHeroProps) => {
                         left: "5px",
                         width: "15px",
                         height: "15px",
-                    }}/>
+                    }} />
                 )}
                 {hero.isMainHeal && (
                     <MedicationIcon sx={{
@@ -139,12 +150,12 @@ export const DraggableHero = ({hero, bestHeroes}: DraggableHeroProps) => {
                         left: "5px",
                         width: "17px",
                         height: "17px",
-                    }}/>
+                    }} />
 
                 )}
             </Box>
             {isLowWinrate && (
-                <Box sx={{position: "absolute", top: 0, right: 0, zIndex: 5}}>
+                <Box sx={{ position: "absolute", top: 0, right: 0, zIndex: 5 }}>
                     <span
                         onMouseEnter={handlePopperOpen}
                         onMouseLeave={handlePopperClose}
@@ -152,17 +163,17 @@ export const DraggableHero = ({hero, bestHeroes}: DraggableHeroProps) => {
                         onBlur={handlePopperClose}
                         tabIndex={0}
                         aria-describedby={popperId}
-                        style={{display: "inline-block", lineHeight: 0}}
+                        style={{ display: "inline-block", lineHeight: 0 }}
                     >
-      <WarningAmberIcon
-          sx={{
-              color: "#ff3300",
-              fontSize: "28px",
-              filter: "drop-shadow(0 0 4px black)",
-              cursor: "pointer",
-          }}
-      />
-    </span>
+                        <WarningAmberIcon
+                            sx={{
+                                color: "#ff3300",
+                                fontSize: "28px",
+                                filter: "drop-shadow(0 0 4px black)",
+                                cursor: "pointer",
+                            }}
+                        />
+                    </span>
 
                     <Popper
                         id={popperId}
@@ -170,7 +181,7 @@ export const DraggableHero = ({hero, bestHeroes}: DraggableHeroProps) => {
                         anchorEl={popperAnchorEl}
                         placement="left"
                         disablePortal
-                        modifiers={[{name: "offset", options: {offset: [0, 8]}}]}
+                        modifiers={[{ name: "offset", options: { offset: [0, 8] } }]}
                     >
                         <Paper
                             elevation={9}
@@ -184,9 +195,9 @@ export const DraggableHero = ({hero, bestHeroes}: DraggableHeroProps) => {
                                 borderRadius: 1,
                             }}
                         >
-                            <Box sx={{fontWeight: 700, mb: 0.5}}>{hero.name}</Box>
+                            <Box sx={{ fontWeight: 700, mb: 0.5 }}>{hero.name}</Box>
 
-                            <Box sx={{display: "flex", justifyContent: "space-between", fontSize: "0.85rem"}}>
+                            <Box sx={{ display: "flex", justifyContent: "space-between", fontSize: "0.85rem" }}>
                                 <span>Hero Winrate</span>
                                 <span>{(heroWinrate ?? 0).toFixed(1)}%</span>
                             </Box>
@@ -214,7 +225,7 @@ export const DraggableHero = ({hero, bestHeroes}: DraggableHeroProps) => {
                                 <span>{averageWinrate.toFixed(1)}%</span>
                             </Box>
 
-                            <Box sx={{fontSize: "0.75rem", mt: 0.5, opacity: 0.95}}>
+                            <Box sx={{ fontSize: "0.75rem", mt: 0.5, opacity: 0.95 }}>
                                 Matchs: {heroData?.matches ?? 0}
                             </Box>
                         </Paper>
@@ -225,7 +236,7 @@ export const DraggableHero = ({hero, bestHeroes}: DraggableHeroProps) => {
                 disableEnforceFocus
                 disableAutoFocus
                 id={id}
-                sx={{pointerEvents: "none"}}
+                sx={{ pointerEvents: "none" }}
                 open={open}
                 anchorEl={anchorEl}
                 onClose={handlePopoverClose}
@@ -243,7 +254,7 @@ export const DraggableHero = ({hero, bestHeroes}: DraggableHeroProps) => {
                 }}>
                     {hero.matchUps.map(matchup => (
                         <Paper elevation={6} key={matchup.id}
-                               sx={{display: "flex", padding: "2px", alignItems: "center", border: "2px solid red"}}>
+                            sx={{ display: "flex", padding: "2px", alignItems: "center", border: "2px solid red" }}>
                             <img
                                 src={imageBaseUrl + matchup.counterPick.imageLink}
                                 style={{
