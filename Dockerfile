@@ -2,21 +2,26 @@
 FROM node:20 AS build
 WORKDIR /app
 
-# Copier les fichiers nécessaires et installer les dépendances
+# Installer dépendances
 COPY package*.json ./
 RUN npm install
 
-# Copier le reste du code et construire le projet
+# Copier le code et build
 COPY . .
 RUN npm run build
 
 
-# ---- Étape 2 : Serveur NGINX ----
+# ---- Étape 2 : Serveur statique NGINX ----
 FROM nginx:alpine
-COPY --from=build /app/dist /usr/share/nginx/html
+WORKDIR /usr/share/nginx/html
 
-# Configuration Nginx React-friendly
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copier le build
+COPY --from=build /app/dist .
 
+# Pas besoin de config Nginx → Traefik gère tout
+# Supprimer fichiers config par défaut (optionnel)
+RUN rm -rf /etc/nginx/conf.d/*
+
+# Nginx servira juste les fichiers statiques
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
