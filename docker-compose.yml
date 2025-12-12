@@ -13,6 +13,7 @@ services:
       - "traefik.http.routers.mrivals-front.rule=Host(`mrivals-builder.com`, `www.mrivals-builder.com`)"
       - "traefik.http.routers.mrivals-front.entrypoints=websecure"
       - "traefik.http.routers.mrivals-front.tls.certresolver=le"
+      - "traefik.http.routers.mrivals-front.tls=true"
 
       # SERVICE (port interne du container)
       - "traefik.http.services.mrivals-front.loadbalancer.server.port=80"
