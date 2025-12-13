@@ -107,7 +107,7 @@ const LoginDialog = ({ open, setOpen, onRegisterRequest }: loginDialogProps) => 
                             display: 'flex',
                             gap: '10px',
                             flexDirection: 'column',
-                            margin: '5px auto',
+                            margin: { xs: '5px auto', md: '5px auto' },
                             width: '100%',
                             alignItems: 'center'
                         }}>
@@ -154,15 +154,13 @@ const LoginDialog = ({ open, setOpen, onRegisterRequest }: loginDialogProps) => 
                                 }}
                             ></TextField>
                         </DialogContent>
-                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", margin: "0 20px" }}>
+                        <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center", gap: "10px", margin: "10px 0" }}>
                             <Link underline="hover" onClick={handleForgotPassword} sx={{ cursor: 'pointer' }}>
                                 Forgotten password?
                             </Link>
-                            {onRegisterRequest && (
-                                <Link underline="hover" onClick={onRegisterRequest} sx={{ cursor: 'pointer' }}>
-                                    No account? Register
-                                </Link>
-                            )}
+                            <Link underline="hover" onClick={onRegisterRequest} sx={{ cursor: 'pointer' }}>
+                                No account? Register
+                            </Link>
                         </Box>
                         <DialogActions>
                             <Button type="submit" variant={"contained"}

@@ -14,7 +14,16 @@ const AuthBox = () => {
         <>
             {!isAuthenticated ?
                 <Stack direction={"row"} spacing={1}>
-                    <Button variant={"contained"} onClick={() => setOpenLoginDialog(true)}>Login</Button>
+                    <Button
+                        variant={"contained"}
+                        onClick={() => setOpenLoginDialog(true)}
+                        sx={{
+                            fontSize: { xs: "0.7rem", md: "0.875rem" },
+                            padding: { xs: "4px 10px", md: "6px 16px" }
+                        }}
+                    >
+                        Login
+                    </Button>
                     <Box sx={{ display: { xs: "none", md: "block" } }}>
                         <Button variant={"outlined"} onClick={() => setOpenRegisterDialog(true)}><span>Register</span></Button>
                     </Box>

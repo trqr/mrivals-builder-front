@@ -12,7 +12,7 @@ import { useNavigate } from "react-router";
 import Page from "../layout/Page.tsx";
 import { useTheme } from "@mui/material/styles";
 import ClearIcon from '@mui/icons-material/Clear';
-import { useData } from "../../hooks/useData.tsx";
+import CancelIcon from '@mui/icons-material/Cancel'; import { useData } from "../../hooks/useData.tsx";
 import RecommendationMessages from "../../componnents/builder/RecommendationMessages.tsx";
 import TeamSynergy from "../../componnents/builder/TeamSynergy.tsx";
 import TeamCounter from "../../componnents/builder/TeamCounter.tsx";
@@ -341,20 +341,18 @@ const BuilderPage = () => {
                         justifyContent: "space-between",
                         alignItems: "center",
                         padding: "8px 16px", // Added some padding
-                        backgroundColor: "background.paper", // Or a specific color for the bar
                         boxShadow: 3, // Adds a subtle shadow
                     }}
                 >
-                    <Box>
-                        <Button
-                            variant="outlined"
+                    {compo.length > 0 && <Box>
+                        <IconButton
                             onClick={handleRemoveAllHeroes}
                             disabled={compo.length === 0}
                         >
-                            Clear
-                        </Button>
+                            <CancelIcon color="warning" />
+                        </IconButton>
                     </Box>
-
+                    }
                     {compo.filter((x) => x !== null).length >= 6 && (
                         <Box>
                             <Button

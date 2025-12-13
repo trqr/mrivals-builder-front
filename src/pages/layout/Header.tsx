@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router';
 import AuthBox from "../../componnents/common/AuthBox.tsx";
+import NavMenu from "../../componnents/common/NavMenu.tsx";
 import Box from "@mui/material/Box";
 import MainButton from "../../componnents/common/buttons/MainButton.tsx";
-import { alpha, IconButton, Menu, MenuItem } from "@mui/material";
+import { alpha } from "@mui/material";
 import { useState, useEffect } from "react";
-import MenuIcon from '@mui/icons-material/Menu';
 
 import logo from "../../assets/images/IconSite.png";
 import texte from "../../assets/images/texte.png";
@@ -18,9 +18,6 @@ const menuPages = [
 
 export default function Header() {
     const navigate = useNavigate();
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
-
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
@@ -30,13 +27,6 @@ export default function Header() {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
-
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
 
     return (
         <Box
@@ -60,9 +50,20 @@ export default function Header() {
                 sx={{ display: "flex", alignItems: "center", cursor: "pointer", width: { xs: "auto", md: "33%" }, justifyContent: "flex-start" }}
                 onClick={() => navigate('/')}
             >
-                <img height={scrolled ? 70 : 70} src={logo} />
-                <Box sx={{ display: { xs: "none", sm: "flex" } }}>
-                    <img height={scrolled ? 90 : 90} width={120} src={texte} />
+                <Box
+                    component="img"
+                    src={logo}
+                    sx={{ height: scrolled ? { xs: 50, md: 70 } : { xs: 50, md: 70 } }}
+                />
+                <Box sx={{ display: "flex" }}>
+                    <Box
+                        component="img"
+                        src={texte}
+                        sx={{
+                            height: scrolled ? { xs: 50, md: 90 } : { xs: 50, md: 90 },
+                            width: { xs: 60, md: 120 }
+                        }}
+                    />
                 </Box>
             </Box>
 
@@ -78,30 +79,8 @@ export default function Header() {
 
             <Box sx={{ display: "flex", width: { xs: "auto", md: "33%" }, justifyContent: "flex-end", alignItems: "center", flexGrow: { xs: 1, md: 0 } }}>
                 <AuthBox />
-                <Box sx={{ display: { xs: 'flex', md: 'none' }, ml: 1 }}>
-                    <IconButton
-                        id="demo-positioned-button"
-                        aria-controls={open ? 'demo-positioned-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={open ? 'true' : undefined}
-                        onClick={handleClick}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Menu
-                        id="demo-positioned-menu"
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
-                        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-                        transformOrigin={{ vertical: 'top', horizontal: 'left' }}
-                    >
-                        {menuPages.map((menuItem) => (
-                            <MenuItem key={menuItem.name} onClick={() => navigate(menuItem.path)}>
-                                {menuItem.name}
-                            </MenuItem>
-                        ))}
-                    </Menu>
+                <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+                    <NavMenu pages={menuPages} />
                 </Box>
             </Box>
         </Box>
