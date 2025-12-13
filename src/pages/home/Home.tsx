@@ -1,10 +1,10 @@
-import {useNavigate} from "react-router";
+import { useNavigate } from "react-router";
 import Page from "../layout/Page.tsx";
 import "./Home.css";
 import Carousel from "../../componnents/home/Carousel.tsx";
 import SecondButton from "../../componnents/common/buttons/SecondButton.tsx";
 import BestHeroesSection from "../../componnents/home/BestHeroesSection.tsx";
-import {Container, Grid} from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import ShinyText from "../../componnents/home/ShinyText.tsx";
 import Typography from "@mui/material/Typography";
 import HomeCard from "../../componnents/home/HomeCard.tsx";
@@ -22,11 +22,11 @@ const Home = () => {
             <div className="Homepage">
                 <Container maxWidth="xl" >
                     <Grid container spacing={2}
-                          sx={{
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                          }}
+                        sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}
                     >
                         <Grid size={{
                             xs: 12,
@@ -34,23 +34,32 @@ const Home = () => {
                             md: 12,
                             lg: 10
                         }}
-                              sx={{
-                                  marginTop: "80px",
-                                  height: "45vh",
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                              }}>
+                            sx={{
+                                marginTop: { xs: "80px", sm: "80px", md: "80px", lg: "80px" },
+                                height: { xs: "18vh", sm: "25vh", md: "40vh", lg: "45vh" },
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                            }}>
                             <Typography sx={{
                                 marginTop: "30px",
-                                typography: {xs: "h3", sm: "h2", md: "h2", lg: "h1", xl: "h1"},
+                                typography: { xs: "h4", sm: "h2", md: "h2", lg: "h1", xl: "h1" },
                                 textAlign: "center",
                                 textShadow: "1px 1px 3px rgba(0,0,0,1)"
                             }}>Build the Perfect
-                                Team<br/> on Marvel Rivals</Typography>
+                                Team<br /> on Marvel Rivals</Typography>
                         </Grid>
-                        <Grid size={{lg: 12}} sx={{display: "flex", justifyContent: "center", height: "220px"}}>
-                            <SecondButton onClick={handleClickBuild} style={{margin: "10px",}}><Typography variant={"h4"}>Start Building</Typography></SecondButton>
+                        <Grid size={{ lg: 12 }} sx={{ display: "flex", justifyContent: "center", height: { xs: "150px", sm: "220px", md: "220px", lg: "220px" } }}>
+                            <SecondButton onClick={handleClickBuild} style={{ margin: "10px", }}>
+                                <Typography sx={{
+                                    typography: {
+                                        xs: "h6",
+                                        sm: "h5",
+                                        md: "h4",
+                                        lg: "h4"
+                                    }
+                                }}>Start Building</Typography>
+                            </SecondButton>
                         </Grid>
 
 
@@ -60,12 +69,12 @@ const Home = () => {
                             md: 12,
                             lg: 12,
                         }}
-                              style={{
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                              }}
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                                justifyContent: "center",
+                            }}
                         >
                             <HomeCard
                                 width="auto"
@@ -88,14 +97,14 @@ const Home = () => {
                             md: 12,
                             lg: 12,
                         }}
-                              style={{
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  marginTop: "60px",
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                marginTop: "60px",
 
-                              }}
+                            }}
                         >
                             <HomeCard
                                 width="auto"
@@ -103,8 +112,8 @@ const Home = () => {
                                 backgroundColor="rgba(42, 42, 64, 0.6)"
                                 className={"homepage-card"}
                             >
-                                <h2 style={{textAlign: "center"}}>Best Winrates</h2>
-                                <BestHeroesSection/>
+                                <h2 style={{ textAlign: "center" }}>Best Winrates</h2>
+                                <BestHeroesSection />
                             </HomeCard>
                         </Grid>
                         <Grid size={{
@@ -113,13 +122,13 @@ const Home = () => {
                             md: 6,
                             lg: 6,
                         }}
-                              style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  marginTop: "60px",
-                              }}>
-                            <Carousel/>
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                marginTop: "60px",
+                            }}>
+                            <Carousel />
                         </Grid>
 
 

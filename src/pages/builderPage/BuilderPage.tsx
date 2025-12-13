@@ -329,6 +329,43 @@ const BuilderPage = () => {
                             ))}
                     </Grid>
                 </Grid>
+                {/* Mobile Floating Buttons */}
+                <Box
+                    sx={{
+                        display: { xs: "flex", md: "none" },
+                        position: "fixed",
+                        bottom: { xs: 80, sm: 110 },
+                        left: 0,
+                        right: 0,
+                        zIndex: 1100, // Ensure it's above most content
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        padding: "8px 16px", // Added some padding
+                        backgroundColor: "background.paper", // Or a specific color for the bar
+                        boxShadow: 3, // Adds a subtle shadow
+                    }}
+                >
+                    <Box>
+                        <Button
+                            variant="outlined"
+                            onClick={handleRemoveAllHeroes}
+                            disabled={compo.length === 0}
+                        >
+                            Clear
+                        </Button>
+                    </Box>
+
+                    {compo.filter((x) => x !== null).length >= 6 && (
+                        <Box>
+                            <Button
+                                variant="contained"
+                                onClick={handleSubmitCompo}
+                            >
+                                Validate
+                            </Button>
+                        </Box>
+                    )}
+                </Box>
             </Grid>
             <LoginDialog open={openLoginDialog} setOpen={setOpenLoginDialog}></LoginDialog>
         </Page>

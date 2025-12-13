@@ -11,11 +11,11 @@ import {
     Link,
     TextField
 } from "@mui/material";
-import {useState, useTransition} from "react";
+import { useState, useTransition } from "react";
 import Box from "@mui/material/Box";
-import {LockOutlined, Visibility, VisibilityOff} from "@mui/icons-material";
-import {login} from "../../../api/Auth.api.ts";
-import {useAuth} from "../../../hooks/useAuth.tsx";
+import { LockOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
+import { login } from "../../../api/Auth.api.ts";
+import { useAuth } from "../../../hooks/useAuth.tsx";
 import SpotlightCard from "../cards/spotlightCard/SpotlightCard.tsx";
 import ForgotPasswordDialog from "./ForgotPasswordDialog.tsx";
 
@@ -27,21 +27,22 @@ export type LoginDTO = {
 type loginDialogProps = {
     open: boolean;
     setOpen: (open: boolean) => void;
+    onRegisterRequest?: () => void;
 }
 
-const LoginDialog = ({open, setOpen}: loginDialogProps) => {
+const LoginDialog = ({ open, setOpen, onRegisterRequest }: loginDialogProps) => {
     const [isPending, startTransition] = useTransition()
     const [openForgotPassDialog, setOpenForgotPassDialog] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-    const [loginValues, setLoginValues] = useState<LoginDTO>({email: "", password: ""})
+    const [loginValues, setLoginValues] = useState<LoginDTO>({ email: "", password: "" })
     const [serverError, setServerError] = useState<string | null>(null);
     const [validationErrors, setValidationErrors] = useState<{ email?: string; password?: string }>({})
-    const {setUser} = useAuth();
+    const { setUser } = useAuth();
 
 
     const handleChange = (field: keyof LoginDTO) =>
         (e: React.ChangeEvent<HTMLInputElement>) => {
-            setLoginValues({...loginValues, [field]: e.target.value})
+            setLoginValues({ ...loginValues, [field]: e.target.value })
         }
 
     const handleLogin = () => {
@@ -52,7 +53,7 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
             if (authData.user) {
                 setUser(authData.user);
                 setOpen(false)
-                setLoginValues({email: "", password: ""})
+                setLoginValues({ email: "", password: "" })
                 localStorage.setItem("MBtoken", authData.token)
             } else {
                 setServerError(authData);
@@ -87,13 +88,13 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
     return (
         <>
             <Dialog open={open}
-                    onClose={() => setOpen(false)} fullWidth>
+                onClose={() => setOpen(false)} fullWidth>
                 {isPending &&
                     <LinearProgress></LinearProgress>
                 }
                 <SpotlightCard width={"auto"} className="dialog-card" spotlightColor="rgba(0, 229, 255, 0.2)">
-                    <DialogTitle sx={{display: "flex", alignItems: "center"}}>
-                        <LockOutlined fontSize={"small"}/>Sign in</DialogTitle>
+                    <DialogTitle sx={{ display: "flex", alignItems: "center" }}>
+                        <LockOutlined fontSize={"small"} />Sign in</DialogTitle>
                     <Box
                         component="form"
                         noValidate
@@ -146,28 +147,33 @@ const LoginDialog = ({open, setOpen}: loginDialogProps) => {
                                                 edge="end"
                                                 disabled={isPending}
                                             >
-                                                {showPassword ? <VisibilityOff/> : <Visibility/>}
+                                                {showPassword ? <VisibilityOff /> : <Visibility />}
                                             </IconButton>
                                         </InputAdornment>
                                     )
                                 }}
                             ></TextField>
                         </DialogContent>
-                        <Box sx={{display: "flex", alignItems: "center", margin: "0 20px"}}>
-                            <Link underline="hover" onClick={handleForgotPassword}>
+                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", margin: "0 20px" }}>
+                            <Link underline="hover" onClick={handleForgotPassword} sx={{ cursor: 'pointer' }}>
                                 Forgotten password?
                             </Link>
+                            {onRegisterRequest && (
+                                <Link underline="hover" onClick={onRegisterRequest} sx={{ cursor: 'pointer' }}>
+                                    No account? Register
+                                </Link>
+                            )}
                         </Box>
                         <DialogActions>
                             <Button type="submit" variant={"contained"}
-                                    disabled={isPending}>{isPending ? "Loging in..." : "Login"}</Button>
+                                disabled={isPending}>{isPending ? "Loging in..." : "Login"}</Button>
                             <Button variant={"text"} onClick={() => setOpen(false)}>Cancel</Button>
                         </DialogActions>
                     </Box>
                 </SpotlightCard>
             </Dialog>
             <ForgotPasswordDialog open={openForgotPassDialog}
-                                  onClose={() => setOpenForgotPassDialog(false)}></ForgotPasswordDialog>
+                onClose={() => setOpenForgotPassDialog(false)}></ForgotPasswordDialog>
         </>
     )
 }
