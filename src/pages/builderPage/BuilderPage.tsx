@@ -365,7 +365,7 @@ const BuilderPage = () => {
                     )}
                 </Box>
             </Grid>
-            <LoginDialog open={openLoginDialog} setOpen={setOpenLoginDialog}></LoginDialog>
+            <LoginDialog open={openLoginDialog} setOpen={setOpenLoginDialog} ></LoginDialog>
         </Page>
     );
 };

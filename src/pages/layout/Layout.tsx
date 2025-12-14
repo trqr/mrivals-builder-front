@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header.tsx";
+import Footer from "./Footer.tsx";
 import { LinearProgress } from "@mui/material";
 import { useLoading } from "../../hooks/useLoading.tsx";
 import { useEffect, useState } from "react";
@@ -28,6 +29,7 @@ const Layout = () => {
                 value={isPending ? undefined : 100}
             />
             <Outlet />
+            <Footer />
         </>
     )
 }

@@ -154,7 +154,7 @@ const LoginDialog = ({ open, setOpen, onRegisterRequest }: loginDialogProps) => 
                                 }}
                             ></TextField>
                         </DialogContent>
-                        <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center", gap: "10px", margin: "10px 0" }}>
+                        <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, justifyContent: "space-between", alignItems: "center", gap: "10px", margin: "10px 10px" }}>
                             <Link underline="hover" onClick={handleForgotPassword} sx={{ cursor: 'pointer' }}>
                                 Forgotten password?
                             </Link>

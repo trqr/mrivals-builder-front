@@ -9,7 +9,7 @@ const MapDetails = () => {
 
     return (
         <Page title={"Map details"} description={"Map details"}>
-            <Grid container className="mapDetails" spacing={2} sx={{justifyContent: "center"}}>
+            <Grid container className="mapDetails" spacing={2} sx={{justifyContent: "center", pl: 1, pr: 1}}>
                 <Grid size={{xs: 12, md: 4, lg: 4, xl: 4}} className="leftColumn">
                     <div className="mapName">
                         <h1>{map.name}</h1>
