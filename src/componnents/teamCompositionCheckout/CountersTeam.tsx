@@ -29,7 +29,9 @@ const CountersTeam = ({heroes}: CountersTeamProps) => {
             <Typography variant="h6" textAlign={"center"} gutterBottom>
                 Best Counters
             </Typography>
-            <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "row", justifyContent: "center" }}>
+            <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "row", justifyContent: "center",
+                flexWrap: "wrap"
+            }}>
                 {teamCounters.map((counter) => (
                     <li
                         key={counter.enemyHeroId}

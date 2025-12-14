@@ -1,14 +1,14 @@
 import Box from "@mui/material/Box";
-import type {HeroType} from "../../@types/HeroType";
-import {Card, CardMedia, Grid, Paper} from "@mui/material";
-import {imageBaseUrl} from "../../api/config/Axios.config.ts";
+import type { HeroType } from "../../@types/HeroType";
+import { Card, CardContent, CardMedia, Grid, Paper } from "@mui/material";
+import { imageBaseUrl } from "../../api/config/Axios.config.ts";
 import Typography from "@mui/material/Typography";
 
 type HeroCardProps = {
     heroes: HeroType[];
 };
 
-const HeroCard = ({heroes}: HeroCardProps) => {
+const HeroCard = ({ heroes }: HeroCardProps) => {
     return (
         <Box>
             <Grid
@@ -21,7 +21,7 @@ const HeroCard = ({heroes}: HeroCardProps) => {
                 }}
             >
                 {heroes.map((hero: HeroType) => (
-                    <Grid size={{lg: 2}} key={hero.id}>
+                    <Grid size={{ xs: 4, lg: 2 }} key={hero.id}>
                         <Card
                             style={{
                                 display: "flex",
@@ -34,14 +34,37 @@ const HeroCard = ({heroes}: HeroCardProps) => {
                                 overflow: "hidden",
                             }}
                         >
-                            <CardMedia>
-                                <img src={imageBaseUrl + hero.imageLink} alt={hero.name}></img>
+                            <CardMedia
+                                sx={{
+                                    width: "100%",
+                                    margin: "0 auto",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                }}
+                            >
+                                <img
+                                    src={imageBaseUrl + hero.imageLink}
+                                    alt={hero.name}
+                                    style={{
+                                        maxWidth: "100%",
+                                        maxHeight: "100%",
+                                        objectFit: "cover",
+                                    }}
+                                />
                             </CardMedia>
-                            <Typography variant={"caption"} style={{fontSize: "20px"}}>
-                                Winrate : {(hero.winRate * 100).toFixed(1)}%
-                            </Typography>
+                            <CardContent>
+                                <Typography variant="body2" sx={{fontSize: {xs: 12, sm: 14, md: 16, lg: 20}}}>
+                                    <Typography component="span" sx={{display: {xs: "inline", md: "none"}}}>
+                                        WR{" "}
+                                    </Typography>
+                                    <Typography component="span" sx={{display: {xs: "none", md: "inline"}}}>
+                                        Winrate{" "}
+                                    </Typography>
+                                    {(hero.winRate * 100).toFixed(1)}%
+                                </Typography>
+                            </CardContent>
 
-                            {/* Layer qui s'affiche seulement au hover */}
                             <Box
                                 className="hover-layer"
                                 sx={{
@@ -58,11 +81,11 @@ const HeroCard = ({heroes}: HeroCardProps) => {
                                     alignItems: "center",
                                     opacity: 0,
                                     transition: "opacity 0.3s ease-in-out",
-                                    gap: "10px",
+                                    gap: "5px",
                                     padding: "16px",
                                 }}
                             >
-                                <Box style={{margin: "5px"}}>
+                                <Box style={{ margin: "5px" }}>
                                     {hero.synergies.map((synergie) => (
                                         <Paper
                                             elevation={6}
@@ -75,6 +98,7 @@ const HeroCard = ({heroes}: HeroCardProps) => {
                                                     ? "3px dashed gold"
                                                     : "2px solid green",
                                                 background: "white",
+                                                flexWrap: "wrap"
                                             }}
                                         >
                                             <img
@@ -89,7 +113,7 @@ const HeroCard = ({heroes}: HeroCardProps) => {
                                         </Paper>
                                     ))}
                                 </Box>
-                                <Box style={{margin: "5px"}}>
+                                <Box style={{ margin: "5px" }}>
                                     {hero.matchUps.map((matchUp) => (
                                         <Paper
                                             elevation={6}
@@ -100,6 +124,7 @@ const HeroCard = ({heroes}: HeroCardProps) => {
                                                 alignItems: "center",
                                                 border: "2px solid red",
                                                 background: "white",
+                                                flexWrap: "wrap"
                                             }}
                                         >
                                             <img
