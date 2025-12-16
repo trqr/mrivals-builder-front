@@ -1,4 +1,4 @@
-import {createTheme} from "@mui/material";
+import { createTheme } from "@mui/material";
 
 
 
@@ -19,13 +19,13 @@ const theme = createTheme({
         divider: "#000000",
         text: {
             primary: "#ffffff",
-            secondary: "#e1dfdf",
+            secondary: "#ffffffff",
         },
     },
     typography: {
         h1: { fontFamily: "Avenger, Arial, sans-serif", letterSpacing: 1.5 },
-        h2: { fontFamily: "Avenger, Arial, sans-serif", letterSpacing: 1.5  },
-        h3: { fontFamily: "Avenger, Arial, sans-serif", letterSpacing: 1.5  },
+        h2: { fontFamily: "Avenger, Arial, sans-serif", letterSpacing: 1.5 },
+        h3: { fontFamily: "Avenger, Arial, sans-serif", letterSpacing: 1.5 },
         h4: { fontFamily: "Avenger, Arial, sans-serif", letterSpacing: 1.5 },
         h5: { fontFamily: "Avenger, Arial, sans-serif", letterSpacing: 1.5 },
         h6: { fontFamily: "Avenger, Arial, sans-serif", letterSpacing: 1.5 },
@@ -35,16 +35,17 @@ const theme = createTheme({
         MuiButton: {
             variants: [
                 {
-                    props: { variant: 'contained'} ,
+                    props: { variant: 'contained' },
                     style: {
                         fontSize: '1rem',
-                        color: '#3c3c3c',
+                        color: '#222222ff',
                         clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)',
-                        borderRadius: '0px',},
+                        borderRadius: '0px',
+                    },
                 },
                 {
-                    props: {variant: "outlined"},
-                    style: ({theme}) => ({
+                    props: { variant: "outlined" },
+                    style: ({ theme }) => ({
                         transform: "skew(-21deg)",
                         borderRadius: "0px",
 
@@ -53,8 +54,8 @@ const theme = createTheme({
                         },
                     }),
                 },],
-            },
         },
+    },
 });
 
 

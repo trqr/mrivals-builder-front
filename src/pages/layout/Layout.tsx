@@ -27,6 +27,7 @@ const Layout = () => {
                 }}
                 variant={isPending ? "indeterminate" : "determinate"}
                 value={isPending ? undefined : 100}
+                aria-label="loading"
             />
             <Outlet />
             <Footer />
