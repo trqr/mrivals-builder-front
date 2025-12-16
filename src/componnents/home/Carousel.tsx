@@ -10,10 +10,10 @@ import Box from "@mui/material/Box";
 
 export default function HomeCarousel() {
     const slides = [
-        { src: affiche, alt: "affiche 1", link: "https://www.marvelrivals.com/match/", },
-        { src: affiche2, alt: "affiche 2", link: "https://www.youtube.com/watch?v=bqPIioDA79E", },
-        { src: affiche3, alt: "affiche 3", link: "https://www.marvelrivals.com/index.html", },
-        { src: affiche4, alt: "affiche 4", link: "https://www.youtube.com/watch?v=WVc4uTJmKy4", },
+        { src: affiche, alt: "Marvel Rivals Esport Tournament", link: "https://www.marvelrivals.com/match/", },
+        { src: affiche2, alt: "Iker Casillas Partnership", link: "https://www.youtube.com/watch?v=bqPIioDA79E", },
+        { src: affiche3, alt: "New Season Announcement", link: "https://www.marvelrivals.com/index.html", },
+        { src: affiche4, alt: "New Character Reveal", link: "https://www.youtube.com/watch?v=WVc4uTJmKy4", },
     ];
     return (
         <Box className="max-w-[1000px] mx-auto">
