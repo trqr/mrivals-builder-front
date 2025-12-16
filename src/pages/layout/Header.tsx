@@ -53,15 +53,18 @@ export default function Header() {
                 <Box
                     component="img"
                     src={logo}
+                    alt="Logo"
                     sx={{ height: scrolled ? { xs: 50, md: 70 } : { xs: 50, md: 70 } }}
                 />
                 <Box sx={{ display: "flex" }}>
                     <Box
                         component="img"
                         src={texte}
+                        alt="Nom du site"
                         sx={{
                             height: scrolled ? { xs: 50, md: 90 } : { xs: 50, md: 90 },
-                            width: { xs: 60, md: 120 }
+                            width: "auto",
+                            objectFit: "contain"
                         }}
                     />
                 </Box>
