@@ -6,8 +6,8 @@ import MainButton from "../../componnents/common/buttons/MainButton.tsx";
 import { alpha } from "@mui/material";
 import { useState, useEffect } from "react";
 
-import logo from "../../assets/images/IconSite.png";
-import texte from "../../assets/images/texte.png";
+import logo from "../../assets/images/IconSite.webp";
+import texte from "../../assets/images/texte.webp";
 import theme from '../../theme/theme.ts';
 
 const menuPages = [

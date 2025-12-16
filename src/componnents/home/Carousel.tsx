@@ -2,9 +2,9 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import affiche from "../../assets/images/HomeEsport.webp";
-import affiche2 from "../../assets/images/HomeIker.jpg";
+import affiche2 from "../../assets/images/HomeIker.webp";
 import affiche3 from "../../assets/images/HomeSeason.webp";
-import affiche4 from "../../assets/images/NewChar.jpeg";
+import affiche4 from "../../assets/images/NewChar.webp";
 import Box from "@mui/material/Box";
 
 

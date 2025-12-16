@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import logo from "../../assets/images/IconSite.png";
+import logo from "../../assets/images/IconSite.webp";
 
 type PagesProps = {
     children: ReactNode;
