@@ -26,4 +26,4 @@ services:
 networks:
   traefik-network:
     external: true
-    name: traefik_traefik-network
+    name: traefik-network
