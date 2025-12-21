@@ -12,7 +12,7 @@ services:
       - "traefik.enable=true"
 
       # ROUTEUR FRONT HTTPS
-      - "traefik.http.routers.mrivals-front.rule=Host(`mrivals-builder.com`) || Host(`www.mrivals-builder.com`)"
+      - "traefik.http.routers.mrivals-front.rule=Host(`mrivals-builder.com`) || Host(`www.mrivals-builder.com`) || Host(`mrivals.trqr.fr`)"
       - "traefik.http.routers.mrivals-front.entrypoints=websecure"
       - "traefik.http.routers.mrivals-front.tls.certresolver=le"
       - "traefik.http.routers.mrivals-front.tls=true"
