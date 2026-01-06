@@ -52,8 +52,8 @@ const RegisterDialog = ({open, setOpen}: RegisterDialogProps) => {
         }
         if (!registerValues.password){
             newErrors.password = "Password is required";
-        } else if (registerValues.password.length < 8) {
-            newErrors.password = "Password must be at least 8 characters";
+        } else if (registerValues.password.length < 12) {
+            newErrors.password = "Password must be at least 12 characters";
         }
         else if (!/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&._-])[A-Za-z\d@$!%*?&._-]{8,}$/.test(registerValues.password)) {
             newErrors.password = "Password must have one uppercase letter, one number, and one special character.";
