@@ -50,13 +50,28 @@ const RegisterDialog = ({open, setOpen}: RegisterDialogProps) => {
         }  else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(registerValues.email)) {
             newErrors.email = "Email format is required";
         }
-        if (!registerValues.password){
-            newErrors.password = "Password is required";
-        } else if (registerValues.password.length < 12) {
-            newErrors.password = "Password must be at least 12 characters";
+        const passwordErrors: string[] = [];
+        const password = registerValues.password || "";
+
+        if (!password) {
+            passwordErrors.push("Password is required");
         }
-        else if (!/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&._-])[A-Za-z\d@$!%*?&._-]{8,}$/.test(registerValues.password)) {
-            newErrors.password = "Password must have one uppercase letter, one number, and one special character.";
+
+        if (password.length < 12) {
+            passwordErrors.push("Password must be at least 12 characters");
+        }
+        if (!/[A-Z]/.test(password)) {
+            passwordErrors.push("At least one uppercase letter required");
+        }
+        if (!/\d/.test(password)) {
+            passwordErrors.push("At least one number required");
+        }
+        if (!/[@$!%*?&._-]/.test(password)) {
+            passwordErrors.push("At least one special character required");
+        }
+
+        if (passwordErrors.length > 0) {
+            newErrors.password = passwordErrors.join(". ");
         }
         setValidationErrors(newErrors);
         return Object.keys(newErrors).length === 0;
